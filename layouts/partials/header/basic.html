@@ -26,7 +26,7 @@
         <a
           href="{{ .RelPermalink }}"
           {{ if eq .Language.Lang $.Site.Language.Lang }}aria-current="page"{{ end }}>
-          {{ .Language.Params.displayName | default .Language.Label | default .Language.Lang }}
+          {{ .Language.Params.displayName | default .Language.Lang }}
         </a>
       {{ end }}
     </nav>

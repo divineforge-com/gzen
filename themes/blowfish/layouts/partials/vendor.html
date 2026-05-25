@@ -124,7 +124,7 @@
 {{ end }}
 
 {{ if $hasRepoCards }}
-  {{ $repoColors := hugo.Data.repoColors }}
+  {{ $repoColors := site.Data.repoColors }}
   {{ $cssRules := slice }}
 
   {{/* default color */}}
