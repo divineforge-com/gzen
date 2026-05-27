@@ -40,6 +40,9 @@ other = "近期文章"
 [all_posts]
 other = "All Writing"
 
+[more]
+other = "More"
+
 [topics]
 other = "Topics"
 

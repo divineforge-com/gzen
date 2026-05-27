@@ -84,3 +84,6 @@ other = "工程"
 
 [library]
 other = "典藏"
+
+[more]
+other = "更多"
