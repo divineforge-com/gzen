@@ -26,7 +26,7 @@ summaryLength = 70
 
 [languages]
   [languages.zh]
-    label        = "中文"
+    languageName = "中文"
     weight       = 1
     title        = "GrowZen · 善聚慧生"
     contentDir   = "content/zh"
@@ -41,7 +41,7 @@ summaryLength = 70
       languageNote = "中文为主，English 与 日本語同步同行。"
 
   [languages.en]
-    label        = "English"
+    languageName = "English"
     weight       = 2
     title        = "GrowZen · 善聚慧生"
     contentDir   = "content/en"
@@ -56,7 +56,7 @@ summaryLength = 70
       languageNote = "Chinese first, then English and Japanese in step."
 
   [languages.ja]
-    label        = "日本語"
+    languageName = "日本語"
     weight       = 3
     title        = "GrowZen · 善集慧生"
     contentDir   = "content/ja"
