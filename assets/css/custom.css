@@ -243,11 +243,14 @@ body {
   line-height: 1;
   padding: 0.82rem 1.1rem;
   text-decoration: none;
+  transition: transform 160ms cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 160ms ease, box-shadow 160ms ease;
 }
 
 .gzen-primary-link:hover {
   color: #fffaf4;
-  background: #5a3320;
+  background: #4a2c1a;
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(47, 33, 24, 0.12);
 }
 
 .gzen-hero-actions span {
@@ -267,6 +270,19 @@ body {
   background: rgba(255, 244, 232, 0.78);
   color: #65442d;
   padding: 0.68rem 0.85rem;
+  border-radius: 0 8px 8px 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(74, 44, 26, 0.02);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.gzen-hero-aside span:hover {
+  transform: translateX(4px);
+  background: rgba(255, 244, 232, 0.95);
+  box-shadow: 0 4px 12px rgba(74, 44, 26, 0.06);
 }
 
 .gzen-home-content {
@@ -452,6 +468,11 @@ header .logo {
 .gzen-dropdown-arrow {
   font-size: 0.65rem;
   opacity: 0.7;
+  transition: transform 180ms ease;
+}
+
+.gzen-nav-dropdown:hover .gzen-dropdown-arrow {
+  transform: rotate(180deg);
 }
 
 .gzen-nav-dropdown-menu {
@@ -522,20 +543,38 @@ header .logo {
 .gzen-card {
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
-  background: rgba(255, 244, 232, 0.38);
+  padding: 1.6rem 1.6rem 1.4rem;
+  background: rgba(255, 244, 232, 0.28);
   border: 1px solid var(--gzen-border);
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
-  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.gzen-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gzen-saffron) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 180ms ease;
 }
 
 .gzen-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   background: rgba(255, 244, 232, 0.88);
-  box-shadow: 0 6px 20px rgba(74, 44, 26, 0.06);
+  box-shadow: 0 8px 24px rgba(74, 44, 26, 0.07);
   border-color: var(--gzen-saffron);
+}
+
+.gzen-card:hover::before {
+  opacity: 1;
 }
 
 .gzen-card-tag {
@@ -550,7 +589,7 @@ header .logo {
 
 .gzen-card h3 {
   margin: 0 0 0.5rem;
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   font-weight: 650;
   color: var(--gzen-ink);
   font-family: "Noto Sans SC", system-ui, sans-serif;
@@ -559,25 +598,81 @@ header .logo {
 .gzen-card p {
   margin: 0;
   font-size: 0.88rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--gzen-muted);
   flex-grow: 1;
 }
 
 .gzen-card-url {
-  margin-top: 1.2rem;
+  margin-top: 1.25rem;
   font-size: 0.78rem;
   color: var(--gzen-saffron);
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  transition: transform 180ms ease;
 }
 
+.gzen-card:hover .gzen-card-url {
+  transform: translateX(3px);
+}
+
+/* ── Responsive Enhancements ────────────────────────── */
 @media (max-width: 860px) {
+  .gzen-hero-aside {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+
+  .gzen-hero-aside span {
+    flex-grow: 1;
+    text-align: center;
+    border-left: 0;
+    border-top: 3px solid var(--gzen-saffron);
+    border-radius: 0 0 8px 8px;
+  }
+
+  .gzen-hero-aside span:hover {
+    transform: translateY(-2px);
+  }
+
+  .gzen-nav-dropdown {
+    width: 100%;
+  }
+
+  .gzen-nav-dropdown-trigger {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .gzen-nav-dropdown:hover .gzen-dropdown-arrow {
+    transform: none;
+  }
+
   .gzen-nav-dropdown-menu {
-    left: 0;
-    right: auto;
+    position: static;
+    width: 100%;
+    box-shadow: none;
+    border: none;
+    border-left: 2px solid var(--gzen-border);
+    border-radius: 0;
+    background: transparent;
+    padding: 0.25rem 0 0.25rem 0.75rem;
+    margin-top: 0.25rem;
+    transform: none;
+    display: none;
+  }
+
+  .gzen-nav-dropdown:hover .gzen-nav-dropdown-menu,
+  .gzen-nav-dropdown-menu:focus-within {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
