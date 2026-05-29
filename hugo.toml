@@ -76,3 +76,10 @@ summaryLength = 70
   brandSubtitle  = "聚善"
   brandTagline   = "禅生定，定生慧"
   lotusEmoji     = "🪷"
+
+  [params.ecosystem]
+    ki          = "https://ki.gzen.io"
+    learn       = "https://learn.gzen.io"
+    invest      = "https://invest.gzen.io"
+
+

@@ -87,3 +87,33 @@ other = "典藏"
 
 [more]
 other = "更多"
+
+[yijing]
+other = "易经"
+
+[nav_yijing]
+other = "易经"
+
+[nav_ecosystem]
+other = "生态"
+
+[ecosystem_ki_title]
+other = "气与生"
+
+[ecosystem_ki_desc]
+other = "探索身体能量、正念健康与生命的元气之道。"
+
+
+[ecosystem_learn_title]
+other = "知与学"
+
+[ecosystem_learn_desc]
+other = "以禅修思维深化技术与人文素养的学习平台。"
+
+[ecosystem_invest_title]
+other = "资与财"
+
+[ecosystem_invest_desc]
+other = "以正念与长期主义看待投资与财务决策。"
+
+

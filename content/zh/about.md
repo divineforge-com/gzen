@@ -31,9 +31,10 @@ GrowZen 遵循中国农历运作。每月三十天，对应莲花从种子到盛
 
 GrowZen 是更大生态的核心：
 
+- [**ki.gzen**](https://ki.gzen.io) — 探索身体能量、正念健康与生命的元气之道
 - [**learn.gzen**](https://learn.gzen.io) — 学习平台，以禅修思维深化技术与人文素养
 - [**invest.gzen**](https://invest.gzen.io) — 以正念与长期主义看待投资与财务决策
-- [**architect.gzen**](https://architect.gzen.io) — 系统架构与工程设计的哲学思考
+
 
 ## 对 AI 的开放态度
 

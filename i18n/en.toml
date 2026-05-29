@@ -87,3 +87,33 @@ other = "Engineering"
 
 [library]
 other = "Library"
+
+[yijing]
+other = "I Ching"
+
+[nav_yijing]
+other = "I Ching"
+
+[nav_ecosystem]
+other = "Ecosystem"
+
+[ecosystem_ki_title]
+other = "Qi & Vitality"
+
+[ecosystem_ki_desc]
+other = "Exploring vital energy (Ki/Qi), mindful health, and the art of living with vigor and presence."
+
+
+[ecosystem_learn_title]
+other = "Learn & Grow"
+
+[ecosystem_learn_desc]
+other = "Learning platform informed by meditative thinking and holistic growth."
+
+[ecosystem_invest_title]
+other = "Invest & Steward"
+
+[ecosystem_invest_desc]
+other = "Mindful investing, right livelihood, and long-term stewardship."
+
+

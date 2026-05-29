@@ -29,9 +29,10 @@ The full moon (day 15) and new moon (day 1) are special moments of observation. 
 
 GrowZen is the philosophical core of a broader ecosystem:
 
+- [**ki.gzen**](https://ki.gzen.io) — Exploring vital energy (Ki/Qi), mindful health, and the art of living with vigor and presence
 - [**learn.gzen**](https://learn.gzen.io) — Learning platform informed by meditative thinking
 - [**invest.gzen**](https://invest.gzen.io) — Mindful, long-term investing philosophy
-- [**architect.gzen**](https://architect.gzen.io) — Systems architecture through a philosophical lens
+
 
 ## Open to AI
 

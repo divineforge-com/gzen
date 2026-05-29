@@ -70,6 +70,33 @@
   </section>
   {{ end }}
 
+  {{/* Ecosystem Showcase */}}
+  <section class="gzen-section">
+    <div class="gzen-section-heading">
+      <h2>{{ i18n "nav_ecosystem" | default "生态" }}</h2>
+    </div>
+    <div class="gzen-grid">
+      <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card">
+        <span class="gzen-card-tag">ki.gzen.io</span>
+        <h3>{{ i18n "ecosystem_ki_title" | default "机与器" }}</h3>
+        <p>{{ i18n "ecosystem_ki_desc" | default "探索人工智能、工具与生命的共生之道。" }}</p>
+        <span class="gzen-card-url">ki.gzen.io &rarr;</span>
+      </a>
+      <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card">
+        <span class="gzen-card-tag">learn.gzen.io</span>
+        <h3>{{ i18n "ecosystem_learn_title" | default "知与学" }}</h3>
+        <p>{{ i18n "ecosystem_learn_desc" | default "以禅修思维深化技术与人文素养的学习平台。" }}</p>
+        <span class="gzen-card-url">learn.gzen.io &rarr;</span>
+      </a>
+      <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card">
+        <span class="gzen-card-tag">invest.gzen.io</span>
+        <h3>{{ i18n "ecosystem_invest_title" | default "资与财" }}</h3>
+        <p>{{ i18n "ecosystem_invest_desc" | default "以正念与长期主义看待投资与财务决策。" }}</p>
+        <span class="gzen-card-url">invest.gzen.io &rarr;</span>
+      </a>
+    </div>
+  </section>
+
   {{/* Tags */}}
   {{ $tags := site.Taxonomies.tags }}
   {{ if $tags }}

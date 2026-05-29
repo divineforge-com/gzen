@@ -420,3 +420,164 @@ article {
 header .logo {
   font-family: "Noto Serif SC", serif;
 }
+
+/* ── Ecosystem Dropdown ─────────────────────────────── */
+.gzen-nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.gzen-nav-dropdown-trigger {
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 999px;
+  color: var(--gzen-muted);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  padding: 0.45rem 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-family: inherit;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.gzen-nav-dropdown:hover .gzen-nav-dropdown-trigger,
+.gzen-nav-dropdown-trigger:focus {
+  background: rgba(217, 120, 69, 0.1);
+  color: #8f4526;
+}
+
+.gzen-dropdown-arrow {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+.gzen-nav-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  background: var(--gzen-bg);
+  border: 1px solid var(--gzen-border);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(74, 44, 26, 0.08);
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+}
+
+.gzen-nav-dropdown:hover .gzen-nav-dropdown-menu,
+.gzen-nav-dropdown-menu:focus-within {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.gzen-nav-dropdown-menu a {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+  align-items: flex-start;
+}
+
+.gzen-nav-dropdown-menu a:hover {
+  background: rgba(217, 120, 69, 0.08) !important;
+  color: #8f4526 !important;
+}
+
+.gzen-nav-dropdown-menu a strong {
+  font-size: 0.85rem;
+  color: var(--gzen-ink);
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.gzen-nav-dropdown-menu a span {
+  font-size: 0.72rem;
+  color: var(--gzen-muted);
+  margin-top: 0.15rem;
+  line-height: 1.3;
+}
+
+/* ── Ecosystem Grid ─────────────────────────────────── */
+.gzen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.2rem;
+  width: 100%;
+}
+
+.gzen-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: rgba(255, 244, 232, 0.38);
+  border: 1px solid var(--gzen-border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.gzen-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 244, 232, 0.88);
+  box-shadow: 0 6px 20px rgba(74, 44, 26, 0.06);
+  border-color: var(--gzen-saffron);
+}
+
+.gzen-card-tag {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--gzen-leaf);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.gzen-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.12rem;
+  font-weight: 650;
+  color: var(--gzen-ink);
+  font-family: "Noto Sans SC", system-ui, sans-serif;
+}
+
+.gzen-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--gzen-muted);
+  flex-grow: 1;
+}
+
+.gzen-card-url {
+  margin-top: 1.2rem;
+  font-size: 0.78rem;
+  color: var(--gzen-saffron);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (max-width: 860px) {
+  .gzen-nav-dropdown-menu {
+    left: 0;
+    right: auto;
+  }
+}
+

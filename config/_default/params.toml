@@ -58,4 +58,5 @@ showLikes      = false
 showViews      = false
 
 # ── Content sections ───────────────────────────────────
-mainSections = ["principles", "koans", "practice", "engineering", "library"]
+mainSections = ["principles", "koans", "practice", "engineering", "library", "yijing"]
+
