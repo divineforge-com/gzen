@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=\"${CLAUDE_TOOL_INPUT_COMMAND:-}\"; case \"$cmd\" in *'git push'*' main'*|*'git push origin main'*) echo 'BLOCKED: push to main forbidden — use a feature branch' && exit 1 ;; *) exit 0 ;; esac"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=\"${CLAUDE_TOOL_INPUT_FILE_PATH:-}\"; case \"$f\" in content/zh/*|content/en/*|content/ja/*) echo \"→ wisdom-check  writing-check  accessibility-check\" ;; layouts/*|assets/css/*|tailwind*) echo \"→ visual-check\" ;; esac; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}
