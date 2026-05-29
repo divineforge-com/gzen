@@ -40,6 +40,9 @@ other = "Recent Writing"
 [all_posts]
 other = "すべての記事"
 
+[more]
+other = "もっと"
+
 [topics]
 other = "トピック"
 
