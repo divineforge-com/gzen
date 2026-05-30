@@ -1,5 +1,6 @@
 ---
 title: "Morning Reflection"
+feature: img/og-morning-reflection.jpg
 date: 2026-03-01
 summary: "A five-minute morning practice for anchoring attention before the day begins."
 tags: ["mindfulness", "discipline", "clarity"]

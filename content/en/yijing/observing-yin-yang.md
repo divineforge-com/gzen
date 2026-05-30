@@ -1,5 +1,6 @@
 ---
 title: "Observing Yin and Yang: The Art of Balance in Daily Life"
+feature: img/og-observing-yin-and-yang--the-ar.jpg
 date: 2026-05-29
 summary: "Learn to track the wax and wane of Yin and Yang in action, rest, speech, and silence, practicing the Middle Way in modern life."
 tags: ["clarity", "practice", "middle-way"]

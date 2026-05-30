@@ -1,5 +1,6 @@
 ---
 title: "Deep Reflection & Adaptation: Settling the Mind in Impermanence"
+feature: img/og-deep-reflection---adaptation--.jpg
 date: 2026-05-29
 summary: "Combine the I Ching's wisdom of adaptation with the Buddhist path of non-clinging, learning to flow freely in a transforming world."
 tags: ["impermanence", "clarity", "practice"]

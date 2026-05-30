@@ -1,5 +1,6 @@
 ---
 title: "Mountain Wisdom: Sitting Like a Mountain in a Busy World"
+feature: img/og-mountain-wisdom--sitting-like-.jpg
 date: 2026-05-29
 summary: "Explore the quiet wisdom of Hexagram Gèn (Mountain), learning how to settle the mind through mountain-like meditation in an age of information overload."
 tags: ["impermanence", "practice", "simplicity"]
