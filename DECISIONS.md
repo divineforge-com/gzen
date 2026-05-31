@@ -64,3 +64,23 @@ Run the following command locally:
 - Secures the integration by relying on local developer authentication.
 - Agents or CI pipelines that need access to the submodule will either need SSH keys configured via secrets, or they will skip the submodule initialization if they don't explicitly require its context for generating the public site build.
 ---
+
+## ADR 4: Cross-Repository Context Management
+
+**Date**: 2026-05-31
+**Status**: Accepted
+
+### Context
+The GrowZen ecosystem consists of multiple repositories corresponding to different subdomains (`gzen-invest`, `gzen-ki`, `gzen-learn`, and the main site `gzen`). Previously, Git submodules were used to tie them together and provide context to agents working across repos. However, Cloudflare Pages fails the build because it tries to automatically clone submodules during its deploy process, but it lacks the SSH/authentication credentials required for private repos. Since the submodules are purely for context (and not build dependencies), using Git submodules is an anti-pattern that breaks CI.
+
+### Decision
+Removed all Git submodules (`gzen-invest`, `gzen-ki`, `gzen-learn`) from this repository.
+Going forward, cross-repository context for AI agents should be managed using external referencing methods instead of Git Submodules:
+1. **AGENTS.md**: Use instructions to instruct agents on where to find parallel repositories online or how to request context files explicitly if needed.
+2. **URL References**: Include links in documentation back to the source code or deployed assets of the other apps.
+3. **Dedicated Knowledge Base**: Context needed across the entire ecosystem should be isolated to a single shared documentation standard.
+
+### Consequences
+- Resolves Cloudflare Pages CI build failures due to missing authentication.
+- Agents working locally may need separate, explicit instructions or tools to fetch code from sister-repositories if deep codebase context is required.
+---

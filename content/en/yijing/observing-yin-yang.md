@@ -19,7 +19,7 @@ This exhausting loop of "too much or too little" leaves us drained. We try to co
 
 ## Principle
 
-The core theory of the I Ching is the unity and cyclical transition of **Yin and Yang**. Yin and Yang are not static symbols; they represent two fundamental states of life energy (Qi/Ki):
+
 - **Yang**: Represents active, bright, movement, expression, creation, and expenditure.
 - **Yin**: Represents receptive, dark, rest, listening, holding, and accumulation.
 
