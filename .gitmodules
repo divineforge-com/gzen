@@ -1,9 +1,0 @@
-[submodule "gzen-ki"]
-	path = gzen-ki
-	url = https://github.com/divineforge-com/gzen-ki.git
-[submodule "gzen-learn"]
-	path = gzen-learn
-	url = https://github.com/divineforge-com/gzen-learn.git
-[submodule "gzen-invest"]
-	path = gzen-invest
-	url = https://github.com/divineforge-com/gzen-invest.git

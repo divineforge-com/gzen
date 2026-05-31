@@ -1,5 +1,6 @@
 ---
 title: "The Drifting Log"
+feature: img/og-the-drifting-log.jpg
 date: 2026-03-24
 summary: "A log drifts downstream, clinging to neither bank. The unattached mind reaches the ocean naturally."
 tags: ["clarity", "mindfulness", "discipline"]

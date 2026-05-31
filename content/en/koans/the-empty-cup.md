@@ -1,5 +1,6 @@
 ---
 title: "The Empty Cup"
+feature: img/og-the-empty-cup.jpg
 date: 2026-03-01
 summary: "A mind already full cannot receive anything new. Wisdom begins not with adding, but with emptying."
 tags: ["clarity", "simplicity", "mindfulness"]
