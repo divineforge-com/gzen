@@ -1,6 +1,5 @@
 ---
 title: "The Second Arrow"
-feature: img/og-the-second-arrow.jpg
 date: 2026-03-08
 summary: "Pain is inevitable. Suffering is the story we add to it. The second arrow is always optional."
 tags: ["compassion", "mindfulness", "impermanence"]

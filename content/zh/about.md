@@ -1,6 +1,5 @@
 ---
 title: "关于 GrowZen"
-feature: img/og----growzen.jpg
 description: "GrowZen 是一个以佛教智慧为根基的哲学平台，探索禅修、清明与正念之道。"
 layout: "single"
 ---

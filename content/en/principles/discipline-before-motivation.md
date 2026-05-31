@@ -1,6 +1,5 @@
 ---
 title: "Discipline Before Motivation"
-feature: img/og-discipline-before-motivation.jpg
 date: 2026-02-22
 summary: "Waiting to feel ready is waiting forever. The feeling of readiness is a reward for beginning — not a condition for it."
 tags: ["discipline", "virtue", "mindfulness"]

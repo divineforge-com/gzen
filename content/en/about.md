@@ -1,6 +1,5 @@
 ---
 title: "About GrowZen"
-feature: img/og-about-growzen.jpg
 description: "GrowZen is a philosophy platform rooted in Buddhist wisdom, exploring meditation, clarity, and mindful living."
 layout: "single"
 ---

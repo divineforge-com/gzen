@@ -1,6 +1,5 @@
 ---
 title: "Simplicity Before Scale"
-feature: img/og-simplicity-before-scale.jpg
 date: 2026-02-15
 summary: "Adding more before understanding what is already there leads only to more confusion. Return to what is essential."
 tags: ["simplicity", "clarity", "mindfulness"]

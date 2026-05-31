@@ -1,6 +1,5 @@
 ---
 title: "Understanding Before Action"
-feature: img/og-understanding-before-action.jpg
 date: 2026-03-08
 summary: "Reaching for a solution before understanding the problem creates more confusion, not less."
 tags: ["clarity", "mindfulness", "simplicity"]

@@ -1,6 +1,5 @@
 ---
 title: "I Ching Primer: Finding Constancy in Change"
-feature: img/og-i-ching-primer--finding-consta.jpg
 date: 2026-05-29
 summary: "Understand the mysteries of Yin, Yang, the Trigrams, and Change, returning to present awareness in a world of impermanence."
 layout: "list"

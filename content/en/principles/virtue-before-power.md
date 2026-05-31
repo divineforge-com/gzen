@@ -1,6 +1,5 @@
 ---
 title: "Virtue Before Power"
-feature: img/og-virtue-before-power.jpg
 date: 2026-02-08
 summary: "Ability without goodness only makes us more effective at causing harm. Tend to the person before seeking influence."
 tags: ["virtue", "discipline", "compassion"]

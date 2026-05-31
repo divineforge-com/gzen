@@ -1,6 +1,5 @@
 ---
 title: "GrowZenについて"
-feature: img/og-growzen----.jpg
 description: "GrowZenは仏教の智慧を根底に持つ哲学プラットフォームです。"
 layout: "single"
 ---

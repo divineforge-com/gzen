@@ -1,6 +1,5 @@
 ---
 title: "Clarity Before Tools"
-feature: img/og-clarity-before-tools.jpg
 date: 2026-02-01
 summary: "We reach for tools before we understand the problem. Stillness first — then action."
 tags: ["clarity", "mindfulness", "simplicity"]

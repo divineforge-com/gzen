@@ -1,6 +1,5 @@
 ---
 title: "On Simplicity"
-feature: img/og-on-simplicity.jpg
 date: 2026-03-01
 summary: "Simplicity is not the absence of depth. It is depth made accessible. A collection of reflections from the Buddhist tradition and human wisdom."
 tags: ["simplicity", "clarity", "impermanence"]

@@ -77,11 +77,6 @@ summaryLength = 70
   brandTagline   = "禅生定，定生慧"
   lotusEmoji     = "🪷"
 
-  # Default image for social sharing (Open Graph and Twitter Cards)
-  defaultSocialImage = "img/og-default.jpg"
-  defaultAppearance = "light"
-
-
   [params.ecosystem]
     ki          = "https://ki.gzen.io"
     learn       = "https://learn.gzen.io"
