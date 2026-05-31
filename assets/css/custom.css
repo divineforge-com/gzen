@@ -496,6 +496,7 @@ header .logo {
 }
 
 .gzen-nav-dropdown:hover .gzen-nav-dropdown-menu,
+.gzen-nav-dropdown-trigger:focus-visible + .gzen-nav-dropdown-menu,
 .gzen-nav-dropdown-menu:focus-within {
   opacity: 1;
   visibility: visible;
@@ -669,6 +670,7 @@ header .logo {
   }
 
   .gzen-nav-dropdown:hover .gzen-nav-dropdown-menu,
+  .gzen-nav-dropdown-trigger:focus-visible + .gzen-nav-dropdown-menu,
   .gzen-nav-dropdown-menu:focus-within {
     display: flex;
     opacity: 1;
