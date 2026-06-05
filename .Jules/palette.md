@@ -1,0 +1,3 @@
+## 2026-06-05 - Added focus-visible states
+**Learning:** The custom CSS implementation completely lacked `focus-visible` styles, meaning keyboard navigation users had no visual indicator of their current position on the site. Since the site uses highly custom CSS with many interactive elements (like the navigation dropdown, ecosystem cards, and link lists), a global focus-visible style using the primary brand color (`rgb(var(--color-primary-500))`) is necessary to ensure keyboard accessibility.
+**Action:** Applied a global `focus-visible` outline to interactive elements (`a`, `button`, `input`, `textarea`, `summary`). Next time dealing with a custom CSS site without a utility framework, always check for keyboard focus styles first.
