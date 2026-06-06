@@ -21,18 +21,18 @@
     {{ end }}
     <div class="gzen-nav-dropdown">
       <button class="gzen-nav-dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-        {{ i18n "nav_ecosystem" | default "生态" }} <span class="gzen-dropdown-arrow">▾</span>
+        {{ i18n "nav_ecosystem" | default "生态" }} <span class="gzen-dropdown-arrow" aria-hidden="true">▾</span>
       </button>
-      <div class="gzen-nav-dropdown-menu" role="menu">
-        <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener" role="menuitem">
+      <div class="gzen-nav-dropdown-menu">
+        <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener">
           <strong>ki.gzen.io</strong>
           <span>{{ i18n "ecosystem_ki_title" | default "机与器" }}</span>
         </a>
-        <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener" role="menuitem">
+        <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener">
           <strong>learn.gzen.io</strong>
           <span>{{ i18n "ecosystem_learn_title" | default "知与学" }}</span>
         </a>
-        <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener" role="menuitem">
+        <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener">
           <strong>invest.gzen.io</strong>
           <span>{{ i18n "ecosystem_invest_title" | default "资与财" }}</span>
         </a>
