@@ -1,0 +1,3 @@
+## 2025-06-10 - Fix Dropdown Keyboard Accessibility
+**Learning:** When using `visibility: hidden` for a dropdown menu, the children of that menu cannot receive focus because they are not considered reachable. Attempting to use `.menu:focus-within` on the hidden element will not work for keyboard users because they can't tab into it to trigger the state.
+**Action:** Always apply `:focus-within` to the *visible parent* (e.g. `.nav-dropdown:focus-within .menu`) instead of the hidden menu itself, ensuring that focusing the trigger button makes the hidden content visible and enterable in the tab order.
