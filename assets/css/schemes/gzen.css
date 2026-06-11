@@ -10,39 +10,39 @@
 :root,
 html.light {
   /* Primary accent: warm saffron #d97845 */
-  --color-primary-50:  255 248 245;
+  --color-primary-50: 255 248 245;
   --color-primary-100: 255 237 220;
   --color-primary-200: 250 210 174;
   --color-primary-300: 240 176 124;
-  --color-primary-400: 226 139  78;
-  --color-primary-500: 217 120  69;
-  --color-primary-600: 188  91  47;
-  --color-primary-700: 148  68  36;
-  --color-primary-800: 111  49  29;
-  --color-primary-900:  82  36  24;
-  --color-primary-950:  52  23  15;
+  --color-primary-400: 226 139 78;
+  --color-primary-500: 217 120 69;
+  --color-primary-600: 188 91 47;
+  --color-primary-700: 148 68 36;
+  --color-primary-800: 111 49 29;
+  --color-primary-900: 82 36 24;
+  --color-primary-950: 52 23 15;
 
   /* Neutral scale: warm brown → cream */
-  --color-neutral-50:  255 250 244;
+  --color-neutral-50: 255 250 244;
   --color-neutral-100: 250 241 229;
   --color-neutral-200: 235 218 198;
   --color-neutral-300: 210 184 154;
-  --color-neutral-400: 168 132  96;
-  --color-neutral-500: 126  92  62;
-  --color-neutral-600:  98  69  45;
-  --color-neutral-700:  72  49  32;
-  --color-neutral-800:  50  34  24;
-  --color-neutral-900:  36  25  18;
-  --color-neutral-950:  24  16  11;
+  --color-neutral-400: 168 132 96;
+  --color-neutral-500: 126 92 62;
+  --color-neutral-600: 98 69 45;
+  --color-neutral-700: 72 49 32;
+  --color-neutral-800: 50 34 24;
+  --color-neutral-900: 36 25 18;
+  --color-neutral-950: 24 16 11;
 }
 
 /* Dark mode: keep warm tones even in dark (graceful fallback) */
 html.dark {
-  --color-primary-50:   74  44  26;
-  --color-primary-100:  98  60  34;
-  --color-primary-200: 130  82  50;
-  --color-primary-300: 160 106  68;
-  --color-primary-400: 196 128  88;
+  --color-primary-50: 74 44 26;
+  --color-primary-100: 98 60 34;
+  --color-primary-200: 130 82 50;
+  --color-primary-300: 160 106 68;
+  --color-primary-400: 196 128 88;
   --color-primary-500: 232 149 109;
   --color-primary-600: 240 172 138;
   --color-primary-700: 246 198 172;
@@ -50,12 +50,12 @@ html.dark {
   --color-primary-900: 253 240 232;
   --color-primary-950: 255 248 245;
 
-  --color-neutral-50:   28  16   8;
-  --color-neutral-100:  48  30  16;
-  --color-neutral-200:  74  48  28;
-  --color-neutral-300: 100  70  44;
-  --color-neutral-400: 130  92  62;
-  --color-neutral-500: 160 116  84;
+  --color-neutral-50: 28 16 8;
+  --color-neutral-100: 48 30 16;
+  --color-neutral-200: 74 48 28;
+  --color-neutral-300: 100 70 44;
+  --color-neutral-400: 130 92 62;
+  --color-neutral-500: 160 116 84;
   --color-neutral-600: 190 145 108;
   --color-neutral-700: 210 175 145;
   --color-neutral-800: 230 208 186;

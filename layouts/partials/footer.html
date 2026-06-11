@@ -8,15 +8,32 @@
           <small>{{ .Site.Language.Params.subtitle | default "善聚慧生" }}</small>
         </span>
       </div>
-      <p class="gzen-footer-tagline">{{ .Site.Language.Params.description | default .Site.Params.brandTagline }}</p>
+      <p class="gzen-footer-tagline">
+        {{ .Site.Language.Params.description | default .Site.Params.brandTagline }}
+      </p>
     </div>
 
     <div class="gzen-footer-links">
       <div class="gzen-footer-col">
         <h4>{{ i18n "nav_ecosystem" | default "生态" }}</h4>
-        <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener">ki.gzen.io</a>
-        <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener">learn.gzen.io</a>
-        <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener">invest.gzen.io</a>
+        <a
+          href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}"
+          target="_blank"
+          rel="noopener"
+          >ki.gzen.io</a
+        >
+        <a
+          href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}"
+          target="_blank"
+          rel="noopener"
+          >learn.gzen.io</a
+        >
+        <a
+          href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}"
+          target="_blank"
+          rel="noopener"
+          >invest.gzen.io</a
+        >
       </div>
       <div class="gzen-footer-col">
         <h4>{{ i18n "nav_origin" | default "起源" }}</h4>
@@ -28,7 +45,8 @@
 
   <div class="gzen-footer-bottom">
     <p class="gzen-copyright">
-      &copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved. Spawned from divineforge.com.
+      &copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved. Spawned from
+      divineforge.com.
     </p>
   </div>
 
@@ -37,8 +55,8 @@
       mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
         margin: 24,
         background: "rgba(0,0,0,0.5)",
-        scrollOffset: 0,
-      });
+        scrollOffset: 0
+      })
     </script>
   {{ end }}
 
