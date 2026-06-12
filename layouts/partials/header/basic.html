@@ -6,6 +6,7 @@
   (dict "key" "library" "path" "library")
 }}
 
+
 <header class="gzen-header">
   <a class="gzen-brand" href="{{ "" | relLangURL }}" aria-label="{{ .Site.Title }}">
     <span class="gzen-brand-mark" aria-hidden="true">善</span>
@@ -24,22 +25,33 @@
         {{ i18n "nav_ecosystem" | default "生态" }} <span class="gzen-dropdown-arrow">▾</span>
       </button>
       <div class="gzen-nav-dropdown-menu" role="menu">
-        <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener" role="menuitem">
+        <a
+          href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}"
+          target="_blank"
+          rel="noopener"
+          role="menuitem">
           <strong>ki.gzen.io</strong>
           <span>{{ i18n "ecosystem_ki_title" | default "机与器" }}</span>
         </a>
-        <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener" role="menuitem">
+        <a
+          href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}"
+          target="_blank"
+          rel="noopener"
+          role="menuitem">
           <strong>learn.gzen.io</strong>
           <span>{{ i18n "ecosystem_learn_title" | default "知与学" }}</span>
         </a>
-        <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener" role="menuitem">
+        <a
+          href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}"
+          target="_blank"
+          rel="noopener"
+          role="menuitem">
           <strong>invest.gzen.io</strong>
           <span>{{ i18n "ecosystem_invest_title" | default "资与财" }}</span>
         </a>
       </div>
     </div>
   </nav>
-
 
   {{ if .IsTranslated }}
     <nav class="gzen-languages" aria-label="{{ i18n "read_in" | default "Languages" }}">
