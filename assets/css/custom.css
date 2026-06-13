@@ -61,6 +61,17 @@ body {
   }
 }
 
+/* ── Accessibility ──────────────────────────────────── */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gzen-saffron) !important;
+  outline-offset: 2px !important;
+}
+
 /* Long-form article content uses serif for readability */
 .prose h1, .prose h2, .prose h3 {
   font-family: "Noto Serif SC", "Noto Sans SC", serif;
@@ -496,7 +507,7 @@ header .logo {
 }
 
 .gzen-nav-dropdown:hover .gzen-nav-dropdown-menu,
-.gzen-nav-dropdown-menu:focus-within {
+.gzen-nav-dropdown:focus-within .gzen-nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -669,7 +680,7 @@ header .logo {
   }
 
   .gzen-nav-dropdown:hover .gzen-nav-dropdown-menu,
-  .gzen-nav-dropdown-menu:focus-within {
+  .gzen-nav-dropdown:focus-within .gzen-nav-dropdown-menu {
     display: flex;
     opacity: 1;
     visibility: visible;

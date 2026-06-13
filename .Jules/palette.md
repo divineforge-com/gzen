@@ -1,0 +1,3 @@
+## 2026-06-08 - Accessible CSS-only Dropdowns
+**Learning:** When building hover-based CSS-only dropdowns without JS, applying `:focus-within` directly to the hidden `.dropdown-menu` causes keyboard accessibility to fail because the menu is un-focusable when hidden (`display: none` or `visibility: hidden`).
+**Action:** Always apply `:focus-within` to the parent container (`.dropdown:focus-within .dropdown-menu { display: block; }`) so that when the trigger button receives focus, the menu becomes visible, allowing keyboard users to tab sequentially through the links.
