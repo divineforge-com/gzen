@@ -1,0 +1,4 @@
+
+## 2026-06-24 - Language Switcher Accessibility
+**Learning:** For a multilingual site, adding `hreflang` and `lang` attributes to language switcher links is critical for screen readers to apply the correct pronunciation profile when reading the foreign language names (e.g., reading "English" in English while navigating the Chinese site). Without this, the screen reader uses the primary language's pronunciation rules, creating confusing auditory experiences. Additionally, relying on isolated JavaScript hooks (like `id="lang-toggle"`) without corresponding markup IDs can lead to broken UX features (like remembering language preference in localStorage).
+**Action:** Always verify that language toggle links have appropriate `hreflang` and `lang` attributes, and ensure JavaScript hooks are correctly bound to the markup elements they target.
