@@ -1,0 +1,3 @@
+## 2025-02-28 - Screen Reader Accessibility for Language Links
+**Learning:** When linking to translations of a page (e.g., in a language switcher), it's crucial to add `hreflang` and `lang` attributes. Screen readers use these to switch pronunciation profiles automatically. Without them, a screen reader set to English might try to pronounce Chinese characters using English phonetics.
+**Action:** Always include `hreflang` (for SEO and document structure) and `lang` (for screen reader pronunciation) on language switcher links, matching the target language code.
