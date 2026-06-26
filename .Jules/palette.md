@@ -1,0 +1,3 @@
+## 2024-06-27 - Language Switcher Accessibility
+**Learning:** For multilingual support and accessibility, language switcher links must include `hreflang` and `lang` attributes matching the target language code. This is crucial because it ensures proper screen reader pronunciation profiles are applied. Without them, screen readers may attempt to read target language words using the current language's pronunciation rules, resulting in gibberish.
+**Action:** Always include `hreflang` and `lang` attributes on `<a>` tags that switch the site's language. Use Hugo's `.Language.Lang` variable to automatically populate these fields.
