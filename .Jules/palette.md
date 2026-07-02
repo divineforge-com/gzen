@@ -4,4 +4,4 @@
 
 ## 2024-05-18 - Hugo Version Compatibility
 **Learning:** The Cloudflare Pages deployment environment uses Hugo v0.147.7-extended. When running `pnpm install`, newer versions of `hugo-extended` (like v0.162.1) might be installed locally, which introduce deprecation warnings and errors that fail the CI build (e.g., `.Language.LanguageName` being deprecated in v0.158.0+).
-**Action:** Always maintain compatibility with Hugo v0.147.7 and avoid upgrading `hugo-extended` beyond `^0.147.0` in `package.json` to prevent CI build failures.
+**Action:** Always maintain compatibility with Hugo v0.147.7 and avoid upgrading `hugo-extended` beyond `0.147.0` in `package.json` to prevent CI build failures.
