@@ -46,6 +46,8 @@
       {{ range sort .AllTranslations "Language.Weight" }}
         <a
           href="{{ .RelPermalink }}"
+          hreflang="{{ .Language.Lang }}"
+          lang="{{ .Language.Lang }}"
           {{ if eq .Language.Lang $.Site.Language.Lang }}aria-current="page"{{ end }}>
           {{ .Language.Params.displayName | default .Language.LanguageName | default .Language.Lang }}
         </a>
