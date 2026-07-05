@@ -1,0 +1,3 @@
+## 2025-05-18 - Multilingual Language Switcher Screen Reader Pronunciation Profiles
+**Learning:** When displaying language names in their native format (e.g., "日本語", "English", "中文"), screen readers may mispronounce them by applying the primary document language's voice profile (e.g., trying to read "日本語" with a Chinese or English accent).
+**Action:** Always add `hreflang` and `lang` attributes (e.g., `lang="ja"`) to language switcher links to ensure screen readers switch to the correct pronunciation engine for each language option, improving the accessibility for visually impaired multilingual users.
