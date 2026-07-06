@@ -1,0 +1,3 @@
+## 2025-02-13 - Multilingual Language Switcher Accessibility
+**Learning:** For language switcher links, it is critical to explicitly provide `hreflang` and `lang` attributes set to the target language code. Screen readers use these attributes to apply the correct pronunciation profile. The app also requires a `data-lang` attribute and an `id="lang-toggle"` on the wrapper to function with the custom vanilla JS toggle `static/js/language-toggle.js`.
+**Action:** Always verify that multilingual links have the `hreflang` and `lang` attributes set to the target language, and review associated vanilla JS scripts for integration requirements like `data-*` attributes or specific parent IDs.
