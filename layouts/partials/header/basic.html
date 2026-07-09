@@ -42,10 +42,13 @@
 
 
   {{ if .IsTranslated }}
-    <nav class="gzen-languages" aria-label="{{ i18n "read_in" | default "Languages" }}">
+    <nav class="gzen-languages" id="lang-toggle" aria-label="{{ i18n "read_in" | default "Languages" }}">
       {{ range sort .AllTranslations "Language.Weight" }}
         <a
           href="{{ .RelPermalink }}"
+          hreflang="{{ .Language.Lang }}"
+          lang="{{ .Language.Lang }}"
+          data-lang="{{ .Language.Lang }}"
           {{ if eq .Language.Lang $.Site.Language.Lang }}aria-current="page"{{ end }}>
           {{ .Language.Params.displayName | default .Language.LanguageName | default .Language.Lang }}
         </a>
