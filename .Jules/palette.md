@@ -1,0 +1,3 @@
+## 2026-07-09 - Language Switcher Accessibility
+**Learning:** Screen readers will incorrectly pronounce non-native language names (e.g. reading "日本語" with English pronunciation rules) unless the elements are tagged with proper `lang` attributes. Adding `hreflang` helps with overall document outline semantics for translations. Also, newer Hugo keys like `label` or `.Language.Label` are not supported in Cloudflare Pages deployment environment (Hugo v0.147.7), causing build failures if used.
+**Action:** Always add `lang` and `hreflang` to any multilingual language toggle links or inline translations so assistive tech handles them correctly. Stick to deprecated `.LanguageName` and `languageName` fields when targeting Cloudflare environments.
