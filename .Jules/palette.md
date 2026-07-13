@@ -1,0 +1,3 @@
+## 2026-07-13 - Multilingual Language Switcher Accessibility
+**Learning:** For Hugo multilingual sites, language switcher links must include `hreflang` and `lang` attributes matching the target language code. This ensures proper screen reader pronunciation profiles are applied. Additionally, the JS logic for highlighting selected languages relies on `data-lang` attributes and an `id="lang-toggle"` container.
+**Action:** When building or updating multilingual navigation menus, always include `hreflang="{{ .Language.Lang }}"`, `lang="{{ .Language.Lang }}"`, and `data-lang="{{ .Language.Lang }}"` on the anchor tags to maintain both accessibility and interactivity.
