@@ -1,0 +1,3 @@
+## 2025-02-22 - Multilingual Accessible Switcher
+**Learning:** For a multilingual site like GrowZen, language switcher links often display the native name of the language (e.g., "日本語" for Japanese or "English" for English). If the `lang` and `hreflang` attributes are missing from these links, screen readers may attempt to read the text using the current document's language profile, leading to unintelligible pronunciation.
+**Action:** Always include `lang` and `hreflang` attributes on language switcher links that map to the target language code, ensuring screen readers apply the correct pronunciation profile.
