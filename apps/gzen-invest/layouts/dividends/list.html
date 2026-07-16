@@ -1,0 +1,132 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="text-gold" data-en="💰 Dividend Income Mastery" data-zh="💰 股息收益精通">💰 Dividend Income Mastery</h1>
+  <p data-en="Build a passive income stream. Let your money work while you sleep." data-zh="建立被动收入来源。让您的钱在睡眠时持续工作。">Build a passive income stream. Let your money work while you sleep.</p>
+</div>
+
+<section class="card card-section">
+  {{ partial "infographics/dividend-flow.html" . }}
+</section>
+
+<!-- DRIP section -->
+<section class="card card-section">
+  <h2 class="section-title text-gold" data-en="🔄 DRIP — Dividend Reinvestment Plan" data-zh="🔄 DRIP — 股息再投资计划">🔄 DRIP — Dividend Reinvestment Plan</h2>
+  <div class="infographic">
+  <svg viewBox="0 0 700 200" style="width:100%;height:auto;font-family:var(--font-diagram)">
+    <defs>
+      <marker id="arrY" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#f0b429"/>
+      </marker>
+    </defs>
+    <!-- Year 1 -->
+    <rect x="10" y="30" width="100" height="80" rx="8" fill="rgba(66,153,225,0.13)" stroke="#4299e1" stroke-width="1.5"/>
+    <text x="60" y="56" text-anchor="middle" font-size="14" fill="#4299e1" font-weight="700">Year 1</text>
+    <text x="60" y="76" text-anchor="middle" font-size="18" fill="#4299e1" font-weight="700">100 shares</text>
+    <text x="60" y="96" text-anchor="middle" font-size="14" fill="#4299e1" opacity="0.7">RM400/yr</text>
+    <text x="60" y="146" text-anchor="middle" font-size="13" fill="rgba(255,255,255,0.4)">reinvest all divs</text>
+    <line x1="110" y1="70" x2="150" y2="70" stroke="#f0b429" stroke-width="1.5" marker-end="url(#arrY)"/>
+    <!-- Year 3 -->
+    <rect x="150" y="30" width="100" height="80" rx="8" fill="rgba(72,187,120,0.13)" stroke="#48bb78" stroke-width="1.5"/>
+    <text x="200" y="56" text-anchor="middle" font-size="14" fill="#48bb78" font-weight="700">Year 3</text>
+    <text x="200" y="76" text-anchor="middle" font-size="18" fill="#48bb78" font-weight="700">116 shares</text>
+    <text x="200" y="96" text-anchor="middle" font-size="14" fill="#48bb78" opacity="0.7">RM464/yr</text>
+    <text x="200" y="146" text-anchor="middle" font-size="13" fill="rgba(255,255,255,0.4)">reinvest all divs</text>
+    <line x1="250" y1="70" x2="290" y2="70" stroke="#f0b429" stroke-width="1.5" marker-end="url(#arrY)"/>
+    <!-- Year 5 -->
+    <rect x="290" y="30" width="100" height="80" rx="8" fill="rgba(240,180,41,0.13)" stroke="#f0b429" stroke-width="1.5"/>
+    <text x="340" y="56" text-anchor="middle" font-size="14" fill="#f0b429" font-weight="700">Year 5</text>
+    <text x="340" y="76" text-anchor="middle" font-size="18" fill="#f0b429" font-weight="700">134 shares</text>
+    <text x="340" y="96" text-anchor="middle" font-size="14" fill="#f0b429" opacity="0.7">RM536/yr</text>
+    <text x="340" y="146" text-anchor="middle" font-size="13" fill="rgba(255,255,255,0.4)">reinvest all divs</text>
+    <line x1="390" y1="70" x2="430" y2="70" stroke="#f0b429" stroke-width="1.5" marker-end="url(#arrY)"/>
+    <!-- Year 10 -->
+    <rect x="430" y="30" width="100" height="80" rx="8" fill="rgba(237,100,166,0.13)" stroke="#ed64a6" stroke-width="1.5"/>
+    <text x="480" y="56" text-anchor="middle" font-size="14" fill="#ed64a6" font-weight="700">Year 10</text>
+    <text x="480" y="76" text-anchor="middle" font-size="18" fill="#ed64a6" font-weight="700">179 shares</text>
+    <text x="480" y="96" text-anchor="middle" font-size="14" fill="#ed64a6" opacity="0.7">RM716/yr</text>
+    <text x="480" y="146" text-anchor="middle" font-size="13" fill="rgba(255,255,255,0.4)">reinvest all divs</text>
+    <text x="350" y="185" text-anchor="middle" font-size="15" fill="rgba(255,255,255,0.5)">Assuming 4% yield · DRIP each year · Same stock price (conservative)</text>
+  </svg>
+  </div>
+</section>
+
+<!-- Top Dividend Stocks -->
+<section class="card-section">
+  <h2 class="section-title" data-en="🌟 Top Dividend Stocks to Watch" data-zh="🌟 值得关注的顶级股息股">🌟 Top Dividend Stocks to Watch</h2>
+  <div class="grid grid-2">
+    <div class="card" style="border-color:rgba(252,129,74,0.2)">
+      <h3 style="font-size:1.2rem;font-weight:700;color:var(--orange);margin-bottom:1rem">🇲🇾 Malaysia — Bursa</h3>
+      <table class="div-table">
+        <tr><td><div class="stock-name">Public Bank (1295)</div><div class="stock-meta">Banking · Consistent payer 30+ yrs</div></td><td class="yield-val text-gold">5.2%</td></tr>
+        <tr><td><div class="stock-name">Petronas Gas (6033)</div><div class="stock-meta">Energy · Govt-backed, stable</div></td><td class="yield-val text-gold">4.8%</td></tr>
+        <tr><td><div class="stock-name">Tenaga Nasional (5347)</div><div class="stock-meta">Utilities · Monopoly, regulated</div></td><td class="yield-val text-gold">4.3%</td></tr>
+        <tr><td><div class="stock-name">IGB REIT (5227)</div><div class="stock-meta">REIT · Mid Valley, The Gardens</div></td><td class="yield-val text-gold">5.5%</td></tr>
+        <tr><td><div class="stock-name">Axiata (6888)</div><div class="stock-meta">Telco · Regional telecom giant</div></td><td class="yield-val text-gold">4.1%</td></tr>
+      </table>
+      <p style="margin-top:.75rem;font-size:.75rem;color:rgba(255,255,255,0.3)">* Indicative yield. Check latest figures before investing.</p>
+    </div>
+    <div class="card" style="border-color:rgba(66,153,225,0.2)">
+      <h3 style="font-size:1.2rem;font-weight:700;color:var(--blue);margin-bottom:1rem">🇺🇸 USA — NYSE/NASDAQ</h3>
+      <table class="div-table">
+        <tr><td><div class="stock-name">Realty Income (O)</div><div class="stock-meta">REIT · Monthly dividends!</div></td><td class="yield-val text-blue">5.8%</td></tr>
+        <tr><td><div class="stock-name">Coca-Cola (KO)</div><div class="stock-meta">Consumer · Div Aristocrat 60+ yrs</div></td><td class="yield-val text-blue">3.1%</td></tr>
+        <tr><td><div class="stock-name">Johnson &amp; Johnson (JNJ)</div><div class="stock-meta">Healthcare · Div King 60+ yrs</div></td><td class="yield-val text-blue">3.0%</td></tr>
+        <tr><td><div class="stock-name">Procter &amp; Gamble (PG)</div><div class="stock-meta">Consumer · Div Aristocrat 67 yrs</div></td><td class="yield-val text-blue">2.5%</td></tr>
+        <tr><td><div class="stock-name">AT&amp;T (T)</div><div class="stock-meta">Telco · High yield, post-cut</div></td><td class="yield-val text-blue">6.5%</td></tr>
+      </table>
+      <p style="margin-top:.75rem;font-size:.75rem;color:rgba(255,255,255,0.3)">* 30% US withholding tax applies to Malaysian investors on US dividends.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Dividend Safety Checklist -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="🔍 Dividend Safety Checklist" data-zh="🔍 股息安全检查清单">🔍 Dividend Safety Checklist</h2>
+  <div style="overflow-x:auto">
+  <table class="safety-table">
+    <thead>
+      <tr>
+        <th style="width:3rem"></th>
+        <th data-en="Metric" data-zh="指标">Metric</th>
+        <th data-en="✅ Safe Signal" data-zh="✅ 安全信号">✅ Safe Signal</th>
+        <th data-en="⚠ Warning Signal" data-zh="⚠ 警告信号">⚠ Warning Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="metric-icon">📊</span></td>
+        <td><strong style="color:var(--green)" data-en="Payout Ratio" data-zh="派息率">Payout Ratio</strong></td>
+        <td class="signal-ok" data-en="&lt; 70% — sustainable" data-zh="&lt; 70% — 可持续">&lt; 70% — sustainable</td>
+        <td class="signal-warn" data-en="&gt; 90% — at risk of a cut" data-zh="&gt; 90% — 有削减风险">&gt; 90% — at risk of a cut</td>
+      </tr>
+      <tr>
+        <td><span class="metric-icon">💵</span></td>
+        <td><strong style="color:var(--gold)" data-en="Free Cash Flow" data-zh="自由现金流">Free Cash Flow</strong></td>
+        <td class="signal-ok" data-en="FCF fully covers the dividend" data-zh="自由现金流完全覆盖股息">FCF fully covers the dividend</td>
+        <td class="signal-warn" data-en="Dividend funded by debt ⚠" data-zh="用债务支付股息 ⚠">Dividend funded by debt ⚠</td>
+      </tr>
+      <tr>
+        <td><span class="metric-icon">📈</span></td>
+        <td><strong style="color:var(--blue)" data-en="Dividend History" data-zh="股息历史">Dividend History</strong></td>
+        <td class="signal-ok" data-en="5+ years of consecutive growth" data-zh="5年以上连续增长">5+ years of consecutive growth</td>
+        <td class="signal-warn" data-en="Recent cuts or freezes ❌" data-zh="近期削减或冻结 ❌">Recent cuts or freezes ❌</td>
+      </tr>
+      <tr>
+        <td><span class="metric-icon">🏢</span></td>
+        <td><strong style="color:var(--pink)" data-en="Business Moat" data-zh="护城河">Business Moat</strong></td>
+        <td class="signal-ok" data-en="Durable competitive advantage" data-zh="持久的竞争优势">Durable competitive advantage</td>
+        <td class="signal-warn" data-en="Cyclical or easily disrupted" data-zh="周期性或容易被颠覆">Cyclical or easily disrupted</td>
+      </tr>
+      <tr>
+        <td><span class="metric-icon">📋</span></td>
+        <td><strong style="color:var(--orange)" data-en="Debt Level" data-zh="负债水平">Debt Level</strong></td>
+        <td class="signal-ok" data-en="D/E &lt; 1× (manageable)" data-zh="债务/股本 &lt; 1×（可管理）">D/E &lt; 1× (manageable)</td>
+        <td class="signal-warn" data-en="D/E &gt; 3× — financial stress" data-zh="债务/股本 &gt; 3× — 财务压力">D/E &gt; 3× — financial stress</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<div class="disclaimer" data-en="⚠ Educational purposes only. Yields fluctuate. Always verify before investing. DYOR." data-zh="⚠ 仅供教育目的。收益率会波动。投资前请自行核实。DYOR。">⚠ Educational purposes only. Yields fluctuate. Always verify before investing. DYOR.</div>
+{{ end }}

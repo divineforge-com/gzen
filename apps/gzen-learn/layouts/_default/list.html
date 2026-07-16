@@ -1,0 +1,48 @@
+{{ define "main" }}
+{{ $lang := .Section }}
+{{ $isJP := eq $lang "japanese" }}
+{{ $isKR := eq $lang "korean" }}
+{{ $isRU := eq $lang "russian" }}
+{{ $accentClass := "jp" }}
+{{ if $isRU }}{{ $accentClass = "ru" }}{{ else if $isKR }}{{ $accentClass = "kr" }}{{ end }}
+<div class="list-hero {{ $accentClass }}">
+  <div class="container">
+    {{ if $isJP }}
+    <h1>🇯🇵 Japanese Lessons</h1>
+    <p>30-day journey from N3 to N1 — one lesson a day, advent-calendar style.</p>
+    {{ else if $isKR }}
+    <h1>🇰🇷 Korean Lessons</h1>
+    <p>20-day journey from Hangul to everyday conversations — taught in Traditional Chinese (繁體中文).</p>
+    {{ else }}
+    <h1>🇷🇺 Russian Lessons</h1>
+    <p>Start from zero and grow — beginner to advanced, step by step.</p>
+    {{ end }}
+  </div>
+</div>
+
+<div class="container">
+  <div class="lesson-list-grid">
+    {{ $pages := .Pages }}
+    {{ $pages = sort $pages "Params.day" "asc" }}
+    {{ range $pages }}
+    {{ if .Params.day }}
+    <a href="{{ .Permalink }}" class="lesson-card">
+      <div class="lesson-card-accent {{ $accentClass }}"></div>
+      <div class="lesson-card-body">
+        <div class="lesson-card-day {{ $accentClass }}">
+          Day {{ .Params.day }}{{ with .Params.level }} · {{ . }}{{ end }}
+        </div>
+        {{ if $isJP }}
+        <span class="kanji-preview">{{ .Params.kanji | default "字" }}</span>
+        {{ else if $isKR }}
+        <span class="kanji-preview" style="font-family:sans-serif;">{{ .Params.icon | default "한" }}</span>
+        {{ end }}
+        <h2>{{ .Title }}</h2>
+        <p>{{ .Params.summary | default (.Summary | truncate 100) }}</p>
+      </div>
+    </a>
+    {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

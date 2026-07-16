@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects
+# Hugo multilingual — Chinese is root (/), English at /en/, Japanese at /ja/
+
+# 404 fallback
+/*  /404.html  404

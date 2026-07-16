@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-jp">学</span><span class="logo-text">GZen</span>
+        <p>{{ .Site.Params.tagline }}</p>
+      </div>
+      <div class="footer-links">
+        <h4>Languages</h4>
+        <ul>
+          <li><a href="{{ "/japanese/" | relURL }}">🇯🇵 Japanese (N3→N1)</a></li>
+          <li><a href="{{ "/korean/" | relURL }}">🇰🇷 Korean (Beginner→Intermediate)</a></li>
+          <li><a href="{{ "/russian/" | relURL }}">🇷🇺 Russian (Beginner→Advanced)</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="{{ "/about/" | relURL }}">About GZen</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ now.Year }} GZen · Built with Hugo · Learn every day 🌸</p>
+    </div>
+  </div>
+</footer>
+<script src="{{ "js/main.js" | relURL }}"></script>
+{{ with .Site.Params.buymeacoffee }}
+{{- /* Buy Me a Coffee floating widget — SRI not applicable: BMAC manages versioned CDN updates. */}}
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="{{ . }}" data-description="Support GZen — Buy me a coffee!" data-message="Enjoying GZen? Your support keeps the lessons coming ☕" data-color="#c0392b" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+{{ end }}

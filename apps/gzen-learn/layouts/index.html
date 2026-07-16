@@ -1,0 +1,207 @@
+{{ define "main" }}
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">📅 Learn one lesson every day</div>
+    <h1>
+      Master <span class="jp">日本語</span>・<span class="kr">한국어</span><br>
+      &amp; <span class="ru">Русский</span>
+    </h1>
+    <p class="hero-sub">
+      A daily language-learning adventure — Japanese &amp; Korean with Traditional Chinese guidance,
+      Russian in English. Inspired by the Advent of Code format.
+    </p>
+    <div class="hero-cta">
+      <a href="{{ "/japanese/" | relURL }}" class="btn btn-jp">🇯🇵 Start Japanese</a>
+      <a href="{{ "/korean/" | relURL }}" class="btn btn-kr">🇰🇷 Start Korean</a>
+      <a href="{{ "/russian/" | relURL }}" class="btn btn-ru">🇷🇺 Start Russian</a>
+      <a href="{{ "/about/" | relURL }}" class="btn btn-outline">Learn more</a>
+    </div>
+  </div>
+</section>
+
+<!-- Today's Lessons -->
+{{ $allPages := .Site.Pages }}
+{{ $jpPages := where $allPages "Params.language" "japanese" }}
+{{ $jpPages = sort $jpPages "Params.day" "asc" }}
+{{ $jpFirst := "" }}
+{{ if $jpPages }}{{ $jpFirst = index $jpPages 0 }}{{ end }}
+
+{{ $krPages := where $allPages "Params.language" "korean" }}
+{{ $krPages = sort $krPages "Params.day" "asc" }}
+{{ $krFirst := "" }}
+{{ if $krPages }}{{ $krFirst = index $krPages 0 }}{{ end }}
+
+{{ $ruPages := where $allPages "Params.language" "russian" }}
+{{ $ruPages = sort $ruPages "Params.day" "asc" }}
+{{ $ruFirst := "" }}
+{{ if $ruPages }}{{ $ruFirst = index $ruPages 0 }}{{ end }}
+
+<section class="today-strip">
+  <div class="container">
+    <div class="section-heading">
+      <h2>🗓 Start Here — Lesson 1</h2>
+      <p>Pick your language and begin your first lesson today.</p>
+    </div>
+    <div class="today-grid">
+      {{ if $jpFirst }}
+      <div class="today-card">
+        <div class="today-card-header jp">
+          <span class="lang-flag">🇯🇵</span>
+          <div class="lang-meta">
+            <span class="lang-name">Japanese</span>
+            <span class="lang-level">N3 → N1 · 30 Days</span>
+          </div>
+          <span class="day-badge">Day {{ $jpFirst.Params.day }}</span>
+        </div>
+        <div class="today-card-body">
+          <h3>{{ $jpFirst.Title }}</h3>
+          <p>{{ $jpFirst.Params.summary | default $jpFirst.Summary | truncate 120 }}</p>
+        </div>
+        <div class="today-card-footer">
+          <a href="{{ $jpFirst.Permalink }}" class="btn btn-jp">Open Lesson →</a>
+        </div>
+      </div>
+      {{ end }}
+      {{ if $krFirst }}
+      <div class="today-card">
+        <div class="today-card-header kr">
+          <span class="lang-flag">🇰🇷</span>
+          <div class="lang-meta">
+            <span class="lang-name">Korean</span>
+            <span class="lang-level">Beginner → Intermediate · 20 Days</span>
+          </div>
+          <span class="day-badge">Day {{ $krFirst.Params.day }}</span>
+        </div>
+        <div class="today-card-body">
+          <h3>{{ $krFirst.Title }}</h3>
+          <p>{{ $krFirst.Params.summary | default $krFirst.Summary | truncate 120 }}</p>
+        </div>
+        <div class="today-card-footer">
+          <a href="{{ $krFirst.Permalink }}" class="btn btn-kr">Open Lesson →</a>
+        </div>
+      </div>
+      {{ end }}
+      {{ if $ruFirst }}
+      <div class="today-card">
+        <div class="today-card-header ru">
+          <span class="lang-flag">🇷🇺</span>
+          <div class="lang-meta">
+            <span class="lang-name">Russian</span>
+            <span class="lang-level">Beginner → Advanced</span>
+          </div>
+          <span class="day-badge">Day {{ $ruFirst.Params.day }}</span>
+        </div>
+        <div class="today-card-body">
+          <h3>{{ $ruFirst.Title }}</h3>
+          <p>{{ $ruFirst.Params.summary | default $ruFirst.Summary | truncate 120 }}</p>
+        </div>
+        <div class="today-card-footer">
+          <a href="{{ $ruFirst.Permalink }}" class="btn btn-ru">Open Lesson →</a>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Calendar Grid — Japanese -->
+<section class="calendar-section">
+  <div class="container">
+    <div class="section-heading">
+      <h2>🇯🇵 30-Day Japanese Calendar</h2>
+      <p>Click any day to jump into that lesson. Work through them in order for best results.</p>
+    </div>
+    <div class="calendar-grid">
+      {{ $jpSorted := sort $jpPages "Params.day" "asc" }}
+      {{ range $jpSorted }}
+      {{ if .Params.day }}
+      <a href="{{ .Permalink }}" class="calendar-day jp-card">
+        <span class="day-num">Day {{ .Params.day }}</span>
+        <span class="day-kanji">{{ .Params.kanji | default "字" }}</span>
+        <span class="day-title">{{ .Title | truncate 22 }}</span>
+      </a>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Calendar Grid — Korean -->
+<section class="calendar-section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-heading">
+      <h2>🇰🇷 Korean Learning Path</h2>
+      <p>Start from Hangul and build up to everyday conversations, guided in Traditional Chinese (繁體中文).</p>
+    </div>
+    <div class="calendar-grid">
+      {{ $krSorted := sort $krPages "Params.day" "asc" }}
+      {{ range $krSorted }}
+      {{ if .Params.day }}
+      <a href="{{ .Permalink }}" class="calendar-day kr-card">
+        <span class="day-num">Day {{ .Params.day }}</span>
+        <span class="day-kanji" style="font-family:sans-serif;font-size:1.2rem;">{{ .Params.icon | default "한" }}</span>
+        <span class="day-title">{{ .Title | truncate 22 }}</span>
+      </a>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Calendar Grid — Russian -->
+<section class="calendar-section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-heading">
+      <h2>🇷🇺 Russian Learning Path</h2>
+      <p>Start from the Cyrillic alphabet and grow your Russian day by day.</p>
+    </div>
+    <div class="calendar-grid">
+      {{ $ruSorted := sort $ruPages "Params.day" "asc" }}
+      {{ range $ruSorted }}
+      {{ if .Params.day }}
+      <a href="{{ .Permalink }}" class="calendar-day ru-card">
+        <span class="day-num">Day {{ .Params.day }}</span>
+        <span class="day-kanji" style="font-family:sans-serif;font-size:1.2rem;">{{ .Params.icon | default "А" }}</span>
+        <span class="day-title">{{ .Title | truncate 22 }}</span>
+      </a>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-heading">
+      <h2>How GZen Works</h2>
+      <p>One lesson per day, structured like an advent calendar. Simple, consistent, effective.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-icon">📅</span>
+        <h3>Pick a Day</h3>
+        <p>Choose any day from the calendar above. Start from Day 1 and work forward.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-icon">📖</span>
+        <h3>Study the Lesson</h3>
+        <p>Learn vocabulary, grammar patterns, and reading passages with furigana support.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-icon">✏️</span>
+        <h3>Practice</h3>
+        <p>Reveal quiz answers, repeat example sentences aloud, track your progress.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-icon">🏆</span>
+        <h3>Level Up</h3>
+        <p>Mark lessons complete and watch your progress bar climb toward fluency.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ end }}

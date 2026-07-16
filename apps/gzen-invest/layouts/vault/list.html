@@ -1,0 +1,67 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="text-orange" data-en="🏦 Trading Vault" data-zh="🏦 交易资库">🏦 Trading Vault</h1>
+  <p data-en="Malaysia &amp; US market knowledge, live market data, and broker tools — all in one place." data-zh="马来西亚与美国市场知识、实时市场数据与券商工具 — 一站汇集。">Malaysia &amp; US market knowledge, live market data, and broker tools — all in one place.</p>
+</div>
+
+<!-- TradingView Ticker Tape -->
+<section class="card card-section">
+  <h2 class="section-title" style="margin-bottom:.75rem" data-en="📡 Live Market Ticker" data-zh="📡 实时市场行情">📡 Live Market Ticker</h2>
+  {{ partial "tradingview-ticker.html" . }}
+</section>
+
+<!-- Market Comparison -->
+<section class="card card-section">
+  {{ partial "infographics/malaysia-us-market.html" . }}
+</section>
+
+<!-- Broker Comparison -->
+<section class="card card-section">
+  {{ partial "infographics/broker-comparison.html" . }}
+</section>
+
+<!-- TradingView Market Overview -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="📈 Market Overview — Live Charts" data-zh="📈 市场概览 — 实时图表">📈 Market Overview — Live Charts</h2>
+  {{ partial "tradingview-overview.html" . }}
+</section>
+
+<!-- Market Hours -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="🕐 Market Hours (Malaysia Time — MYT / UTC+8)" data-zh="🕐 交易时间（马来西亚时间 — MYT / UTC+8）">🕐 Market Hours (Malaysia Time — MYT / UTC+8)</h2>
+  <div class="infographic">
+  <svg viewBox="0 0 720 200" style="width:100%;height:auto;font-family:var(--font-diagram)">
+    <line x1="40" y1="80" x2="680" y2="80" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+    <line x1="40" y1="75" x2="40" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="40" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">12am</text>
+    <line x1="120" y1="75" x2="120" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="120" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">3am</text>
+    <line x1="200" y1="75" x2="200" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="200" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">6am</text>
+    <line x1="280" y1="75" x2="280" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="280" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">9am</text>
+    <line x1="360" y1="75" x2="360" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="360" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">12pm</text>
+    <line x1="440" y1="75" x2="440" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="440" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">3pm</text>
+    <line x1="520" y1="75" x2="520" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="520" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">6pm</text>
+    <line x1="600" y1="75" x2="600" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="600" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">9pm</text>
+    <line x1="680" y1="75" x2="680" y2="85" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+    <text x="680" y="100" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.4)">12am</text>
+    <!-- Bursa: 9am-12:30pm and 2:30pm-5pm -->
+    <rect x="280" y="55" width="93" height="24" rx="4" fill="rgba(252,129,74,0.6)"/>
+    <rect x="413" y="55" width="67" height="24" rx="4" fill="rgba(252,129,74,0.6)"/>
+    <text x="356" y="44" text-anchor="middle" font-size="14" fill="#fc814a" font-weight="700">&#127474;&#127486; Bursa</text>
+    <!-- US: 9:30pm-4am MYT -->
+    <rect x="613" y="115" width="67" height="24" rx="4" fill="rgba(66,153,225,0.6)"/>
+    <rect x="40" y="115" width="107" height="24" rx="4" fill="rgba(66,153,225,0.6)"/>
+    <text x="627" y="105" text-anchor="middle" font-size="14" fill="#4299e1" font-weight="700">&#127482;&#127480; US Market</text>
+    <text x="360" y="165" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.4)">Bursa: 9am&#8211;5pm MYT &#183; US: 9:30pm&#8211;4am MYT (Pre-market: 4pm&#8211;9:30pm ET)</text>
+  </svg>
+  </div>
+</section>
+
+<div class="disclaimer" data-en="⚠ Market hours are approximate and may vary on holidays. Verify with your broker." data-zh="⚠ 交易时间为近似值，节假日可能有所不同。请向您的券商确认。">⚠ Market hours are approximate and may vary on holidays. Verify with your broker.</div>
+{{ end }}

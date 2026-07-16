@@ -1,0 +1,66 @@
+<div class="infographic">
+<svg viewBox="0 0 720 520" style="width:100%;height:auto;font-family:var(--font-diagram)">
+  <defs>
+    <marker id="arrowR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" style="fill:var(--svg-nfg)"/>
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#48bb78"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#fc8181"/>
+    </marker>
+  </defs>
+  <!-- Title -->
+  <text x="360" y="35" text-anchor="middle" font-size="26" fill="#4299e1" font-weight="700">📊 Stochastic Oscillator (%K &amp; %D)</text>
+  <!-- Formula box -->
+  <rect x="50" y="48" width="620" height="55" rx="8" fill="rgba(66,153,225,0.1)" stroke="#4299e1" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="360" y="70" text-anchor="middle" font-size="17" fill="#4299e1" font-weight="700">%K = (Close − Lowest Low) / (Highest High − Lowest Low) × 100</text>
+  <text x="360" y="92" text-anchor="middle" font-size="15" fill="#4299e1" opacity="0.7">%D = 3-period moving average of %K (signal line)</text>
+  <!-- Axes -->
+  <line x1="60" y1="310" x2="660" y2="310" stroke-width="1.5" marker-end="url(#arrowR)" style="stroke:var(--svg-n30)"/>
+  <line x1="60" y1="380" x2="60" y2="135" stroke-width="1.5" marker-end="url(#arrowR)" style="stroke:var(--svg-n30)"/>
+  <!-- Y-axis labels -->
+  <text x="50" y="148" text-anchor="end" font-size="15" style="fill:var(--svg-n50)">100</text>
+  <text x="50" y="210" text-anchor="end" font-size="15" fill="#fc8181">80</text>
+  <text x="50" y="270" text-anchor="end" font-size="15" style="fill:var(--svg-n30)">50</text>
+  <text x="50" y="315" text-anchor="end" font-size="15" fill="#48bb78">20</text>
+  <!-- Overbought zone -->
+  <rect x="60" y="145" width="600" height="60" fill="rgba(252,129,129,0.08)" stroke="none"/>
+  <line x1="60" y1="205" x2="660" y2="205" stroke="#fc8181" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="665" y="209" font-size="14" fill="#fc8181">80</text>
+  <text x="300" y="160" font-size="16" fill="#fc8181" opacity="0.7">⚠ OVERBOUGHT — Consider selling</text>
+  <!-- Oversold zone -->
+  <rect x="60" y="265" width="600" height="50" fill="rgba(72,187,120,0.08)" stroke="none"/>
+  <line x1="60" y1="265" x2="660" y2="265" stroke="#48bb78" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="665" y="269" font-size="14" fill="#48bb78">20</text>
+  <text x="300" y="300" font-size="16" fill="#48bb78" opacity="0.7">✅ OVERSOLD — Consider buying</text>
+  <!-- %K line (blue, wavy) -->
+  <polyline points="70,255 110,240 150,220 190,195 230,180 270,165 310,175 350,200 390,215 430,235 470,255 510,270 540,260 570,230 600,210 630,220 655,240" fill="none" stroke="#4299e1" stroke-width="2.5"/>
+  <text x="665" y="242" font-size="14" fill="#4299e1" font-weight="600">%K</text>
+  <!-- %D line (orange, smoother) -->
+  <polyline points="70,260 110,248 150,232 190,212 230,195 270,182 310,184 350,206 390,218 430,240 470,258 510,268 540,264 570,242 600,220 630,224 655,244" fill="none" stroke="#f0b429" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="665" y="258" font-size="14" fill="#f0b429" font-weight="600">%D</text>
+  <!-- Buy signal annotation -->
+  <circle cx="510" cy="270" r="10" fill="none" stroke="#48bb78" stroke-width="2"/>
+  <line x1="510" y1="280" x2="510" y2="350" stroke="#48bb78" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="440" y="350" width="140" height="44" rx="6" fill="rgba(72,187,120,0.15)" stroke="#48bb78" stroke-width="1.5"/>
+  <text x="510" y="368" text-anchor="middle" font-size="16" fill="#48bb78" font-weight="700">BUY SIGNAL</text>
+  <text x="510" y="386" text-anchor="middle" font-size="14" fill="#48bb78" opacity="0.8">%K crosses above %D</text>
+  <!-- Sell signal annotation -->
+  <circle cx="270" cy="165" r="10" fill="none" stroke="#fc8181" stroke-width="2"/>
+  <line x1="270" y1="155" x2="270" y2="118" stroke="#fc8181" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="200" y="96" width="140" height="44" rx="6" fill="rgba(252,129,129,0.15)" stroke="#fc8181" stroke-width="1.5"/>
+  <text x="270" y="114" text-anchor="middle" font-size="16" fill="#fc8181" font-weight="700">SELL SIGNAL</text>
+  <text x="270" y="132" text-anchor="middle" font-size="14" fill="#fc8181" opacity="0.8">%K crosses below %D</text>
+  <!-- Legend -->
+  <line x1="70" y1="415" x2="110" y2="415" stroke="#4299e1" stroke-width="2.5"/>
+  <text x="115" y="420" font-size="16" fill="#4299e1">%K — Fast line</text>
+  <line x1="70" y1="440" x2="110" y2="440" stroke="#f0b429" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="115" y="445" font-size="16" fill="#f0b429">%D — Signal line (3-SMA of %K)</text>
+  <rect x="300" y="400" width="380" height="60" rx="8" stroke-width="1" style="fill:var(--svg-n04);stroke:var(--svg-n10)"/>
+  <text x="490" y="420" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--svg-n70)">🧠 Pro Tip</text>
+  <text x="490" y="440" text-anchor="middle" font-size="14" style="fill:var(--svg-n60)">Use with volume &amp; trend confirmation</text>
+  <text x="490" y="456" text-anchor="middle" font-size="14" style="fill:var(--svg-n60)">Best in ranging (sideways) markets</text>
+</svg>
+</div>

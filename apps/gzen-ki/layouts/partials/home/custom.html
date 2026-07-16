@@ -1,0 +1,77 @@
+{{/* GZen Ki — Custom Blowfish Homepage
+     Used when params.toml: homepage.layout = "custom"
+     Receives full site context (.)
+*/}}
+
+{{/* ── Hero ────────────────────────────────────────────────────────────────── */}}
+<div class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-700">
+  <div class="gzen-hero-badge">気 · GZen · 健康</div>
+  <h1 class="gzen-hero-title">气血调和，健康长寿</h1>
+  <p class="gzen-hero-ja">気血を整え、健やかに長生きする</p>
+  <p class="gzen-hero-desc">
+    以中医为本，汇聚气血、脾胃、本草、食疗、气功等传统养生知识。<br>
+    传统智慧与现代养生的数码笔记本——
+    <a href="https://gzen.io" class="text-primary-600 dark:text-primary-400 font-semibold hover:underline">GZen.io</a> 系列之一。
+  </p>
+  <p class="mt-2 text-sm italic text-neutral-500 dark:text-neutral-400">
+    A digital notebook rooted in TCM — Qi &amp; Blood, herbal wisdom, food therapy, Tai Ji &amp; Ba Duan Jin.
+    Part of the <a href="https://gzen.io" class="text-primary-600 dark:text-primary-400 hover:underline">GZen.io</a> learning ecosystem.
+  </p>
+</div>
+
+{{/* ── Recent Articles ────────────────────────────────────────────────────── */}}
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ $recent := first 6 ($pages.ByDate.Reverse) }}
+{{ if $recent }}
+<section class="mb-12">
+  <h2 class="text-2xl font-extrabold mb-6 text-neutral-900 dark:text-neutral">最新笔记</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    {{ range $recent }}
+      {{ partial "article-link/card.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{/* ── Knowledge Sections ─────────────────────────────────────────────────── */}}
+<section class="pt-8 border-t border-neutral-200 dark:border-neutral-700 mb-10">
+  <h2 class="text-2xl font-extrabold mb-6 text-neutral-900 dark:text-neutral">知识分区</h2>
+  <div class="gzen-sections">
+    <a href="{{ "/notes/" | relURL }}" class="gzen-sec-card">
+      <div class="gzen-sec-icon">📝</div>
+      <p class="gzen-sec-name">笔记</p>
+      <span class="gzen-sec-sub">ノート · Notes</span>
+      <p class="gzen-sec-desc">气血·脾胃·本草·食疗，综合中医笔记</p>
+    </a>
+    <a href="{{ "/qigong/" | relURL }}" class="gzen-sec-card">
+      <div class="gzen-sec-icon">☯️</div>
+      <p class="gzen-sec-name">气功</p>
+      <span class="gzen-sec-sub">気功 · Qì-Gōng</span>
+      <p class="gzen-sec-desc">太极·八段锦，以动养生</p>
+    </a>
+    <a href="{{ "/gallery/" | relURL }}" class="gzen-sec-card">
+      <div class="gzen-sec-icon">🏮</div>
+      <p class="gzen-sec-name">图鉴</p>
+      <span class="gzen-sec-sub">図鑑 · Gallery</span>
+      <p class="gzen-sec-desc">常见中药图鉴，性味一览</p>
+    </a>
+    <a href="{{ "/tags/" | relURL }}" class="gzen-sec-card">
+      <div class="gzen-sec-icon">🏷️</div>
+      <p class="gzen-sec-name">标签</p>
+      <span class="gzen-sec-sub">タグ · Tags</span>
+      <p class="gzen-sec-desc">按主题浏览所有条目</p>
+    </a>
+  </div>
+</section>
+
+{{/* ── GZen Ecosystem Strip ───────────────────────────────────────────────── */}}
+<div class="gzen-ecosystem-strip">
+  <p class="text-sm text-neutral-700 dark:text-neutral-300 font-medium">
+    本站为 <a href="https://gzen.io" class="text-primary-600 dark:text-primary-400 font-bold hover:underline">GZen.io</a>
+    旗下数码笔记本——致力于让传统健康智慧人人可及。
+  </p>
+  <p class="text-xs text-neutral-500 dark:text-neutral-500 italic">
+    A GZen.io notebook — making traditional Chinese wellness wisdom accessible to everyone.
+    Technology powered · Greater good of humanity.
+  </p>
+</div>

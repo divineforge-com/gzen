@@ -1,0 +1,45 @@
+<header class="site-header">
+  <nav class="nav" id="main-nav">
+    <a href="/" class="site-title">元気・健康笔记</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="切换导航" aria-expanded="false" aria-controls="nav-collapse">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-collapse" id="nav-collapse">
+      <ul class="nav-links">
+        <li><a href="/notes/">笔记</a></li>
+        <li><a href="/qixue/">气血</a></li>
+        <li><a href="/piwei/">脾胃</a></li>
+        <li><a href="/bencao/">本草</a></li>
+        <li><a href="/shiliao/">食疗</a></li>
+        <li><a href="/qigong/">气功</a></li>
+        <li><a href="/gallery/">图鉴</a></li>
+        <li class="nav-tag-group">
+          <a href="/tags/气血/" class="tag nav-tag">#气血</a>
+          <a href="/tags/八段锦/" class="tag nav-tag">#八段锦</a>
+          <a href="/tags/中药/" class="tag nav-tag">#中药</a>
+        </li>
+      </ul>
+      <div class="nav-search">
+        <form action="/search/" method="get" class="search-form">
+          <input type="text" name="q" placeholder="搜索笔记…" class="search-input" aria-label="搜索">
+          <button type="submit" class="search-btn" aria-label="提交搜索">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+<script>
+(function() {
+  var toggle = document.getElementById('nav-toggle');
+  var collapse = document.getElementById('nav-collapse');
+  if (toggle && collapse) {
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      collapse.classList.toggle('is-open', !expanded);
+    });
+  }
+})();
+</script>

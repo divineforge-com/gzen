@@ -1,0 +1,14 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "示意图" }}
+{{ $caption := .Get "caption" }}
+{{ $type := .Get "type" | default "image" }}
+<div class="excalidraw-diagram">
+  <figure>
+    {{ if eq $type "embed" }}
+    <iframe src="{{ $src }}" class="excalidraw-frame" loading="lazy" title="{{ $alt }}" allowfullscreen></iframe>
+    {{ else }}
+    <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" class="excalidraw-img">
+    {{ end }}
+    {{ with $caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+</div>

@@ -1,0 +1,18 @@
+baseURL = "https://genki.gzen.io/"
+languageCode = "zh-CN"
+defaultContentLanguage = "zh-cn"
+title = "元気・健康笔记"
+theme = "blowfish"
+
+[pagination]
+  pagerSize = 12
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[outputs]
+  home    = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term    = ["HTML", "RSS"]

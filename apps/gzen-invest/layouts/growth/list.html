@@ -1,0 +1,118 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="text-green" data-en="📈 Capital Growth Strategy" data-zh="📈 资本增长策略">📈 Capital Growth Strategy</h1>
+  <p data-en="Grow your wealth systematically. Beat inflation. Build lasting financial freedom." data-zh="系统地增长财富。跑赢通胀。建立持久的财务自由。">Grow your wealth systematically. Beat inflation. Build lasting financial freedom.</p>
+</div>
+
+<section class="card card-section">
+  {{ partial "infographics/growth-strategy-map.html" . }}
+</section>
+
+<section class="card card-section">
+  {{ partial "infographics/compound-interest-chart.html" . }}
+</section>
+
+<!-- DCA Explained -->
+<section class="card card-section">
+  <h2 class="section-title text-green" data-en="📅 Dollar Cost Averaging (DCA) — Visualized" data-zh="📅 定期定额投资（DCA）— 可视化">📅 Dollar Cost Averaging (DCA) — Visualized</h2>
+  <div class="infographic">
+  <svg viewBox="0 0 700 280" style="width:100%;height:auto;font-family:var(--font-diagram)">
+    <defs>
+      <marker id="aG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L0,6 L8,3 z" fill="#48bb78"/>
+      </marker>
+    </defs>
+    <text x="350" y="22" text-anchor="middle" font-size="16" fill="rgba(255,255,255,0.5)">Monthly investment of RM500 — regardless of price</text>
+    <!-- Price line (volatile) -->
+    <polyline points="60,160 110,140 160,120 210,145 260,170 310,155 360,130 410,108 460,125 510,140 560,118 610,100 660,115" fill="none" stroke="#4299e1" stroke-width="2"/>
+    <text x="665" y="118" font-size="13" fill="#4299e1">Price</text>
+    <!-- Average cost line -->
+    <line x1="60" y1="148" x2="660" y2="148" stroke="#f0b429" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <text x="665" y="151" font-size="13" fill="#f0b429">Avg</text>
+    <!-- Buy markers -->
+    <circle cx="60" cy="160" r="5" fill="#48bb78"/>
+    <line x1="60" y1="165" x2="60" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="60" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M1</text>
+    <circle cx="110" cy="140" r="5" fill="#48bb78"/>
+    <line x1="110" y1="145" x2="110" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="110" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M2</text>
+    <circle cx="160" cy="120" r="5" fill="#48bb78"/>
+    <line x1="160" y1="125" x2="160" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="160" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M3</text>
+    <circle cx="210" cy="145" r="5" fill="#48bb78"/>
+    <line x1="210" y1="150" x2="210" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="210" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M4</text>
+    <circle cx="260" cy="170" r="5" fill="#48bb78"/>
+    <line x1="260" y1="175" x2="260" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="260" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M5</text>
+    <circle cx="310" cy="155" r="5" fill="#48bb78"/>
+    <line x1="310" y1="160" x2="310" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="310" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M6</text>
+    <circle cx="360" cy="130" r="5" fill="#48bb78"/>
+    <line x1="360" y1="135" x2="360" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="360" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M7</text>
+    <circle cx="410" cy="108" r="5" fill="#48bb78"/>
+    <line x1="410" y1="113" x2="410" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="410" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M8</text>
+    <circle cx="460" cy="125" r="5" fill="#48bb78"/>
+    <line x1="460" y1="130" x2="460" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="460" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M9</text>
+    <circle cx="510" cy="140" r="5" fill="#48bb78"/>
+    <line x1="510" y1="145" x2="510" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="510" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M10</text>
+    <circle cx="560" cy="118" r="5" fill="#48bb78"/>
+    <line x1="560" y1="123" x2="560" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="560" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M11</text>
+    <circle cx="610" cy="100" r="5" fill="#48bb78"/>
+    <line x1="610" y1="105" x2="610" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="610" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M12</text>
+    <circle cx="660" cy="115" r="5" fill="#48bb78"/>
+    <line x1="660" y1="120" x2="660" y2="220" stroke="#48bb78" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+    <text x="660" y="234" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.35)">M13</text>
+    <!-- Axis -->
+    <line x1="55" y1="40" x2="55" y2="225" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <line x1="55" y1="225" x2="670" y2="225" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <text x="350" y="260" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.4)">Time</text>
+    <!-- Key insight -->
+    <rect x="60" y="40" width="260" height="56" rx="6" fill="rgba(72,187,120,0.1)" stroke="#48bb78" stroke-width="1"/>
+    <text x="190" y="60" text-anchor="middle" font-size="15" fill="#48bb78" font-weight="700">✅ DCA Benefits</text>
+    <text x="190" y="78" text-anchor="middle" font-size="13" fill="#48bb78" opacity="0.8">• Remove emotion from investing</text>
+    <text x="190" y="92" text-anchor="middle" font-size="13" fill="#48bb78" opacity="0.8">• Buy more when cheap, less when pricey</text>
+  </svg>
+  </div>
+</section>
+
+<!-- Value vs Growth -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="🆚 Value vs Growth Investing" data-zh="🆚 价值投资 vs 成长投资">🆚 Value vs Growth Investing</h2>
+  <div class="grid grid-2">
+    <div class="card" style="border-color:rgba(240,180,41,0.3);background:linear-gradient(135deg,rgba(240,180,41,0.08),rgba(240,180,41,0.02))">
+      <h3 style="font-size:1.2rem;font-weight:700;color:var(--gold);margin-bottom:1rem">📖 Value Investing</h3>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;gap:.75rem;color:rgba(240,210,120,0.7);font-size:.9rem"><span>🎯</span><span>Buy below intrinsic value</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(240,210,120,0.7);font-size:.9rem"><span>📊</span><span>Low P/E, P/B ratios</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(240,210,120,0.7);font-size:.9rem"><span>💪</span><span>Strong fundamentals</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(240,210,120,0.7);font-size:.9rem"><span>⏳</span><span>Long-term horizon (5–10yr)</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(240,210,120,0.7);font-size:.9rem"><span>🏆</span><span>Warren Buffett style</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(240,210,120,0.7);font-size:.9rem"><span>🔍</span><span>DCF + Graham number analysis</span></div>
+      </div>
+    </div>
+    <div class="card" style="border-color:rgba(237,100,166,0.3);background:linear-gradient(135deg,rgba(237,100,166,0.08),rgba(237,100,166,0.02))">
+      <h3 style="font-size:1.2rem;font-weight:700;color:var(--pink);margin-bottom:1rem">🚀 Growth Investing</h3>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <div style="display:flex;gap:.75rem;color:rgba(237,150,190,0.7);font-size:.9rem"><span>📈</span><span>High revenue/earnings growth</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(237,150,190,0.7);font-size:.9rem"><span>💻</span><span>Tech, AI, Biotech sectors</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(237,150,190,0.7);font-size:.9rem"><span>🔮</span><span>Future potential over current value</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(237,150,190,0.7);font-size:.9rem"><span>⚡</span><span>Higher risk, higher reward</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(237,150,190,0.7);font-size:.9rem"><span>🦅</span><span>Cathie Wood / Peter Lynch style</span></div>
+        <div style="display:flex;gap:.75rem;color:rgba(237,150,190,0.7);font-size:.9rem"><span>📉</span><span>Volatile, needs strong conviction</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1rem;text-align:center">
+    <p style="color:rgba(255,255,255,0.6);font-size:.9rem">💡 <strong style="color:rgba(255,255,255,0.8)">Blend both</strong> — core value holdings (60%) + growth satellites (40%) for balanced wealth building</p>
+  </div>
+</section>
+
+<div class="disclaimer" data-en="⚠ Educational purposes only. Past performance doesn't guarantee future results. DYOR." data-zh="⚠ 仅供教育目的。过往业绩不代表未来表现。请自行研究。">⚠ Educational purposes only. Past performance doesn't guarantee future results. DYOR.</div>
+{{ end }}

@@ -1,0 +1,86 @@
+{{ define "main" }}
+<section style="text-align:center;margin-bottom:3rem">
+  <h1 style="font-size:3rem;font-weight:700;margin-bottom:1rem">
+    <span class="text-gold">金GZen</span> <span data-en="Invest" data-zh="投资">Invest</span>
+  </h1>
+  <p style="font-size:1.1rem;color:var(--fg-muted);max-width:40rem;margin:0 auto 1.5rem;line-height:1.7"
+     data-en="Your personal investment learning companion. Explore dividends, capital growth, technical analysis, and market insights — presented through clear, visual infographics."
+     data-zh="您的个人投资学习伴侣。通过清晰直观的信息图表，探索股息、资本增长、技术分析与市场洞察。">
+    Your personal investment learning companion. Explore dividends, capital growth, technical analysis, and market insights — presented through clear, visual <span class="text-gold">infographics</span>.
+  </p>
+  <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+    <a href="/dividends/" style="padding:.5rem 1.25rem;border-radius:.5rem;background:rgba(240,180,41,0.2);color:var(--gold);border:1px solid rgba(240,180,41,0.3)" data-en="Begin Learning →" data-zh="开始学习 →">Begin Learning →</a>
+    <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener noreferrer" style="padding:.5rem 1.25rem;border-radius:.5rem;background:var(--card-bg);color:var(--fg-dim);border:1px solid var(--card-border)" data-en="☕ Support" data-zh="☕ 支持">☕ Support</a>
+  </div>
+</section>
+
+<section class="card card-section">
+  <h2 class="section-title" data-en="Investment Pyramid — Where to Put Your Money" data-zh="投资金字塔 — 如何配置资金">Investment Pyramid — Where to Put Your Money</h2>
+  {{ partial "infographics/investment-pyramid.html" . }}
+</section>
+
+<section class="card-section">
+  <h2 class="section-title" data-en="Explore Investment Topics" data-zh="探索投资主题">Explore Investment Topics</h2>
+  <div class="grid grid-3">
+    <a href="/dividends/" class="topic-card card-gold">
+      <div class="icon">💰</div>
+      <h3 data-en="Dividend Income" data-zh="股息收益">Dividend Income</h3>
+      <p data-en="Passive income, DRIP, yield calculation, ex-dates, top MY &amp; US dividend payers" data-zh="被动收入、DRIP再投资、收益率计算、除息日、马来西亚与美国顶级股息股">Passive income, DRIP, yield calculation, ex-dates, top MY &amp; US dividend payers</p>
+      <div class="arrow" data-en="View infographic →" data-zh="查看图表 →">View infographic →</div>
+    </a>
+    <a href="/growth/" class="topic-card card-green">
+      <div class="icon">📈</div>
+      <h3 data-en="Capital Growth" data-zh="资本增长">Capital Growth</h3>
+      <p data-en="Value investing, growth stocks, ETF/index, DCA strategy, compounding" data-zh="价值投资、成长股、ETF/指数基金、定投策略、复利增长">Value investing, growth stocks, ETF/index, DCA strategy, compounding</p>
+      <div class="arrow" data-en="View infographic →" data-zh="查看图表 →">View infographic →</div>
+    </a>
+    <a href="/technical/" class="topic-card card-blue">
+      <div class="icon">📊</div>
+      <h3 data-en="Technical Analysis" data-zh="技术分析">Technical Analysis</h3>
+      <p data-en="Stochastic, RSI, MACD, Bollinger Bands, Fibonacci, volume — all infographic" data-zh="随机指标、RSI、MACD、布林带、斐波那契、成交量 — 全图表">Stochastic, RSI, MACD, Bollinger Bands, Fibonacci, volume — all infographic</p>
+      <div class="arrow" data-en="View infographic →" data-zh="查看图表 →">View infographic →</div>
+    </a>
+    <a href="/vault/" class="topic-card card-orange">
+      <div class="icon">🏦</div>
+      <h3 data-en="Trading Vault" data-zh="交易资库">Trading Vault</h3>
+      <p data-en="Malaysia vs US market, broker comparison, live charts from TradingView" data-zh="马来西亚与美国市场对比、券商比较、TradingView实时图表">Malaysia vs US market, broker comparison, live charts from TradingView</p>
+      <div class="arrow" data-en="View infographic →" data-zh="查看图表 →">View infographic →</div>
+    </a>
+    <a href="/learn/" class="topic-card card-pink">
+      <div class="icon">🎓</div>
+      <h3 data-en="Daily Learning" data-zh="每日学习">Daily Learning</h3>
+      <p data-en="Investment glossary, daily tips, KPI checklist, mental models" data-zh="投资术语、每日小贴士、KPI清单、思维模型">Investment glossary, daily tips, KPI checklist, mental models</p>
+      <div class="arrow" data-en="View infographic →" data-zh="查看图表 →">View infographic →</div>
+    </a>
+  </div>
+</section>
+
+<section class="card card-section">
+  {{ partial "infographics/compound-interest-chart.html" . }}
+</section>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="value text-gold">4–8%</div>
+    <div class="sub" data-en="yield p.a." data-zh="年化收益率">yield p.a.</div>
+    <div class="label" data-en="MY Dividend Target" data-zh="马来西亚股息目标">MY Dividend Target</div>
+  </div>
+  <div class="stat-card">
+    <div class="value text-blue">25+</div>
+    <div class="sub" data-en="yrs dividend growth" data-zh="年连续股息增长">yrs dividend growth</div>
+    <div class="label" data-en="US Div Aristocrat" data-zh="美国股息贵族">US Div Aristocrat</div>
+  </div>
+  <div class="stat-card">
+    <div class="value text-green">72 ÷ rate</div>
+    <div class="sub" data-en="years to double" data-zh="翻倍所需年数">years to double</div>
+    <div class="label" data-en="Rule of 72" data-zh="72定律">Rule of 72</div>
+  </div>
+  <div class="stat-card">
+    <div class="value text-pink">3–6×</div>
+    <div class="sub" data-en="monthly expenses" data-zh="月支出倍数">monthly expenses</div>
+    <div class="label" data-en="Emergency Fund" data-zh="紧急备用金">Emergency Fund</div>
+  </div>
+</div>
+
+<div class="disclaimer" data-en="⚠ Educational purposes only. Not financial advice. Always do your own research (DYOR)." data-zh="⚠ 仅供教育目的。非投资建议。请自行研究（DYOR）。">⚠ Educational purposes only. Not financial advice. Always do your own research (DYOR).</div>
+{{ end }}

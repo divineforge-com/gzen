@@ -1,0 +1,31 @@
+{{/* Blowfish extend-head.html — extra <head> content for GZen Ki */}}
+
+{{/* Preconnect for Google Fonts */}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+{{/* The actual font imports are in assets/css/custom.css @import
+     but we add the display=swap meta here for better performance */}}
+
+{{/* Favicon override — jade square with 気 */}}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="shortcut icon" href="{{ "favicon.svg" | relURL }}">
+
+{{/* Site meta — OpenGraph enhancements */}}
+<meta property="og:site_name" content="元気・健康笔记 · GZen Ki">
+<meta property="og:locale" content="zh_CN">
+
+{{/* Fuse.js search: ensure tokenizer works for CJK (single-char words) */}}
+<script>
+  window.__fusejsOptions = {
+    minMatchCharLength: 1,
+    threshold: 0.4,
+    distance: 600,
+    includeScore: true,
+    keys: [
+      { name: "title",       weight: 0.8 },
+      { name: "description", weight: 0.5 },
+      { name: "content",     weight: 0.3 }
+    ]
+  };
+</script>

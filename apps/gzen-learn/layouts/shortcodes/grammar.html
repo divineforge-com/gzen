@@ -1,0 +1,8 @@
+{{/* grammar shortcode */}}
+<div class="grammar-box {{ .Get "lang" }}">
+  <div class="pattern">{{ .Get "pattern" }}</div>
+  <div class="meaning-en">{{ .Get "meaning" }}</div>
+  {{ with .Inner }}
+  <div class="example">{{ . | markdownify }}</div>
+  {{ end }}
+</div>

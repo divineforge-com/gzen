@@ -1,0 +1,254 @@
+<svg width="900" height="540" viewBox="0 0 900 540" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      text { font-family: 'Noto Serif SC','Source Han Serif SC','Hiragino Mincho ProN',serif; }
+      .fig { stroke:#2c1f0e; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .head { fill:#f0e8d8; stroke:#2c1f0e; stroke-width:2; }
+      .panel-bg { fill:#fdfaf5; }
+      .num-bg { fill:#2d6b4f; }
+      .benefit-bg { fill:#2d6b4f; rx:6; }
+      .label-zh { font-size:12px; font-weight:700; fill:#1a1410; }
+      .label-en { font-size:8px; fill:#7c7060; }
+      .label-benefit { font-size:8px; fill:#ffffff; font-weight:600; }
+      .divider { stroke:#d4c9b5; stroke-width:0.8; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="540" fill="#fdf8ef"/>
+
+  <!-- Title bar -->
+  <rect width="900" height="46" fill="#1a3a28"/>
+  <text x="450" y="16" text-anchor="middle" fill="rgba(240,235,224,0.65)" font-size="9.5" letter-spacing="3" font-family="system-ui,sans-serif">TRADITIONAL CHINESE HEALTH QIGONG · 健身气功</text>
+  <text x="450" y="36" text-anchor="middle" fill="#f0ebe0" font-size="17" letter-spacing="1.5" font-weight="700">八段锦 · Bā Duàn Jǐn · Eight Pieces of Brocade</text>
+
+  <!-- Grid dividers -->
+  <line x1="225" y1="46" x2="225" y2="494" class="divider"/>
+  <line x1="450" y1="46" x2="450" y2="494" class="divider"/>
+  <line x1="675" y1="46" x2="675" y2="494" class="divider"/>
+  <line x1="0"   y1="270" x2="900" y2="270" class="divider"/>
+
+  <!-- Footer bar -->
+  <rect y="494" width="900" height="46" fill="#1a3a28"/>
+  <text x="450" y="521" text-anchor="middle" fill="rgba(240,235,224,0.75)" font-size="9" font-family="system-ui,sans-serif" letter-spacing="1">
+    练习要领：调身 · 调息 · 调心 — Align Body · Regulate Breath · Calm Mind · genki.gzen.io
+  </text>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 1: 双手托天理三焦     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <!-- Number badge -->
+  <circle cx="22" cy="64" r="11" class="num-bg"/>
+  <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">一</text>
+
+  <!-- Head -->
+  <circle cx="112" cy="108" r="13" class="head"/>
+  <!-- Body -->
+  <line x1="112" y1="121" x2="112" y2="183" class="fig"/>
+  <!-- Left arm raised diagonally up-left -->
+  <polyline points="112,149 82,122 58,96" class="fig"/>
+  <!-- Right arm raised diagonally up-right -->
+  <polyline points="112,149 142,122 167,96" class="fig"/>
+  <!-- Palm indicators (raised palms face up — short perp lines) -->
+  <line x1="49" y1="94" x2="66" y2="99" class="fig"/>
+  <line x1="160" y1="94" x2="176" y2="99" class="fig"/>
+  <!-- Left leg -->
+  <polyline points="98,183 86,213 81,240" class="fig"/>
+  <!-- Right leg -->
+  <polyline points="126,183 138,213 143,240" class="fig"/>
+
+  <!-- Benefit pill -->
+  <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+  <text x="112" y="255.5" text-anchor="middle" class="label-benefit">调理三焦 · Triple Burner</text>
+  <!-- Labels -->
+  <text x="112" y="176" text-anchor="middle" class="label-zh" dy="-3" visibility="hidden"></text>
+  <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">双手托天理三焦</text>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 2: 左右开弓似射雕     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(225,0)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">二</text>
+
+    <!-- Head (slightly tilted left to follow archer gaze) -->
+    <circle cx="106" cy="108" r="13" class="head"/>
+    <!-- Body -->
+    <line x1="112" y1="121" x2="112" y2="183" class="fig"/>
+    <!-- Left arm extended straight out -->
+    <polyline points="112,149 70,145 40,142" class="fig"/>
+    <!-- Right arm bent/drawn back -->
+    <polyline points="112,149 138,156 158,166" class="fig"/>
+    <!-- Bow string indicator -->
+    <line x1="40" y1="135" x2="40" y2="150" class="fig"/>
+    <!-- Wide horse stance legs -->
+    <polyline points="82,183 60,215 52,243" class="fig"/>
+    <polyline points="142,183 164,215 172,243" class="fig"/>
+    <!-- Hip line (wide) -->
+    <line x1="82" y1="183" x2="142" y2="183" class="fig"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">宣肺强心 · Lung &amp; Heart</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">左右开弓似射雕</text>
+  </g>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 3: 调理脾胃须单举     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(450,0)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">三</text>
+
+    <circle cx="112" cy="108" r="13" class="head"/>
+    <line x1="112" y1="121" x2="112" y2="183" class="fig"/>
+    <!-- Right arm raised up -->
+    <polyline points="112,149 144,122 166,96" class="fig"/>
+    <!-- Palm up indicator -->
+    <line x1="159" y1="94" x2="174" y2="99" class="fig"/>
+    <!-- Left arm pushed down -->
+    <polyline points="112,149 82,172 68,194" class="fig"/>
+    <!-- Palm down indicator -->
+    <line x1="60" y1="198" x2="76" y2="194" class="fig"/>
+    <!-- Standard legs -->
+    <polyline points="98,183 86,213 81,240" class="fig"/>
+    <polyline points="126,183 138,213 143,240" class="fig"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">健脾和胃 · Spleen &amp; Stomach</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">调理脾胃须单举</text>
+  </g>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 4: 五劳七伤往后瞧     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(675,0)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">四</text>
+
+    <!-- Head turned to the right -->
+    <circle cx="120" cy="108" r="13" class="head"/>
+    <!-- Neck slightly angled -->
+    <line x1="120" y1="121" x2="112" y2="130" class="fig"/>
+    <!-- Body -->
+    <line x1="112" y1="130" x2="112" y2="183" class="fig"/>
+    <!-- Arms at sides -->
+    <polyline points="112,149 82,170 72,192" class="fig"/>
+    <polyline points="112,149 142,170 152,192" class="fig"/>
+    <!-- Rotation arrow (curved, behind head going right) -->
+    <path d="M133,100 Q148,90 140,115" class="fig" stroke-dasharray="3,2"/>
+    <polyline points="136,113 140,115 138,108" class="fig"/>
+    <!-- Standard legs -->
+    <polyline points="98,183 86,213 81,240" class="fig"/>
+    <polyline points="126,183 138,213 143,240" class="fig"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">消疲解劳 · Relieve Fatigue</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">五劳七伤往后瞧</text>
+  </g>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 5: 摇头摆尾去心火     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(0,224)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">五</text>
+
+    <!-- Head tilted down-left (bowing) -->
+    <circle cx="102" cy="112" r="13" class="head"/>
+    <!-- Body leaning left -->
+    <line x1="112" y1="124" x2="106" y2="183" class="fig"/>
+    <!-- Left arm sweeping low -->
+    <polyline points="106,155 72,170 50,184" class="fig"/>
+    <!-- Right arm raised right -->
+    <polyline points="106,155 138,144 162,130" class="fig"/>
+    <!-- Wide horse stance -->
+    <line x1="78" y1="183" x2="134" y2="183" class="fig"/>
+    <polyline points="78,183 56,215 48,243" class="fig"/>
+    <polyline points="134,183 158,215 168,243" class="fig"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">清心降火 · Clear Heart Fire</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">摇头摆尾去心火</text>
+  </g>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 6: 两手攀足固肾腰     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(225,224)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">六</text>
+
+    <!-- Forward bend: head near foot level -->
+    <!-- Legs straight -->
+    <line x1="92" y1="130" x2="86" y2="240" class="fig"/>
+    <line x1="132" y1="130" x2="138" y2="240" class="fig"/>
+    <!-- Hips -->
+    <line x1="92" y1="130" x2="132" y2="130" class="fig"/>
+    <!-- Bent upper body (arc forward/down) -->
+    <path d="M112,130 Q112,155 112,175" class="fig"/>
+    <!-- Head low (near feet) -->
+    <circle cx="112" cy="188" r="11" class="head"/>
+    <!-- Arms reaching past feet -->
+    <polyline points="112,158 86,180 78,200" class="fig"/>
+    <polyline points="112,158 138,180 146,200" class="fig"/>
+    <!-- Up-down arrows showing the movement -->
+    <line x1="112" y1="97" x2="112" y2="108" class="fig" stroke-dasharray="2,2"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">固肾强腰 · Kidney &amp; Lumbar</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">两手攀足固肾腰</text>
+  </g>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 7: 攥拳怒目增气力     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(450,224)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">七</text>
+
+    <circle cx="112" cy="108" r="13" class="head"/>
+    <line x1="112" y1="121" x2="112" y2="183" class="fig"/>
+    <!-- Right arm punching straight out -->
+    <polyline points="112,149 158,145 196,142" class="fig"/>
+    <!-- Fist indicator -->
+    <rect x="194" y="137" width="9" height="9" rx="2" fill="#2c1f0e" opacity="0.8"/>
+    <!-- Left arm pulled to hip -->
+    <polyline points="112,149 84,162 72,178" class="fig"/>
+    <!-- Wide horse stance -->
+    <line x1="78" y1="183" x2="146" y2="183" class="fig"/>
+    <polyline points="78,183 55,215 47,243" class="fig"/>
+    <polyline points="146,183 170,215 178,243" class="fig"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">增气力 · Build Strength</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">攥拳怒目增气力</text>
+  </g>
+
+  <!-- ╔══════════════════════════════╗ -->
+  <!-- ║  PANEL 8: 背后七颠百病消     ║ -->
+  <!-- ╚══════════════════════════════╝ -->
+  <g transform="translate(675,224)">
+    <circle cx="22" cy="64" r="11" class="num-bg"/>
+    <text x="22" y="68.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">八</text>
+
+    <circle cx="112" cy="108" r="13" class="head"/>
+    <line x1="112" y1="121" x2="112" y2="183" class="fig"/>
+    <!-- Arms at sides, slightly raised -->
+    <polyline points="112,149 84,165 76,183" class="fig"/>
+    <polyline points="112,149 140,165 148,183" class="fig"/>
+    <!-- Legs, feet on tiptoe (pointed down) -->
+    <polyline points="98,183 88,213 82,234" class="fig"/>
+    <polyline points="126,183 136,213 142,234" class="fig"/>
+    <!-- Tiptoe foot lines (heels raised, toe-point) -->
+    <line x1="74" y1="238" x2="82" y2="234" class="fig"/>
+    <line x1="134" y1="238" x2="142" y2="234" class="fig"/>
+    <!-- Upward arrows indicating rise -->
+    <line x1="112" y1="98" x2="112" y2="86" class="fig"/>
+    <polyline points="107,91 112,86 117,91" class="fig"/>
+
+    <rect x="52" y="245" width="121" height="14" rx="7" fill="#2d6b4f"/>
+    <text x="112" y="255.5" text-anchor="middle" class="label-benefit">通经活络 · Activate Meridians</text>
+    <text x="112" y="272" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1a1410">背后七颠百病消</text>
+  </g>
+
+</svg>

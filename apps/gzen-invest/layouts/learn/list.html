@@ -1,0 +1,231 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="text-pink" data-en="🎓 Daily Learning Hub" data-zh="🎓 每日学习中心">🎓 Daily Learning Hub</h1>
+  <p data-en="Knowledge compounding — a little every day builds massive investment intelligence over time." data-zh="知识复利 — 每天积累一点，长期下来建立强大的投资智慧。">Knowledge compounding — a little every day builds massive investment intelligence over time.</p>
+</div>
+
+<!-- Weekly Learning Routine -->
+<section class="card-section">
+  <h2 class="section-title" data-en="📅 Weekly Learning Routine" data-zh="📅 每周学习计划">📅 Weekly Learning Routine</h2>
+  <div class="grid grid-3">
+    <div class="day-card" style="background:rgba(240,180,41,0.05);border-color:rgba(240,180,41,0.3)">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <span style="font-size:1.75rem">🎯</span>
+        <div>
+          <div style="font-weight:700;color:var(--gold)">Monday</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:.9rem;font-weight:600">Set Your Weekly Goals</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:.875rem;line-height:1.6">Review your portfolio. Note any earnings releases this week. Identify 1–2 stocks to research deeper. Don't trade out of boredom.</p>
+    </div>
+    <div class="day-card" style="background:rgba(66,153,225,0.05);border-color:rgba(66,153,225,0.3)">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <span style="font-size:1.75rem">📊</span>
+        <div>
+          <div style="font-weight:700;color:var(--blue)">Tuesday</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:.9rem;font-weight:600">Read an Annual Report</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:.875rem;line-height:1.6">Pick one stock from your watchlist. Read the CEO letter &amp; financial summary. Focus on: revenue trend, profit margin, debt level, dividend history.</p>
+    </div>
+    <div class="day-card" style="background:rgba(72,187,120,0.05);border-color:rgba(72,187,120,0.3)">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <span style="font-size:1.75rem">📈</span>
+        <div>
+          <div style="font-weight:700;color:var(--green)">Wednesday</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:.9rem;font-weight:600">Chart Analysis Practice</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:.875rem;line-height:1.6">Open TradingView. Pick any stock. Draw support/resistance levels. Check RSI + MACD. Practice without real money first.</p>
+    </div>
+    <div class="day-card" style="background:rgba(159,122,234,0.05);border-color:rgba(159,122,234,0.3)">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <span style="font-size:1.75rem">🌐</span>
+        <div>
+          <div style="font-weight:700;color:#9f7aea">Thursday</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:.9rem;font-weight:600">Macro &amp; News Day</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:.875rem;line-height:1.6">Read 1 financial news source (Bloomberg, Reuters, The Edge MY). Understand how global events affect your portfolio sectors.</p>
+    </div>
+    <div class="day-card" style="background:rgba(237,100,166,0.05);border-color:rgba(237,100,166,0.3)">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <span style="font-size:1.75rem">🔢</span>
+        <div>
+          <div style="font-weight:700;color:var(--pink)">Friday</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:.9rem;font-weight:600">Screen &amp; Shortlist</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:.875rem;line-height:1.6">Use stock screener: filter by P/E &lt; 15, Dividend &gt; 4%, ROE &gt; 12%. Add qualifiers to your watchlist for next week.</p>
+    </div>
+    <div class="day-card" style="background:rgba(252,129,74,0.05);border-color:rgba(252,129,74,0.3)">
+      <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.75rem">
+        <span style="font-size:1.75rem">📚</span>
+        <div>
+          <div style="font-weight:700;color:var(--orange)">Weekend</div>
+          <div style="color:rgba(255,255,255,0.8);font-size:.9rem;font-weight:600">Deep Learning</div>
+        </div>
+      </div>
+      <p style="color:rgba(255,255,255,0.5);font-size:.875rem;line-height:1.6">Read 1 chapter of an investment book. Recommended: One Up On Wall Street, The Intelligent Investor, Common Stocks &amp; Uncommon Profits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Portfolio KPI Dashboard -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="📊 Portfolio KPI Dashboard" data-zh="📊 投资组合KPI仪表板">📊 Portfolio KPI Dashboard</h2>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="border-color:rgba(72,187,120,0.3)">
+      <div class="kpi-icon">📈</div>
+      <div class="kpi-label" style="color:var(--green)" data-en="Portfolio Return" data-zh="投资组合回报">Portfolio Return</div>
+      <div class="kpi-target" data-en="Target: &gt; inflation + 3%" data-zh="目标：&gt; 通胀 + 3%">Target: &gt; inflation + 3%</div>
+    </div>
+    <div class="kpi-card" style="border-color:rgba(240,180,41,0.3)">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-label" style="color:var(--gold)" data-en="Dividend Yield" data-zh="股息收益率">Dividend Yield</div>
+      <div class="kpi-target" data-en="Target: &gt; 4% average" data-zh="目标：&gt; 4%平均">Target: &gt; 4% average</div>
+    </div>
+    <div class="kpi-card" style="border-color:rgba(66,153,225,0.3)">
+      <div class="kpi-icon">🌱</div>
+      <div class="kpi-label" style="color:var(--blue)" data-en="Div Growth Rate" data-zh="股息增长率">Div Growth Rate</div>
+      <div class="kpi-target" data-en="Target: &gt; 5% p.a." data-zh="目标：&gt; 5%每年">Target: &gt; 5% p.a.</div>
+    </div>
+    <div class="kpi-card" style="border-color:rgba(237,100,166,0.3)">
+      <div class="kpi-icon">💵</div>
+      <div class="kpi-label" style="color:var(--pink)" data-en="Cash Allocation" data-zh="现金配置">Cash Allocation</div>
+      <div class="kpi-target" data-en="Target: 5–15% ready" data-zh="目标：5-15%备用">Target: 5–15% ready</div>
+    </div>
+    <div class="kpi-card" style="border-color:rgba(252,129,74,0.3)">
+      <div class="kpi-icon">📦</div>
+      <div class="kpi-label" style="color:var(--orange)" data-en="No. of Holdings" data-zh="持仓数量">No. of Holdings</div>
+      <div class="kpi-target" data-en="Target: 10–20 stocks" data-zh="目标：10-20只股票">Target: 10–20 stocks</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:.8rem;color:var(--fg-faint);margin-top:1rem" data-en="Review portfolio KPIs monthly. Adjust strategy when targets drift." data-zh="每月审查投资组合KPI。当目标偏离时调整策略。">Review portfolio KPIs monthly. Adjust strategy when targets drift.</p>
+</section>
+
+<!-- Investment Mental Models -->
+<section class="card-section">
+  <h2 class="section-title" data-en="🧠 Investment Mental Models" data-zh="🧠 投资思维模型">🧠 Investment Mental Models</h2>
+  <div class="grid grid-3">
+    <div class="mental-model-card">
+      <div style="font-size:1.75rem;margin-bottom:.5rem">🧠</div>
+      <h3 style="color:rgba(255,255,255,0.9);font-weight:700;margin-bottom:.25rem">Circle of Competence</h3>
+      <p style="color:rgba(255,255,255,0.45);font-size:.875rem">Only invest in what you understand. No FOMO into unfamiliar sectors.</p>
+    </div>
+    <div class="mental-model-card">
+      <div style="font-size:1.75rem;margin-bottom:.5rem">🔬</div>
+      <h3 style="color:rgba(255,255,255,0.9);font-weight:700;margin-bottom:.25rem">Margin of Safety</h3>
+      <p style="color:rgba(255,255,255,0.45);font-size:.875rem">Buy at significant discount to intrinsic value. Protection against being wrong.</p>
+    </div>
+    <div class="mental-model-card">
+      <div style="font-size:1.75rem;margin-bottom:.5rem">🏰</div>
+      <h3 style="color:rgba(255,255,255,0.9);font-weight:700;margin-bottom:.25rem">Moat Thinking</h3>
+      <p style="color:rgba(255,255,255,0.45);font-size:.875rem">Ask: what prevents competitors from taking this company's profits?</p>
+    </div>
+    <div class="mental-model-card">
+      <div style="font-size:1.75rem;margin-bottom:.5rem">⏰</div>
+      <h3 style="color:rgba(255,255,255,0.9);font-weight:700;margin-bottom:.25rem">Long-Term Thinking</h3>
+      <p style="color:rgba(255,255,255,0.45);font-size:.875rem">Think in decades, not days. Most wealth is created by holding quality stocks long.</p>
+    </div>
+    <div class="mental-model-card">
+      <div style="font-size:1.75rem;margin-bottom:.5rem">🐻</div>
+      <h3 style="color:rgba(255,255,255,0.9);font-weight:700;margin-bottom:.25rem">Mr. Market</h3>
+      <p style="color:rgba(255,255,255,0.45);font-size:.875rem">Market is emotional. Buy when fearful, sell when greedy. Be contrarian.</p>
+    </div>
+    <div class="mental-model-card">
+      <div style="font-size:1.75rem;margin-bottom:.5rem">🎯</div>
+      <h3 style="color:rgba(255,255,255,0.9);font-weight:700;margin-bottom:.25rem">Concentrated vs Diversified</h3>
+      <p style="color:rgba(255,255,255,0.45);font-size:.875rem">Know enough for 10–15 stocks. Over-diversification dilutes returns.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Investment Glossary -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="📖 Investment Glossary" data-zh="📖 投资术语表">📖 Investment Glossary</h2>
+  <div class="grid grid-2">
+    <div class="glossary-item">
+      <span class="glossary-term">P/E Ratio</span>
+      <span class="glossary-def">Price / Earnings. Lower = potentially cheaper. Compare within same sector.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">EPS</span>
+      <span class="glossary-def">Earnings Per Share. Net profit ÷ shares outstanding. Growing EPS = healthy.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">ROE</span>
+      <span class="glossary-def">Return on Equity. Net income ÷ shareholders equity. &gt;15% = excellent.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">FCF</span>
+      <span class="glossary-def">Free Cash Flow. Operating cash − capex. Real cash available for dividends/buybacks.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">MOAT</span>
+      <span class="glossary-def">Competitive advantage. Brand, patents, network effect, cost advantage, switching cost.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">D/E Ratio</span>
+      <span class="glossary-def">Debt/Equity. &lt;1 generally safe. High D/E = higher financial risk.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Market Cap</span>
+      <span class="glossary-def">Total company value = share price × total shares. Small/Mid/Large cap.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Beta</span>
+      <span class="glossary-def">Volatility vs market. Beta&gt;1 = more volatile. Beta&lt;1 = more stable.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">Ex-Dividend</span>
+      <span class="glossary-def">Date you must own shares to receive dividend. Buy BEFORE this date.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">DRIP</span>
+      <span class="glossary-def">Dividend Reinvestment Plan. Auto-reinvest dividends to buy more shares.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">NAV</span>
+      <span class="glossary-def">Net Asset Value. For funds/REITs: assets minus liabilities ÷ shares.</span>
+    </div>
+    <div class="glossary-item">
+      <span class="glossary-term">DCA</span>
+      <span class="glossary-def">Dollar Cost Averaging. Invest fixed amount at regular intervals.</span>
+    </div>
+  </div>
+</section>
+
+<!-- Recommended Books -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="📚 Must-Read Investment Books" data-zh="📚 必读投资书籍">📚 Must-Read Investment Books</h2>
+  <div class="grid grid-4">
+    <div class="book-card">
+      <div class="emoji">📘</div>
+      <div style="color:rgba(255,255,255,0.8);font-weight:700;font-size:.9rem;margin-bottom:.25rem">The Intelligent Investor</div>
+      <div style="color:rgba(255,255,255,0.4);font-size:.8rem;margin-bottom:.5rem">Benjamin Graham</div>
+      <div style="color:rgba(255,255,255,0.35);font-size:.8rem">Value investing bible</div>
+    </div>
+    <div class="book-card">
+      <div class="emoji">📗</div>
+      <div style="color:rgba(255,255,255,0.8);font-weight:700;font-size:.9rem;margin-bottom:.25rem">One Up On Wall Street</div>
+      <div style="color:rgba(255,255,255,0.4);font-size:.8rem;margin-bottom:.5rem">Peter Lynch</div>
+      <div style="color:rgba(255,255,255,0.35);font-size:.8rem">Find great stocks in everyday life</div>
+    </div>
+    <div class="book-card">
+      <div class="emoji">📙</div>
+      <div style="color:rgba(255,255,255,0.8);font-weight:700;font-size:.9rem;margin-bottom:.25rem">Rich Dad Poor Dad</div>
+      <div style="color:rgba(255,255,255,0.4);font-size:.8rem;margin-bottom:.5rem">Robert Kiyosaki</div>
+      <div style="color:rgba(255,255,255,0.35);font-size:.8rem">Financial mindset shift</div>
+    </div>
+    <div class="book-card">
+      <div class="emoji">📕</div>
+      <div style="color:rgba(255,255,255,0.8);font-weight:700;font-size:.9rem;margin-bottom:.25rem">The Psychology of Money</div>
+      <div style="color:rgba(255,255,255,0.4);font-size:.8rem;margin-bottom:.5rem">Morgan Housel</div>
+      <div style="color:rgba(255,255,255,0.35);font-size:.8rem">Behavior &amp; money habits</div>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer" data-en="⚠ Educational content only. Always consult a licensed financial advisor for personal advice." data-zh="⚠ 仅供教育内容。个人建议请咨询持牌理财顾问。">⚠ Educational content only. Always consult a licensed financial advisor for personal advice.</div>
+{{ end }}

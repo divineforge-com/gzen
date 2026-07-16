@@ -1,0 +1,11 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1>所有标签</h1>
+  <p class="page-desc">按标签浏览所有中医知识条目</p>
+</div>
+<div class="tag-cloud">
+  {{ range .Data.Terms.Alphabetical }}
+  <a href="{{ .Page.RelPermalink }}" class="tag tag-lg">{{ .Page.Title }} <span class="tag-count">({{ .Count }})</span></a>
+  {{ end }}
+</div>
+{{ end }}

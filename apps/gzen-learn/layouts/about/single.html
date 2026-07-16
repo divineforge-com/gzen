@@ -1,0 +1,10 @@
+{{ define "main" }}
+<div class="page-layout">
+  <article class="page-article">
+    <div class="lesson-breadcrumb" style="margin-bottom:1.5rem;">
+      <a href="{{ "/" | relURL }}">Home</a> / {{ .Title }}
+    </div>
+    {{ .Content }}
+  </article>
+</div>
+{{ end }}

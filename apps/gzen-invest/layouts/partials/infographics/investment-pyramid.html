@@ -1,0 +1,42 @@
+<div class="infographic">
+<svg viewBox="0 0 700 460" style="width:100%;height:auto;font-family:var(--font-diagram)">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke-width="1" style="stroke:var(--svg-n03)"/>
+    </pattern>
+    <filter id="rough">
+      <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,8 L4,0 L8,8" fill="none" stroke-width="1.2" style="stroke:var(--svg-n30)"/>
+    </marker>
+  </defs>
+  <rect width="700" height="460" fill="url(#grid)"/>
+  <text x="350" y="38" text-anchor="middle" font-size="28" fill="#f0b429" font-weight="700">Investment Knowledge Pyramid</text>
+  <line x1="100" y1="48" x2="600" y2="48" stroke="#f0b429" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <!-- Level 1: Cash/Savings -->
+  <polygon points="80,420 620,420 560,340 140,340" fill="rgba(66,153,225,0.15)" stroke="#4299e1" stroke-width="2" filter="url(#rough)"/>
+  <text x="350" y="390" text-anchor="middle" font-size="20" fill="#4299e1" font-weight="600">💵 Cash &amp; Savings — Emergency Fund (3–6 months)</text>
+  <text x="350" y="413" text-anchor="middle" font-size="15" fill="#4299e1" opacity="0.8">Liquidity · Capital Preservation · FD / ASB / High-Yield Savings</text>
+  <!-- Level 2: Fixed Income -->
+  <polygon points="140,340 560,340 500,260 200,260" fill="rgba(72,187,120,0.15)" stroke="#48bb78" stroke-width="2" filter="url(#rough)"/>
+  <text x="350" y="308" text-anchor="middle" font-size="20" fill="#48bb78" font-weight="600">📊 Fixed Income — Bonds · REITs · Sukuk</text>
+  <text x="350" y="330" text-anchor="middle" font-size="15" fill="#48bb78" opacity="0.8">Steady yield · Lower risk · 4–7% p.a. target</text>
+  <!-- Level 3: Dividend Stocks -->
+  <polygon points="200,260 500,260 440,180 260,180" fill="rgba(240,180,41,0.15)" stroke="#f0b429" stroke-width="2" filter="url(#rough)"/>
+  <text x="350" y="225" text-anchor="middle" font-size="19" fill="#f0b429" font-weight="600">💰 Dividend Stocks — Passive Income Engine</text>
+  <text x="350" y="248" text-anchor="middle" font-size="14" fill="#f0b429" opacity="0.8">DRIP · Bursa blue chips · US dividend aristocrats</text>
+  <!-- Level 4: Growth -->
+  <polygon points="260,180 440,180 400,110 300,110" fill="rgba(237,100,166,0.15)" stroke="#ed64a6" stroke-width="2" filter="url(#rough)"/>
+  <text x="350" y="152" text-anchor="middle" font-size="17" fill="#ed64a6" font-weight="600">🚀 Growth — Capital Appreciation</text>
+  <!-- Level 5: Speculative -->
+  <polygon points="300,110 400,110 370,60 330,60" fill="rgba(252,129,74,0.2)" stroke="#fc814a" stroke-width="2" filter="url(#rough)"/>
+  <text x="350" y="90" text-anchor="middle" font-size="14" fill="#fc814a" font-weight="600">⚡ High-Risk</text>
+  <!-- Arrows -->
+  <line x1="640" y1="420" x2="640" y2="65" stroke-width="1.5" marker-end="url(#arrowUp)" style="stroke:var(--svg-n30)"/>
+  <text x="660" y="250" font-size="14" transform="rotate(90,660,250)" style="fill:var(--svg-n50)">RISK ↑</text>
+  <line x1="60" y1="420" x2="60" y2="65" stroke-width="1.5" style="stroke:var(--svg-n30)"/>
+  <text x="20" y="250" font-size="14" transform="rotate(-90,20,250)" style="fill:var(--svg-n50)">REWARD ↑</text>
+</svg>
+</div>

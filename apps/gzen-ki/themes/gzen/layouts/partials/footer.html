@@ -1,0 +1,9 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>© {{ now.Year }} <a href="https://genki.gzen.io/">元気・健康笔记</a> — 以中医为本，气血调和，强身健体</p>
+    <p class="footer-powered">Powered by <a href="https://divineforge.com" target="_blank" rel="noopener">Divineforge Technology Enterprise</a></p>
+    {{ with .Site.Params.buyMeACoffeeURL }}
+    <p class="support-link"><a href="{{ . }}" target="_blank" rel="noopener">☕ 请我喝杯茶</a></p>
+    {{ end }}
+  </div>
+</footer>

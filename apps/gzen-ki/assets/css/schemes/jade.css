@@ -1,0 +1,48 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Jade · Scholar's Studio — Custom Blowfish Color Scheme
+   Primary  : Jade Green  (#2d6b4f and scale)
+   Secondary: Cinnabar / Vermilion seal-stamp (#bf3325 and scale)
+   Neutral  : Warm ink + rice paper (warm-tinted grays)
+   ────────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Neutral (warm ink → rice paper) ────────────────────── */
+  --color-neutral:     253, 250, 245;   /* rice paper default */
+  --color-neutral-50:  253, 250, 245;
+  --color-neutral-100: 246, 242, 234;
+  --color-neutral-200: 233, 226, 215;
+  --color-neutral-300: 205, 196, 182;
+  --color-neutral-400: 162, 151, 136;
+  --color-neutral-500: 121, 112, 98;
+  --color-neutral-600: 89,  81,  68;
+  --color-neutral-700: 60,  54,  44;
+  --color-neutral-800: 38,  34,  26;
+  --color-neutral-900: 26,  23,  17;
+  --color-neutral-950: 14,  12,   8;
+
+  /* ── Primary (Jade Green) ────────────────────────────────── */
+  --color-primary-50:  238, 252, 243;
+  --color-primary-100: 210, 242, 225;
+  --color-primary-200: 170, 226, 198;
+  --color-primary-300: 118, 203, 161;
+  --color-primary-400: 66,  174, 118;
+  --color-primary-500: 40,  140,  88;
+  --color-primary-600: 32,  113,  71;   /* #20714f — darker than our jade */
+  --color-primary-700: 26,   89,  56;
+  --color-primary-800: 20,   68,  43;
+  --color-primary-900: 14,   49,  31;
+  --color-primary-950:  7,   28,  17;
+
+  /* ── Secondary (Cinnabar / Vermilion) ────────────────────── */
+  --color-secondary-50:  255, 242, 240;
+  --color-secondary-100: 254, 219, 215;
+  --color-secondary-200: 252, 180, 172;
+  --color-secondary-300: 247, 130, 118;
+  --color-secondary-400: 237,  83,  68;
+  --color-secondary-500: 214,  54,  38;
+  --color-secondary-600: 191,  51,  37;   /* #bf3325 — our vermilion */
+  --color-secondary-700: 155,  33,  22;
+  --color-secondary-800: 119,  22,  13;
+  --color-secondary-900:  84,  14,   8;
+  --color-secondary-950:  48,   7,   3;
+}

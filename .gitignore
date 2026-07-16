@@ -1,16 +1,18 @@
 # Hugo build output
-public/
-resources/
-.hugo_build.lock
+**/public/
+**/resources/
+**/.hugo_build.lock
+**/.wrangler/
+
 
 # Node.js (Tailwind CSS tooling)
-node_modules/
+**/node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Generated CSS (built from assets/css/main.css via Tailwind CLI)
-static/css/
+# Generated CSS
+**/static/css/
 
 # Logs
 *.log
@@ -35,3 +37,4 @@ static/css/
 # Archive
 _archive/
 .archive/
+

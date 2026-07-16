@@ -1,0 +1,16 @@
+# GZen Ki — i18n overrides for zh-CN (extends Blowfish's built-in zh-CN.yaml)
+
+# Override Blowfish's default UI strings to fit TCM notebook context
+shortcode:
+  recent_articles: "最新笔记"
+
+recent:
+  show_more: "查看全部笔记 →"
+
+list:
+  date_range: "{{ .StartDate }} — {{ .EndDate }}"
+
+search:
+  placeholder: "搜索笔记、草药、功法…"
+  open_menu: "打开菜单"
+  close_menu: "关闭菜单"

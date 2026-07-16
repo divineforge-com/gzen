@@ -1,0 +1,7 @@
+[goldmark.renderer]
+  unsafe = true
+
+[highlight]
+  style      = "dracula"
+  lineNos    = false
+  noClasses  = false

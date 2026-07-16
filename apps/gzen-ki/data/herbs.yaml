@@ -1,0 +1,396 @@
+# TCM Herb Gallery Data
+# Each entry: id, name_zh, pinyin, name_en, name_ja, category, nature, nature_zh,
+#             flavor_zh, meridians, functions_zh, functions_en, common_uses, color, emoji
+# nature: warm | mild-warm | neutral | cool | cold
+# category: qi_tonic | blood_tonic | yin_tonic | yang_tonic | resolve_damp | regulate_qi | exterior
+
+- id: huangqi
+  name_zh: "黄芪"
+  pinyin: "Huáng Qí"
+  name_en: "Astragalus Root"
+  name_ja: "黄耆"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "mild-warm"
+  nature_zh: "微温"
+  flavor_zh: "甘"
+  meridians: ["脾", "肺"]
+  functions_zh: "补气固表，利尿托毒，敛疮生肌"
+  functions_en: "Tonifies Spleen Qi, raises Yang, strengthens defensive Qi, promotes healing"
+  common_uses: ["气虚乏力", "自汗盗汗", "水肿", "慢性疲劳"]
+  color: "#d4a348"
+  emoji: "🌾"
+
+- id: renshen
+  name_zh: "人参"
+  pinyin: "Rén Shēn"
+  name_en: "Ginseng Root"
+  name_ja: "人参"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "mild-warm"
+  nature_zh: "微温"
+  flavor_zh: "甘、微苦"
+  meridians: ["脾", "肺", "心", "肾"]
+  functions_zh: "大补元气，复脉固脱，补脾益肺，生津养血，安神益智"
+  functions_en: "Powerfully tonifies primordial Qi, rescues collapsed Yang, tonifies Spleen and Lung"
+  common_uses: ["气虚欲脱", "脾肺气虚", "心悸失眠", "津伤口渴"]
+  color: "#c8955a"
+  emoji: "🌿"
+
+- id: dangshen
+  name_zh: "党参"
+  pinyin: "Dǎng Shēn"
+  name_en: "Codonopsis Root"
+  name_ja: "党参"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘"
+  meridians: ["脾", "肺"]
+  functions_zh: "健脾益肺，养血生津（人参温和代替品）"
+  functions_en: "Tonifies Spleen and Lung Qi, nourishes Blood, generates fluids — a gentle ginseng substitute"
+  common_uses: ["脾肺气虚", "食欲不振", "气血两虚", "慢性病调养"]
+  color: "#b89060"
+  emoji: "🪴"
+
+- id: baizhu
+  name_zh: "白术"
+  pinyin: "Bái Zhú"
+  name_en: "Atractylodes Rhizome"
+  name_ja: "白朮"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "甘、苦"
+  meridians: ["脾", "胃"]
+  functions_zh: "健脾益气，燥湿利水，止汗，安胎"
+  functions_en: "Tonifies Spleen Qi, dries Dampness, promotes urination, calms fetus"
+  common_uses: ["脾虚食少", "腹胀便溏", "痰饮水肿", "脾虚自汗"]
+  color: "#d4c090"
+  emoji: "🟤"
+
+- id: fuling
+  name_zh: "茯苓"
+  pinyin: "Fú Líng"
+  name_en: "Poria / Tuckahoe"
+  name_ja: "茯苓"
+  category: "resolve_damp"
+  category_zh: "利水渗湿药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘、淡"
+  meridians: ["心", "脾", "肺", "肾"]
+  functions_zh: "利水渗湿，健脾，宁心"
+  functions_en: "Promotes urination, drains Dampness, tonifies Spleen, calms the Heart"
+  common_uses: ["水肿", "脾虚食少", "心悸失眠", "湿困"]
+  color: "#f0e8d8"
+  emoji: "🍄"
+
+- id: danggui
+  name_zh: "当归"
+  pinyin: "Dāng Guī"
+  name_en: "Dong Quai / Chinese Angelica"
+  name_ja: "当帰"
+  category: "blood_tonic"
+  category_zh: "补血药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "甘、辛"
+  meridians: ["肝", "心", "脾"]
+  functions_zh: "补血活血，调经止痛，润肠通便"
+  functions_en: "Tonifies and invigorates Blood, regulates menstruation, relieves pain"
+  common_uses: ["血虚萎黄", "月经不调", "痛经", "跌打损伤"]
+  color: "#8b6340"
+  emoji: "🌸"
+
+- id: shudihung
+  name_zh: "熟地黄"
+  pinyin: "Shú Dì Huáng"
+  name_en: "Prepared Rehmannia Root"
+  name_ja: "熟地黄"
+  category: "blood_tonic"
+  category_zh: "补血药"
+  nature: "mild-warm"
+  nature_zh: "微温"
+  flavor_zh: "甘"
+  meridians: ["肝", "肾"]
+  functions_zh: "补血滋阴，益精填髓"
+  functions_en: "Tonifies Blood, nourishes Yin, replenishes Essence and Marrow"
+  common_uses: ["血虚萎黄", "肝肾阴虚", "腰膝酸软", "耳鸣耳聋"]
+  color: "#3a2010"
+  emoji: "🟫"
+
+- id: baishao
+  name_zh: "白芍"
+  pinyin: "Bái Sháo"
+  name_en: "White Peony Root"
+  name_ja: "白芍"
+  category: "blood_tonic"
+  category_zh: "补血药"
+  nature: "cool"
+  nature_zh: "微寒"
+  flavor_zh: "苦、酸"
+  meridians: ["肝", "脾"]
+  functions_zh: "养血调经，敛阴止汗，柔肝止痛，平抑肝阳"
+  functions_en: "Nourishes Blood, regulates menstruation, softens Liver, relieves spasm and pain"
+  common_uses: ["月经不调", "肝区疼痛", "四肢挛痛", "头痛眩晕"]
+  color: "#f0d8d8"
+  emoji: "🌺"
+
+- id: ejiao
+  name_zh: "阿胶"
+  pinyin: "Ē Jiāo"
+  name_en: "Donkey-Hide Gelatin"
+  name_ja: "阿膠"
+  category: "blood_tonic"
+  category_zh: "补血药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘"
+  meridians: ["肺", "肝", "肾"]
+  functions_zh: "补血滋阴，润燥，止血"
+  functions_en: "Tonifies Blood, nourishes Yin, moistens dryness, stops bleeding"
+  common_uses: ["血虚萎黄", "虚劳咳血", "阴虚燥咳", "崩漏便血"]
+  color: "#5c3820"
+  emoji: "🟤"
+
+- id: gouqizi
+  name_zh: "枸杞子"
+  pinyin: "Gǒu Qǐ Zǐ"
+  name_en: "Wolfberry / Goji Berry"
+  name_ja: "枸杞子"
+  category: "yin_tonic"
+  category_zh: "补阴药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘"
+  meridians: ["肝", "肾"]
+  functions_zh: "滋补肝肾，益精明目"
+  functions_en: "Nourishes Liver and Kidney Yin, replenishes Essence, brightens the eyes"
+  common_uses: ["肝肾阴虚", "腰膝酸软", "目昏耳鸣", "视力减退"]
+  color: "#c03020"
+  emoji: "🔴"
+
+- id: hongzao
+  name_zh: "红枣"
+  pinyin: "Hóng Zǎo"
+  name_en: "Jujube / Red Date"
+  name_ja: "大棗"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "甘"
+  meridians: ["脾", "胃", "心"]
+  functions_zh: "补中益气，养血安神，缓和药性"
+  functions_en: "Tonifies Middle Jiao Qi, nourishes Blood, calms the mind, harmonizes herbs"
+  common_uses: ["脾虚食少", "乏力便溏", "妇人脏躁", "血虚萎黄"]
+  color: "#c03010"
+  emoji: "🍎"
+
+- id: guiyuan
+  name_zh: "桂圆"
+  pinyin: "Guì Yuán"
+  name_en: "Longan Fruit (Dried)"
+  name_ja: "竜眼肉"
+  category: "blood_tonic"
+  category_zh: "补血药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "甘"
+  meridians: ["心", "脾"]
+  functions_zh: "补益心脾，养血安神"
+  functions_en: "Tonifies Heart and Spleen, nourishes Blood, calms the mind"
+  common_uses: ["心脾两虚", "气血不足", "心悸失眠", "健忘"]
+  color: "#8b6020"
+  emoji: "🟡"
+
+- id: shanyao
+  name_zh: "山药"
+  pinyin: "Shān Yào"
+  name_en: "Chinese Yam"
+  name_ja: "山薬"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘"
+  meridians: ["脾", "肺", "肾"]
+  functions_zh: "补脾养胃，生津益肺，补肾涩精"
+  functions_en: "Tonifies Spleen, Lung, and Kidney Qi; nourishes Yin; stabilizes Essence"
+  common_uses: ["脾虚食少", "肺虚咳喘", "肾虚遗精", "尿频"]
+  color: "#f0ede0"
+  emoji: "🫙"
+
+- id: chenpi
+  name_zh: "陈皮"
+  pinyin: "Chén Pí"
+  name_en: "Aged Tangerine Peel"
+  name_ja: "陳皮"
+  category: "regulate_qi"
+  category_zh: "理气药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "辛、苦"
+  meridians: ["脾", "肺"]
+  functions_zh: "理气健脾，燥湿化痰"
+  functions_en: "Regulates Qi, strengthens Spleen, dries Dampness, dissolves Phlegm"
+  common_uses: ["脘腹胀满", "食少吐泻", "咳嗽痰多", "胸闷"]
+  color: "#e07820"
+  emoji: "🍊"
+
+- id: yiyiren
+  name_zh: "薏苡仁"
+  pinyin: "Yì Yǐ Rén"
+  name_en: "Coix Seed / Job's Tears"
+  name_ja: "薏苡仁"
+  category: "resolve_damp"
+  category_zh: "利水渗湿药"
+  nature: "cool"
+  nature_zh: "凉"
+  flavor_zh: "甘、淡"
+  meridians: ["脾", "胃", "肺"]
+  functions_zh: "利水渗湿，健脾止泻，除痹，排脓，解毒散结"
+  functions_en: "Drains Dampness, tonifies Spleen, relieves Bi-syndrome, clears heat"
+  common_uses: ["水肿", "脾虚腹泻", "湿痹拘挛", "肺痈肠痈"]
+  color: "#e8e0c8"
+  emoji: "⚪"
+
+- id: lianzi
+  name_zh: "莲子"
+  pinyin: "Lián Zǐ"
+  name_en: "Lotus Seed"
+  name_ja: "蓮子"
+  category: "yin_tonic"
+  category_zh: "补阴药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘、涩"
+  meridians: ["脾", "肾", "心"]
+  functions_zh: "补脾止泻，止带，益肾涩精，养心安神"
+  functions_en: "Tonifies Spleen, stops diarrhea, stabilizes Kidney, calms the Heart"
+  common_uses: ["脾虚泄泻", "肾虚遗精", "心悸失眠", "带下"]
+  color: "#f8f0e0"
+  emoji: "🪷"
+
+- id: maidong
+  name_zh: "麦冬"
+  pinyin: "Mài Dōng"
+  name_en: "Ophiopogon Root"
+  name_ja: "麦門冬"
+  category: "yin_tonic"
+  category_zh: "补阴药"
+  nature: "cool"
+  nature_zh: "微寒"
+  flavor_zh: "甘、微苦"
+  meridians: ["心", "肺", "胃"]
+  functions_zh: "养阴润肺，益胃生津，清心除烦"
+  functions_en: "Nourishes Lung Yin, benefits Stomach, generates fluids, clears Heart heat"
+  common_uses: ["肺燥咳嗽", "热病伤津", "心烦失眠", "口干舌燥"]
+  color: "#d0c8e0"
+  emoji: "🌿"
+
+- id: wuweizi
+  name_zh: "五味子"
+  pinyin: "Wǔ Wèi Zǐ"
+  name_en: "Schisandra Berry"
+  name_ja: "五味子"
+  category: "yin_tonic"
+  category_zh: "收涩药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "酸、甘（五味俱全）"
+  meridians: ["肺", "心", "肾"]
+  functions_zh: "收敛固涩，益气生津，补肾宁心"
+  functions_en: "Astringes Lungs, tonifies Qi and Yin, calms Heart, restrains essence"
+  common_uses: ["久咳虚喘", "自汗盗汗", "心悸失眠", "遗精滑精"]
+  color: "#800020"
+  emoji: "🔴"
+
+- id: gancao
+  name_zh: "甘草"
+  pinyin: "Gān Cǎo"
+  name_en: "Licorice Root"
+  name_ja: "甘草"
+  category: "qi_tonic"
+  category_zh: "补气药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘"
+  meridians: ["脾", "胃", "心", "肺"]
+  functions_zh: "补中益气，清热解毒，祛痰止咳，缓急止痛，调和诸药"
+  functions_en: "Tonifies Middle Qi, clears heat, resolves toxicity, harmonizes all herb formulas"
+  common_uses: ["脾胃虚弱", "咳嗽", "咽喉肿痛", "调和方剂"]
+  color: "#c8a030"
+  emoji: "🌻"
+
+- id: heizhi
+  name_zh: "黑芝麻"
+  pinyin: "Hēi Zhī Ma"
+  name_en: "Black Sesame Seed"
+  name_ja: "黒胡麻"
+  category: "blood_tonic"
+  category_zh: "补血药"
+  nature: "neutral"
+  nature_zh: "平"
+  flavor_zh: "甘"
+  meridians: ["肝", "肾"]
+  functions_zh: "滋补肝肾，润肠通便，乌须发"
+  functions_en: "Nourishes Liver and Kidney, moistens intestines, blackens hair"
+  common_uses: ["肝肾不足", "须发早白", "腰膝酸软", "肠燥便秘"]
+  color: "#1a1a1a"
+  emoji: "⚫"
+
+- id: shengjiang
+  name_zh: "生姜"
+  pinyin: "Shēng Jiāng"
+  name_en: "Fresh Ginger"
+  name_ja: "生姜"
+  category: "exterior"
+  category_zh: "解表药"
+  nature: "mild-warm"
+  nature_zh: "微温"
+  flavor_zh: "辛"
+  meridians: ["脾", "胃", "肺"]
+  functions_zh: "解表散寒，温中止呕，化痰止咳，解鱼蟹毒"
+  functions_en: "Releases exterior cold, warms the Middle, stops vomiting, resolves Phlegm"
+  common_uses: ["风寒感冒", "恶心呕吐", "寒性咳嗽", "日常调味"]
+  color: "#d4a020"
+  emoji: "🫚"
+
+- id: hetaoren
+  name_zh: "核桃仁"
+  pinyin: "Hé Táo Rén"
+  name_en: "Walnut Kernel"
+  name_ja: "胡桃仁"
+  category: "yang_tonic"
+  category_zh: "补阳药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "甘"
+  meridians: ["肾", "肺", "大肠"]
+  functions_zh: "补肾固精，温肺定喘，润肠通便，强健脑髓"
+  functions_en: "Tonifies Kidney Yang, warms Lungs, moistens intestines, strengthens brain"
+  common_uses: ["肾虚腰痛", "遗精阳痿", "肺虚咳喘", "肠燥便秘"]
+  color: "#8b6040"
+  emoji: "🟤"
+
+- id: chuanxiong
+  name_zh: "川芎"
+  pinyin: "Chuān Xiōng"
+  name_en: "Chuanxiong Rhizome"
+  name_ja: "川芎"
+  category: "blood_tonic"
+  category_zh: "活血化瘀药"
+  nature: "warm"
+  nature_zh: "温"
+  flavor_zh: "辛"
+  meridians: ["肝", "胆", "心包"]
+  functions_zh: "活血行气，祛风止痛"
+  functions_en: "Invigorates Blood, moves Qi, expels Wind, relieves pain"
+  common_uses: ["血瘀气滞", "头痛眩晕", "月经不调", "跌打损伤"]
+  color: "#6a4020"
+  emoji: "🌱"

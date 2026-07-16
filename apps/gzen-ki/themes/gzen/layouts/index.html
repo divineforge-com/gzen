@@ -1,0 +1,101 @@
+{{ define "main" }}
+<div class="home-hero">
+  <span class="hero-badge">気 · GZen · 健康</span>
+  <h1>气血调和，健康长寿</h1>
+  <p class="hero-ja">気血を整え、健やかに長生きする</p>
+  <p class="home-tagline">
+    以中医为本，汇聚气血、脾胃、本草、食疗、气功知识。<br>
+    传统智慧与现代养生的数码笔记本——<a href="https://gzen.io" style="color:var(--color-accent)">GZen.io</a> 系列之一。
+  </p>
+  <p class="tagline-en">A digital notebook rooted in Traditional Chinese Medicine — Qi &amp; Blood, herbal wisdom, food therapy, Tai Ji, Ba Duan Jin. Part of the <a href="https://gzen.io">GZen.io</a> learning ecosystem.</p>
+</div>
+
+<section class="recent-posts">
+  <h2>最新笔记</h2>
+  <ul class="post-list">
+    {{ range first 8 (.Site.RegularPages.ByDate.Reverse) }}
+    <li class="post-item">
+      <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <div class="post-tags">
+        {{ range .Params.tags }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="tag">{{ . }}</a>{{ end }}
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+</section>
+
+<section class="sections-nav">
+  <div class="section-card">
+    <a href="/qixue/">
+      <span class="card-icon">🌿</span>
+      <h3>气血</h3>
+      <span class="card-label-ja">気血 · Qì-Xuè</span>
+      <p>气血理论，阴阳平衡，生命之本</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/piwei/">
+      <span class="card-icon">🍵</span>
+      <h3>脾胃</h3>
+      <span class="card-label-ja">脾胃 · Pí-Wèi</span>
+      <p>后天之本，气血生化之源</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/bencao/">
+      <span class="card-icon">🌱</span>
+      <h3>本草</h3>
+      <span class="card-label-ja">本草 · Běn-Cǎo</span>
+      <p>常用中药，性味归经，功效主治</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/shiliao/">
+      <span class="card-icon">🥣</span>
+      <h3>食疗</h3>
+      <span class="card-label-ja">食療 · Shí-Liáo</span>
+      <p>药食同源，以食养生调理身体</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/qigong/">
+      <span class="card-icon">☯️</span>
+      <h3>气功</h3>
+      <span class="card-label-ja">気功 · Qì-Gōng</span>
+      <p>太极拳·八段锦，以动养生疏经络</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/gallery/">
+      <span class="card-icon">🏮</span>
+      <h3>图鉴</h3>
+      <span class="card-label-ja">図鑑 · Gallery</span>
+      <p>常见中药图鉴，性味归经一览</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/notes/">
+      <span class="card-icon">📝</span>
+      <h3>笔记</h3>
+      <span class="card-label-ja">ノート · Notes</span>
+      <p>中医综合笔记，中西医结合资料</p>
+    </a>
+  </div>
+  <div class="section-card">
+    <a href="/tags/">
+      <span class="card-icon">🏷️</span>
+      <h3>标签</h3>
+      <span class="card-label-ja">タグ · Tags</span>
+      <p>按主题浏览所有中医知识条目</p>
+    </a>
+  </div>
+</section>
+
+<div style="margin-top:var(--spacing-xl);padding-top:var(--spacing-lg);border-top:1px solid var(--color-border);text-align:center;">
+  <p style="font-family:var(--font-ui);font-size:0.8125rem;color:var(--color-muted);">
+    本站为 <a href="https://gzen.io" style="color:var(--color-accent);font-weight:600;">GZen.io</a> 旗下数码笔记本之一，致力于让传统健康智慧人人可及。<br>
+    <em style="font-size:0.75rem;">A GZen.io notebook — making traditional wellness wisdom accessible to all.</em>
+  </p>
+</div>
+{{ end }}

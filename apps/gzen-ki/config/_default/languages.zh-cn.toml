@@ -1,0 +1,12 @@
+disabled    = false
+languageCode = "zh-CN"
+languageName = "中文"
+weight       = 1
+title        = "元気・健康笔记"
+
+[params]
+  displayName = "ZH"
+  isoCode     = "zh-CN"
+  rtl         = false
+  dateFormat  = "2006年01月02日"
+  description = "以中医为本，气血调和，脾胃健康。集中西医学之精粹，传统智慧与现代养生的数码笔记本。"

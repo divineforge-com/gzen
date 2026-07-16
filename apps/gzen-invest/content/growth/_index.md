@@ -1,0 +1,3 @@
+---
+title: "Capital Growth Strategy"
+---

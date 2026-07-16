@@ -1,0 +1,67 @@
+# ── Blowfish Theme Parameters ──────────────────────────────────────────────────
+# Full reference: https://blowfish.page/docs/configuration/#theme-parameters
+
+colorScheme = "jade"
+defaultAppearance = "light"   # light | dark
+autoSwitchAppearance = false
+
+enableSearch   = true
+enableCodeCopy = true
+enableA11y     = false
+disableImageOptimization   = false
+disableTextInHeader        = false
+
+# Which content sections count as "articles" for homepage recent list
+mainSections = ["notes", "qigong", "principles", "koans", "practice", "yijing", "engineering", "library"]
+
+
+# ── Header ──────────────────────────────────────────────────────────────────────
+[header]
+  layout = "fixed"   # basic | fixed | fixed-fill | fixed-fill-blur
+
+# ── Footer ──────────────────────────────────────────────────────────────────────
+[footer]
+  showMenu             = true
+  showCopyright        = true
+  showThemeAttribution = false
+  showAppearanceSwitcher = true
+  showScrollToTop      = true
+
+# ── Homepage ────────────────────────────────────────────────────────────────────
+[homepage]
+  layout            = "custom"   # our own layouts/partials/home/custom.html
+  showRecent        = false      # handled inside custom layout
+  showRecentItems   = 6
+  cardView          = true
+  cardViewScreenWidth = false
+
+# ── Article (single page) ───────────────────────────────────────────────────────
+[article]
+  showDate           = true
+  showDateUpdated    = false
+  showAuthor         = false
+  showReadingTime    = true
+  showWordCount      = false
+  showHero           = false
+  showBreadcrumbs    = true
+  showTableOfContents = true
+  showTaxonomies     = true
+  showEdit           = false
+
+# ── List (section) ──────────────────────────────────────────────────────────────
+[list]
+  showCards       = true
+  cardView        = true
+  showBreadcrumbs = true
+  groupByYear     = false
+  showTableOfContents = false
+
+# ── Taxonomy (tags, categories) ─────────────────────────────────────────────────
+[taxonomy]
+  showTermCount = true
+  cardView      = false
+
+[term]
+  showTableOfContents = true
+  groupByYear         = false
+  cardView            = false

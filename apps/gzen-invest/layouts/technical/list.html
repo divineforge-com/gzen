@@ -1,0 +1,78 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1 class="text-blue" data-en="📊 Technical Analysis" data-zh="📊 技术分析">📊 Technical Analysis</h1>
+  <p data-en="Read charts like a pro. Indicators, patterns, and signals — all visual." data-zh="像专家一样读懂图表。指标、形态与信号 — 全图表呈现。">Read charts like a pro. Indicators, patterns, and signals — all visual.</p>
+</div>
+
+<section class="card card-section">
+  {{ partial "infographics/stochastic-oscillator.html" . }}
+</section>
+
+<section class="card card-section">
+  <h2 class="section-title text-pink" data-en="📊 Technical Indicators Cheatsheet" data-zh="📊 技术指标速查表">📊 Technical Indicators Cheatsheet</h2>
+  {{ partial "infographics/technical-indicators.html" . }}
+</section>
+
+<!-- Candlestick Patterns -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="🕯 Key Candlestick Patterns" data-zh="🕯 关键蜡烛图形态">🕯 Key Candlestick Patterns</h2>
+  <div class="infographic">
+  <svg viewBox="0 0 720 260" style="width:100%;height:auto;font-family:var(--font-diagram)">
+    <!-- Doji -->
+    <line x1="70" y1="105" x2="70" y2="155" stroke="#e0e0e0" stroke-width="2"/>
+    <rect x="60" y="130" width="20" height="2" fill="transparent" stroke="#e0e0e0" stroke-width="2"/>
+    <text x="70" y="188" text-anchor="middle" font-size="14" fill="#e0e0e0" font-weight="700">Doji</text>
+    <text x="70" y="208" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">Indecision</text>
+    <text x="70" y="226" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">Reversal warning</text>
+    <!-- Hammer -->
+    <line x1="185" y1="137" x2="185" y2="170" stroke="#48bb78" stroke-width="2"/>
+    <rect x="175" y="140" width="20" height="10" fill="#48bb78" stroke="#48bb78" stroke-width="2"/>
+    <text x="185" y="188" text-anchor="middle" font-size="14" fill="#48bb78" font-weight="700">Hammer</text>
+    <text x="185" y="208" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">Bullish reversal</text>
+    <text x="185" y="226" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">at support</text>
+    <!-- Shooting Star -->
+    <line x1="300" y1="100" x2="300" y2="153" stroke="#fc8181" stroke-width="2"/>
+    <rect x="290" y="140" width="20" height="10" fill="transparent" stroke="#fc8181" stroke-width="2"/>
+    <text x="300" y="188" text-anchor="middle" font-size="14" fill="#fc8181" font-weight="700">Shooting Star</text>
+    <text x="300" y="208" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">Bearish reversal</text>
+    <text x="300" y="226" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">at resistance</text>
+    <!-- Engulfing Bull -->
+    <line x1="415" y1="120" x2="415" y2="155" stroke="#48bb78" stroke-width="2"/>
+    <rect x="405" y="128" width="20" height="27" fill="#48bb78" stroke="#48bb78" stroke-width="2"/>
+    <text x="415" y="188" text-anchor="middle" font-size="14" fill="#48bb78" font-weight="700">Engulfing Bull</text>
+    <text x="415" y="208" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">Strong bull signal</text>
+    <text x="415" y="226" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">engulfs prev candle</text>
+    <!-- Morning Star -->
+    <text x="545" y="135" text-anchor="middle" font-size="28">☀</text>
+    <text x="545" y="188" text-anchor="middle" font-size="14" fill="#48bb78" font-weight="700">Morning Star</text>
+    <text x="545" y="208" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">3-candle reversal</text>
+    <text x="545" y="226" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">bottom pattern</text>
+    <!-- Evening Star -->
+    <text x="650" y="135" text-anchor="middle" font-size="28">🌟</text>
+    <text x="650" y="188" text-anchor="middle" font-size="14" fill="#fc8181" font-weight="700">Evening Star</text>
+    <text x="650" y="208" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">3-candle reversal</text>
+    <text x="650" y="226" text-anchor="middle" font-size="12" fill="rgba(255,255,255,0.45)">top pattern</text>
+  </svg>
+  </div>
+</section>
+
+<!-- Support & Resistance -->
+<section class="card card-section">
+  <h2 class="section-title" data-en="🧱 Support &amp; Resistance Levels" data-zh="🧱 支撑位与阻力位">🧱 Support &amp; Resistance Levels</h2>
+  <div class="infographic">
+  <svg viewBox="0 0 700 200" style="width:100%;height:auto;font-family:var(--font-diagram)">
+    <!-- Resistance line -->
+    <line x1="50" y1="60" x2="650" y2="60" stroke="#fc8181" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="655" y="63" font-size="14" fill="#fc8181">Resistance</text>
+    <!-- Support line -->
+    <line x1="50" y1="160" x2="650" y2="160" stroke="#48bb78" stroke-width="2" stroke-dasharray="10,5"/>
+    <text x="655" y="163" font-size="14" fill="#48bb78">Support</text>
+    <!-- Price bounces -->
+    <polyline points="60,155 100,120 140,65 180,90 220,155 260,130 300,70 340,95 380,160 420,130 460,65 500,90 540,155" fill="none" stroke="#4299e1" stroke-width="2"/>
+    <text x="350" y="188" text-anchor="middle" font-size="14" fill="rgba(255,255,255,0.4)">Buy near support · Sell near resistance · Breakout = new level!</text>
+  </svg>
+  </div>
+</section>
+
+<div class="disclaimer" data-en="⚠ Technical analysis is probabilistic, not deterministic. Use with risk management. DYOR." data-zh="⚠ 技术分析具有概率性，而非确定性。请配合风险管理使用。请自行研究。">⚠ Technical analysis is probabilistic, not deterministic. Use with risk management. DYOR.</div>
+{{ end }}

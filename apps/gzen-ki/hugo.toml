@@ -1,0 +1,3 @@
+# Root config — all settings live in config/_default/
+# See: config/_default/hugo.toml, params.toml, languages.zh-cn.toml, menus.zh-cn.toml
+theme = "blowfish"

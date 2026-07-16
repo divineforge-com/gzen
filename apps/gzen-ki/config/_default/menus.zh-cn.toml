@@ -1,0 +1,58 @@
+# ── Main Navigation ─────────────────────────────────────────────────────────────
+
+[[main]]
+  name    = "笔记"
+  pageRef = "notes"
+  weight  = 10
+
+[[main]]
+  name    = "气功"
+  pageRef = "qigong"
+  weight  = 20
+
+[[main]]
+  name    = "图鉴"
+  pageRef = "gallery"
+  weight  = 30
+
+[[main]]
+  name    = "禅理"
+  pageRef = "principles"
+  weight  = 40
+
+[[main]]
+  name    = "公案"
+  pageRef = "koans"
+  weight  = 50
+
+[[main]]
+  name    = "修行"
+  pageRef = "practice"
+  weight  = 60
+
+[[main]]
+  name    = "易经"
+  pageRef = "yijing"
+  weight  = 70
+
+[[main]]
+  name    = "工程"
+  pageRef = "engineering"
+  weight  = 80
+
+[[main]]
+  name    = "典藏"
+  pageRef = "library"
+  weight  = 90
+
+
+# ── Footer Navigation ───────────────────────────────────────────────────────────
+[[footer]]
+  name    = "标签"
+  pageRef = "tags"
+  weight  = 10
+
+[[footer]]
+  name   = "GZen.io"
+  url    = "https://gzen.io"
+  weight = 20

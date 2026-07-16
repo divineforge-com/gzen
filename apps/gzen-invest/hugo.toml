@@ -1,0 +1,15 @@
+baseURL = "https://invest.gzen.dev/"
+languageCode = "en-us"
+title = "invest.gzen"
+enableRobotsTXT = true
+
+[minify]
+  disableJS = true
+
+[params]
+  description = "Visual investment knowledge — dividends, capital growth, technical analysis & market insights. All through infographics, less text."
+  author = "divineforge"
+  buyMeCoffeeURL = "https://buymeacoffee.com/divineforge"
+  divineforgeURL = "https://divineforge.dev"
+
+[taxonomies]

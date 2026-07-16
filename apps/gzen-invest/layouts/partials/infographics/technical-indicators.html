@@ -1,0 +1,94 @@
+<div style="overflow-x:auto">
+<table class="indicator-table">
+  <thead>
+    <tr>
+      <th data-en="Indicator" data-zh="指标">Indicator</th>
+      <th data-en="Setup / Formula" data-zh="设置 / 公式">Setup / Formula</th>
+      <th data-en="📈 Bullish Signal" data-zh="📈 看涨信号">📈 Bullish Signal</th>
+      <th data-en="📉 Bearish Signal" data-zh="📉 看跌信号">📉 Bearish Signal</th>
+      <th data-en="💡 Pro Tip" data-zh="💡 专家提示">💡 Pro Tip</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="ind-name" style="color:#ed64a6">🔴 RSI</div>
+        <div class="ind-formula">Relative Strength Index</div>
+      </td>
+      <td>
+        <span style="color:#ed64a6">Range: 0–100 · Period: 14</span><br>
+        <span class="ind-formula">RSI = 100 − 100/(1+RS)  |  RS = AvgGain/AvgLoss</span>
+      </td>
+      <td class="signal-bull" data-en="RSI &lt; 30 → Oversold (potential buy)" data-zh="RSI &lt; 30 → 超卖（潜在买入）">RSI &lt; 30 → Oversold (potential buy)</td>
+      <td class="signal-bear" data-en="RSI &gt; 70 → Overbought (potential sell)" data-zh="RSI &gt; 70 → 超买（潜在卖出）">RSI &gt; 70 → Overbought (potential sell)</td>
+      <td class="signal-tip" data-en="Divergence = early reversal signal" data-zh="背离 = 早期反转信号">Divergence = early reversal signal</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ind-name" style="color:#4299e1">📘 MACD</div>
+        <div class="ind-formula">Moving Avg Convergence Divergence</div>
+      </td>
+      <td>
+        <span style="color:#4299e1">MACD = 12EMA − 26EMA  |  Signal = 9EMA</span><br>
+        <span class="ind-formula">Histogram = MACD − Signal line</span>
+      </td>
+      <td class="signal-bull" data-en="MACD crosses above Signal → Bullish" data-zh="MACD上穿信号线 → 看涨">MACD crosses above Signal → Bullish</td>
+      <td class="signal-bear" data-en="MACD crosses below Signal → Bearish" data-zh="MACD下穿信号线 → 看跌">MACD crosses below Signal → Bearish</td>
+      <td class="signal-tip" data-en="Zero-line crossover confirms trend" data-zh="零线交叉确认趋势">Zero-line crossover confirms trend</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ind-name" style="color:#48bb78">📉 Moving Averages</div>
+        <div class="ind-formula">SMA / EMA</div>
+      </td>
+      <td>
+        <span style="color:#48bb78">SMA — Simple · EMA — Exponential (recent bias)</span><br>
+        <span class="ind-formula">Key levels: 20 · 50 · 100 · 200 periods</span>
+      </td>
+      <td class="signal-bull" data-en="Golden Cross: 50MA crosses above 200MA" data-zh="黄金交叉：50均线上穿200均线">Golden Cross: 50MA crosses above 200MA</td>
+      <td class="signal-bear" data-en="Death Cross: 50MA crosses below 200MA" data-zh="死亡交叉：50均线下穿200均线">Death Cross: 50MA crosses below 200MA</td>
+      <td class="signal-tip" data-en="MA = dynamic support/resistance" data-zh="均线 = 动态支撑/阻力">MA = dynamic support/resistance</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ind-name" style="color:#f0b429">📊 Volume Analysis</div>
+        <div class="ind-formula">OBV / Volume bars</div>
+      </td>
+      <td>
+        <span style="color:#f0b429">Volume confirms price moves</span><br>
+        <span class="ind-formula">OBV — On-Balance Volume indicator</span>
+      </td>
+      <td class="signal-bull" data-en="Price ↑ + Volume ↑ = Strong bull move" data-zh="价格↑ + 成交量↑ = 强劲上涨">Price ↑ + Volume ↑ = Strong bull move</td>
+      <td class="signal-bear" data-en="Price ↑ + Volume ↓ = Weak move (caution)" data-zh="价格↑ + 成交量↓ = 弱势上涨（注意）">Price ↑ + Volume ↓ = Weak move (caution)</td>
+      <td class="signal-tip" data-en="Volume spike = institutional activity" data-zh="成交量突增 = 机构活动">Volume spike = institutional activity</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ind-name" style="color:#fc814a">📐 Bollinger Bands</div>
+        <div class="ind-formula">BB (20, 2)</div>
+      </td>
+      <td>
+        <span style="color:#fc814a">Upper = 20SMA + 2× Std Dev</span><br>
+        <span class="ind-formula">Lower = 20SMA − 2× Std Dev</span>
+      </td>
+      <td class="signal-bull" data-en="Price at lower band = potential buy" data-zh="价格触及下轨 = 潜在买入">Price at lower band = potential buy</td>
+      <td class="signal-bear" data-en="Band squeeze = breakout incoming!" data-zh="带宽收窄 = 即将突破！">Band squeeze = breakout incoming!</td>
+      <td class="signal-tip" data-en="95% of prices stay within bands" data-zh="95%的价格在带宽内波动">95% of prices stay within bands</td>
+    </tr>
+    <tr>
+      <td>
+        <div class="ind-name" style="color:#ed64a6">🌀 Fibonacci Retracement</div>
+        <div class="ind-formula">Fib Levels</div>
+      </td>
+      <td>
+        <span style="color:#ed64a6">Key levels: 23.6% · 38.2% · 50% · 61.8%</span><br>
+        <span class="ind-formula">Draw from swing low → swing high</span>
+      </td>
+      <td class="signal-bull" data-en="Price bounces at fib level = buy zone" data-zh="价格在斐波那契位反弹 = 买入区">Price bounces at fib level = buy zone</td>
+      <td class="signal-bear" data-en="Break below 61.8% = trend reversal" data-zh="跌破61.8% = 趋势反转">Break below 61.8% = trend reversal</td>
+      <td class="signal-tip" data-en="61.8% = Golden Ratio (strongest)" data-zh="61.8% = 黄金比例（最强）">61.8% = Golden Ratio (strongest)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p style="text-align:center;font-size:.8rem;color:var(--fg-faint);margin-top:1rem" data-en="🔗 Combine 2–3 indicators for confirmation · No single indicator is 100% accurate" data-zh="🔗 结合2-3个指标确认信号 · 没有任何单一指标100%准确">🔗 Combine 2–3 indicators for confirmation · No single indicator is 100% accurate</p>

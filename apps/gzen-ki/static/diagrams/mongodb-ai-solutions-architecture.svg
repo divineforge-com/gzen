@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MongoDB as AI Solution – Architecture Diagram (draw.io compatible SVG) -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 900 560" width="900" height="560" style="background:#ffffff;font-family:'JetBrains Mono',monospace;">
+
+  <!-- ── Background zones ── -->
+  <!-- Client zone -->
+  <rect x="20" y="20" width="160" height="520" rx="8" fill="#f0f9ff" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="100" y="45" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="700">Client / App</text>
+
+  <!-- AI Orchestration zone -->
+  <rect x="210" y="20" width="200" height="520" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="310" y="45" text-anchor="middle" font-size="11" fill="#166534" font-weight="700">AI Orchestration</text>
+
+  <!-- MongoDB zone -->
+  <rect x="440" y="20" width="220" height="520" rx="8" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.5"/>
+  <text x="550" y="45" text-anchor="middle" font-size="11" fill="#9a3412" font-weight="700">MongoDB Atlas</text>
+
+  <!-- AI Services zone -->
+  <rect x="690" y="20" width="190" height="520" rx="8" fill="#fdf4ff" stroke="#e9d5ff" stroke-width="1.5"/>
+  <text x="785" y="45" text-anchor="middle" font-size="11" fill="#6b21a8" font-weight="700">AI / LLM Services</text>
+
+  <!-- ── Client layer ── -->
+  <rect x="40" y="80" width="120" height="40" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="100" y="104" text-anchor="middle" font-size="11" fill="#1e3a8a">Web / Mobile</text>
+
+  <rect x="40" y="160" width="120" height="40" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="100" y="184" text-anchor="middle" font-size="11" fill="#1e3a8a">REST / GraphQL</text>
+
+  <!-- ── AI Orchestration layer ── -->
+  <rect x="228" y="80" width="164" height="40" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="310" y="100" text-anchor="middle" font-size="11" fill="#14532d">LangChain / LlamaIndex</text>
+  <text x="310" y="114" text-anchor="middle" font-size="10" fill="#166534">Orchestration Agent</text>
+
+  <rect x="228" y="160" width="164" height="40" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="310" y="180" text-anchor="middle" font-size="11" fill="#14532d">RAG Pipeline</text>
+  <text x="310" y="194" text-anchor="middle" font-size="10" fill="#166534">Retrieval-Augmented Gen</text>
+
+  <rect x="228" y="260" width="164" height="40" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="310" y="280" text-anchor="middle" font-size="11" fill="#14532d">Prompt Router</text>
+  <text x="310" y="294" text-anchor="middle" font-size="10" fill="#166534">Tool / Function Call</text>
+
+  <rect x="228" y="360" width="164" height="40" rx="6" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <text x="310" y="380" text-anchor="middle" font-size="11" fill="#14532d">Response Cache</text>
+  <text x="310" y="394" text-anchor="middle" font-size="10" fill="#166534">Semantic Dedup</text>
+
+  <!-- ── MongoDB Atlas layer ── -->
+  <rect x="458" y="80" width="184" height="40" rx="6" fill="#ffedd5" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="550" y="100" text-anchor="middle" font-size="11" fill="#7c2d12">Atlas Vector Search</text>
+  <text x="550" y="114" text-anchor="middle" font-size="10" fill="#9a3412">kNN / ANN Index</text>
+
+  <rect x="458" y="160" width="184" height="40" rx="6" fill="#ffedd5" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="550" y="180" text-anchor="middle" font-size="11" fill="#7c2d12">Document Store</text>
+  <text x="550" y="194" text-anchor="middle" font-size="10" fill="#9a3412">Flexible Schema</text>
+
+  <rect x="458" y="260" width="184" height="40" rx="6" fill="#ffedd5" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="550" y="280" text-anchor="middle" font-size="11" fill="#7c2d12">Atlas Search (FTS)</text>
+  <text x="550" y="294" text-anchor="middle" font-size="10" fill="#9a3412">Lucene Full-Text</text>
+
+  <rect x="458" y="360" width="184" height="40" rx="6" fill="#ffedd5" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="550" y="380" text-anchor="middle" font-size="11" fill="#7c2d12">Change Streams</text>
+  <text x="550" y="394" text-anchor="middle" font-size="10" fill="#9a3412">Real-time Sync</text>
+
+  <rect x="458" y="460" width="184" height="40" rx="6" fill="#ffedd5" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="550" y="480" text-anchor="middle" font-size="11" fill="#7c2d12">Atlas App Services</text>
+  <text x="550" y="494" text-anchor="middle" font-size="10" fill="#9a3412">Edge / Serverless</text>
+
+  <!-- ── AI / LLM Services layer ── -->
+  <rect x="708" y="80" width="154" height="40" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="785" y="100" text-anchor="middle" font-size="11" fill="#4c1d95">OpenAI / Azure OAI</text>
+  <text x="785" y="114" text-anchor="middle" font-size="10" fill="#6b21a8">Embeddings + Chat</text>
+
+  <rect x="708" y="160" width="154" height="40" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="785" y="180" text-anchor="middle" font-size="11" fill="#4c1d95">Embedding Model</text>
+  <text x="785" y="194" text-anchor="middle" font-size="10" fill="#6b21a8">text-embedding-3</text>
+
+  <rect x="708" y="260" width="154" height="40" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="785" y="280" text-anchor="middle" font-size="11" fill="#4c1d95">LLM Inference</text>
+  <text x="785" y="294" text-anchor="middle" font-size="10" fill="#6b21a8">GPT-4o / Claude</text>
+
+  <rect x="708" y="360" width="154" height="40" rx="6" fill="#f3e8ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="785" y="380" text-anchor="middle" font-size="11" fill="#4c1d95">AI Gateway</text>
+  <text x="785" y="394" text-anchor="middle" font-size="10" fill="#6b21a8">Rate Limit / Auth</text>
+
+  <!-- ── Arrows (data flow) ── -->
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Client → Orchestration -->
+  <line x1="160" y1="100" x2="226" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="160" y1="180" x2="226" y2="180" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Orchestration → MongoDB -->
+  <line x1="392" y1="100" x2="456" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="392" y1="180" x2="456" y2="180" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="392" y1="280" x2="456" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="392" y1="380" x2="456" y2="380" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- MongoDB → AI Services -->
+  <line x1="642" y1="100" x2="706" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="642" y1="180" x2="706" y2="180" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="642" y1="280" x2="706" y2="280" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="642" y1="380" x2="706" y2="380" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Return paths (dashed) -->
+  <line x1="706" y1="108" x2="642" y2="108" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <line x1="456" y1="188" x2="392" y2="188" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+
+  <!-- Legend -->
+  <rect x="225" y="440" width="164" height="70" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="307" y="458" text-anchor="middle" font-size="10" fill="#475569" font-weight="700">Data Flow Legend</text>
+  <line x1="240" y1="472" x2="280" y2="472" stroke="#64748b" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <text x="290" y="476" font-size="9" fill="#475569">Request / Write</text>
+  <line x1="240" y1="492" x2="280" y2="492" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#arrowhead)"/>
+  <text x="290" y="496" font-size="9" fill="#475569">Response / Read</text>
+
+</svg>

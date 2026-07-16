@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="container">
+    <a href="{{ "/" | relURL }}" class="logo">
+      <span class="logo-jp">学</span><span class="logo-text">GZen</span>
+    </a>
+    <nav class="main-nav">
+      <a href="{{ "/japanese/" | relURL }}" class="{{ if hasPrefix .RelPermalink "/japanese" }}active{{ end }}">
+        🇯🇵 Japanese
+      </a>
+      <a href="{{ "/korean/" | relURL }}" class="{{ if hasPrefix .RelPermalink "/korean" }}active{{ end }}">
+        🇰🇷 Korean
+      </a>
+      <a href="{{ "/russian/" | relURL }}" class="{{ if hasPrefix .RelPermalink "/russian" }}active{{ end }}">
+        🇷🇺 Russian
+      </a>
+      <a href="{{ "/about/" | relURL }}" class="{{ if hasPrefix .RelPermalink "/about" }}active{{ end }}">
+        About
+      </a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  </div>
+</header>

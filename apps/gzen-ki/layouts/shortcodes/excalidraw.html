@@ -1,0 +1,21 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
+{{- $type := .Get "type" | default "image" -}}
+
+{{ if eq $type "embed" }}
+<div class="excalidraw-embed" style="width:100%;aspect-ratio:16/9;border-radius:0.5rem;overflow:hidden;margin:1.5rem 0;">
+  <iframe src="{{ $src }}"
+          width="100%" height="100%"
+          style="border:none;"
+          loading="lazy"
+          title="{{ $alt }}"></iframe>
+</div>
+{{ else }}
+<figure class="excalidraw-figure" style="margin:1.5rem 0;text-align:center;">
+  <img src="{{ $src }}" alt="{{ $alt }}"
+       style="max-width:100%;border-radius:0.5rem;box-shadow:0 2px 12px rgba(0,0,0,0.10);"
+       loading="lazy" />
+  {{ if $caption }}<figcaption style="margin-top:0.5rem;font-size:0.875rem;opacity:0.7;">{{ $caption }}</figcaption>{{ end }}
+</figure>
+{{ end }}

@@ -1,0 +1,85 @@
+{{/* Gallery list — Herb Gallery with filter bar
+     Reads from .Site.Data.herbs (data/herbs.yaml)
+     Uses Blowfish base template via {{ define "main" }}
+*/}}
+{{ define "main" }}
+  {{ .Scratch.Set "scope" "list" }}
+
+  {{/* Page header */}}
+  <header class="mb-8">
+    {{ if .Params.showBreadcrumbs | default (site.Params.list.showBreadcrumbs | default false) }}
+      {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">{{ .Title }}</h1>
+    {{ if .Params.title_ja }}<p class="text-base text-neutral-400 italic mt-0.5 mb-0">{{ .Params.title_ja }}</p>{{ end }}
+    {{ if .Params.title_en }}<p class="text-sm text-neutral-400 italic mb-0">{{ .Params.title_en }}</p>{{ end }}
+    {{ if .Description }}
+    <p class="mt-3 text-neutral-500 dark:text-neutral-400 text-base">{{ .Description }}</p>
+    {{ end }}
+  </header>
+
+  {{/* Filter bar */}}
+  <div class="gallery-filters" role="group" aria-label="按分类筛选">
+    <button class="gallery-filter-btn active" data-filter="all">全部 All</button>
+    <button class="gallery-filter-btn" data-filter="qi_tonic">补气</button>
+    <button class="gallery-filter-btn" data-filter="blood_tonic">补血</button>
+    <button class="gallery-filter-btn" data-filter="yin_tonic">补阴</button>
+    <button class="gallery-filter-btn" data-filter="yang_tonic">补阳</button>
+    <button class="gallery-filter-btn" data-filter="resolve_damp">利湿</button>
+    <button class="gallery-filter-btn" data-filter="regulate_qi">理气</button>
+    <button class="gallery-filter-btn" data-filter="exterior">解表</button>
+  </div>
+
+  {{/* Herb grid */}}
+  <div class="herb-gallery-grid" id="herb-gallery">
+    {{ range .Site.Data.herbs }}
+    <div class="herb-card" data-category="{{ .category }}">
+      <div class="herb-stripe {{ .nature }}"></div>
+      <div class="herb-body">
+        <div class="herb-emoji" aria-hidden="true">{{ .emoji }}</div>
+        <h3 class="herb-zh">{{ .name_zh }}</h3>
+        <p class="herb-pinyin">{{ .pinyin }}</p>
+        <p class="herb-en">{{ .name_en }}</p>
+
+        <div class="herb-props">
+          <span class="herb-prop {{ if or (eq .nature "warm") (eq .nature "mild-warm") }}nature-warm{{ else if or (eq .nature "cool") (eq .nature "cold") }}nature-cool{{ else }}nature-neutral{{ end }}">
+            {{ .nature_zh }} · {{ .flavor_zh }}
+          </span>
+          <span class="herb-prop category">{{ .category_zh }}</span>
+          {{ range .meridians }}<span class="herb-prop meridian">{{ . }}</span>{{ end }}
+        </div>
+
+        <p class="herb-fn">{{ .functions_zh }}</p>
+
+        <div class="herb-uses">
+          {{ range .common_uses }}<span class="herb-use-tag">{{ . }}</span>{{ end }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+
+  <div class="mt-10 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+    <p class="text-xs text-neutral-400 leading-relaxed">
+      ⚠️ 本图鉴仅供学习参考，不构成医疗建议。中药须在专业中医师指导下使用。<br>
+      <em>For educational reference only. Always consult a qualified TCM practitioner before use.</em>
+    </p>
+  </div>
+
+  <script>
+  (function () {
+    var btns = document.querySelectorAll('.gallery-filter-btn');
+    var cards = document.querySelectorAll('.herb-card');
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var f = btn.getAttribute('data-filter');
+        btns.forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        cards.forEach(function (card) {
+          card.style.display = (f === 'all' || card.getAttribute('data-category') === f) ? '' : 'none';
+        });
+      });
+    });
+  })();
+  </script>
+{{ end }}

@@ -1,0 +1,103 @@
+{{ define "main" }}
+{{ $lang := .Params.language | default "japanese" }}
+{{ $day  := .Params.day | default 0 }}
+
+{{/* Compute prev/next pages by day number for correct sequential navigation */}}
+{{ $allLangPages := where .Site.Pages "Params.language" $lang }}
+{{ $prevPage := "" }}
+{{ $nextPage := "" }}
+{{ range $allLangPages }}
+  {{ if eq .Params.day (sub $day 1) }}{{ $prevPage = . }}{{ end }}
+  {{ if eq .Params.day (add $day 1) }}{{ $nextPage = . }}{{ end }}
+{{ end }}
+
+{{/* Determine accent class */}}
+{{ $accentClass := "jp" }}
+{{ if eq $lang "russian" }}{{ $accentClass = "ru" }}{{ else if eq $lang "korean" }}{{ $accentClass = "kr" }}{{ end }}
+
+<div class="lesson-layout" data-lesson-id="{{ .Params.lesson_id }}">
+  <article class="lesson-article lang-{{ $lang }}">
+    <div class="lesson-header">
+      <div class="lesson-breadcrumb">
+        <a href="{{ "/" | relURL }}">Home</a> /
+        {{ if eq $lang "russian" }}
+        <a href="{{ "/russian/" | relURL }}">Russian</a>
+        {{ else if eq $lang "korean" }}
+        <a href="{{ "/korean/" | relURL }}">Korean</a>
+        {{ else }}
+        <a href="{{ "/japanese/" | relURL }}">Japanese</a>
+        {{ end }}
+        / {{ .Title }}
+      </div>
+      <div class="lesson-meta">
+        {{ if eq $lang "russian" }}
+        <span class="lang-tag ru">🇷🇺 Russian</span>
+        {{ else if eq $lang "korean" }}
+        <span class="lang-tag kr">🇰🇷 Korean</span>
+        {{ else }}
+        <span class="lang-tag jp">🇯🇵 Japanese</span>
+        {{ end }}
+        {{ with .Params.level }}<span class="level-tag">{{ . }}</span>{{ end }}
+        {{ with .Params.day }}<span class="tag">Day {{ . }}</span>{{ end }}
+      </div>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    </div>
+
+    <div class="lesson-body">
+      {{ .Content }}
+    </div>
+
+    <div class="lesson-nav" style="display:flex;gap:1rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--color-border);">
+      {{ with $prevPage }}
+      <a href="{{ .Permalink }}" class="btn btn-outline" style="border-color:var(--color-border);color:var(--color-text);">
+        ← {{ .Title }}
+      </a>
+      {{ end }}
+      <div style="flex:1"></div>
+      {{ with $nextPage }}
+      <a href="{{ .Permalink }}" class="btn btn-{{ $accentClass }}">
+        {{ .Title }} →
+      </a>
+      {{ end }}
+    </div>
+  </article>
+
+  <aside class="lesson-sidebar">
+    <div class="sidebar-card">
+      <h3>Your Progress</h3>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progress-bar"
+          data-lang="{{ $lang }}"
+          data-total="{{ if eq $lang "russian" }}20{{ else if eq $lang "korean" }}20{{ else }}30{{ end }}"
+          style="width:0%"></div>
+      </div>
+      <p class="progress-label" id="progress-label">Loading…</p>
+      <br>
+      <button id="mark-complete-btn" class="btn btn-{{ $accentClass }}" style="width:100%;justify-content:center;">
+        Mark as complete
+      </button>
+    </div>
+
+    {{ $pages := where .Site.Pages "Params.language" $lang }}
+    {{ $pages = sort $pages "Params.day" "asc" }}
+    {{ if $pages }}
+    <div class="sidebar-card">
+      <h3>All Lessons</h3>
+      <ul class="sidebar-nav-list">
+        {{ range $pages }}
+        {{ if .Params.day }}
+        <li>
+          <a href="{{ .Permalink }}" {{ if eq .Permalink $.Permalink }}class="current"{{ end }}>
+            Day {{ .Params.day }}: {{ .Title }}
+          </a>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </aside>
+</div>
+<script>document.body.dataset.lessonId = "{{ $lang }}-{{ $day }}";</script>
+{{ end }}

@@ -1,0 +1,75 @@
+{{ define "main" }}
+<div class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{ if .Params.title_ja }}<p class="post-title-ja">{{ .Params.title_ja }}</p>{{ end }}
+  {{ if .Params.title_en }}<p class="post-title-en">{{ .Params.title_en }}</p>{{ end }}
+  {{ if .Description }}<p class="page-desc">{{ .Description }}</p>{{ end }}
+</div>
+
+<div class="gallery-filters" role="group" aria-label="按分类筛选">
+  <button class="gallery-filter-btn active" data-filter="all">全部</button>
+  <button class="gallery-filter-btn" data-filter="qi_tonic">补气药</button>
+  <button class="gallery-filter-btn" data-filter="blood_tonic">补血药</button>
+  <button class="gallery-filter-btn" data-filter="yin_tonic">补阴药</button>
+  <button class="gallery-filter-btn" data-filter="yang_tonic">补阳药</button>
+  <button class="gallery-filter-btn" data-filter="resolve_damp">利水渗湿</button>
+  <button class="gallery-filter-btn" data-filter="regulate_qi">理气药</button>
+  <button class="gallery-filter-btn" data-filter="exterior">解表药</button>
+</div>
+
+<div class="gallery-grid" id="herb-gallery">
+  {{ range .Site.Data.herbs }}
+  <div class="herb-card" data-category="{{ .category }}">
+    <div class="herb-card-stripe {{ .nature }}"></div>
+    <div class="herb-card-body">
+      <div class="herb-emoji" aria-hidden="true">{{ .emoji }}</div>
+      <h3 class="herb-name-zh">{{ .name_zh }}</h3>
+      <p class="herb-pinyin">{{ .pinyin }}</p>
+      <p class="herb-name-en">{{ .name_en }}</p>
+
+      <div class="herb-properties">
+        <span class="herb-prop {{ if eq .nature "warm" }}nature-warm{{ else if eq .nature "mild-warm" }}nature-warm{{ else if eq .nature "cool" }}nature-cool{{ else if eq .nature "cold" }}nature-cool{{ else }}nature-neutral{{ end }}">
+          {{ .nature_zh }} · {{ .flavor_zh }}
+        </span>
+        <span class="herb-prop category">{{ .category_zh }}</span>
+        {{ range .meridians }}<span class="herb-prop meridian">{{ . }}</span>{{ end }}
+      </div>
+
+      <p class="herb-functions">{{ .functions_zh }}</p>
+
+      <div class="herb-uses">
+        {{ range .common_uses }}<span class="herb-use-tag">{{ . }}</span>{{ end }}
+      </div>
+    </div>
+  </div>
+  {{ end }}
+</div>
+
+<div style="margin-top:var(--spacing-xl);padding-top:var(--spacing-lg);border-top:1px solid var(--color-border)">
+  <p style="font-family:var(--font-ui);font-size:0.8125rem;color:var(--color-muted);line-height:1.75;">
+    ⚠️ 本图鉴仅供学习参考，不构成医疗建议。中药须在专业中医师指导下使用。<br>
+    <em>For educational reference only. Herbs should be used under the guidance of a qualified TCM practitioner.</em>
+  </p>
+</div>
+
+<script>
+(function() {
+  var btns = document.querySelectorAll('.gallery-filter-btn');
+  var cards = document.querySelectorAll('.herb-card');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = btn.getAttribute('data-filter');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      cards.forEach(function(card) {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
+{{ end }}
