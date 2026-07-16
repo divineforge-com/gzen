@@ -1,5 +1,5 @@
 /**
- * GrowZen Lunar Calendar + Lotus Visualizer
+ * GZen.io Lunar Calendar + Lotus Visualizer
  * Vanilla JS — no dependencies
  * Computes Chinese lunar date from Gregorian using the classic algorithm.
  */
@@ -294,7 +294,7 @@
       dayLabel: function(d) { return 'Lunar Day ' + d; },
       fullMoon: ' · Full Moon 🌕',
       newMoon: ' · New Moon 🌑',
-      monthInfo: function(m) { return 'Lunar Month ' + m + ' · GrowZen'; },
+      monthInfo: function(m) { return 'Lunar Month ' + m + ' · GZen.io'; },
     },
     ja: {
       preview: function(d) { return 'プレビュー · 第' + d + '日'; },

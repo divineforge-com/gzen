@@ -432,3 +432,45 @@ header a[href="/"]::before {
   }
 }
 
+/* ── Lunar Hero Styles & Animations ───────────────────────────────── */
+#lunar-hero {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  border-radius: 1rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 20px rgba(47, 33, 24, 0.05);
+}
+
+@media (min-width: 768px) {
+  #lunar-hero {
+    min-height: 420px;
+  }
+}
+
+#lunar-hero canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes heroRise {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes petalPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(255,255,255,0)); }
+  50% { transform: scale(1.07); filter: drop-shadow(0 0 14px rgba(255,255,255,0.35)); }
+}
+
+.animate-hero-rise {
+  animation: heroRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-petal-pulse {
+  animation: petalPulse 3.6s ease-in-out infinite;
+}
+

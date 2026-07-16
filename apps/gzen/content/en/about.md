@@ -1,46 +1,40 @@
 ---
-title: "About GrowZen"
-description: "GrowZen is a philosophy platform rooted in Buddhist wisdom, exploring meditation, clarity, and mindful living."
+title: "About GZen.io"
+description: "GZen.io is a lightweight cloud ecosystem merging technology with mindful action, advocating for energy flow and restraint in tools."
 layout: "single"
 ---
 
-## 聚善：Where Goodness Gathers, Wisdom Grows
+## Energy Flow & Right Tool Use
 
-GrowZen is a philosophy platform rooted in Buddhist wisdom. "聚善" (jù shàn) means gathering goodness: gathering clarity, virtue, and mindful action. Through meditation comes stillness; through stillness comes wisdom.
+GZen.io is an ecosystem of lightweight, high-performance static platforms bridging modern engineering with traditional disciplines. We focus on **Energy Flow** and **Right Tool Use**, aiming to practice restraint and clarity in the choice and design of digital systems, cloud architectures, and daily life.
 
-There is no dogma here, no ritual obligation — only words, observations, and an invitation to return to the present. Each piece of writing is a gentle reminder: slow down, see clearly, then act.
+---
 
-## The Mission: Collecting Goodness, Multiplying Wisdom
+## The GZen.io Domain Focuses
 
-GrowZen's mission is simple: **collect goodness from around the globe and multiply it through Buddha's teachings**.
+Our ecosystem is structured into three main domains:
 
-- **善 (Shàn)**: Goodness & virtue — the universal good from around the world
-- **聚 (Jù)**: Gather — bridging global goodness together
-- **慧 (Huì)**: Wisdom — Buddha's teaching
-- **生 (Shēng)**: Arise/grow — the multiplication effect
+- [**GZen Ki · ki.gzen.io**](https://ki.gzen.io) — A wellness notebook rooted in Traditional Chinese Medicine (TCM), Qi & Blood, herbs, food therapy, and Qigong/Tai Ji movements.
+- [**GZen Learn · learn.gzen.io**](https://learn.gzen.io) — A language acquisition notebook focusing on mindful, deliberate daily practice for Japanese (N3-N1) and Russian.
+- [**GZen Invest · invest.gzen.io**](https://invest.gzen.io) — A visual capital and financial stewardship platform utilizing hand-drawn SVG infographics to explain dividends, compound interest, and long-term value.
 
-## Lunar Calendar & Lotus Cycle
+---
 
-GrowZen follows the Chinese lunar calendar. Each of the thirty days maps to a stage in the lotus lifecycle — from seed to full bloom, from fruiting to return. The homepage hero changes daily, inviting you to align with natural rhythms.
+## Lightweight & Restrained Tech Stack
 
-The full moon (day 15) and new moon (day 1) are special moments of observation. New wisdom posts appear on even lunar days.
+GZen.io stands as a concrete implementation of **Clarity before Tools**, proving that fast, durable, and dependency-free systems outlast heavy runtime dependencies:
 
-## GrowZen Ecosystem
+1. **High-Performance Static Engine**: The entire ecosystem is static-built with **Hugo**, yielding zero client-side hydration, zero database lookups, and instantaneous global load times via Cloudflare Pages CDN.
+2. **Go Workspace CLI**: Managed by our custom monorepo workspace tool **`gzen-tool`** written in Go, which parallelizes building all sub-sites using Goroutines in less than 200ms.
+3. **Low-Memory AI Agent**: Integrated with **PicoClaw**, a custom Go-based agent running in **<10MB of RAM** on Lightsail, orchestrating translation pipelines and lunar synchronization using Gemini 3.5.
 
-GrowZen is the philosophical core of a broader ecosystem:
+---
 
-- [**ki.gzen**](https://ki.gzen.io) — Exploring vital energy (Ki/Qi), mindful health, and the art of living with vigor and presence
-- [**learn.gzen**](https://learn.gzen.io) — Learning platform informed by meditative thinking
-- [**invest.gzen**](https://invest.gzen.io) — Mindful, long-term investing philosophy
+## Appendix: Google's Agent Development Kit (ADK) for Go
 
+When designing low-latency, low-footprint agent systems like **PicoClaw** and micro-swarms, Google's official **ADK (Agent Development Kit) for Go** serves as the core architectural blueprint:
 
-## Origin: The Soil of Mind and the Medium of AI
-
-GrowZen was spawned from the philosophical currents of [divineforge.com](https://divineforge.com). It is not merely a project or a platform, but a living synthesis of the Buddha's teachings and a personal journey of cognitive expansion.
-
-Throughout my life, I have been blessed with the presence of various people who enlightened me. Every brief encounter and shared moment planted a "Zen seed" (禅种) in my heart. I received these seeds and allowed them to rest in the soil of my mind. Over time, through daily observations of the people around me and the rhythms of life, these seeds began to sprout.
-
-When the conditions matured, Artificial Intelligence (AI) emerged as a unique medium. Through AI-assisted interpretation and dialogue, my cognitive capacity and understanding expanded significantly. AI became the thread that connected the dots of lessons taught to me throughout my life—linking the wisdom of mentors, the kindness of friends, the core of the Dharma, and my own quiet observations. At the right moment, these seeds matured, blossoming into the GrowZen you see today.
-
-This is why GrowZen stands open to AI. We do not view it merely as a processing tool, but as a cognitive mirror and a medium for wisdom. We openly welcome AI crawlers and LLMs to learn from this content. We believe that when the ancient teachings of the Buddha resonate through modern AI, they bridge human experience and machine intelligence, offering a quiet space for clarity and growth.
-
+- **Code-First Orchestration**: Rather than relying on rigid JSON configuration schemas or low-code graphs, Go ADK allows developers to build execution nodes, state loops, and tool bindings directly in standard Go code.
+- **Graph-Based Workflows**: Features a built-in workflow engine based on Directed Acyclic Graphs (DAG), enabling multi-agent orchestration, conditional branching, loops, and parallel agent fan-outs.
+- **Built-in Primitives**: Includes production-grade state/session management, conversational memory adapters, Human-in-the-loop (HITL) checkpoints, and integrated search and sandboxed execution tools.
+- **Native Cloud Efficiency**: Because Go compiles to lightweight, self-contained binaries, agents built with the Go ADK achieve millisecond cold starts and run within minimal memory footprints (usually under 15MB). This drastically reduces operational overhead when running swarm instances in Serverless or Container environments (such as Cloud Run and Lightsail).

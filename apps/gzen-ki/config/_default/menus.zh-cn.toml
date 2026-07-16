@@ -45,6 +45,11 @@
   pageRef = "library"
   weight  = 90
 
+[[main]]
+  name    = "关于"
+  pageRef = "about"
+  weight  = 95
+
 
 # ── Footer Navigation ───────────────────────────────────────────────────────────
 [[footer]]

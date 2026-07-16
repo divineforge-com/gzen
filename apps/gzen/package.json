@@ -1,7 +1,7 @@
 {
   "name": "gzen",
   "private": true,
-  "description": "Optional helper scripts for the GrowZen Hugo site",
+  "description": "Optional helper scripts for the GZen.io Hugo site",
   "scripts": {
     "dev": "hugo server",
     "serve": "hugo server",

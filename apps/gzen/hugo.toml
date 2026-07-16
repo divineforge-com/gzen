@@ -1,5 +1,5 @@
 baseURL = "https://gzen.io/"
-title = "GrowZen"
+title = "GZen.io"
 theme = "blowfish"
 defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
@@ -25,55 +25,60 @@ summaryLength = 70
   category = "categories"
 
 [languages]
-  [languages.zh]
-    languageName = "中文"
-    weight       = 1
-    title        = "GrowZen · 善聚慧生"
-    contentDir   = "content/zh"
-    [languages.zh.params]
-      displayName = "中文"
-      subtitle    = "善聚慧生"
-      description = "GrowZen 生态 — 倡导能量流动，践行工具之道。传统智慧与现代软件工程的完美交织。"
-      heroKicker  = "倡导能量流动，践行工具之道"
-      heroTitle   = "善聚慧生 · GrowZen"
-      heroLead    = "GrowZen 是一个智慧与工具共生的生态。我们倡导身心能量的顺畅流动，通过在云端、DevOps 与 AI 中正确克制地运用工具，将传统哲学与现代技术转化为真实的生命力与现实影响力。"
-      heroAction  = "关于本站"
-      languageNote = "中文为主，English 与 日本語同步同行。"
-
   [languages.en]
     languageName = "English"
-    weight       = 2
-    title        = "GrowZen · 善聚慧生"
+    weight       = 1
+    title        = "GZen.io"
     contentDir   = "content/en"
     [languages.en.params]
-      displayName = "English"
+      displayName = "EN"
       subtitle    = "Where Goodness Gathers, Wisdom Grows"
-      description = "GrowZen Ecosystem — Advocating energy flow and the right use of tools. Bridging ancient wisdom and modern engineering."
+      description = "GZen.io Ecosystem — Advocating energy flow and the right use of tools. Bridging traditional wisdom and modern engineering."
       heroKicker  = "Energy Flow & Right Tool Use"
-      heroTitle   = "GrowZen Ecosystem"
-      heroLead    = "GrowZen is an ecosystem merging ancient wisdom with modern engineering. We advocate for the natural flow of physical and digital energy, practicing simplicity and restraint in Cloud, DevOps, and AI to achieve meaningful impact."
-      heroAction  = "About Us"
-      languageNote = "Chinese first, then English and Japanese in step."
+      heroTitle   = "GZen.io Ecosystem"
+      heroLead    = "GZen.io is a multi-site gateway merging ancient wisdom with modern engineering. We advocate for the natural flow of physical and digital energy, practicing simplicity and restraint in Cloud, DevOps, and AI to achieve meaningful impact."
+      heroAction  = "About the Ecosystem"
+      languageNote = "English primary option, with Chinese and Japanese in step."
+      philosophicalTagline = "Where Goodness Gathers, Wisdom Grows"
+      philosophicalSubtitle = "From stillness comes clarity. From clarity comes wisdom."
+
+  [languages.zh]
+    languageName = "中文"
+    weight       = 2
+    title        = "GZen.io"
+    contentDir   = "content/zh"
+    [languages.zh.params]
+      displayName = "CN"
+      subtitle    = "善聚慧生"
+      description = "GZen.io 生态 — 倡导能量流动，践行工具之道。传统智慧与现代软件工程的完美交织。"
+      heroKicker  = "倡导能量流动，践行工具之道"
+      heroTitle   = "善聚慧生 · GZen.io"
+      heroLead    = "GZen.io 是一个智慧与工具共生的生态网。我们倡导身心能量的顺畅流动，通过在云端、DevOps 与 AI 中正确克制地运用工具，将传统哲学与现代技术转化为真实的生命力与现实影响力。"
+      heroAction  = "关于生态"
+      languageNote = "中文主页选项，English 与 日本語同步同行。"
+      philosophicalTagline = "聚善：禅生定，定生慧"
+      philosophicalSubtitle = "聚集世间之善，在寂静中萌发真实的智慧。"
 
   [languages.ja]
     languageName = "日本語"
     weight       = 3
-    title        = "GrowZen · 善集慧生"
+    title        = "GZen.io"
     contentDir   = "content/ja"
     [languages.ja.params]
-      displayName = "日本語"
+      displayName = "JP"
       subtitle    = "善集慧生"
-      description = "GrowZen エコシステム — エネルギーの流動と正しい道具の道。伝統的な知恵とソフトウェアエンジニアリングの融合。"
-      heroKicker  = "エネルギーの流動と正しい道具の道"
-      heroTitle   = "GrowZen エコシステム"
-      heroLead    = "GrowZen は、伝統的な知恵と現代のエンジニアリングを融合させたエコシステムです。身体とデジタルのエネルギー流動を促し、クラウド、DevOps、AIにおいて道具を適切に制約し、現実的な影響力をもたらします。"
-      heroAction  = "当サイトについて"
-      languageNote = "中文を中心に、English と 日本語で共に歩みます。"
-
+      description = "GZen.io エコシステム — エネルギーの流動と正しい道具の道。伝統的な知恵とソフトウェアエンジニアリングの融合。"
+      heroKicker  = "エネルギーの流動と正しい道具之道"
+      heroTitle   = "GZen.io エコシステム"
+      heroLead    = "GZen.io は、伝統的な知恵と現代のエンジニアリングを融合させたエコシステムです。身体とデジタルのエネルギー流動を促し、クラウド、DevOps、AIにおいて道具を適切に制約し、現実的な影響力をもたらします。"
+      heroAction  = "エコシステムについて"
+      languageNote = "日本語のオプション、English と 中文で共に歩みます。"
+      philosophicalTagline = "善集慧生：禅は定を生み、定は慧を生む"
+      philosophicalSubtitle = "世の善きものを集め、静寂の中に真の知恵を育む。"
 
 [params]
   # These are read by our custom partials, not by Blowfish directly
-  brand          = "GrowZen"
+  brand          = "GZen.io"
   brandSubtitle  = "聚善"
   brandTagline   = "禅生定，定生慧"
   lotusEmoji     = "🪷"
@@ -82,5 +87,3 @@ summaryLength = 70
     ki          = "https://ki.gzen.io"
     learn       = "https://learn.gzen.io"
     invest      = "https://invest.gzen.io"
-
-

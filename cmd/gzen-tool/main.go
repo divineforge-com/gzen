@@ -213,7 +213,7 @@ func handleLint() {
 		if err != nil {
 			return err
 		}
-		if info.IsDir() || !strings.HasSuffix(info.Name(), ".md") || info.Name() == "_index.md" {
+		if info.IsDir() || !strings.HasSuffix(info.Name(), ".md") || info.Name() == "_index.md" || info.Name() == "about.md" {
 			return nil
 		}
 

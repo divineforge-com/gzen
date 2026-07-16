@@ -1,4 +1,4 @@
-{{/* GrowZen custom homepage — calm advocacy front door */}}
+{{/* GZen.io custom landing page — premium, serene editorial gateway */}}
 
 <section class="gzen-home-hero" aria-labelledby="gzen-home-title">
   <div class="gzen-hero-copy">
@@ -7,83 +7,146 @@
     <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default .Site.Params.description }}</p>
     <div class="gzen-hero-actions">
       <a href="{{ "about" | relLangURL }}" class="gzen-primary-link">
-        {{ .Site.Language.Params.heroAction | default "关于本站" }}
+        {{ .Site.Language.Params.heroAction | default "了解生态理念" }}
       </a>
-      <span>{{ .Site.Language.Params.languageNote }}</span>
+      <span class="gzen-hero-note">{{ .Site.Language.Params.languageNote }}</span>
     </div>
   </div>
-  <div class="gzen-hero-aside" aria-label="Ecosystem Tags">
-    <span>能量流动 Energy Flow</span>
-    <span>克制用器 Right Tool Use</span>
-    <span>真实影响 Real Impact</span>
-  </div>
-</section>
 
+  <div class="gzen-hero-visual" aria-hidden="true">
+    {{/* Serene SVG Lotus Visual Centerpiece */}}
+    <div class="gzen-lotus-container">
+      <svg class="gzen-lotus-flower" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="lotus-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="var(--gzen-saffron)" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="var(--gzen-bg)" stop-opacity="0"/>
+          </radialGradient>
+          <linearGradient id="petal-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f9c8d0"/>
+            <stop offset="100%" stop-color="var(--gzen-saffron)"/>
+          </linearGradient>
+          <linearGradient id="petal-grad-2" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#fff4e8"/>
+            <stop offset="100%" stop-color="#f5bfa0"/>
+          </linearGradient>
+        </defs>
+        <circle cx="50" cy="50" r="45" fill="url(#lotus-glow)"/>
+        {{/* Outer Petals */}}
+        <path d="M50 15 C45 35, 35 45, 50 85 C65 45, 55 35, 50 15 Z" fill="url(#petal-grad-1)" opacity="0.6"/>
+        <path d="M15 50 C35 45, 45 35, 85 50 C45 65, 35 55, 15 50 Z" fill="url(#petal-grad-1)" opacity="0.6"/>
+        {{/* Inner Rotated Petals */}}
+        <path d="M25 25 C40 38, 48 30, 75 75 C60 62, 52 70, 25 25 Z" fill="url(#petal-grad-2)" opacity="0.85"/>
+        <path d="M75 25 C60 38, 52 30, 25 75 C40 62, 48 70, 75 25 Z" fill="url(#petal-grad-2)" opacity="0.85"/>
+        {{/* Core Pistil */}}
+        <circle cx="50" cy="50" r="6" fill="#f0c070" opacity="0.95"/>
+      </svg>
+      <div class="gzen-lotus-reflection"></div>
+    </div>
+  </div>
 <div class="gzen-home-content">
+
+  {{/* Serene Centered Tagline Block */}}
+  {{ if .Site.Language.Params.philosophicalTagline }}
+  <div class="gzen-philosophical-banner">
+    <blockquote class="gzen-tagline-quote">
+      “ {{ .Site.Language.Params.philosophicalTagline }} ”
+    </blockquote>
+    {{ with .Site.Language.Params.philosophicalSubtitle }}
+    <p class="gzen-tagline-subtitle">{{ . }}</p>
+    {{ end }}
+  </div>
+  {{ end }}
+
+  {{/* Ecosystem Showcase - Frost Glass Grid */}}
+  <section class="gzen-section">
+    <div class="gzen-section-heading">
+      <h2>{{ i18n "nav_ecosystem" | default "GZen.io 三大主脉" }}</h2>
+    </div>
+    <div class="gzen-grid">
+      <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">ki.gzen.io</span>
+        <div class="gzen-card-icon-wrap">
+          {{/* Serene Jade Wave Icon */}}
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-leaf)" stroke-width="1.5">
+            <path d="M12 2 C6.48 2, 2 6.48, 2 12 C2 17.52, 6.48 22, 12 22 C17.52 22, 22 17.52, 22 12" stroke-linecap="round"/>
+            <path d="M12 6 C9 9, 9 13, 12 18 C15 13, 15 9, 12 6 Z" fill="rgba(111,143,99,0.15)"/>
+            <circle cx="12" cy="12" r="2" fill="var(--gzen-leaf)"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "ecosystem_ki_title" | default "元気健康 · TCM & Philosophy" }}</h3>
+        <p>{{ i18n "ecosystem_ki_desc" | default "融合中医气血、脾胃养生、中药图鉴与太极导引，以自然的律动与传统正念哲学调和身心。" }}</p>
+        <span class="gzen-card-url">前往元気健康 &rarr;</span>
+      </a>
+
+      <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">learn.gzen.io</span>
+        <div class="gzen-card-icon-wrap">
+          {{/* Elegant Book/Scroll Icon */}}
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="#b09080" stroke-width="1.5">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-linecap="round"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-linejoin="round"/>
+            <path d="M8 6h8M8 10h8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "ecosystem_learn_title" | default "知与学 · Language & Mind" }}</h3>
+        <p>{{ i18n "ecosystem_learn_desc" | default "在专注与沉浸中深化知识的境界。以禅修式的克制节奏进行日语（N3-N1）与俄语的高效学习。" }}</p>
+        <span class="gzen-card-url">前往知与学 &rarr;</span>
+      </a>
+
+      <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">invest.gzen.io</span>
+        <div class="gzen-card-icon-wrap">
+          {{/* Capital Seedling Icon */}}
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-saffron)" stroke-width="1.5">
+            <path d="M12 22V10M12 10C12 7 9 5 6 7M12 10C12 6 16 4 19 6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 14c2.5-1 4-3.5 4-3.5M12 17c-2.5-0.5-3-3-3-3" stroke-linecap="round"/>
+            <circle cx="12" cy="6" r="1.5" fill="var(--gzen-saffron)"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "ecosystem_invest_title" | default "资与财 · Mindfulness & Capital" }}</h3>
+        <p>{{ i18n "ecosystem_invest_desc" | default "以长期主义与复利常识看待财务决策。通过精美手绘 SVG 信息图解剖析分红与资本增殖底层逻辑。" }}</p>
+        <span class="gzen-card-url">前往资与财 &rarr;</span>
+      </a>
+    </div>
+  </section>
 
   {{/* Core Philosophy Pillars */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
-      <h2>{{ i18n "core_advocacy" | default "核心倡导" }}</h2>
+      <h2>{{ i18n "core_advocacy" | default "生态支柱 · GZen Anchors" }}</h2>
     </div>
     <div class="gzen-grid">
-      <div class="gzen-card no-hover">
+      <div class="gzen-card gzen-pillar-card no-hover">
         <span class="gzen-card-tag">01</span>
         <h3>能量流动 · Energy Flow</h3>
-        <p>无论是身心健康的气血运行，还是云端计算的架构设计，本质上都在探寻阻力的最小化与能量的最大化。流转顺畅，生命与系统方能生生不息。</p>
+        <p>无论是身心健康的气血循环，还是软件系统的架构交互，本源都在于将阻力降到最小，使价值流转达到最高。流转顺畅，生命力与生产力方能延绵不绝。</p>
       </div>
-      <div class="gzen-card no-hover">
+      <div class="gzen-card gzen-pillar-card no-hover">
         <span class="gzen-card-tag">02</span>
         <h3>克制用器 · Right Tool Use</h3>
-        <p>我们坚信“明晰先于工具”（Clarity before Tools）。在云原生、DevOps 与 AI 的浩瀚选择中，保持克制，选用低耗、高效、纯粹的轻量化系统（如 Golang / Hugo），追求极简的力量。</p>
+        <p>我们笃信“明晰先于工具”（Clarity before Tools）。面对海量喧嚣的软件、框架与 AI 概念，我们保持清醒，追求极简与低能耗的纯粹静态架构，让每一次运用都精准饱满。</p>
       </div>
-      <div class="gzen-card no-hover">
+      <div class="gzen-card gzen-pillar-card no-hover">
         <span class="gzen-card-tag">03</span>
         <h3>真实影响 · Real Impact</h3>
-        <p>拒绝宏大叙事与虚妄的理论。将正念、修行与长期主义落实于具体的健康（Ki）、学习（Learn）、财富（Invest）与软件系统架构中，用成果带来真实的社会善意与影响。</p>
+        <p>不流于虚空的口号，不沉迷宏大的叙事。我们将静心、体察与专注融于代码、外语习得、养生习惯与资产配置的微小实践中，以清爽透明的成果回馈真实世界。</p>
       </div>
-    </div>
-  </section>
-
-  {{/* Ecosystem Showcase */}}
-  <section class="gzen-section">
-    <div class="gzen-section-heading">
-      <h2>{{ i18n "nav_ecosystem" | default "生态项目" }}</h2>
-    </div>
-    <div class="gzen-grid">
-      <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card">
-        <span class="gzen-card-tag">ki.gzen.io</span>
-        <h3>{{ i18n "ecosystem_ki_title" | default "元気健康 · TCM & Philosophy" }}</h3>
-        <p>{{ i18n "ecosystem_ki_desc" | default "融合中医气血、佛教禅宗、易经太极与道德经的健康随笔，探索身心与系统能量的调和之境。" }}</p>
-        <span class="gzen-card-url">访问元気健康 &rarr;</span>
-      </a>
-      <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card">
-        <span class="gzen-card-tag">learn.gzen.io</span>
-        <h3>{{ i18n "ecosystem_learn_title" | default "知与学 · Language & Mind" }}</h3>
-        <p>{{ i18n "ecosystem_learn_desc" | default "以禅修思维与专注初心深化知识体系的学习平台，聚焦日语（N3-N1）与俄语的高效习得。" }}</p>
-        <span class="gzen-card-url">访问知与学 &rarr;</span>
-      </a>
-      <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card">
-        <span class="gzen-card-tag">invest.gzen.io</span>
-        <h3>{{ i18n "ecosystem_invest_title" | default "资与财 · Mindfulness & Capital" }}</h3>
-        <p>{{ i18n "ecosystem_invest_desc" | default "以长期主义与正念洞察财务逻辑，通过手绘 SVG 信息图解剖析分红与资本复利的真谛。" }}</p>
-        <span class="gzen-card-url">访问资与财 &rarr;</span>
-      </a>
     </div>
   </section>
 
   {{/* Technology Stack & Automation */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
-      <h2>{{ i18n "tech_stack_title" | default "极简与高效的技术架构" }}</h2>
+      <h2>{{ i18n "tech_stack_title" | default "极简工程实践 · Engineering Ethos" }}</h2>
     </div>
-    <div class="gzen-card no-hover">
-      <div style="display: flex; flex-direction: column; gap: 1rem;">
-        <p>本站及生态项目以<strong>克制用器</strong>为工程实践，展示如何使用高性能、零冗余的开源工具链构建轻量级云原生系统：</p>
-        <ul style="list-style-type: disc; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--color-neutral-600);">
-          <li><strong>高性能静态引擎</strong>：全部网站由 Go 语言编写的 <strong>Hugo</strong> 静态生成，零客户端运行时，通过 Cloudflare 全球 CDN 实现瞬时响应。</li>
-          <li><strong>Go 语言开发脚手架</strong>：由我们自主开发的 <strong><code>gzen-tool</code></strong> Workspace CLI 工具接管整个 Monorepo（单仓多包）的构建，基于 Goroutine 协程实现多站点并行构建，编译仅需 200 余毫秒。</li>
-          <li><strong>轻量级 AI 自动化</strong>：后台集成了以 Go 编写、运行仅耗 <strong>&lt;10MB 内存</strong> 的 AI 智能体 <strong>PicoClaw</strong>，借助 Gemini 2.5/3.5 模型自动根据农历节律完成内容分发与多语言翻译协同。</li>
+    <div class="gzen-card gzen-glass-card no-hover">
+      <div class="gzen-tech-content">
+        <p>本站及生态项目以<strong>克制用器</strong>为工程样板，展示如何使用高性能、零冗余的开源工具链构建轻量级云原生系统：</p>
+        <ul class="gzen-tech-list">
+          <li><strong>零渲染开销</strong>：全部站点由 Go 语言编写的 <strong>Hugo</strong> 静态生成，摆脱复杂的客户端运行时与动态接口，通过 Cloudflare CDN 实现毫秒级瞬间呈现。</li>
+          <li><strong>并行工作流</strong>：由我们自主开发的 Golang Workspace CLI 工具 <strong><code>gzen-tool</code></strong> 管理整个单仓（Monorepo），基于多协程实现多站点并行构建，全部编译耗时仅 200 余毫秒。</li>
+          <li><strong>极简自动化</strong>：后台搭载以 Go 编写、运行仅占用 <strong>&lt;10MB 内存</strong> 的 AI 智能体 <strong>PicoClaw</strong>，接入大模型自动协作处理内容流分发与多国语言翻译。</li>
         </ul>
       </div>
     </div>
