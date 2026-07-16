@@ -1,22 +1,26 @@
-# ── GrowZen menu config (Blowfish format) ────────────────
-# Blowfish reads menus from config/_default/menus.toml.
+# ── GZen.io menu config ────────────────────────────────
 
 [[main]]
-  name    = "关于"
-  pageRef = "about"
+  name    = "Blog"
+  pageRef = "blog"
   weight  = 10
 
 [[main]]
-  name    = "元気健康"
-  url     = "https://ki.gzen.io"
+  name    = "Speaking"
+  pageRef = "speaking"
   weight  = 20
 
 [[main]]
-  name    = "知与学"
-  url     = "https://learn.gzen.io"
+  name    = "Resources"
+  pageRef = "resources"
   weight  = 30
 
 [[main]]
-  name    = "资与财"
-  url     = "https://invest.gzen.io"
+  name    = "About"
+  pageRef = "about"
   weight  = 40
+
+[[main]]
+  name    = "Donate"
+  pageRef = "donate"
+  weight  = 50

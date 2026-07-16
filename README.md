@@ -1,62 +1,66 @@
 # GZen.io · Monorepo
 
-GZen.io is a multi-site ecosystem bridging ancient wisdom, traditional wellness, cognitive learning, and long-term financial stewardship with modern high-performance engineering.
+GZen.io is a **Go (Golang) advocacy hub** — a technical blog and portfolio covering TUI, web apps, APIs, cloud infrastructure, AI SDKs, and general Go engineering. Built with Hugo and deployed on Cloudflare Pages.
 
-**Main Entry Hub:** [gzen.io](https://gzen.io)
+**Site:** [gzen.io](https://gzen.io)
 
 ---
 
-## Ecosystem Applications
+## What's Here
 
-| Directory | Subdomain | Role & Description |
-|-----------|-----------|--------------------|
-| [`apps/gzen`](./apps/gzen) | [gzen.io](https://gzen.io) | **Ecosystem Entry Gateway**: Features GZen's core principles, domains, and lightweight technical architecture. |
-| [`apps/gzen-ki`](./apps/gzen-ki) | [ki.gzen.io](https://ki.gzen.io) | **元気・健康 / Serene Wisdom Notebooks**: Rooted in TCM, Qi & Blood flow, Tai Ji, Yijing, and Buddhist-inspired philosophy/lunar rhythms. |
-| [`apps/gzen-learn`](./apps/gzen-learn) | [learn.gzen.io](https://learn.gzen.io) | **知与学 / Meditative Learning**: Language learning for Japanese, Korean, and Russian guided by mindful concentration. |
-| [`apps/gzen-invest`](./apps/gzen-invest) | [invest.gzen.io](https://invest.gzen.io) | **资与财 / Infographic Capital**: Explaining compound growth and long-term dividends through visual SVG diagrams. |
+| Directory | Subdomain | Purpose |
+|-----------|-----------|---------|
+| [`apps/gzen`](./apps/gzen) | [gzen.io](https://gzen.io) | **Go advocacy hub** — blog, GDE portfolio, speaking, recommendations, donation |
+| [`apps/gzen-ki`](./apps/gzen-ki) | [ki.gzen.io](https://ki.gzen.io) | **TCM & Philosophy notebooks** (side project) |
+| [`apps/gzen-learn`](./apps/gzen-learn) | [learn.gzen.io](https://learn.gzen.io) | **Meditative language learning** (side project) |
+| [`apps/gzen-invest`](./apps/gzen-invest) | [invest.gzen.io](https://invest.gzen.io) | **Infographic capital** (side project) |
+
+---
+
+## Content Pillars (gzen.io)
+
+The main site covers six Go domains:
+
+- **TUI** — Bubble Tea, Charm ecosystem, terminal UI patterns
+- **Web Apps** — Gin, Echo, Chi, Templ, HTMX
+- **API** — REST, gRPC, Connect-Go, OpenAPI codegen
+- **Cloud** — Cloudflare Workers, GCP, serverless Go, infra-as-code
+- **AI SDKs** — Go ADK, Gemini SDK, LangChain Go, PicoClaw
+- **General Go** — concurrency, testing, profiling, module design
 
 ---
 
 ## Technical Architecture
 
-GZen.io follows the engineering principles of **Clarity before Tools** and **Right Tool Use**:
-- **Framework**: [Hugo](https://gohugo.io) static site generator (zero client-side JS runtimes).
-- **Theme pipeline**: [Blowfish](https://blowfish.page) theme + custom CSS overrides.
-- **Monorepo Manager**: Custom Go-based CLI [`gzen-tool`](./cmd/gzen-tool) for concurrent multi-site builds and Cloudflare Page deployment.
-- **AI Automation**: Low-footprint Go-based AI agent **PicoClaw** (<10MB RAM) for lunar rhythm automation.
-- **Hosting**: Cloudflare Pages.
+- **Generator**: [Hugo](https://gohugo.io) Extended — zero client-side runtime
+- **Theme**: [Blowfish](https://blowfish.page) + custom CSS overrides
+- **Typography**: JetBrains Mono (code/headings) + Noto Sans/Serif SC (body)
+- **Hosting**: Cloudflare Pages — instant global CDN
+- **Monorepo tool**: Custom Go CLI [`gzen-tool`](./cmd/gzen-tool) — parallel multi-site builds in <200ms
 
 ---
 
-## Development & Workspace Tool
-
-We use the compiled `gzen-tool` binary in the root directory to manage monorepo tasks.
+## Development
 
 ```bash
 # List all apps
 ./gzen-tool list
 
-# Build all applications concurrently
+# Build all sites concurrently
 ./gzen-tool build
 
-# Run lint checks on main content structure
-./gzen-tool lint
-
-# Deploy all applications to Cloudflare Pages
+# Deploy to Cloudflare Pages
 ./gzen-tool deploy
-```
 
-For local preview, navigate to any specific app and run the Hugo development server:
-```bash
-cd apps/gzen
-hugo server
+# Local preview for gzen.io
+cd apps/gzen && hugo server
 ```
 
 ---
 
-## Design Systems & Aesthetic
+## Design Principles
 
-- **Background**: Warm Cream (`#fffaf4`) representing natural parchment.
-- **Ink**: Grounded Earth Brown (`#2f2118`) for text.
-- **Accent**: Saffron Orange (`#d97845`) and Jade Green (`#2d6b4f`).
-- **Typography**: CJK-first Serif/Sans (Noto Serif SC and Noto Sans SC) with line heights `≥ 1.8`.
+1. **Clarity before Tools** — choose the right tool, use it well, keep it simple
+2. **Warm minimalism** — cream palette, saffron accents, generous whitespace
+3. **Code-first aesthetic** — JetBrains Mono typography communicates precision and craftsmanship
+4. **Developer experience** — fast builds, zero runtime deps, trilingual from day one

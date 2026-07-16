@@ -1,47 +1,41 @@
 [brand_subtitle]
-other = "Where Goodness Gathers"
+other = "Go Beyond. Build Better."
 
-[nav_home]
-other = "Home"
+[nav_blog]
+other = "Blog"
 
-[nav_koans]
-other = "Koans"
+[nav_speaking]
+other = "Speaking"
 
-[nav_principles]
-other = "Principles"
+[nav_resources]
+other = "Resources"
 
-[nav_practice]
-other = "Practice"
+[nav_playground]
+other = "Playground"
 
-[nav_engineering]
-other = "Engineering"
-
-[nav_library]
-other = "Library"
+[nav_donate]
+other = "Donate"
 
 [nav_about]
 other = "About"
 
-[nav_posts]
-other = "Writing"
+[nav_ecosystem]
+other = "Side Projects"
 
-[principles]
-other = "Core Principles"
+[nav_origin]
+other = "Origin"
 
-[principles_en]
-other = "核心禅理"
-
-[recent_posts]
-other = "Recent Writing"
-
-[recent_posts_en]
-other = "近期文章"
-
-[all_posts]
-other = "All Writing"
+[read_in]
+other = "Read in other languages"
 
 [more]
 other = "More"
+
+[all_posts]
+other = "All Posts"
+
+[recent_posts]
+other = "Recent Posts"
 
 [topics]
 other = "Topics"
@@ -52,72 +46,68 @@ other = "Back to Home"
 [no_posts]
 other = "No posts yet"
 
-[read_in]
-other = "Read in other languages"
+[pillar_tui]
+other = "TUI"
 
-[lunar_hero_label]
-other = "Lunar phase backdrop"
+[pillar_tui_desc]
+other = "Terminal UIs with Bubble Tea, Charm ecosystem, Cobra + Viper CLI design, and terminal UI patterns."
 
-[prev_day]
-other = "Previous day"
+[pillar_webapp]
+other = "Web Apps"
 
-[next_day]
-other = "Next day"
+[pillar_webapp_desc]
+other = "HTTP services with net/http, Gin, Echo, Chi, Templ, HTMX, and real-time WebSocket patterns."
 
-[today]
-other = "Today"
+[pillar_api]
+other = "API"
 
-[waxing]
-other = "Waxing"
+[pillar_api_desc]
+other = "REST, gRPC, Connect-Go, OpenAPI codegen, and GraphQL service design in Go."
 
-[waning]
-other = "Waning"
+[pillar_cloud]
+other = "Cloud & Infrastructure"
 
-[lunar_cycle_progress]
-other = "Lunar cycle progress"
+[pillar_cloud_desc]
+other = "Cloudflare Workers, GCP SDKs, serverless Go, minimal containers with Ko, infra-as-code with Pulumi."
 
-[koans]
-other = "Koans"
+[pillar_ai]
+other = "AI SDKs"
 
-[practice]
-other = "Practice"
+[pillar_ai_desc]
+other = "Go ADK, Gemini SDK, LangChain Go, building AI-powered tools, PicoClaw agent framework."
 
-[engineering]
-other = "Engineering"
+[pillar_general]
+other = "General Go"
 
-[library]
-other = "Library"
+[pillar_general_desc]
+other = "Concurrency, generics, testing, profiling, module design, code generation, and best practices."
 
-[yijing]
-other = "I Ching"
+[tenet_simplicity]
+other = "Simplicity"
 
-[nav_yijing]
-other = "I Ching"
+[tenet_simplicity_desc]
+other = "Clear, readable code that is easy to reason about. Go's design prioritizes clarity over cleverness."
 
-[nav_ecosystem]
-other = "Ecosystem"
+[tenet_concurrency]
+other = "Concurrency"
 
-[ecosystem_ki_title]
-other = "Qi & Vitality"
+[tenet_concurrency_desc]
+other = "Goroutines, channels, and select — built-in primitives for scalable, concurrent programs."
 
-[ecosystem_ki_desc]
-other = "Exploring vital energy (Ki/Qi), mindful health, and the art of living with vigor and presence."
+[tenet_tooling]
+other = "Tooling"
 
+[tenet_tooling_desc]
+other = "Fast compilation, built-in formatting, testing, profiling, and a single binary deploy model."
 
-[ecosystem_learn_title]
-other = "Learn & Grow"
+[support_title]
+other = "Support Open Source Go"
 
-[ecosystem_learn_desc]
-other = "Learning platform informed by meditative thinking and holistic growth."
+[support_desc]
+other = "If the articles and resources here help you, consider supporting more Go content creation."
 
-[ecosystem_invest_title]
-other = "Invest & Steward"
+[donate_coffee]
+other = "Buy Me a Coffee"
 
-[ecosystem_invest_desc]
-other = "Mindful investing, right livelihood, and long-term stewardship."
-
-[nav_origin]
-other = "Origin"
-
-
-
+[donate_github]
+other = "GitHub Sponsors"

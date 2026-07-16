@@ -1,7 +1,7 @@
 baseURL = "https://gzen.io/"
 title = "GZen.io"
 theme = "blowfish"
-defaultContentLanguage = "zh"
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 summaryLength = 70
@@ -14,9 +14,14 @@ summaryLength = 70
     style = "monokai"
     noClasses = false
 
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss+xml"
+    baseName = "rss"
+
 [outputs]
-  home    = ["HTML", "JSON"]   # JSON needed for Blowfish search
-  section = ["HTML"]
+  home    = ["HTML", "JSON", "RSS"]
+  section = ["HTML", "RSS"]
   taxonomy = ["HTML"]
   term    = ["HTML"]
 
@@ -26,62 +31,57 @@ summaryLength = 70
 
 [languages]
   [languages.en]
-    languageName = "English"
+    label = "English"
     weight       = 1
     title        = "GZen.io"
     contentDir   = "content/en"
     [languages.en.params]
       displayName = "EN"
-      subtitle    = "Where Goodness Gathers, Wisdom Grows"
-      description = "GZen.io Ecosystem — Advocating energy flow and the right use of tools. Bridging traditional wisdom and modern engineering."
-      heroKicker  = "Energy Flow & Right Tool Use"
-      heroTitle   = "GZen.io Ecosystem"
-      heroLead    = "GZen.io is a multi-site gateway merging ancient wisdom with modern engineering. We advocate for the natural flow of physical and digital energy, practicing simplicity and restraint in Cloud, DevOps, and AI to achieve meaningful impact."
-      heroAction  = "About the Ecosystem"
-      languageNote = "English primary option, with Chinese and Japanese in step."
-      philosophicalTagline = "Where Goodness Gathers, Wisdom Grows"
-      philosophicalSubtitle = "From stillness comes clarity. From clarity comes wisdom."
+      subtitle    = "Go Beyond. Build Better."
+      description = "GZen.io — A Go (Golang) advocacy blog covering TUI, web apps, APIs, cloud infrastructure, AI SDKs, and general Go engineering."
+      heroKicker  = "Go (Golang) Advocacy"
+      heroTitle   = "Crafted in Go"
+      heroLead    = "Technical articles, talks, and resources on building with Go — from terminal UIs to cloud infrastructure to AI SDKs. A GDE roadmap in progress."
+      heroAction  = "Start Reading"
+      languageNote = "Also available in Chinese and Japanese."
+      tagline     = "func main() { fmt.Println(\"Go Beyond. Build Better.\") }"
 
   [languages.zh]
-    languageName = "中文"
+    label = "中文"
     weight       = 2
     title        = "GZen.io"
     contentDir   = "content/zh"
     [languages.zh.params]
       displayName = "CN"
-      subtitle    = "善聚慧生"
-      description = "GZen.io 生态 — 倡导能量流动，践行工具之道。传统智慧与现代软件工程的完美交织。"
-      heroKicker  = "倡导能量流动，践行工具之道"
-      heroTitle   = "善聚慧生 · GZen.io"
-      heroLead    = "GZen.io 是一个智慧与工具共生的生态网。我们倡导身心能量的顺畅流动，通过在云端、DevOps 与 AI 中正确克制地运用工具，将传统哲学与现代技术转化为真实的生命力与现实影响力。"
-      heroAction  = "关于生态"
-      languageNote = "中文主页选项，English 与 日本語同步同行。"
-      philosophicalTagline = "聚善：禅生定，定生慧"
-      philosophicalSubtitle = "聚集世间之善，在寂静中萌发真实的智慧。"
+      subtitle    = "以 Go 超越，构建更好"
+      description = "GZen.io — 涵盖 TUI、Web 应用、API、云基础设施、AI SDK 及通用 Go 工程的 Go 语言技术博客。"
+      heroKicker  = "Go 语言实践"
+      heroTitle   = "用 Go 精工细作"
+      heroLead    = "关于 Go 语言的技术文章、演讲与资源推荐 —— 从终端界面到云原生架构再到 AI SDK。Google 开发者专家成长之路。"
+      heroAction  = "开始阅读"
+      languageNote = "另有英文与日文版本。"
+      tagline     = "func main() { fmt.Println(\"以 Go 超越，构建更好\") }"
 
   [languages.ja]
-    languageName = "日本語"
+    label = "日本語"
     weight       = 3
     title        = "GZen.io"
     contentDir   = "content/ja"
     [languages.ja.params]
       displayName = "JP"
-      subtitle    = "善集慧生"
-      description = "GZen.io エコシステム — エネルギーの流動と正しい道具の道。伝統的な知恵とソフトウェアエンジニアリングの融合。"
-      heroKicker  = "エネルギーの流動と正しい道具之道"
-      heroTitle   = "GZen.io エコシステム"
-      heroLead    = "GZen.io は、伝統的な知恵と現代のエンジニアリングを融合させたエコシステムです。身体とデジタルのエネルギー流動を促し、クラウド、DevOps、AIにおいて道具を適切に制約し、現実的な影響力をもたらします。"
-      heroAction  = "エコシステムについて"
-      languageNote = "日本語のオプション、English と 中文で共に歩みます。"
-      philosophicalTagline = "善集慧生：禅は定を生み、定は慧を生む"
-      philosophicalSubtitle = "世の善きものを集め、静寂の中に真の知恵を育む。"
+      subtitle    = "Go で超える、より良く作る"
+      description = "GZen.io — TUI、Web アプリ、API、クラウド基盤、AI SDK、そして一般 Go エンジニアリングをカバーする Go 言語アドボカシーブログ。"
+      heroKicker  = "Go 言語アドボカシー"
+      heroTitle   = "Go で紡ぐ"
+      heroLead    = "ターミナル UI からクラウド基盤、AI SDK まで — Go で作る技術記事、トーク、リソース。GDE ロードマップ進行中。"
+      heroAction  = "読み始める"
+      languageNote = "英語・中国語版もあります。"
+      tagline     = "func main() { fmt.Println(\"Go で超える、より良く作る\") }"
 
 [params]
-  # These are read by our custom partials, not by Blowfish directly
   brand          = "GZen.io"
-  brandSubtitle  = "聚善"
-  brandTagline   = "禅生定，定生慧"
-  lotusEmoji     = "🪷"
+  brandSubtitle  = "Go Beyond"
+  brandTagline   = "Crafted in Go."
 
   [params.ecosystem]
     ki          = "https://ki.gzen.io"

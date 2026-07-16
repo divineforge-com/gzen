@@ -1,12 +1,9 @@
-# ── GrowZen Blowfish params ──────────────────────────────
-# Full reference: https://blowfish.page/docs/configuration/
+# ── GZen.io Blowfish params ──────────────────────────────
 
-# ── Appearance ─────────────────────────────────────────
-colorScheme          = "gzen"         # Our custom warm palette
-defaultAppearance    = "light"        # Always warm cream — no dark mode
+colorScheme          = "gzen"
+defaultAppearance    = "light"
 autoSwitchAppearance = false
 
-# ── Header / Footer ────────────────────────────────────
 [header]
   layout = "basic"
 
@@ -17,21 +14,19 @@ autoSwitchAppearance = false
   showAppearanceSwitcher = false
   showScrollToTop = true
 
-# ── Homepage ───────────────────────────────────────────
 [homepage]
-  layout     = "custom"    # Uses layouts/partials/home/custom.html
+  layout     = "custom"
   showRecent = false
 
-# ── Article defaults ───────────────────────────────────
 [article]
   showDate            = true
   showDateUpdated     = false
-  showAuthor          = false      # Wisdom is from the tradition, not a person
-  showAuthorBottom    = false
-  showReadingTime     = false
+  showAuthor          = true
+  showAuthorBottom    = true
+  showReadingTime     = true
   showWordCount       = false
-  showTableOfContents = false
-  showBreadcrumbs     = false
+  showTableOfContents = true
+  showBreadcrumbs     = true
   showPagination      = true
   showSummary         = true
   showTaxonomies      = true
@@ -51,12 +46,9 @@ autoSwitchAppearance = false
   showTableOfContents = false
   groupByYear = false
 
-# ── Features ───────────────────────────────────────────
 enableSearch   = false
-enableCodeCopy = false
+enableCodeCopy = true
 showLikes      = false
 showViews      = false
 
-# ── Content sections ───────────────────────────────────
-mainSections = ["principles", "koans", "practice", "engineering", "library", "yijing"]
-
+mainSections = ["blog"]

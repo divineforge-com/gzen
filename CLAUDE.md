@@ -1,4 +1,4 @@
-# CLAUDE.md — GZen.io · 善聚慧生
+# CLAUDE.md — GZen.io · Go Advocacy Hub
 
 This file governs agent behavior on this repository. Read it fully before any action.
 
@@ -6,29 +6,30 @@ This file governs agent behavior on this repository. Read it fully before any ac
 
 ## Project Identity
 
-**GZen.io** is a multi-site ecosystem:
-- **`gzen.io`** (landing gateway)
-- **`ki.gzen.io`** (TCM & philosophy notebooks - GZen Ki)
-- **`learn.gzen.io`** (meditative learning - GZen Learn)
-- **`invest.gzen.io`** (mindful investing infographics - GZen Invest)
+**GZen.io** is a multi-site monorepo:
+- **`gzen.io`** — Go (Golang) advocacy blog, GDE portfolio, and resource hub
+- **`ki.gzen.io`** — TCM & philosophy notebooks (side project)
+- **`learn.gzen.io`** — meditative language learning (side project)
+- **`invest.gzen.io`** — mindful investing infographics (side project)
 
-The core mission: *collect goodness from around the world and multiply it through Buddha's teachings and traditional wisdom*.
+The main site (`apps/gzen`) covers six Go content pillars: TUI, Web Apps, API, Cloud & Infrastructure, AI SDKs, and General Go Engineering.
 
-- **Language translation menus**: English first, then Chinese, then Japanese.
-- **Monorepo setup**: Manage via `gzen-tool` in the root directory.
+- **Language ordering**: English primary, Chinese secondary, Japanese tertiary
+- **Monorepo setup**: Manage via `gzen-tool` in the root directory
 
 ---
 
 ## Tech Stack (Hugo + Blowfish)
 
 - **Generator**: Hugo extended
-- **Themes**: Blowfish theme (for main sites)
-- **CSS overrides**: Built-in Hugo Pipes (edit `assets/css/custom.css`)
+- **Theme**: Blowfish (custom overrides)
+- **Typography**: JetBrains Mono (code/headings) + Noto Sans/Serif SC (body)
+- **CSS**: Built-in Hugo Pipes (edit `assets/css/custom.css`)
 - **Deployment**: Cloudflare Pages
 
 ---
 
-## Workspace Helper commands
+## Workspace Helper Commands
 - Build all sites: `./gzen-tool build`
 - Deploy all sites: `./gzen-tool deploy`
 - Lint content structure: `./gzen-tool lint`

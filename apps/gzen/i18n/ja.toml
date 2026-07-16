@@ -1,47 +1,41 @@
 [brand_subtitle]
-other = "善集慧生"
+other = "Go で超える、より良く作る"
 
-[nav_home]
-other = "ホーム"
+[nav_blog]
+other = "ブログ"
 
-[nav_koans]
-other = "公案"
+[nav_speaking]
+other = "トーク"
 
-[nav_principles]
-other = "禅理"
+[nav_resources]
+other = "リソース"
 
-[nav_practice]
-other = "修行"
+[nav_playground]
+other = "プレイグラウンド"
 
-[nav_engineering]
-other = "工程"
-
-[nav_library]
-other = "典籍"
+[nav_donate]
+other = "サポート"
 
 [nav_about]
 other = "について"
 
-[nav_posts]
-other = "記事"
+[nav_ecosystem]
+other = "サイドプロジェクト"
 
-[principles]
-other = "禅理"
+[nav_origin]
+other = "起源"
 
-[principles_en]
-other = "Core Principles"
+[read_in]
+other = "他の言語で読む"
 
-[recent_posts]
-other = "最近の記事"
-
-[recent_posts_en]
-other = "Recent Writing"
+[more]
+other = "もっと"
 
 [all_posts]
 other = "すべての記事"
 
-[more]
-other = "もっと"
+[recent_posts]
+other = "最近の記事"
 
 [topics]
 other = "トピック"
@@ -52,72 +46,68 @@ other = "ホームに戻る"
 [no_posts]
 other = "記事はまだありません"
 
-[read_in]
-other = "他の言語で読む"
+[pillar_tui]
+other = "TUI"
 
-[lunar_hero_label]
-other = "月の満ち欠け"
+[pillar_tui_desc]
+other = "Bubble Tea、Charm エコシステム、Cobra + Viper CLI 設計とターミナル UI パターン。"
 
-[prev_day]
-other = "前の日"
+[pillar_webapp]
+other = "Web アプリ"
 
-[next_day]
-other = "次の日"
+[pillar_webapp_desc]
+other = "net/http、Gin、Echo、Chi、Templ、HTMX、WebSocket リアルタイムパターン。"
 
-[today]
-other = "今日"
+[pillar_api]
+other = "API"
 
-[waxing]
-other = "月が満ちる"
+[pillar_api_desc]
+other = "REST、gRPC、Connect-Go、OpenAPI コード生成、GraphQL サービス設計。"
 
-[waning]
-other = "月が欠ける"
+[pillar_cloud]
+other = "クラウド"
 
-[lunar_cycle_progress]
-other = "月の周期"
+[pillar_cloud_desc]
+other = "Cloudflare Workers、GCP SDK、サーバーレス Go、Ko ミニマルコンテナ、Pulumi IaC。"
 
-[koans]
-other = "公案"
+[pillar_ai]
+other = "AI SDK"
 
-[practice]
-other = "修行"
+[pillar_ai_desc]
+other = "Go ADK、Gemini SDK、LangChain Go、AI ツール開発、PicoClaw エージェントフレームワーク。"
 
-[engineering]
-other = "工程"
+[pillar_general]
+other = "一般 Go"
 
-[library]
-other = "典籍"
+[pillar_general_desc]
+other = "並行処理、ジェネリクス、テスト、プロファイリング、モジュール設計、コード生成。"
 
-[yijing]
-other = "易経"
+[tenet_simplicity]
+other = "シンプルさ"
 
-[nav_yijing]
-other = "易経"
+[tenet_simplicity_desc]
+other = "明確で読みやすく、推論しやすいコード。Go の設計は巧妙さよりも明瞭さを重視。"
 
-[nav_ecosystem]
-other = "生態系"
+[tenet_concurrency]
+other = "並行処理"
 
-[ecosystem_ki_title]
-other = "気と養生"
+[tenet_concurrency_desc]
+other = "Goroutine、Channel、Select —— スケーラブルな並行プログラムのための組み込みプリミティブ。"
 
-[ecosystem_ki_desc]
-other = "身体のエネルギー（気）、マインドフルな健康、そして生命力あふれる養生の道を探求する。"
+[tenet_tooling]
+other = "ツールチェーン"
 
+[tenet_tooling_desc]
+other = "高速コンパイル、標準フォーマッター、テスティング、プロファイリング、単一バイナリデプロイ。"
 
-[ecosystem_learn_title]
-other = "知と学び"
+[support_title]
+other = "オープンソース Go を支援"
 
-[ecosystem_learn_desc]
-other = "禅的思考に基づき、技術と人文素養を深める学習プラットフォーム。"
+[support_desc]
+other = "記事やリソースが役立つと感じられた方は、Go コンテンツ制作の支援をご検討ください。"
 
-[ecosystem_invest_title]
-other = "投資と資財"
+[donate_coffee]
+other = "コーヒーをおごる"
 
-[ecosystem_invest_desc]
-other = "正念と長期主義に基づく投資と財務意思決定。"
-
-[nav_origin]
-other = "起源"
-
-
-
+[donate_github]
+other = "GitHub Sponsors"

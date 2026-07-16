@@ -1,44 +1,41 @@
 [brand_subtitle]
-other = "善聚慧生"
+other = "以 Go 超越，构建更好"
 
-[nav_home]
-other = "首页"
+[nav_blog]
+other = "博客"
 
-[nav_koans]
-other = "公案"
+[nav_speaking]
+other = "演讲"
 
-[nav_principles]
-other = "禅理"
+[nav_resources]
+other = "资源"
 
-[nav_practice]
-other = "修行"
+[nav_playground]
+other = "实践"
 
-[nav_engineering]
-other = "工程"
-
-[nav_library]
-other = "典藏"
+[nav_donate]
+other = "赞助"
 
 [nav_about]
 other = "关于"
 
-[nav_posts]
-other = "文章"
+[nav_ecosystem]
+other = "副项目"
 
-[principles]
-other = "禅理"
+[nav_origin]
+other = "起源"
 
-[principles_en]
-other = "Core Principles"
+[read_in]
+other = "以其他语言阅读"
 
-[recent_posts]
-other = "近期文章"
-
-[recent_posts_en]
-other = "Recent Writing"
+[more]
+other = "更多"
 
 [all_posts]
 other = "全部文章"
+
+[recent_posts]
+other = "近期文章"
 
 [topics]
 other = "主题"
@@ -49,75 +46,68 @@ other = "返回首页"
 [no_posts]
 other = "暂无文章"
 
-[read_in]
-other = "以其他语言阅读"
+[pillar_tui]
+other = "TUI 终端界面"
 
-[lunar_hero_label]
-other = "农历月相"
+[pillar_tui_desc]
+other = "使用 Bubble Tea、Charm 生态、Cobra + Viper 构建终端界面。探索 Go 在 CLI/TUI 领域的丰富生态。"
 
-[prev_day]
-other = "前一天"
+[pillar_webapp]
+other = "Web 应用"
 
-[next_day]
-other = "后一天"
+[pillar_webapp_desc]
+other = "使用 net/http、Gin、Echo、Chi、Templ、HTMX 构建 HTTP 服务。涵盖 WebSocket 实时通信模式。"
 
-[today]
-other = "今日"
+[pillar_api]
+other = "API 开发"
 
-[waxing]
-other = "月盈"
+[pillar_api_desc]
+other = "REST、gRPC、Connect-Go、OpenAPI 代码生成及 GraphQL 服务设计。Go 是构建 API 的绝佳选择。"
 
-[waning]
-other = "月亏"
+[pillar_cloud]
+other = "云基础设施"
 
-[lunar_cycle_progress]
-other = "农历月相进度"
+[pillar_cloud_desc]  
+other = "Cloudflare Workers、GCP SDK、Serverless Go、Ko 最小容器镜像、Pulumi 基础设施即代码。"
 
-[koans]
-other = "公案"
+[pillar_ai]
+other = "AI SDK"
 
-[practice]
-other = "修行"
+[pillar_ai_desc]
+other = "Go ADK、Gemini SDK、LangChain Go、AI 工具构建、PicoClaw 超轻量智能体框架。"
 
-[engineering]
-other = "工程"
+[pillar_general]
+other = "通用 Go"
 
-[library]
-other = "典藏"
+[pillar_general_desc]
+other = "并发模式、泛型实践、测试技巧、性能分析、模块设计与编译时元编程。"
 
-[more]
-other = "更多"
+[tenet_simplicity]
+other = "简洁"
 
-[yijing]
-other = "易经"
+[tenet_simplicity_desc]
+other = "清晰可读、易于推理的代码。Go 的设计理念是清晰优于巧妙。"
 
-[nav_yijing]
-other = "易经"
+[tenet_concurrency]
+other = "并发"
 
-[nav_ecosystem]
-other = "生态"
+[tenet_concurrency_desc]
+other = "Goroutine、Channel 与 Select —— 构建可扩展并发程序的内建原语。"
 
-[ecosystem_ki_title]
-other = "气与生"
+[tenet_tooling]
+other = "工具链"
 
-[ecosystem_ki_desc]
-other = "探索身体能量、正念健康与生命的元气之道。"
+[tenet_tooling_desc]
+other = "快速编译、内置格式化、测试、性能分析 —— 单一二进制部署模型。"
 
+[support_title]
+other = "支持开源 Go"
 
-[ecosystem_learn_title]
-other = "知与学"
+[support_desc]
+other = "如果这里的文章和资源对你有帮助，欢迎支持更多 Go 内容的创作。"
 
-[ecosystem_learn_desc]
-other = "以禅修思维深化技术与人文素养的学习平台。"
+[donate_coffee]
+other = "请喝咖啡"
 
-[ecosystem_invest_title]
-other = "资与财"
-
-[ecosystem_invest_desc]
-other = "以正念与长期主义看待投资与财务决策。"
-
-[nav_origin]
-other = "起源"
-
-
-
+[donate_github]
+other = "GitHub 赞助"

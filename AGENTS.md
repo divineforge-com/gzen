@@ -1,7 +1,6 @@
-# AGENTS.md — GZen.io · 善聚慧生 Agent Reference
+# AGENTS.md — GZen.io · Go Advocacy Hub
 
-> 聚善：禅生定，定生慧  
-> Goodness gathers; from stillness comes wisdom.
+> Go Beyond. Build Better.
 
 This is the primary reference for all AI agents working on this repository. **Read this before making any changes.**
 
@@ -9,12 +8,12 @@ This is the primary reference for all AI agents working on this repository. **Re
 
 ## What Is GZen.io
 
-GZen.io is a multi-site ecosystem bridging traditional wisdom and health, cognitive learning, and long-term financial principles with modern lightweight engineering.
+GZen.io is a **Go (Golang) advocacy blog and portfolio** — covering TUI, web apps, APIs, cloud infrastructure, AI SDKs, and general Go engineering. It also serves as a GDE roadmap, recommendation hub, and donation landing for Go open-source work.
 
-Core design principles:
-- **Language ordering**: English primary → Chinese secondary → Japanese tertiary in translation menus
-- **Buddhist & TCM grounding**: Traditional health wisdom (TCM, Qigong) and philosophy live on `ki.gzen.io` (GZen Ki)
-- **Umbrella branding**: The main gateway `gzen.io` links to all ecosystem products and showcases engineering ethics (Clarity before tools, right tool use)
+Additional side projects live in the monorepo:
+- `apps/gzen-ki` — TCM & philosophy notebooks (ki.gzen.io)
+- `apps/gzen-learn` — meditative language learning (learn.gzen.io)
+- `apps/gzen-invest` — infographic capital (invest.gzen.io)
 
 ---
 
@@ -23,10 +22,11 @@ Core design principles:
 | Layer | Technology |
 |---|---|
 | Framework | **Hugo** (static site generator) |
-| Styling | **Blowfish Tailwind pipeline** |
-| Fonts | Noto Sans SC / Noto Serif SC + system-ui |
-| Lunar calendar | Vanilla JS — `static/js/lunar.js` (now lives in `apps/gzen-ki/`) |
-| Deployment | **Cloudflare Pages** — auto-deploy on push to `main` |
+| Theme | **Blowfish** (custom overrides) |
+| Styling | Tailwind CSS + custom CSS |
+| Fonts | **JetBrains Mono** (code/headings) + Noto Sans/Serif SC (body) |
+| Hosting | **Cloudflare Pages** — auto-deploy on push to `main` |
+| Monorepo | `gzen-tool` (Go CLI) — parallel multi-site builds |
 
 ---
 
@@ -34,14 +34,11 @@ Core design principles:
 
 ```
 apps/
-  gzen/                 # Main landing gateway (gzen.io)
-    content/            # Gateway pages (zh, en, ja)
-    layouts/            # Gateway templates & footer overrides
-    assets/css/         # Gateway styling
-  gzen-ki/              # TCM & Philosophy (ki.gzen.io / genki.gzen.io)
-    content/            # Trilingual articles (koans, principles, notes, etc.)
-    layouts/            # Custom templates
-    static/js/lunar.js  # Lunar cycle & lotus stage tracker
+  gzen/                 # Go advocacy hub (gzen.io)
+    content/            # Trilingual pages (en, zh, ja) + blog posts
+    layouts/            # Templates, partials, shortcodes
+    assets/css/         # Custom styling
+  gzen-ki/              # TCM & Philosophy (ki.gzen.io)
   gzen-learn/           # Language learning (learn.gzen.io)
   gzen-invest/          # Investment infographics (invest.gzen.io)
 ```
@@ -50,6 +47,8 @@ apps/
 
 ## Design Constraints
 
-1. **Warm Palette** — Background `#fffaf4` (cream), text `#2f2118` (dark brown), saffron `#d97845`, jade `#2d6b4f`
+1. **Warm Palette** — Background `#fffaf4` (cream), text `#2f2118` (dark brown), accent `#d97845` (saffron)
 2. **Readability** — `line-height: 1.8+` for CJK body text
-3. **No Heavy Frameworks** — Pure HTML + Vanilla JS, built by Hugo in <300ms
+3. **Code-first aesthetic** — JetBrains Mono for code blocks and technical headings, communicating precision and craftsmanship
+4. **No Heavy Frameworks** — Pure HTML + Vanilla JS, built by Hugo in <300ms
+5. **Trilingual** — English primary, Chinese secondary, Japanese tertiary

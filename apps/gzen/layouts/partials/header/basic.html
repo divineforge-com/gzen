@@ -1,17 +1,18 @@
 <header class="gzen-header">
   <a class="gzen-brand" href="{{ "" | relLangURL }}" aria-label="{{ .Site.Title }}">
-    <span class="gzen-brand-mark" aria-hidden="true">善</span>
+    <span class="gzen-brand-mark" aria-hidden="true">GZ</span>
     <span>
       <strong>GZen.io</strong>
-      <small>{{ .Site.Language.Params.subtitle | default "善聚慧生" }}</small>
+      <small>{{ .Site.Language.Params.subtitle | default "Go Beyond. Build Better." }}</small>
     </span>
   </a>
 
   <nav class="gzen-nav" aria-label="Primary">
-    <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener">Ki</a>
-    <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener">Learn</a>
-    <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener">Invest</a>
+    <a href="{{ "blog" | relLangURL }}">{{ i18n "nav_blog" | default "Blog" }}</a>
+    <a href="{{ "speaking" | relLangURL }}">{{ i18n "nav_speaking" | default "Speaking" }}</a>
+    <a href="{{ "resources" | relLangURL }}">{{ i18n "nav_resources" | default "Resources" }}</a>
     <a href="{{ "about" | relLangURL }}">{{ i18n "nav_about" | default "About" }}</a>
+    <a href="{{ "donate" | relLangURL }}" class="gzen-nav-cta">{{ i18n "nav_donate" | default "Donate" }}</a>
   </nav>
 
   {{ if .IsTranslated }}
@@ -21,7 +22,7 @@
           href="{{ .RelPermalink }}"
           class="gzen-lang-btn"
           {{ if eq .Language.Lang $.Site.Language.Lang }}aria-current="page"{{ end }}>
-          {{ .Language.Params.displayName | default .Language.LanguageName | default .Language.Lang }}
+          {{ .Language.Params.displayName | default .Language.Label | default .Language.Lang }}
         </a>
       {{ end }}
     </nav>

@@ -1,153 +1,206 @@
-{{/* GZen.io custom landing page — premium, serene editorial gateway */}}
+{{/* GZen.io custom landing page — Go advocacy hub */}}
 
 <section class="gzen-home-hero" aria-labelledby="gzen-home-title">
   <div class="gzen-hero-copy">
-    <p class="gzen-kicker">{{ .Site.Language.Params.heroKicker | default "倡导能量流动，践行工具之道" }}</p>
-    <h1 id="gzen-home-title">{{ .Site.Language.Params.heroTitle | default .Site.Title }}</h1>
-    <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default .Site.Params.description }}</p>
+    <p class="gzen-kicker">{{ .Site.Language.Params.heroKicker | default "Go (Golang) Advocacy" }}</p>
+    <h1 id="gzen-home-title">{{ .Site.Language.Params.heroTitle | default "Crafted in Go" }}</h1>
+    <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default "Technical articles, talks, and resources on building with Go — from terminal UIs to cloud infrastructure to AI SDKs." }}</p>
     <div class="gzen-hero-actions">
-      <a href="{{ "about" | relLangURL }}" class="gzen-primary-link">
-        {{ .Site.Language.Params.heroAction | default "了解生态理念" }}
+      <a href="{{ "blog" | relLangURL }}" class="gzen-primary-link">
+        {{ .Site.Language.Params.heroAction | default "Start Reading" }}
       </a>
       <span class="gzen-hero-note">{{ .Site.Language.Params.languageNote }}</span>
     </div>
   </div>
 
   <div class="gzen-hero-visual" aria-hidden="true">
-    {{/* Serene SVG Lotus Visual Centerpiece */}}
-    <div class="gzen-lotus-container">
-      <svg class="gzen-lotus-flower" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="lotus-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="var(--gzen-saffron)" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="var(--gzen-bg)" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="petal-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f9c8d0"/>
-            <stop offset="100%" stop-color="var(--gzen-saffron)"/>
-          </linearGradient>
-          <linearGradient id="petal-grad-2" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#fff4e8"/>
-            <stop offset="100%" stop-color="#f5bfa0"/>
-          </linearGradient>
-        </defs>
-        <circle cx="50" cy="50" r="45" fill="url(#lotus-glow)"/>
-        {{/* Outer Petals */}}
-        <path d="M50 15 C45 35, 35 45, 50 85 C65 45, 55 35, 50 15 Z" fill="url(#petal-grad-1)" opacity="0.6"/>
-        <path d="M15 50 C35 45, 45 35, 85 50 C45 65, 35 55, 15 50 Z" fill="url(#petal-grad-1)" opacity="0.6"/>
-        {{/* Inner Rotated Petals */}}
-        <path d="M25 25 C40 38, 48 30, 75 75 C60 62, 52 70, 25 25 Z" fill="url(#petal-grad-2)" opacity="0.85"/>
-        <path d="M75 25 C60 38, 52 30, 25 75 C40 62, 48 70, 75 25 Z" fill="url(#petal-grad-2)" opacity="0.85"/>
-        {{/* Core Pistil */}}
-        <circle cx="50" cy="50" r="6" fill="#f0c070" opacity="0.95"/>
-      </svg>
-      <div class="gzen-lotus-reflection"></div>
+    <div class="gzen-terminal">
+      <div class="gzen-terminal-bar">
+        <span class="gzen-terminal-dot gzen-dot-red"></span>
+        <span class="gzen-terminal-dot gzen-dot-yellow"></span>
+        <span class="gzen-terminal-dot gzen-dot-green"></span>
+        <span class="gzen-terminal-title">gzen.io</span>
+      </div>
+      <div class="gzen-terminal-body">
+        <span class="gzen-token-comment">// Go Beyond. Build Better.</span>
+        <br>
+        <span class="gzen-token-keyword">package</span> <span class="gzen-token-type">main</span>
+        <br>
+        <br>
+        <span class="gzen-token-keyword">import</span> <span class="gzen-token-string">"fmt"</span>
+        <br>
+        <br>
+        <span class="gzen-token-keyword">func</span> <span class="gzen-token-func">main</span>() {
+        <br>
+        <span class="gzen-token-indent"></span>fmt.<span class="gzen-token-func">Println</span>(
+        <br>
+        <span class="gzen-token-indent2"></span><span class="gzen-token-string">"Crafted in Go."</span>
+        <br>
+        <span class="gzen-token-indent"></span>)
+        <br>
+        }
+        <br>
+        <span class="gzen-cursor">|</span>
+      </div>
     </div>
   </div>
+</section>
+
 <div class="gzen-home-content">
 
-  {{/* Serene Centered Tagline Block */}}
-  {{ if .Site.Language.Params.philosophicalTagline }}
-  <div class="gzen-philosophical-banner">
-    <blockquote class="gzen-tagline-quote">
-      “ {{ .Site.Language.Params.philosophicalTagline }} ”
+  {{/* Go Tagline */}}
+  <div class="gzen-tagline-banner">
+    <blockquote class="gzen-tagline-code">
+      <span class="gzen-token-keyword">func</span> <span class="gzen-token-func">advocate</span>() {
+      <br>
+      <span class="gzen-token-indent"></span><span class="gzen-token-keyword">for</span> <span class="gzen-token-type">range</span> <span class="gzen-token-func">sixPillars</span>() {
+      <br>
+      <span class="gzen-token-indent2"></span>fmt.<span class="gzen-token-func">Println</span>(<span class="gzen-token-string">"Simple. Concurrent. Readable."</span>)
+      <br>
+      <span class="gzen-token-indent"></span>}
+      <br>
+      }
     </blockquote>
-    {{ with .Site.Language.Params.philosophicalSubtitle }}
-    <p class="gzen-tagline-subtitle">{{ . }}</p>
-    {{ end }}
   </div>
-  {{ end }}
 
-  {{/* Ecosystem Showcase - Frost Glass Grid */}}
+  {{/* Content Pillars Grid */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
-      <h2>{{ i18n "nav_ecosystem" | default "GZen.io 三大主脉" }}</h2>
+      <h2>{{ i18n "nav_blog" | default "Content Pillars" }}</h2>
     </div>
-    <div class="gzen-grid">
-      <a href="{{ .Site.Params.ecosystem.ki | default "https://ki.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">ki.gzen.io</span>
-        <div class="gzen-card-icon-wrap">
-          {{/* Serene Jade Wave Icon */}}
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-leaf)" stroke-width="1.5">
-            <path d="M12 2 C6.48 2, 2 6.48, 2 12 C2 17.52, 6.48 22, 12 22 C17.52 22, 22 17.52, 22 12" stroke-linecap="round"/>
-            <path d="M12 6 C9 9, 9 13, 12 18 C15 13, 15 9, 12 6 Z" fill="rgba(111,143,99,0.15)"/>
-            <circle cx="12" cy="12" r="2" fill="var(--gzen-leaf)"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "ecosystem_ki_title" | default "元気健康 · TCM & Philosophy" }}</h3>
-        <p>{{ i18n "ecosystem_ki_desc" | default "融合中医气血、脾胃养生、中药图鉴与太极导引，以自然的律动与传统正念哲学调和身心。" }}</p>
-        <span class="gzen-card-url">前往元気健康 &rarr;</span>
-      </a>
-
-      <a href="{{ .Site.Params.ecosystem.learn | default "https://learn.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">learn.gzen.io</span>
-        <div class="gzen-card-icon-wrap">
-          {{/* Elegant Book/Scroll Icon */}}
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="#b09080" stroke-width="1.5">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-linecap="round"/>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-linejoin="round"/>
-            <path d="M8 6h8M8 10h8" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "ecosystem_learn_title" | default "知与学 · Language & Mind" }}</h3>
-        <p>{{ i18n "ecosystem_learn_desc" | default "在专注与沉浸中深化知识的境界。以禅修式的克制节奏进行日语（N3-N1）与俄语的高效学习。" }}</p>
-        <span class="gzen-card-url">前往知与学 &rarr;</span>
-      </a>
-
-      <a href="{{ .Site.Params.ecosystem.invest | default "https://invest.gzen.io" }}" target="_blank" rel="noopener" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">invest.gzen.io</span>
-        <div class="gzen-card-icon-wrap">
-          {{/* Capital Seedling Icon */}}
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-saffron)" stroke-width="1.5">
-            <path d="M12 22V10M12 10C12 7 9 5 6 7M12 10C12 6 16 4 19 6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M12 14c2.5-1 4-3.5 4-3.5M12 17c-2.5-0.5-3-3-3-3" stroke-linecap="round"/>
-            <circle cx="12" cy="6" r="1.5" fill="var(--gzen-saffron)"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "ecosystem_invest_title" | default "资与财 · Mindfulness & Capital" }}</h3>
-        <p>{{ i18n "ecosystem_invest_desc" | default "以长期主义与复利常识看待财务决策。通过精美手绘 SVG 信息图解剖析分红与资本增殖底层逻辑。" }}</p>
-        <span class="gzen-card-url">前往资与财 &rarr;</span>
-      </a>
-    </div>
-  </section>
-
-  {{/* Core Philosophy Pillars */}}
-  <section class="gzen-section">
-    <div class="gzen-section-heading">
-      <h2>{{ i18n "core_advocacy" | default "生态支柱 · GZen Anchors" }}</h2>
-    </div>
-    <div class="gzen-grid">
-      <div class="gzen-card gzen-pillar-card no-hover">
+    <div class="gzen-grid gzen-grid-3col">
+      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
         <span class="gzen-card-tag">01</span>
-        <h3>能量流动 · Energy Flow</h3>
-        <p>无论是身心健康的气血循环，还是软件系统的架构交互，本源都在于将阻力降到最小，使价值流转达到最高。流转顺畅，生命力与生产力方能延绵不绝。</p>
-      </div>
-      <div class="gzen-card gzen-pillar-card no-hover">
+        <div class="gzen-card-icon-wrap">
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="14" rx="2" stroke-linecap="round"/>
+            <path d="M8 21h8M12 17v4" stroke-linecap="round"/>
+            <path d="M7 8h10M7 12h6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "pillar_tui" | default "TUI" }}</h3>
+        <p>{{ i18n "pillar_tui_desc" | default "Terminal UIs with Bubble Tea, Charm ecosystem, Cobra + Viper CLI design, and terminal UI patterns." }}</p>
+        <span class="gzen-card-url">Explore TUI &rarr;</span>
+      </a>
+
+      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
         <span class="gzen-card-tag">02</span>
-        <h3>克制用器 · Right Tool Use</h3>
-        <p>我们笃信“明晰先于工具”（Clarity before Tools）。面对海量喧嚣的软件、框架与 AI 概念，我们保持清醒，追求极简与低能耗的纯粹静态架构，让每一次运用都精准饱满。</p>
+        <div class="gzen-card-icon-wrap">
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linejoin="round"/>
+            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "pillar_webapp" | default "Web Apps" }}</h3>
+        <p>{{ i18n "pillar_webapp_desc" | default "HTTP services with net/http, Gin, Echo, Chi, Templ, HTMX, and real-time WebSocket patterns." }}</p>
+        <span class="gzen-card-url">Explore Web &rarr;</span>
+      </a>
+
+      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">03</span>
+        <div class="gzen-card-icon-wrap">
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
+            <path d="M4 4h16v16H4z" stroke-linejoin="round"/>
+            <path d="M9 9l6 6M15 9l-6 6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "pillar_api" | default "API" }}</h3>
+        <p>{{ i18n "pillar_api_desc" | default "REST, gRPC, Connect-Go, OpenAPI codegen, and GraphQL service design in Go." }}</p>
+        <span class="gzen-card-url">Explore API &rarr;</span>
+      </a>
+
+      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">04</span>
+        <div class="gzen-card-icon-wrap">
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
+            <path d="M3 15h4l2-4 3 7 3-5 2 2h4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 21h18" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "pillar_cloud" | default "Cloud & Infrastructure" }}</h3>
+        <p>{{ i18n "pillar_cloud_desc" | default "Cloudflare Workers, GCP SDKs, serverless Go, minimal containers with Ko, infra-as-code." }}</p>
+        <span class="gzen-card-url">Explore Cloud &rarr;</span>
+      </a>
+
+      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">05</span>
+        <div class="gzen-card-icon-wrap">
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "pillar_ai" | default "AI SDKs" }}</h3>
+        <p>{{ i18n "pillar_ai_desc" | default "Go ADK, Gemini SDK, LangChain Go, building AI-powered tools, PicoClaw agent framework." }}</p>
+        <span class="gzen-card-url">Explore AI &rarr;</span>
+      </a>
+
+      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">06</span>
+        <div class="gzen-card-icon-wrap">
+          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
+            <path d="M4 6h16M4 12h16M4 18h12" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>{{ i18n "pillar_general" | default "General Go" }}</h3>
+        <p>{{ i18n "pillar_general_desc" | default "Concurrency, generics, testing, profiling, module design, code generation, best practices." }}</p>
+        <span class="gzen-card-url">Explore General &rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  {{/* Go Tenets */}}
+  <section class="gzen-section">
+    <div class="gzen-section-heading">
+      <h2>Go Tenets</h2>
+    </div>
+    <div class="gzen-grid gzen-grid-3col">
+      <div class="gzen-card gzen-pillar-card no-hover">
+        <span class="gzen-card-tag">Simplicity</span>
+        <h3>{{ i18n "tenet_simplicity" | default "Simplicity" }}</h3>
+        <p>{{ i18n "tenet_simplicity_desc" | default "Clear, readable code that is easy to reason about. Go's design prioritizes clarity over cleverness." }}</p>
       </div>
       <div class="gzen-card gzen-pillar-card no-hover">
-        <span class="gzen-card-tag">03</span>
-        <h3>真实影响 · Real Impact</h3>
-        <p>不流于虚空的口号，不沉迷宏大的叙事。我们将静心、体察与专注融于代码、外语习得、养生习惯与资产配置的微小实践中，以清爽透明的成果回馈真实世界。</p>
+        <span class="gzen-card-tag">Concurrency</span>
+        <h3>{{ i18n "tenet_concurrency" | default "Concurrency" }}</h3>
+        <p>{{ i18n "tenet_concurrency_desc" | default "Goroutines, channels, and select — built-in primitives for scalable, concurrent programs." }}</p>
+      </div>
+      <div class="gzen-card gzen-pillar-card no-hover">
+        <span class="gzen-card-tag">Tooling</span>
+        <h3>{{ i18n "tenet_tooling" | default "Tooling" }}</h3>
+        <p>{{ i18n "tenet_tooling_desc" | default "Fast compilation, built-in formatting, testing, profiling, and a single binary deploy model." }}</p>
       </div>
     </div>
   </section>
 
-  {{/* Technology Stack & Automation */}}
+  {{/* Tech Stack */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
-      <h2>{{ i18n "tech_stack_title" | default "极简工程实践 · Engineering Ethos" }}</h2>
+      <h2>Stack</h2>
     </div>
     <div class="gzen-card gzen-glass-card no-hover">
       <div class="gzen-tech-content">
-        <p>本站及生态项目以<strong>克制用器</strong>为工程样板，展示如何使用高性能、零冗余的开源工具链构建轻量级云原生系统：</p>
+        <p>This site is a living demonstration of Go engineering principles. Built with:</p>
         <ul class="gzen-tech-list">
-          <li><strong>零渲染开销</strong>：全部站点由 Go 语言编写的 <strong>Hugo</strong> 静态生成，摆脱复杂的客户端运行时与动态接口，通过 Cloudflare CDN 实现毫秒级瞬间呈现。</li>
-          <li><strong>并行工作流</strong>：由我们自主开发的 Golang Workspace CLI 工具 <strong><code>gzen-tool</code></strong> 管理整个单仓（Monorepo），基于多协程实现多站点并行构建，全部编译耗时仅 200 余毫秒。</li>
-          <li><strong>极简自动化</strong>：后台搭载以 Go 编写、运行仅占用 <strong>&lt;10MB 内存</strong> 的 AI 智能体 <strong>PicoClaw</strong>，接入大模型自动协作处理内容流分发与多国语言翻译。</li>
+          <li><strong>Hugo</strong> — the world's fastest static site generator, itself written in Go. Zero runtime dependencies, instant CDN delivery.</li>
+          <li><strong>gzen-tool</strong> — a custom Go CLI for parallel multi-site builds, using Goroutines to compile all sub-sites in under 200ms.</li>
+          <li><strong>Cloudflare Pages</strong> — global edge deployment with no servers to manage.</li>
+          <li><strong>JetBrains Mono</strong> — code-first typography that communicates precision and craft.</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  {{/* Support CTA */}}
+  <section class="gzen-section">
+    <div class="gzen-card gzen-glass-card gzen-support-card no-hover">
+      <div class="gzen-support-content">
+        <h3>{{ i18n "support_title" | default "Support Open Source Go" }}</h3>
+        <p>{{ i18n "support_desc" | default "If the articles and resources here help you, consider supporting more Go content creation." }}</p>
+        <div class="gzen-support-links">
+          <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-primary-link">☕ {{ i18n "donate_coffee" | default "Buy Me a Coffee" }}</a>
+          <a href="https://github.com/sponsors/divineforge" target="_blank" rel="noopener" class="gzen-secondary-link">{{ i18n "donate_github" | default "GitHub Sponsors" }}</a>
+        </div>
       </div>
     </div>
   </section>

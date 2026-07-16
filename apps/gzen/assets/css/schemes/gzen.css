@@ -1,15 +1,13 @@
 /*
-  GrowZen color scheme for Blowfish
-  Buddhist warm palette — saffron, cream, earth tones
+  GZen.io color scheme for Blowfish
+  Warm engineering palette — cream, saffron, earth tones
 
-  Blowfish uses RGB triplets (no '#', space-separated)
-  for its CSS custom properties, consumed by Tailwind.
+  Blowfish uses RGB triplets for its CSS custom properties,
+  consumed by Tailwind.
 */
 
-/* ── Light mode (only mode — no dark theme for GrowZen) ── */
 :root,
 html.light {
-  /* Primary accent: warm saffron #d97845 */
   --color-primary-50:  255 248 245;
   --color-primary-100: 255 237 220;
   --color-primary-200: 250 210 174;
@@ -22,7 +20,6 @@ html.light {
   --color-primary-900:  82  36  24;
   --color-primary-950:  52  23  15;
 
-  /* Neutral scale: warm brown → cream */
   --color-neutral-50:  255 250 244;
   --color-neutral-100: 250 241 229;
   --color-neutral-200: 235 218 198;
@@ -36,7 +33,6 @@ html.light {
   --color-neutral-950:  24  16  11;
 }
 
-/* Dark mode: keep warm tones even in dark (graceful fallback) */
 html.dark {
   --color-primary-50:   74  44  26;
   --color-primary-100:  98  60  34;
