@@ -64,3 +64,7 @@ cd apps/gzen && hugo server
 2. **Warm minimalism** — cream palette, saffron accents, generous whitespace
 3. **Code-first aesthetic** — JetBrains Mono typography communicates precision and craftsmanship
 4. **Developer experience** — fast builds, zero runtime deps, trilingual from day one
+
+---
+
+*Built with [Hugo](https://gohugo.io) & [Blowfish](https://blowfish.page/) · Deployed on [Cloudflare Pages](https://pages.cloudflare.com/)*
