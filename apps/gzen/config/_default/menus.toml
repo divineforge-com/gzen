@@ -16,11 +16,16 @@
   weight  = 30
 
 [[main]]
+  name    = "Playground"
+  pageRef = "playground"
+  weight  = 40
+
+[[main]]
   name    = "About"
   pageRef = "about"
-  weight  = 40
+  weight  = 50
 
 [[main]]
   name    = "Donate"
   pageRef = "donate"
-  weight  = 50
+  weight  = 60
