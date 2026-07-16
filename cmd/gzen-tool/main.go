@@ -15,17 +15,20 @@ import (
 type App struct {
 	Name        string
 	Path        string
+	ProjectName string
 	Description string
 }
 
 var apps = []App{
-	{Name: "gzen", Path: "apps/gzen", Description: "Main GrowZen platform (gzen.io)"},
-	{Name: "gzen-ki", Path: "apps/gzen-ki", Description: "Genki/Health notebooks (genki.gzen.io)"},
-	{Name: "gzen-learn", Path: "apps/gzen-learn", Description: "Language learning platform (learn.gzen.io)"},
-	{Name: "gzen-invest", Path: "apps/gzen-invest", Description: "Investment Infographics (invest.gzen.io)"},
+	{Name: "gzen", Path: "apps/gzen", ProjectName: "gzen", Description: "Main GrowZen platform (gzen.io)"},
+	{Name: "gzen-ki", Path: "apps/gzen-ki", ProjectName: "gzen-ki", Description: "Genki/Health notebooks (genki.gzen.io)"},
+	{Name: "gzen-learn", Path: "apps/gzen-learn", ProjectName: "gzen-learn", Description: "Language learning platform (learn.gzen.io)"},
+	{Name: "gzen-invest", Path: "apps/gzen-invest", ProjectName: "gzen-invest", Description: "Investment Infographics (invest.gzen.io)"},
 }
 
 func main() {
+	loadEnv()
+
 	if len(os.Args) < 2 {
 		printUsage()
 		os.Exit(1)
@@ -43,12 +46,39 @@ func main() {
 		handleBuild()
 	case "lint":
 		handleLint()
+	case "deploy":
+		handleDeploy()
 	case "help":
 		printUsage()
 	default:
 		fmt.Printf("Unknown command: %s\n", command)
 		printUsage()
 		os.Exit(1)
+	}
+}
+
+func loadEnv() {
+	file, err := os.Open(".env")
+	if err != nil {
+		return // Ignore if .env doesn't exist
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		parts := strings.SplitN(line, "=", 2)
+		if len(parts) == 2 {
+			key := strings.TrimSpace(parts[0])
+			val := strings.TrimSpace(parts[1])
+			// Only set if not already set in environment
+			if os.Getenv(key) == "" {
+				os.Setenv(key, val)
+			}
+		}
 	}
 }
 
@@ -61,18 +91,19 @@ func printUsage() {
 	fmt.Println("  list      List all applications in the monorepo")
 	fmt.Println("  build     Build all Hugo applications concurrently")
 	fmt.Println("  lint      Verify content structure rules on the main gzen app")
+	fmt.Println("  deploy    Build and deploy all applications to Cloudflare Pages")
 	fmt.Println("  help      Show this help info")
 }
 
 func handleList() {
 	fmt.Println("🚀 Registered Monorepo Applications:")
-	fmt.Println(strings.Repeat("-", 80))
-	fmt.Printf("%-15s | %-20s | %s\n", "Name", "Directory", "Description")
-	fmt.Println(strings.Repeat("-", 80))
+	fmt.Println(strings.Repeat("-", 90))
+	fmt.Printf("%-15s | %-20s | %-15s | %s\n", "Name", "Directory", "Cloudflare Proj", "Description")
+	fmt.Println(strings.Repeat("-", 90))
 	for _, app := range apps {
-		fmt.Printf("%-15s | %-20s | %s\n", app.Name, app.Path, app.Description)
+		fmt.Printf("%-15s | %-20s | %-15s | %s\n", app.Name, app.Path, app.ProjectName, app.Description)
 	}
-	fmt.Println(strings.Repeat("-", 80))
+	fmt.Println(strings.Repeat("-", 90))
 }
 
 func handleBuild() {
@@ -90,7 +121,7 @@ func handleBuild() {
 
 			// Check if directory exists
 			if _, err := os.Stat(a.Path); os.IsNotExist(err) {
-				results <- fmt.Errorf("[%s] directory does not exist: %s", a.Name, a.Path).Error()
+				results <- fmt.Sprintf("❌ [%s] directory does not exist: %s", a.Name, a.Path)
 				return
 			}
 
@@ -118,6 +149,53 @@ func handleBuild() {
 	}
 	fmt.Println(strings.Repeat("-", 50))
 	fmt.Printf("Total build time: %v\n", time.Since(start))
+}
+
+func handleDeploy() {
+	token := os.Getenv("CLOUDFLARE_API_TOKEN")
+	if token == "" {
+		fmt.Println("❌ Error: CLOUDFLARE_API_TOKEN is not set in environment or .env file.")
+		os.Exit(1)
+	}
+
+	// 1. Always build first
+	handleBuild()
+	fmt.Println("\n☁️ Starting deployment to Cloudflare Pages...")
+	start := time.Now()
+
+	for _, app := range apps {
+		fmt.Printf("\n📦 Deploying [%s] to project [%s]...\n", app.Name, app.ProjectName)
+		deployStart := time.Now()
+
+		publicDir := filepath.Join(app.Path, "public")
+		if _, err := os.Stat(publicDir); os.IsNotExist(err) {
+			fmt.Printf("❌ Failed: Public directory does not exist for %s. Did the build fail?\n", app.Name)
+			continue
+		}
+
+		// Run wrangler pages deploy <dir> --project-name=<name> --commit-dirty=true
+		// We use --commit-dirty=true to allow deploying uncommitted local changes if needed
+		cmd := exec.Command("npx", "wrangler", "pages", "deploy", publicDir, "--project-name="+app.ProjectName, "--commit-dirty=true")
+		
+		// Set credentials for wrangler in process environment
+		cmd.Env = append(os.Environ(), "CLOUDFLARE_API_TOKEN="+token)
+		
+		// Redirect output so user sees real-time wrangler upload logs
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+
+		err := cmd.Run()
+		duration := time.Since(deployStart)
+
+		if err != nil {
+			fmt.Printf("❌ [%s] Deployment failed after %v: %v\n", app.Name, duration, err)
+		} else {
+			fmt.Printf("✅ [%s] Successfully deployed to Cloudflare Pages in %v\n", app.Name, duration)
+		}
+	}
+
+	fmt.Println("\n🏁 All deployment processes complete.")
+	fmt.Printf("Total execution time: %v\n", time.Since(start))
 }
 
 func handleLint() {
@@ -198,13 +276,6 @@ func lintFile(path string) []string {
 	fullText := strings.ToLower(strings.Join(contentLines, "\n"))
 	var violations []string
 
-	// Simple check: looking for headers or keywords reflecting:
-	// Observation (e.g. "观察" or "observation" or "everyday" or "notice")
-	// Principle (e.g. "禅理" or "道理" or "principle" or "teaching" or "dharma")
-	// Application (e.g. "修行" or "实践" or "application" or "practice" or "today")
-	
-	// We check for three distinct blocks/headers (e.g., using headings #, ##, ### or bold text)
-	// Let's check for standard section structure or semantic parts.
 	hasObservation := strings.Contains(fullText, "观察") || strings.Contains(fullText, "observation") || strings.Contains(fullText, "生活中") || strings.Contains(fullText, "生活中，")
 	hasPrinciple := strings.Contains(fullText, "禅理") || strings.Contains(fullText, "principle") || strings.Contains(fullText, "教导") || strings.Contains(fullText, "佛陀") || strings.Contains(fullText, "dharma")
 	hasApplication := strings.Contains(fullText, "实践") || strings.Contains(fullText, "修行") || strings.Contains(fullText, "application") || strings.Contains(fullText, "如何") || strings.Contains(fullText, "日常")

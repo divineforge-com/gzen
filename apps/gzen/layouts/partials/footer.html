@@ -21,6 +21,7 @@
       <div class="gzen-footer-col">
         <h4>{{ i18n "nav_origin" | default "起源" }}</h4>
         <a href="https://divineforge.com" target="_blank" rel="noopener">divineforge.com</a>
+        <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 0.25rem;">☕ Buy Me a Coffee</a>
         <a href="{{ "about" | relLangURL }}">{{ i18n "nav_about" | default "关于" }}</a>
       </div>
     </div>
@@ -28,9 +29,10 @@
 
   <div class="gzen-footer-bottom">
     <p class="gzen-copyright">
-      &copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved. Spawned from divineforge.com.
+      &copy; {{ now.Format "2006" }} {{ .Site.Title }}. Spawned from <a href="https://divineforge.com" target="_blank" rel="noopener" style="text-decoration: underline;">divineforge.com</a>. Last Build: {{ now.Format "2006-01-02 15:04 MST" }}
     </p>
   </div>
+
 
   {{ if not .Site.Params.disableImageZoom | default true }}
     <script>
