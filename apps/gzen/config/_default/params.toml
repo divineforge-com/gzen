@@ -52,3 +52,4 @@ showLikes      = false
 showViews      = false
 
 mainSections = ["blog"]
+defaultSocialImage = "og-default.svg"
