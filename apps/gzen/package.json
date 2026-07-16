@@ -21,8 +21,8 @@
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "hugo-extended": "^0.162.0",
-    "markdownlint-cli2": "^0.17.0",
-    "postcss": "^8.4.49",
+    "markdownlint-cli2": "^0.23.0",
+    "postcss": "^8.5.19",
     "prettier": "^3.4.2",
     "prettier-plugin-go-template": "^0.0.15",
     "tailwindcss": "^3.4.15"
