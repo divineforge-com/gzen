@@ -38,25 +38,30 @@ layout: "single"
 ## 库
 
 ### CLI / TUI
+
 - [Cobra](https://github.com/spf13/cobra) — CLI 框架
 - [Bubble Tea](https://github.com/charmbracelet/bubbletea) — TUI 框架
 - [Lip Gloss](https://github.com/charmbracelet/lipgloss) — 终端样式
 
 ### Web
+
 - [Chi](https://github.com/go-chi/chi) — 轻量级路由
 - [Gin](https://github.com/gin-gonic/gin) — 全功能 Web 框架
 - [Templ](https://github.com/a-h/templ) — 类型安全 HTML 模板
 
 ### API
+
 - [Connect-Go](https://connectrpc.com/go/) — gRPC 兼容 HTTP API
 - [oapi-codegen](https://github.com/deepmap/oapi-codegen) — OpenAPI 代码生成
 - [gqlgen](https://gqlgen.com/) — GraphQL 服务器
 
 ### 云
+
 - [Pulumi](https://www.pulumi.com/) — 基础设施即代码
 - [opentelemetry-go](https://opentelemetry.io/docs/languages/go/) — 可观测性
 
 ### AI
+
 - [Google AI Go SDK](https://github.com/google/generative-ai-go) — Gemini API
 - [Go ADK](https://github.com/google/go-adk) — 智能体开发套件
 - [LangChain Go](https://github.com/tmc/langchaingo) — LLM 集成

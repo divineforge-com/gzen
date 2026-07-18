@@ -27,15 +27,18 @@ Go の学習と習得におすすめのリソース集。
 ## ライブラリ
 
 ### CLI / TUI
+
 - [Cobra](https://github.com/spf13/cobra) — CLI フレームワーク
 - [Bubble Tea](https://github.com/charmbracelet/bubbletea) — TUI フレームワーク
 
 ### Web
+
 - [Chi](https://github.com/go-chi/chi) — 軽量ルーター
 - [Gin](https://github.com/gin-gonic/gin) — 本格 Web フレームワーク
 - [Templ](https://github.com/a-h/templ) — 型安全 HTML テンプレート
 
 ### API · クラウド · AI
+
 - [Connect-Go](https://connectrpc.com/go/) — gRPC 互換 HTTP API
 - [Pulumi](https://www.pulumi.com/) — Infrastructure as Code
 - [Google AI Go SDK](https://github.com/google/generative-ai-go) — Gemini API

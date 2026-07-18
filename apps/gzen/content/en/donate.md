@@ -39,6 +39,7 @@ Every article, tool, and talk on this site represents hours of research, writing
 ## Transparency
 
 All donations go toward:
+
 - 📝 Technical writing and research
 - 💻 Open-source Go projects
 - 🎤 Conference tickets and travel

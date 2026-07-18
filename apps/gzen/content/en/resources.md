@@ -42,26 +42,31 @@ A curated collection of resources I recommend for learning and mastering Go.
 ## Libraries
 
 ### CLI / TUI
+
 - [Cobra](https://github.com/spf13/cobra) — CLI framework
 - [Bubble Tea](https://github.com/charmbracelet/bubbletea) — TUI framework
 - [Lip Gloss](https://github.com/charmbracelet/lipgloss) — Terminal styling
 
 ### Web
+
 - [Chi](https://github.com/go-chi/chi) — Lightweight router
 - [Gin](https://github.com/gin-gonic/gin) — Full-featured web framework
 - [Templ](https://github.com/a-h/templ) — Type-safe HTML templates
 
 ### API
+
 - [Connect-Go](https://connectrpc.com/go/) — gRPC-compatible HTTP APIs
 - [oapi-codegen](https://github.com/deepmap/oapi-codegen) — OpenAPI server/client generation
 - [gqlgen](https://gqlgen.com/) — GraphQL server
 
 ### Cloud
+
 - [Pulumi](https://www.pulumi.com/) — Infrastructure as Code
 - [Cloudflare Go SDK](https://github.com/cloudflare/cloudflare-go) — Cloudflare API
 - [opentelemetry-go](https://opentelemetry.io/docs/languages/go/) — Observability
 
 ### AI
+
 - [Google AI Go SDK](https://github.com/google/generative-ai-go) — Gemini API
 - [Go ADK](https://github.com/google/go-adk) — Agent Development Kit
 - [LangChain Go](https://github.com/tmc/langchaingo) — LLM integration
