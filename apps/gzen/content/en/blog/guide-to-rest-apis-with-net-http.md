@@ -3,7 +3,7 @@ title: "Go's net/http: A Complete Guide to Building REST APIs"
 description: "Building production-ready REST APIs using only Go's standard library — middleware, routing, JSON, and testing patterns."
 date: 2026-07-16
 tags: ["web", "api", "net-http", "rest", "testing"]
-author: "GZen.io"
+author: "gZen.io"
 ---
 
 Go's standard library `net/http` package is surprisingly capable. Before reaching for Gin, Echo, or Chi, it's worth understanding what the stdlib gives you out of the box.

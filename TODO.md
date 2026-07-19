@@ -1,4 +1,4 @@
-# GZen.io — Go Advocacy Hub Implementation Checklist
+# gZen.io — Go Advocacy Hub Implementation Checklist
 
 Tracks the transformation from ecosystem gateway to Go advocacy blog and portfolio.
 
@@ -10,78 +10,85 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 - [x] Identify cleanup inventory
 - [x] Write updated PLAN.md
 - [x] Update README.md
-- [ ] Confirm direction before execution
+- [x] Confirm direction before execution
 
 ## Phase 1: Cleanup & Foundation
 
 ### Content Rewrites
-- [ ] Rewrite `content/en/about.md` — Go-focused bio, tech stack, GDE journey
-- [ ] Rewrite `content/zh/about.md` — matching Chinese version
-- [ ] Rewrite `content/ja/about.md` — matching Japanese version
+- [x] Rewrite `content/en/about.md` — Go-focused bio, tech stack, GDE journey
+- [x] Rewrite `content/zh/about.md` — matching Chinese version
+- [x] Rewrite `content/ja/about.md` — matching Japanese version
 
 ### Configuration
-- [ ] Update `hugo.toml` — hero text, taglines, descriptions for all 3 languages
-- [ ] Update `config/_default/params.toml` — mainSections, article defaults
-- [ ] Update `config/_default/menus.toml` — Blog, Speaking, Resources, Playground, Donate
+- [x] Update `hugo.toml` — hero text, taglines, descriptions for all 3 languages
+- [x] Update `config/_default/params.toml` — mainSections, article defaults
+- [x] Update `config/_default/menus.toml` — Blog, Speaking, Resources, Playground, Donate
 
 ### Homepage
-- [ ] Rewrite `layouts/partials/home/custom.html` — Go hero, pillar cards, featured posts
-- [ ] Remove philosophical banner, lotus SVG, ecosystem grid
-- [ ] Add Go code snippet hero visual
+- [x] Rewrite `layouts/partials/home/custom.html` — Go hero, pillar cards, featured posts
+- [x] Remove philosophical banner, lotus SVG, ecosystem grid
+- [x] Add Go code snippet hero visual
 
 ### Header & Footer
-- [ ] Update `layouts/partials/header/basic.html` — nav: Blog / Speaking / Resources / Playground / Donate
-- [ ] Update `layouts/partials/footer.html` — Go topic links + donation CTA
+- [x] Update `layouts/partials/header/basic.html` — nav: Blog / Speaking / Resources / Playground / Donate
+- [x] Update `layouts/partials/footer.html` — Go topic links + donation CTA
 
 ### i18n
-- [ ] Update `i18n/en.toml` — new nav strings, Go-focused labels
-- [ ] Update `i18n/zh.toml` — matching Chinese
-- [ ] Update `i18n/ja.toml` — matching Japanese
+- [x] Update `i18n/en.toml` — new nav strings, Go-focused labels
+- [x] Update `i18n/zh.toml` — matching Chinese
+- [x] Update `i18n/ja.toml` — matching Japanese
 
 ### Design
-- [ ] Add JetBrains Mono to `extend-head.html` font loading
-- [ ] Update `tailwind.config.js` — add JetBrains Mono
-- [ ] Update `assets/css/custom.css` — replace lotus styles, add code block aesthetics
-- [ ] Create Go-themed emblem (GZ monogram or geometric mark)
+- [x] Add JetBrains Mono to `extend-head.html` font loading
+- [x] Update `tailwind.config.js` — add JetBrains Mono
+- [x] Update `assets/css/custom.css` — replace lotus styles, add code block aesthetics
+- [x] Create Go-themed emblem (GZ monogram or geometric mark)
 
 ### Cleanup
-- [ ] Remove `static/images/yijing-mountain.png`
-- [ ] Remove `static/images/yijing-yin-yang.png`
-- [ ] Remove `archetypes/koans.md`
-- [ ] Remove `archetypes/principles.md`
-- [ ] Remove `scripts/new-post.js` (or rewrite for Go posts)
-- [ ] Remove `scripts/prune-branches.sh` (if not needed)
-- [ ] Update `AGENTS.md` with new identity
+- [x] Remove `static/images/yijing-mountain.png`
+- [x] Remove `static/images/yijing-yin-yang.png`
+- [x] Remove `archetypes/koans.md`
+- [x] Remove `archetypes/principles.md`
+- [x] Remove `scripts/new-post.js` (or rewrite for Go posts)
+- [x] Remove `scripts/prune-branches.sh` (if not needed)
+- [x] Update `AGENTS.md` with new identity
+
+### Branding Polish (2026-07-18)
+- [x] Remove legacy `[params.ecosystem]` from `hugo.toml`
+- [x] Fix `unsafe = false` → `true` for content rendering
+- [x] Add Noto Sans JP + Noto Serif JP font loading for Japanese locale
+- [x] Verify OG default image is Go-branded ✅
 
 ## Phase 2: Blog System
 
-- [ ] Create `content/en/blog/` directory structure
-- [ ] Create `content/zh/blog/` directory structure
-- [ ] Create `content/ja/blog/` directory structure
+- [x] Create `content/en/blog/` directory structure
+- [x] Create `content/zh/blog/` directory structure
+- [x] Create `content/ja/blog/` directory structure
 - [ ] Blog list template (`layouts/blog/list.html`) — chronological, tag filter, pagination
 - [ ] Blog single template (`layouts/blog/single.html`) — code blocks, TOC, related posts
 - [ ] Tag taxonomy support
 - [ ] RSS feed generation
-- [ ] Seed 3-5 initial Go blog posts (EN)
-- [ ] Translate seed posts to ZH
+- [x] Seed 3-5 initial Go blog posts (EN)
+- [ ] Translate seed posts to ZH/JA
 
 ## Phase 3: Supporting Pages
 
-- [ ] Speaking page — talk archive, slides, video embeds, upcoming
-- [ ] GDE roadmap timeline
-- [ ] Recommendations page — books, courses, tools, libraries
-- [ ] Playground index — interactive Go examples
-- [ ] Donate page — GitHub Sponsors, BuyMeACoffee
-- [ ] About page — bio, journey, stack, credits
+- [x] Speaking page — talk archive, slides, video embeds, upcoming
+- [x] GDE roadmap timeline
+- [x] Recommendations page — books, courses, tools, libraries
+- [x] Playground index — interactive Go examples
+- [x] Donate page — GitHub Sponsors, BuyMeACoffee
+- [x] About page — bio, journey, stack, credits
+- [ ] Polish Speaking page with actual talk content
 
 ## Phase 4: Aesthetic Polish
 
-- [ ] Refine hero visual (code snippet + Go emblem)
-- [ ] Code block styling with JetBrains Mono
-- [ ] Syntax highlighting polish
+- [x] Refine hero visual (code snippet + Go emblem)
+- [x] Code block styling with JetBrains Mono
+- [x] Syntax highlighting polish
+- [x] Open Graph images for blog posts
 - [ ] Responsive testing (mobile, tablet, desktop)
 - [ ] Performance audit (Lighthouse >90)
-- [ ] Open Graph images for blog posts
 - [ ] Sitemap & SEO metadata
 - [ ] Accessibility audit
 
@@ -95,5 +102,5 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 
 ---
 
-**Status**: Phase 0 (Planning)
-**Last Updated**: 2026-07-16
+**Status**: Phase 1 complete / Phase 2 in progress
+**Last Updated**: 2026-07-18

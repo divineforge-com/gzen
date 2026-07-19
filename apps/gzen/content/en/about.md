@@ -1,49 +1,55 @@
 ---
-title: "About GZen.io"
-description: "GZen.io is a Go (Golang) advocacy blog and portfolio — technical articles, talks, and curated resources."
+title: "About gZen.io"
+description: "A humble Go learning journal — sharing what I discover, one article at a time."
 layout: "single"
 ---
 
-## Go Advocacy & Engineering Craft
+## Hi, I'm William
 
-GZen.io is a focused **Go (Golang) advocacy hub** — a technical blog, GDE portfolio, and resource collection covering the breadth of the Go ecosystem. Built by a developer passionate about Go's philosophy of simplicity, concurrency, and readability.
+I'm a developer who fell in love with Go. This site is where I write down what I learn — partly to remember it myself, partly because sharing helps us both.
 
----
-
-## Content Pillars
-
-Six areas of Go engineering explored through in-depth articles, benchmarks, and real-world patterns:
-
-- **TUI** — Bubble Tea, Charm ecosystem, terminal UI patterns, Cobra + Viper CLI design
-- **Web Apps** — net/http, Gin, Echo, Chi, Templ, HTMX, real-time with WebSockets
-- **API** — REST, gRPC, Connect-Go, OpenAPI codegen, GraphQL with gqlgen
-- **Cloud** — Cloudflare Workers (TinyGo/WASM), GCP SDKs, serverless Go, minimal containers with Ko
-- **AI SDKs** — Go ADK, Gemini SDK, LangChain Go, PicoClaw ultra-lightweight agent
-- **General Go** — concurrency patterns, generics, testing (fuzzing, table-driven), profiling, module design
+I'm not an expert. I'm someone who reads the Go docs, breaks things, fixes them, and occasionally writes about the journey. If anything here helps you too, that's a wonderful bonus.
 
 ---
 
-## GDE Roadmap
+## What This Is
 
-This site tracks the journey toward **Google Developer Expert (GDE) for Go** — including conference talk proposals, workshop materials, community contributions, and published content. The speaking page archives delivered talks with slides and video.
+**gZen.io** is a small, personal space for Go-related writing. Right now it's just a few blog posts. Over time, it might grow into something more — talks, tools, resources. Or it might stay small. Both are fine.
 
----
+What I write about:
 
-## Technical Approach
-
-GZen.io itself is a demonstration of Go's engineering principles:
-
-1. **Static by default** — Built with [Hugo](https://gohugo.io) (written in Go), yielding zero runtime dependencies, zero database lookups, instant global delivery via Cloudflare Pages CDN.
-2. **Monorepo automation** — Managed by [`gzen-tool`](https://github.com/divineforge/gzen), a custom Go CLI that parallelizes multi-site builds using Goroutines in under 200ms.
-3. **Minimal AI automation** — Powered by **PicoClaw**, a custom Go-based AI agent running in <10MB RAM, handling content workflows and translation pipelines.
+- **Go patterns** — concurrency, generics, testing, the things that make Go... Go
+- **Building things** — TUI apps with Bubble Tea, web services, CLI tools
+- **Cloud & deployment** — because code needs to run somewhere
+- **Learning in public** — mistakes, discoveries, the honest process
 
 ---
 
-## Support
+## Why "gZen"
 
-If you find the content here valuable, consider supporting via:
+It's a name that stuck. The "g" is for Go. The "Zen" is for the philosophy of simplicity that Go embodies. The Chinese 善聚慧生 means "where goodness gathers" — a reminder that the best things come from community and kindness, not just cleverness.
 
-- [GitHub Sponsors](https://github.com/sponsors/divineforge)
-- [Buy Me a Coffee](https://buymeacoffee.com/divineforge)
+---
 
-Your support enables more in-depth articles, open-source contributions, and conference participation.
+## The Honest Truth
+
+I started this site because I wanted a place to write. Not because I have all the answers — but because the act of writing forces me to understand things better. Every article here started as me trying to figure something out.
+
+If you're also learning Go, or thinking about it, or just curious — welcome. We're in this together.
+
+---
+
+## Technical Notes
+
+This site is built with [Hugo](https://gohugo.io) and deployed on [Cloudflare Pages](https://pages.cloudflare.com). It's a static site — fast, simple, no database, no magic. Just HTML, CSS, and a little JavaScript. Kind of like Go itself.
+
+---
+
+## Get in Touch
+
+If you want to say hello, correct something I got wrong, or just chat about Go:
+
+- [GitHub](https://github.com/divineforge)
+- [Buy Me a Coffee](https://buymeacoffee.com/divineforge) — if you found something useful here
+
+Thanks for reading. Go Beyond. Build Better.

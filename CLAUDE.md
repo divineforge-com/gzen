@@ -1,4 +1,4 @@
-# CLAUDE.md — GZen.io · Go Advocacy Hub
+# CLAUDE.md — gZen.io · Cloud · AI · Platform
 
 This file governs agent behavior on this repository. Read it fully before any action.
 
@@ -6,13 +6,13 @@ This file governs agent behavior on this repository. Read it fully before any ac
 
 ## Project Identity
 
-**GZen.io** is a multi-site monorepo:
-- **`gzen.io`** — Go (Golang) advocacy blog, GDE portfolio, and resource hub
+**gZen.io** is a multi-site monorepo:
+- **`gzen.io`** — Cloud · AI · Platform blog, GDE/AWS Champion portfolio, and resource hub
 - **`ki.gzen.io`** — TCM & philosophy notebooks (side project)
 - **`learn.gzen.io`** — meditative language learning (side project)
 - **`invest.gzen.io`** — mindful investing infographics (side project)
 
-The main site (`apps/gzen`) covers six Go content pillars: TUI, Web Apps, API, Cloud & Infrastructure, AI SDKs, and General Go Engineering.
+The main site (`apps/gzen`) covers eight Go content pillars: TUI, Web Apps, API, Cloud & Infrastructure, AI SDKs, General Go Engineering, Cloud Architecture & Platform Engineering, and Business & Consulting.
 
 - **Language ordering**: English primary, Chinese secondary, Japanese tertiary
 - **Monorepo setup**: Manage via `gzen-tool` in the root directory

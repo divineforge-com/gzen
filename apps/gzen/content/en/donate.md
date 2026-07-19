@@ -1,51 +1,35 @@
 ---
-title: "Donate"
-description: "Support Go open-source content, tools, and conference participation."
+title: "Support"
+description: "If something here helped you, a small gesture goes a long way."
 layout: "single"
 ---
 
-## Why Donate?
+## Thank you
 
-Every article, tool, and talk on this site represents hours of research, writing, coding, and community engagement. Your support helps:
+Writing these articles takes time — research, code, editing, screenshots. If any of it helped you learn Go or solve a problem, I'd appreciate a coffee.
 
-- **Create deeper content** — More time for in-depth technical articles and benchmarks
-- **Open-source contributions** — Maintaining Go libraries, tools, and example repos
-- **Conference participation** — Travel, tickets, and preparation for speaking engagements
-- **Community building** — Workshop materials, meetup organization, and mentorship
+No tiers, no pressure, no promises of exclusive content. Just a human making things and another human saying "thanks."
 
 ---
 
 ## Ways to Support
 
-### One-Time
+**One-time:**
+- [☕ Buy Me a Coffee](https://buymeacoffee.com/divineforge) — a quick thank-you
 
-[☕ **Buy Me a Coffee**](https://buymeacoffee.com/divineforge) — Perfect for a one-time thank-you. Every coffee funds more Go content.
-
-### Monthly
-
-[💜 **GitHub Sponsors**](https://github.com/sponsors/divineforge) — Recurring support with tiered benefits including early access to articles, direct Q&A, and sponsorship recognition on this site.
+**Recurring:**
+- [💜 GitHub Sponsors](https://github.com/sponsors/divineforge) — monthly support if you find the content consistently useful
 
 ---
 
-## What Your Support Funds
+## What It Funds
 
-| $5/mo | $15/mo | $50/mo |
-|-------|--------|--------|
-| Supports 1 article per month | Supports 3 articles + 1 open-source PR | Supports conference attendance + talk prep |
-| Name in supporter list | Name + link on donate page | Logo placement + dedicated content |
+- More articles (research takes time)
+- Open-source Go tools and examples
+- Eventually, conference tickets and speaking
 
----
-
-## Transparency
-
-All donations go toward:
-- 📝 Technical writing and research
-- 💻 Open-source Go projects
-- 🎤 Conference tickets and travel
-- 📚 Learning materials and certifications
-
-No funds are used for advertising, marketing, or non-Go activities.
+That's it. No marketing budget, no office, no employees. Just me, a laptop, and Go.
 
 ---
 
-Thank you for being part of this journey. Go Beyond. Build Better.
+Thanks for reading. Go Beyond. Build Better.

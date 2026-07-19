@@ -3,7 +3,7 @@ title: "Building Beautiful Terminal UIs with Bubble Tea"
 description: "A practical guide to building interactive terminal applications in Go using the Bubble Tea framework and the Charm ecosystem."
 date: 2026-07-16
 tags: ["tui", "bubble-tea", "charm", "cli"]
-author: "GZen.io"
+author: "gZen.io"
 ---
 
 The terminal doesn't have to be boring. With [Bubble Tea](https://github.com/charmbracelet/bubbletea), you can build rich, interactive terminal user interfaces (TUIs) in Go using an elegant Elm-inspired architecture.

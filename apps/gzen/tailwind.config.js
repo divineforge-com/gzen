@@ -36,21 +36,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        mono: ['"JetBrains Mono"', '"Noto Sans SC"', 'ui-monospace', 'monospace'],
-        sans: [
-          '"Noto Sans SC"',
-          '"Noto Sans JP"',
-          '"PingFang SC"',
-          '"Microsoft YaHei"',
-          'system-ui',
-          'sans-serif',
-        ],
-        serif: [
-          '"Noto Serif SC"',
-          '"Noto Serif JP"',
-          '"Georgia"',
-          'serif',
-        ],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        sans: ['system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Georgia', 'serif'],
         code: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       fontSize: {

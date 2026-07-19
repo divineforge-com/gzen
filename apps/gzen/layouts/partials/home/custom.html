@@ -1,15 +1,17 @@
-{{/* GZen.io custom landing page — Go advocacy hub */}}
+{{/* GZen.io — humble landing page */}}
 
 <section class="gzen-home-hero" aria-labelledby="gzen-home-title">
   <div class="gzen-hero-copy">
-    <p class="gzen-kicker">{{ .Site.Language.Params.heroKicker | default "Go (Golang) Advocacy" }}</p>
-    <h1 id="gzen-home-title">{{ .Site.Language.Params.heroTitle | default "Crafted in Go" }}</h1>
-    <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default "Technical articles, talks, and resources on building with Go — from terminal UIs to cloud infrastructure to AI SDKs." }}</p>
+    <p class="gzen-kicker">{{ .Site.Language.Params.heroKicker | default "Go (Golang)" }}</p>
+    <h1 id="gzen-home-title">{{ .Site.Language.Params.heroTitle | default "Learning in public." }}</h1>
+    <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default "A small space for Go articles, patterns, and honest notes from someone still figuring it out." }}</p>
     <div class="gzen-hero-actions">
       <a href="{{ "blog" | relLangURL }}" class="gzen-primary-link">
-        {{ .Site.Language.Params.heroAction | default "Start Reading" }}
+        {{ .Site.Language.Params.heroAction | default "Read the blog" }}
       </a>
-      <span class="gzen-hero-note">{{ .Site.Language.Params.languageNote }}</span>
+      <a href="{{ "about" | relLangURL }}" class="gzen-secondary-link">
+        About me
+      </a>
     </div>
   </div>
 
@@ -22,7 +24,7 @@
         <span class="gzen-terminal-title">gzen.io</span>
       </div>
       <div class="gzen-terminal-body">
-        <span class="gzen-token-comment">// Go Beyond. Build Better.</span>
+        <span class="gzen-token-comment">// still learning</span>
         <br>
         <span class="gzen-token-keyword">package</span> <span class="gzen-token-type">main</span>
         <br>
@@ -34,7 +36,7 @@
         <br>
         <span class="gzen-token-indent"></span>fmt.<span class="gzen-token-func">Println</span>(
         <br>
-        <span class="gzen-token-indent2"></span><span class="gzen-token-string">"Crafted in Go."</span>
+        <span class="gzen-token-indent2"></span><span class="gzen-token-string">"Go Beyond. Build Better."</span>
         <br>
         <span class="gzen-token-indent"></span>)
         <br>
@@ -48,14 +50,21 @@
 
 <div class="gzen-home-content">
 
-  {{/* Go Tagline */}}
+  {{/* Simple tagline */}}
   <div class="gzen-tagline-banner">
     <blockquote class="gzen-tagline-code">
-      <span class="gzen-token-keyword">func</span> <span class="gzen-token-func">advocate</span>() {
+      <span class="gzen-token-comment">// one article at a time</span>
       <br>
-      <span class="gzen-token-indent"></span><span class="gzen-token-keyword">for</span> <span class="gzen-token-type">range</span> <span class="gzen-token-func">sixPillars</span>() {
       <br>
-      <span class="gzen-token-indent2"></span>fmt.<span class="gzen-token-func">Println</span>(<span class="gzen-token-string">"Simple. Concurrent. Readable."</span>)
+      <span class="gzen-token-keyword">func</span> <span class="gzen-token-func">learn</span>() {
+      <br>
+      <span class="gzen-token-indent"></span><span class="gzen-token-keyword">for</span> {
+      <br>
+      <span class="gzen-token-indent2"></span><span class="gzen-token-func">read</span>()
+      <br>
+      <span class="gzen-token-indent2"></span><span class="gzen-token-func">break</span>()
+      <br>
+      <span class="gzen-token-indent2"></span><span class="gzen-token-func">write</span>()
       <br>
       <span class="gzen-token-indent"></span>}
       <br>
@@ -63,143 +72,56 @@
     </blockquote>
   </div>
 
-  {{/* Content Pillars Grid */}}
+  {{/* Recent blog posts */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
-      <h2>{{ i18n "nav_blog" | default "Content Pillars" }}</h2>
+      <h2>Recent Posts</h2>
+      <a href="{{ "blog" | relLangURL }}" class="gzen-secondary-link" style="font-size:0.8rem; padding:0.4rem 0.8rem;">All posts →</a>
     </div>
-    <div class="gzen-grid gzen-grid-3col">
-      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">01</span>
-        <div class="gzen-card-icon-wrap">
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
-            <rect x="2" y="3" width="20" height="14" rx="2" stroke-linecap="round"/>
-            <path d="M8 21h8M12 17v4" stroke-linecap="round"/>
-            <path d="M7 8h10M7 12h6" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "pillar_tui" | default "TUI" }}</h3>
-        <p>{{ i18n "pillar_tui_desc" | default "Terminal UIs with Bubble Tea, Charm ecosystem, Cobra + Viper CLI design, and terminal UI patterns." }}</p>
-        <span class="gzen-card-url">Explore TUI &rarr;</span>
+    <div class="gzen-grid">
+      {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
+      <a href="{{ .Permalink }}" class="gzen-card gzen-glass-card">
+        <span class="gzen-card-tag">{{ .Date.Format "Jan 2006" }}</span>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Description | default (truncate 120 .Summary) }}</p>
+        <span class="gzen-card-url">Read →</span>
       </a>
-
-      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">02</span>
-        <div class="gzen-card-icon-wrap">
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
-            <path d="M12 2L2 7l10 5 10-5-10-5z" stroke-linejoin="round"/>
-            <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "pillar_webapp" | default "Web Apps" }}</h3>
-        <p>{{ i18n "pillar_webapp_desc" | default "HTTP services with net/http, Gin, Echo, Chi, Templ, HTMX, and real-time WebSocket patterns." }}</p>
-        <span class="gzen-card-url">Explore Web &rarr;</span>
-      </a>
-
-      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">03</span>
-        <div class="gzen-card-icon-wrap">
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
-            <path d="M4 4h16v16H4z" stroke-linejoin="round"/>
-            <path d="M9 9l6 6M15 9l-6 6" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "pillar_api" | default "API" }}</h3>
-        <p>{{ i18n "pillar_api_desc" | default "REST, gRPC, Connect-Go, OpenAPI codegen, and GraphQL service design in Go." }}</p>
-        <span class="gzen-card-url">Explore API &rarr;</span>
-      </a>
-
-      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">04</span>
-        <div class="gzen-card-icon-wrap">
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
-            <path d="M3 15h4l2-4 3 7 3-5 2 2h4" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3 21h18" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "pillar_cloud" | default "Cloud & Infrastructure" }}</h3>
-        <p>{{ i18n "pillar_cloud_desc" | default "Cloudflare Workers, GCP SDKs, serverless Go, minimal containers with Ko, infra-as-code." }}</p>
-        <span class="gzen-card-url">Explore Cloud &rarr;</span>
-      </a>
-
-      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">05</span>
-        <div class="gzen-card-icon-wrap">
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "pillar_ai" | default "AI SDKs" }}</h3>
-        <p>{{ i18n "pillar_ai_desc" | default "Go ADK, Gemini SDK, LangChain Go, building AI-powered tools, PicoClaw agent framework." }}</p>
-        <span class="gzen-card-url">Explore AI &rarr;</span>
-      </a>
-
-      <a href="{{ "blog" | relLangURL }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">06</span>
-        <div class="gzen-card-icon-wrap">
-          <svg class="gzen-domain-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gzen-accent)" stroke-width="1.5">
-            <path d="M4 6h16M4 12h16M4 18h12" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>{{ i18n "pillar_general" | default "General Go" }}</h3>
-        <p>{{ i18n "pillar_general_desc" | default "Concurrency, generics, testing, profiling, module design, code generation, best practices." }}</p>
-        <span class="gzen-card-url">Explore General &rarr;</span>
-      </a>
+      {{ end }}
     </div>
   </section>
 
-  {{/* Go Tenets */}}
+  {{/* What I write about — simple */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
-      <h2>Go Tenets</h2>
+      <h2>What I Write About</h2>
     </div>
     <div class="gzen-grid gzen-grid-3col">
       <div class="gzen-card gzen-pillar-card no-hover">
-        <span class="gzen-card-tag">Simplicity</span>
-        <h3>{{ i18n "tenet_simplicity" | default "Simplicity" }}</h3>
-        <p>{{ i18n "tenet_simplicity_desc" | default "Clear, readable code that is easy to reason about. Go's design prioritizes clarity over cleverness." }}</p>
+        <span class="gzen-card-tag">Go</span>
+        <h3>Patterns & idioms</h3>
+        <p>Concurrency, generics, testing — the things that make Go worth learning.</p>
       </div>
       <div class="gzen-card gzen-pillar-card no-hover">
-        <span class="gzen-card-tag">Concurrency</span>
-        <h3>{{ i18n "tenet_concurrency" | default "Concurrency" }}</h3>
-        <p>{{ i18n "tenet_concurrency_desc" | default "Goroutines, channels, and select — built-in primitives for scalable, concurrent programs." }}</p>
+        <span class="gzen-card-tag">Build</span>
+        <h3>TUIs, web, CLI</h3>
+        <p>Terminal apps with Bubble Tea, web services, command-line tools.</p>
       </div>
       <div class="gzen-card gzen-pillar-card no-hover">
-        <span class="gzen-card-tag">Tooling</span>
-        <h3>{{ i18n "tenet_tooling" | default "Tooling" }}</h3>
-        <p>{{ i18n "tenet_tooling_desc" | default "Fast compilation, built-in formatting, testing, profiling, and a single binary deploy model." }}</p>
+        <span class="gzen-card-tag">Ship</span>
+        <h3>Cloud & deploy</h3>
+        <p>Getting Go code running — containers, serverless, Cloudflare Pages.</p>
       </div>
     </div>
   </section>
 
-  {{/* Tech Stack */}}
-  <section class="gzen-section">
-    <div class="gzen-section-heading">
-      <h2>Stack</h2>
-    </div>
-    <div class="gzen-card gzen-glass-card no-hover">
-      <div class="gzen-tech-content">
-        <p>This site is a living demonstration of Go engineering principles. Built with:</p>
-        <ul class="gzen-tech-list">
-          <li><strong>Hugo</strong> — the world's fastest static site generator, itself written in Go. Zero runtime dependencies, instant CDN delivery.</li>
-          <li><strong>gzen-tool</strong> — a custom Go CLI for parallel multi-site builds, using Goroutines to compile all sub-sites in under 200ms.</li>
-          <li><strong>Cloudflare Pages</strong> — global edge deployment with no servers to manage.</li>
-          <li><strong>JetBrains Mono</strong> — code-first typography that communicates precision and craft.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  {{/* Support CTA */}}
+  {{/* Support CTA — modest */}}
   <section class="gzen-section">
     <div class="gzen-card gzen-glass-card gzen-support-card no-hover">
       <div class="gzen-support-content">
-        <h3>{{ i18n "support_title" | default "Support Open Source Go" }}</h3>
-        <p>{{ i18n "support_desc" | default "If the articles and resources here help you, consider supporting more Go content creation." }}</p>
+        <h3>Enjoying the articles?</h3>
+        <p>If something here helped you learn Go, a coffee would make my day. No pressure.</p>
         <div class="gzen-support-links">
-          <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-primary-link">☕ {{ i18n "donate_coffee" | default "Buy Me a Coffee" }}</a>
-          <a href="https://github.com/sponsors/divineforge" target="_blank" rel="noopener" class="gzen-secondary-link">{{ i18n "donate_github" | default "GitHub Sponsors" }}</a>
+          <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-primary-link">☕ Buy Me a Coffee</a>
         </div>
       </div>
     </div>

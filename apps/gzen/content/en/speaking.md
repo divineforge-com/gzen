@@ -1,48 +1,40 @@
 ---
 title: "Speaking"
-description: "Conference talks, workshops, and community presentations on Go — GDE roadmap and speaking portfolio."
+description: "Eventually, I'd like to share what I learn at meetups and conferences. For now, I'm just writing."
 layout: "single"
 ---
 
-## GDE Roadmap
+## Someday
 
-Journey toward **Google Developer Expert (Go)** — tracking CFP submissions, accepted talks, workshops, and community contributions.
+I'd love to give a talk at a Go meetup or conference. Not because I have all the answers — but because I've learned things the hard way, and maybe that's useful to someone.
 
-### Milestones
-
-| Date | Event | Status |
-|------|-------|--------|
-| 2026 Q3 | First blog post series: Go concurrency patterns | ✅ Published |
-| 2026 Q4 | Go TUI workshop — Bubble Tea deep dive | 🔄 In progress |
-| 2027 Q1 | Conference talk submission: "Go Beyond the Terminal" | 📝 Planning |
-
-### Talk Topics in Development
-
-- **Go Beyond the Terminal** — Building production TUI apps with Bubble Tea
-- **stdlib or Framework?** — When to use net/http vs Gin/Echo/Chi
-- **Concurrency Made Practical** — Real-world Go concurrency patterns
-- **Go in the AI Era** — Go ADK, Gemini SDK, and building AI-powered CLI tools
+For now, I'm writing articles instead. Writing is practice for speaking, and it reaches people I'd never meet in person.
 
 ---
 
-## Upcoming
+## What I'd Talk About
 
-*No upcoming appearances scheduled yet. CFP submissions opening soon.*
+If someone gave me a microphone tomorrow:
 
----
-
-## Past Talks
-
-*No talks archived yet. First talk submissions planned for late 2026.*
+- **Go concurrency made practical** — not the textbook version, but the patterns I actually use
+- **Building TUIs with Bubble Tea** — because terminal apps are fun and useful
+- **Learning Go from Python** — the mental shifts that helped me
 
 ---
 
-## Workshop Materials
+## Topics I'm Exploring
 
-Workshop repositories and slide decks will be linked here as they are developed.
+Things I'm writing about that might eventually become talks:
+
+- Concurrency patterns in real projects
+- Building CLI tools that people actually want to use
+- Go in cloud-native architectures
+- The honest experience of learning a new language mid-career
 
 ---
 
-## Interested in Having Me Speak?
+## Interested?
 
-If you're organizing a Go meetup, conference, or corporate workshop, [reach out](https://divineforge.com) — I'd love to discuss topics around Go engineering, TUI development, and cloud-native patterns.
+If you're organizing a Go meetup or know someone who is, I'd love to chat. No pressure — just planting seeds.
+
+[Get in touch](https://github.com/divineforge) — even a DM on GitHub works.

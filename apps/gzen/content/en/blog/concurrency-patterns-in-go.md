@@ -3,7 +3,7 @@ title: "Concurrency in Go: Goroutines, Channels, and Select"
 description: "A deep dive into Go's concurrency primitives — goroutine lifecycle, channel patterns, the select statement, and real-world idioms."
 date: 2026-07-16
 tags: ["concurrency", "goroutines", "channels", "patterns"]
-author: "GZen.io"
+author: "gZen.io"
 ---
 
 Go's concurrency model is one of its defining features. Goroutines and channels make concurrent programming more approachable than threads and locks — but they still require care and understanding.

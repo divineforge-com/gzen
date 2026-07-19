@@ -1,15 +1,13 @@
 baseURL = "https://gzen.io/"
-title = "GZen.io"
+title = "gZen.io"
 theme = "blowfish"
-defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 summaryLength = 70
 
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = false
+      unsafe = true
   [markup.highlight]
     style = "monokai"
     noClasses = false
@@ -29,61 +27,14 @@ summaryLength = 70
   tag      = "tags"
   category = "categories"
 
-[languages]
-  [languages.en]
-    label = "English"
-    weight       = 1
-    title        = "GZen.io"
-    contentDir   = "content/en"
-    [languages.en.params]
-      displayName = "EN"
-      subtitle    = "Go Beyond. Build Better."
-      description = "GZen.io — A Go (Golang) advocacy blog covering TUI, web apps, APIs, cloud infrastructure, AI SDKs, and general Go engineering."
-      heroKicker  = "Go (Golang) Advocacy"
-      heroTitle   = "Crafted in Go"
-      heroLead    = "Technical articles, talks, and resources on building with Go — from terminal UIs to cloud infrastructure to AI SDKs. A GDE roadmap in progress."
-      heroAction  = "Start Reading"
-      languageNote = "Also available in Chinese and Japanese."
-      tagline     = "func main() { fmt.Println(\"Go Beyond. Build Better.\") }"
-
-  [languages.zh]
-    label = "中文"
-    weight       = 2
-    title        = "GZen.io"
-    contentDir   = "content/zh"
-    [languages.zh.params]
-      displayName = "CN"
-      subtitle    = "以 Go 超越，构建更好"
-      description = "GZen.io — 涵盖 TUI、Web 应用、API、云基础设施、AI SDK 及通用 Go 工程的 Go 语言技术博客。"
-      heroKicker  = "Go 语言实践"
-      heroTitle   = "用 Go 精工细作"
-      heroLead    = "关于 Go 语言的技术文章、演讲与资源推荐 —— 从终端界面到云原生架构再到 AI SDK。Google 开发者专家成长之路。"
-      heroAction  = "开始阅读"
-      languageNote = "另有英文与日文版本。"
-      tagline     = "func main() { fmt.Println(\"以 Go 超越，构建更好\") }"
-
-  [languages.ja]
-    label = "日本語"
-    weight       = 3
-    title        = "GZen.io"
-    contentDir   = "content/ja"
-    [languages.ja.params]
-      displayName = "JP"
-      subtitle    = "Go で超える、より良く作る"
-      description = "GZen.io — TUI、Web アプリ、API、クラウド基盤、AI SDK、そして一般 Go エンジニアリングをカバーする Go 言語アドボカシーブログ。"
-      heroKicker  = "Go 言語アドボカシー"
-      heroTitle   = "Go で紡ぐ"
-      heroLead    = "ターミナル UI からクラウド基盤、AI SDK まで — Go で作る技術記事、トーク、リソース。GDE ロードマップ進行中。"
-      heroAction  = "読み始める"
-      languageNote = "英語・中国語版もあります。"
-      tagline     = "func main() { fmt.Println(\"Go で超える、より良く作る\") }"
-
 [params]
-  brand          = "GZen.io"
-  brandSubtitle  = "Go Beyond"
-  brandTagline   = "Crafted in Go."
-
-  [params.ecosystem]
-    ki          = "https://ki.gzen.io"
-    learn       = "https://learn.gzen.io"
-    invest      = "https://invest.gzen.io"
+  brand          = "gZen.io"
+  brandSubtitle  = "Learning Go"
+  brandTagline   = "One article at a time."
+  subtitle    = "Go Beyond. Build Better."
+  description = "gZen.io — A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out."
+  heroKicker  = "Go (Golang)"
+  heroTitle   = "Learning in public."
+  heroLead    = "A small space for Go articles, patterns, and honest notes from someone still figuring it out."
+  heroAction  = "Read the blog"
+  tagline     = "// one article at a time"

@@ -4,12 +4,12 @@
       <div class="gzen-brand">
         <span class="gzen-brand-mark" aria-hidden="true">GZ</span>
         <span>
-          <strong>GZen.io</strong>
+          <strong>{{ .Site.Title }}</strong>
           <small>{{ .Site.Language.Params.subtitle | default "Go Beyond. Build Better." }}</small>
         </span>
       </div>
       <p class="gzen-footer-tagline">
-        {{ .Site.Language.Params.description | default "A Go (Golang) advocacy blog covering TUI, web apps, APIs, cloud, AI SDKs, and general Go engineering." }}
+        {{ .Site.Language.Params.description | default "A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out." }}
       </p>
     </div>
 
@@ -32,7 +32,7 @@
 
   <div class="gzen-footer-bottom">
     <p class="gzen-copyright">
-      &copy; {{ now.Format "2006" }} <strong>GZen.io</strong>.
+      &copy; {{ now.Format "2006" }} <strong>{{ .Site.Title }}</strong>.
       <span class="gzen-footer-divider">|</span>
       Crafted in Go.
       <span class="gzen-footer-divider">|</span>

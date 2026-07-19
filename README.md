@@ -1,6 +1,8 @@
-# GZen.io · Monorepo
+# gZen.io · Monorepo
 
-GZen.io is a **Go (Golang) advocacy hub** — a technical blog and portfolio covering TUI, web apps, APIs, cloud infrastructure, AI SDKs, and general Go engineering. Built with Hugo and deployed on Cloudflare Pages.
+gZen.io is a **Cloud · AI · Platform portfolio and advocacy hub** powered by Go (Golang) — a technical blog and portfolio covering cloud architecture, AI SDKs, platform engineering, and general Go engineering. Built with Hugo and deployed on Cloudflare Pages.
+
+**Target**: AWS Champion Builder with Go as the primary language.
 
 **Site:** [gzen.io](https://gzen.io)
 

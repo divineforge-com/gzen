@@ -1,8 +1,8 @@
-# Copilot Instructions for GZen.io
+# Copilot Instructions for gZen.io
 
 ## Project Overview
 
-GZen.io is a Go (Golang) advocacy blog and portfolio built with **Hugo** (Blowfish theme) and deployed on **Cloudflare Pages**. The main site covers six content pillars: TUI, Web Apps, API, Cloud & Infrastructure, AI SDKs, and General Go Engineering.
+gZen.io is a Go (Golang) advocacy blog and portfolio built with **Hugo** (Blowfish theme) and deployed on **Cloudflare Pages**. The main site covers six content pillars: TUI, Web Apps, API, Cloud & Infrastructure, AI SDKs, and General Go Engineering.
 
 **Live site:** [gzen.io](https://gzen.io)
 
