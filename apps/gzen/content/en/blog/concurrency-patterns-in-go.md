@@ -251,7 +251,7 @@ ch = nil // now both read and write block
 
 ## Benchmark: Goroutines vs OS Threads
 
-```
+```text
 Operation               Time per op
 Create goroutine         ~200ns
 Create OS thread         ~2µs
