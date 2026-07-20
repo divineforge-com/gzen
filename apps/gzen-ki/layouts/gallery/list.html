@@ -1,5 +1,5 @@
 {{/* Gallery list — Herb Gallery with filter bar
-     Reads from .Site.Data.herbs (data/herbs.yaml)
+     Reads from site.Data.herbs (data/herbs.yaml)
      Uses Blowfish base template via {{ define "main" }}
 */}}
 {{ define "main" }}
@@ -32,7 +32,7 @@
 
   {{/* Herb grid */}}
   <div class="herb-gallery-grid" id="herb-gallery">
-    {{ range .Site.Data.herbs }}
+    {{ range site.Data.herbs }}
     <div class="herb-card" data-category="{{ .category }}">
       <div class="herb-stripe {{ .nature }}"></div>
       <div class="herb-body">

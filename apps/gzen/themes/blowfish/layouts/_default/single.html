@@ -97,7 +97,7 @@
 {{ end }}
 
 {{ define "SingleAuthor" }}
-  {{ $authorsData := .Site.Data.authors }}
+  {{ $authorsData := site.Data.authors }}
   {{ $taxonomies := site.Taxonomies.authors }}
   {{ $baseURL := site.BaseURL }}
   {{ $taxonomyLink := 0 }}

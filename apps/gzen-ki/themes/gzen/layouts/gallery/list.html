@@ -18,7 +18,7 @@
 </div>
 
 <div class="gallery-grid" id="herb-gallery">
-  {{ range .Site.Data.herbs }}
+  {{ range site.Data.herbs }}
   <div class="herb-card" data-category="{{ .category }}">
     <div class="herb-card-stripe {{ .nature }}"></div>
     <div class="herb-card-body">
