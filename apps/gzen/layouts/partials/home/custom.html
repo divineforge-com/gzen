@@ -1,17 +1,20 @@
 {{/* GZen.io — humble landing page */}}
 
+
 <section class="gzen-home-hero" aria-labelledby="gzen-home-title">
   <div class="gzen-hero-copy">
     <p class="gzen-kicker">{{ .Site.Language.Params.heroKicker | default "Go (Golang)" }}</p>
-    <h1 id="gzen-home-title">{{ .Site.Language.Params.heroTitle | default "Learning in public." }}</h1>
-    <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default "A small space for Go articles, patterns, and honest notes from someone still figuring it out." }}</p>
+    <h1 id="gzen-home-title">
+      {{ .Site.Language.Params.heroTitle | default "Learning in public." }}
+    </h1>
+    <p class="gzen-lead">
+      {{ .Site.Language.Params.heroLead | default "A small space for Go articles, patterns, and honest notes from someone still figuring it out." }}
+    </p>
     <div class="gzen-hero-actions">
       <a href="{{ "blog" | relLangURL }}" class="gzen-primary-link">
         {{ .Site.Language.Params.heroAction | default "Read the blog" }}
       </a>
-      <a href="{{ "about" | relLangURL }}" class="gzen-secondary-link">
-        About me
-      </a>
+      <a href="{{ "about" | relLangURL }}" class="gzen-secondary-link"> About me </a>
     </div>
   </div>
 
@@ -25,23 +28,24 @@
       </div>
       <div class="gzen-terminal-body">
         <span class="gzen-token-comment">// still learning</span>
-        <br>
+        <br />
         <span class="gzen-token-keyword">package</span> <span class="gzen-token-type">main</span>
-        <br>
-        <br>
+        <br />
+        <br />
         <span class="gzen-token-keyword">import</span> <span class="gzen-token-string">"fmt"</span>
-        <br>
-        <br>
+        <br />
+        <br />
         <span class="gzen-token-keyword">func</span> <span class="gzen-token-func">main</span>() {
-        <br>
+        <br />
         <span class="gzen-token-indent"></span>fmt.<span class="gzen-token-func">Println</span>(
-        <br>
-        <span class="gzen-token-indent2"></span><span class="gzen-token-string">"Go Beyond. Build Better."</span>
-        <br>
+        <br />
+        <span class="gzen-token-indent2"></span
+        ><span class="gzen-token-string">"Go Beyond. Build Better."</span>
+        <br />
         <span class="gzen-token-indent"></span>)
-        <br>
+        <br />
         }
-        <br>
+        <br />
         <span class="gzen-cursor">|</span>
       </div>
     </div>
@@ -49,25 +53,24 @@
 </section>
 
 <div class="gzen-home-content">
-
   {{/* Simple tagline */}}
   <div class="gzen-tagline-banner">
     <blockquote class="gzen-tagline-code">
       <span class="gzen-token-comment">// one article at a time</span>
-      <br>
-      <br>
+      <br />
+      <br />
       <span class="gzen-token-keyword">func</span> <span class="gzen-token-func">learn</span>() {
-      <br>
+      <br />
       <span class="gzen-token-indent"></span><span class="gzen-token-keyword">for</span> {
-      <br>
+      <br />
       <span class="gzen-token-indent2"></span><span class="gzen-token-func">read</span>()
-      <br>
+      <br />
       <span class="gzen-token-indent2"></span><span class="gzen-token-func">break</span>()
-      <br>
+      <br />
       <span class="gzen-token-indent2"></span><span class="gzen-token-func">write</span>()
-      <br>
+      <br />
       <span class="gzen-token-indent"></span>}
-      <br>
+      <br />
       }
     </blockquote>
   </div>
@@ -76,16 +79,21 @@
   <section class="gzen-section">
     <div class="gzen-section-heading">
       <h2>Recent Posts</h2>
-      <a href="{{ "blog" | relLangURL }}" class="gzen-secondary-link" style="font-size:0.8rem; padding:0.4rem 0.8rem;">All posts →</a>
+      <a
+        href="{{ "blog" | relLangURL }}"
+        class="gzen-secondary-link"
+        style="font-size:0.8rem; padding:0.4rem 0.8rem;"
+        >All posts →</a
+      >
     </div>
     <div class="gzen-grid">
       {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
-      <a href="{{ .Permalink }}" class="gzen-card gzen-glass-card">
-        <span class="gzen-card-tag">{{ .Date.Format "Jan 2006" }}</span>
-        <h3>{{ .Title }}</h3>
-        <p>{{ .Description | default (truncate 120 .Summary) }}</p>
-        <span class="gzen-card-url">Read →</span>
-      </a>
+        <a href="{{ .Permalink }}" class="gzen-card gzen-glass-card">
+          <span class="gzen-card-tag">{{ .Date.Format "Jan 2006" }}</span>
+          <h3>{{ .Title }}</h3>
+          <p>{{ .Description | default (truncate 120 .Summary) }}</p>
+          <span class="gzen-card-url">Read →</span>
+        </a>
       {{ end }}
     </div>
   </section>
@@ -121,10 +129,15 @@
         <h3>Enjoying the articles?</h3>
         <p>If something here helped you learn Go, a coffee would make my day. No pressure.</p>
         <div class="gzen-support-links">
-          <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-primary-link">☕ Buy Me a Coffee</a>
+          <a
+            href="https://buymeacoffee.com/divineforge"
+            target="_blank"
+            rel="noopener"
+            class="gzen-primary-link"
+            >☕ Buy Me a Coffee</a
+          >
         </div>
       </div>
     </div>
   </section>
-
 </div>
