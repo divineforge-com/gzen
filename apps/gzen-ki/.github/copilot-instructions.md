@@ -18,7 +18,7 @@ Deployed via **Cloudflare Pages** (not GitHub Actions).
 
 ```html
 <!-- Iterate over site data -->
-{{ range .Site.Data.herbs }}
+{{ range site.Data.herbs }}
   {{ .name_zh }} — {{ .pinyin }}
 {{ end }}
 

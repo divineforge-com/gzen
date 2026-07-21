@@ -124,7 +124,7 @@
 {{ end }}
 
 {{ if $hasRepoCards }}
-  {{ $repoColors := .Site.Data.repoColors }}
+  {{ $repoColors := site.Data.repoColors }}
   {{ $cssRules := slice }}
 
   {{/* default color */}}

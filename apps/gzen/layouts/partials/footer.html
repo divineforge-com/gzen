@@ -16,16 +16,36 @@
     <div class="gzen-footer-links">
       <div class="gzen-footer-col">
         <h4>{{ i18n "nav_blog" | default "Content" }}</h4>
-        <a href="{{ "blog" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_blog" | default "Blog" }}</a>
-        <a href="{{ "speaking" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_speaking" | default "Speaking" }}</a>
-        <a href="{{ "resources" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_resources" | default "Resources" }}</a>
+        <a href="{{ "blog" | relLangURL }}" class="gzen-footer-link"
+          >{{ i18n "nav_blog" | default "Blog" }}</a
+        >
+        <a href="{{ "speaking" | relLangURL }}" class="gzen-footer-link"
+          >{{ i18n "nav_speaking" | default "Speaking" }}</a
+        >
+        <a href="{{ "resources" | relLangURL }}" class="gzen-footer-link"
+          >{{ i18n "nav_resources" | default "Resources" }}</a
+        >
       </div>
-      
+
       <div class="gzen-footer-col">
         <h4>{{ i18n "nav_origin" | default "Connect" }}</h4>
-        <a href="https://github.com/divineforge" target="_blank" rel="noopener" class="gzen-footer-link">GitHub</a>
-        <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-footer-link gzen-coffee-link">☕ {{ i18n "donate_coffee" | default "Buy Me a Coffee" }}</a>
-        <a href="{{ "donate" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_donate" | default "Donate" }}</a>
+        <a
+          href="https://github.com/divineforge"
+          target="_blank"
+          rel="noopener"
+          class="gzen-footer-link"
+          >GitHub</a
+        >
+        <a
+          href="https://buymeacoffee.com/divineforge"
+          target="_blank"
+          rel="noopener"
+          class="gzen-footer-link gzen-coffee-link"
+          >☕ {{ i18n "donate_coffee" | default "Buy Me a Coffee" }}</a
+        >
+        <a href="{{ "donate" | relLangURL }}" class="gzen-footer-link"
+          >{{ i18n "nav_donate" | default "Donate" }}</a
+        >
       </div>
     </div>
   </div>
@@ -36,14 +56,20 @@
       <span class="gzen-footer-divider">|</span>
       Crafted in Go.
       <span class="gzen-footer-divider">|</span>
-      Build: {{ now.Format "2006-01-02" }}
+      Build:
+      {{ now.Format "2006-01-02" }}
     </p>
     <div class="gzen-footer-logo-mark" aria-hidden="true">
       <svg viewBox="0 0 100 100" class="gzen-mini-gopher">
-        <rect x="25" y="30" width="50" height="40" rx="6" fill="var(--gzen-accent)" opacity="0.7"/>
-        <circle cx="40" cy="50" r="4" fill="var(--gzen-bg)" opacity="0.9"/>
-        <circle cx="60" cy="50" r="4" fill="var(--gzen-bg)" opacity="0.9"/>
-        <path d="M40 60 L60 60" stroke="var(--gzen-bg)" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <rect x="25" y="30" width="50" height="40" rx="6" fill="var(--gzen-accent)" opacity="0.7" />
+        <circle cx="40" cy="50" r="4" fill="var(--gzen-bg)" opacity="0.9" />
+        <circle cx="60" cy="50" r="4" fill="var(--gzen-bg)" opacity="0.9" />
+        <path
+          d="M40 60 L60 60"
+          stroke="var(--gzen-bg)"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          opacity="0.8" />
       </svg>
     </div>
   </div>
