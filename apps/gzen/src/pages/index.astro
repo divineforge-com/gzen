@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content="Astro" />
+    <title>gZen</title>
+    <meta name="description" content="gZen — a quiet portal. K.I.L.O. · observe first." />
+    <meta property="og:title" content="gZen" />
+    <meta property="og:description" content="gZen — a quiet portal. K.I.L.O. · observe first." />
+    <meta property="og:url" content="https://gzen.io/" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#fafafa" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --bg: #fafafa;
+        --ink: #111;
+        --muted: #6b6b6b;
+        --line: #e5e5e5;
+        --accent: #b45309;
+        --card: #fff;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        animation: fadeIn 0.5s ease-out;
+      }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-4px); }
+      }
+      @keyframes breathe {
+        0%, 100% { opacity: 0.02; transform: scale(1); }
+        50% { opacity: 0.04; transform: scale(1.2); }
+      }
+
+      /* background aura */
+      body::before {
+        content: '';
+        position: fixed;
+        inset: -50vh -50vw;
+        z-index: -1;
+        background: radial-gradient(ellipse at 48% 22%, rgba(180,83,9,0.04) 0, transparent 50%),
+                    radial-gradient(ellipse at 74% 70%, rgba(180,83,9,0.02) 0, transparent 40%);
+        animation: breathe 8s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+
+      .wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: clamp(4rem, 12vw, 8rem) 1.5rem 3rem;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      /* header */
+      .mark {
+        font-family: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 0.5rem;
+      }
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 4rem);
+        font-weight: 400;
+        letter-spacing: -0.045em;
+        line-height: 1.0;
+        margin: 0 0 0.6rem;
+        color: var(--ink);
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--accent);
+      }
+      .lede {
+        max-width: 32rem;
+        color: var(--muted);
+        font-size: 1.05rem;
+        margin: 0 0 0.5rem;
+      }
+
+      /* quote */
+      .quote-wrap {
+        margin: 2.2rem 0 0;
+        padding: 1.2rem 0 0;
+        border-top: 1px solid var(--line);
+      }
+      blockquote {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 1rem;
+        font-weight: 420;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        max-width: 34rem;
+      }
+      blockquote::before {
+        content: '\201C';
+        font-size: 2.5rem;
+        line-height: 0;
+        color: var(--accent);
+        vertical-align: -0.4em;
+        margin-right: 0.1em;
+      }
+      .quote-note {
+        margin: 0.4rem 0 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        max-width: 36rem;
+      }
+
+      /* K.I.L.O. tiles */
+      .kilo {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        margin: 3rem 0 0;
+      }
+      @media (min-width: 640px) {
+        .kilo { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+      }
+      a.tile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-decoration: none;
+        color: inherit;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        padding: 1.35rem 1.3rem 1.2rem;
+        transition: all 0.18s ease;
+        animation: float 6s ease-in-out infinite;
+        animation-delay: calc(var(--i, 0) * 0.3s);
+        min-height: 8.8rem;
+      }
+      a.tile:nth-child(1) { --i: 0; }
+      a.tile:nth-child(2) { --i: 1; }
+      a.tile:nth-child(3) { --i: 2; }
+      a.tile:nth-child(4) { --i: 3; }
+      a.tile:hover, a.tile:focus-visible {
+        border-color: var(--ink);
+        outline: none;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        animation: none;
+      }
+      .glyph {
+        font-family: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.22em;
+        color: var(--accent);
+        margin: 0 0 0.6rem;
+      }
+      .tile h2 {
+        margin: 0 0 0.3rem;
+        font-size: 1.15rem;
+        font-weight: 540;
+        letter-spacing: -0.02em;
+      }
+      .tile p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        flex: 1;
+      }
+      .tile .host {
+        display: inline-block;
+        margin-top: 0.8rem;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 0.02em;
+        transition: color 0.15s;
+      }
+      a.tile:hover .host { color: var(--accent); }
+
+      /* footer */
+      footer {
+        margin-top: auto;
+        padding: 2.5rem 0 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--muted);
+        font-size: 0.82rem;
+        border-top: 1px solid var(--line);
+      }
+      footer a {
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.15s;
+      }
+      footer a:hover { border-bottom-color: var(--accent); }
+
+      /* enhanced details */
+      .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      a.tile .arrow {
+        opacity: 0;
+        transition: opacity 0.18s, transform 0.18s;
+        display: inline-block;
+        margin-left: 0.15rem;
+      }
+      a.tile:hover .arrow { opacity: 1; transform: translateX(2px); }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <p class="mark">gZen · K.I.L.O.</p>
+      <h1>Observe <em>first</em>.</h1>
+      <p class="lede">A quiet nexus of imagination, study, and tools. Four doors. No noise.</p>
+
+      <div class="quote-wrap">
+        <blockquote>Kilo: to watch, observe, examine. Read the signs before you move.</blockquote>
+        <p class="quote-note">In Hawaiian knowledge practice, the kilo studies sky, ocean, and land with patience — then acts from understanding, not noise.</p>
+      </div>
+
+      <section class="kilo" aria-label="K.I.L.O. portals">
+        <a class="tile" href="https://ki.gzen.io/">
+          <div>
+            <p class="glyph">K · KI</p>
+            <h2>Ki</h2>
+            <p>Vitality, body, and traditional practice notebooks.</p>
+          </div>
+          <span class="host">ki.gzen.io<span class="arrow">→</span></span>
+        </a>
+        <a class="tile" href="https://invest.gzen.io/">
+          <div>
+            <p class="glyph">I · INVEST</p>
+            <h2>Invest</h2>
+            <p>Capital clarity through charts and quiet study.</p>
+          </div>
+          <span class="host">invest.gzen.io<span class="arrow">→</span></span>
+        </a>
+        <a class="tile" href="https://learn.gzen.io/">
+          <div>
+            <p class="glyph">L · LEARN</p>
+            <h2>Learn</h2>
+            <p>Languages, one honest lesson at a time.</p>
+          </div>
+          <span class="host">learn.gzen.io<span class="arrow">→</span></span>
+        </a>
+        <a class="tile" href="https://om.gzen.io/">
+          <div>
+            <p class="glyph">O · OM · 唵</p>
+            <h2>Om</h2>
+            <p>Buddhist teaching in Chinese — stillness before speech.</p>
+          </div>
+          <span class="host">om.gzen.io<span class="arrow">→</span></span>
+        </a>
+      </section>
+
+      <footer>
+        <span>gZen playground</span>
+        <div>
+          <a href="https://divineforge.com">DivineForge</a> &middot; engineering &amp; advocacy
+        </div>
+      </footer>
+    </main>
+  </body>
+</html>

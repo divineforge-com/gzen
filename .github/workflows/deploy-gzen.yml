@@ -27,24 +27,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          hugo-version: "0.147.9"
-          extended: true
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: apps/gzen/package-lock.json
 
-      - name: Build
-        run: hugo --gc --minify
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (Astro)
+        run: npm run build
 
       - name: Verify portal
         run: |
-          test -f public/index.html
-          test -f public/_redirects
-          grep -q 'Observe first' public/index.html
-          grep -q 'ki.gzen.io' public/index.html
-          grep -q 'om.gzen.io' public/index.html
-          grep -q 'Kilo' public/index.html
-          test ! -d public/blog
+          test -f dist/index.html
+          test -f dist/_redirects
+          grep -q 'Observe' dist/index.html
+          grep -q 'ki.gzen.io' dist/index.html
+          grep -q 'om.gzen.io' dist/index.html
           echo "Portal checks passed"
 
       - name: Deploy to Cloudflare Pages
@@ -52,5 +54,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy public --project-name=gzen --commit-dirty=true
+          command: pages deploy dist --project-name=gzen --commit-dirty=true
           workingDirectory: apps/gzen

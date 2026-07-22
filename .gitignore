@@ -4,6 +4,10 @@
 **/.hugo_build.lock
 **/.wrangler/
 
+# Astro build output
+dist/
+.astro/
+
 
 # Node.js (Tailwind CSS tooling)
 **/node_modules/
@@ -42,7 +46,7 @@ _archive/
 
 
 # Portal no longer uses Blowfish
-apps/gzen/themes._unused_blowfish/
+apps/gzen-hugo-backup/
 apps/gzen/_archive_content_2026-07-22/
 apps/gzen/public/
 apps/gzen/resources/
