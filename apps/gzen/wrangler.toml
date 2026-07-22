@@ -1,3 +1,4 @@
 name = "gzen"
 pages_build_output_dir = "dist"
+pages_build_command = "npm run build"
 compatibility_date = "2026-05-10"

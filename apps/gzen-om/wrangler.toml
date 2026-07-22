@@ -1,3 +1,7 @@
 name = "gzen-om"
 pages_build_output_dir = "public"
+pages_build_command = "hugo --gc --minify"
 compatibility_date = "2026-05-10"
+
+[env.production]
+HUGO_VERSION = "0.147.9"

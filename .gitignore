@@ -1,37 +1,32 @@
-# Hugo build output
-**/public/
-**/resources/
-**/.hugo_build.lock
-**/.wrangler/
+# Dependencies
+**/node_modules/
+package-lock.json
 
-# Astro build output
+# Build output
 dist/
 .astro/
+**/.wrangler/
 
-
-# Node.js (Tailwind CSS tooling)
-**/node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Generated CSS (allow gzen-om manual CSS)
-**/static/css/
-!/home/ubuntu/development/gzen/apps/gzen-om/static/css/
-!apps/gzen-om/static/css/
-
-# Logs
-*.log
+# Hugo leftovers
+apps/gzen-hugo-backup/
+apps/gzen/_archive_content_2026-07-22/
+apps/gzen/public/
+apps/gzen/resources/
 
 # Environment
 .env
 .env.local
-.env.production
-.env*.local
+.env.*.local
 
-# macOS
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
 .DS_Store
-*.local
+Thumbs.db
 
 # IDE
 .vscode/
@@ -43,10 +38,4 @@ yarn-error.log*
 # Archive
 _archive/
 .archive/
-
-
-# Portal no longer uses Blowfish
-apps/gzen-hugo-backup/
-apps/gzen/_archive_content_2026-07-22/
-apps/gzen/public/
-apps/gzen/resources/
+**/.hugo_build.lock
