@@ -20,8 +20,8 @@ type App struct {
 }
 
 var apps = []App{
-	{Name: "gzen", Path: "apps/gzen", ProjectName: "gzen", Description: "Main GrowZen platform (gzen.io)"},
-	{Name: "gzen-ki", Path: "apps/gzen-ki", ProjectName: "gzen-ki", Description: "Genki/Health notebooks (genki.gzen.io)"},
+	{Name: "gzen", Path: "apps/gzen", ProjectName: "gzen", Description: "Go advocacy hub (gzen.io)"},
+	{Name: "gzen-ki", Path: "apps/gzen-ki", ProjectName: "gzen-ki", Description: "TCM & philosophy notebooks (ki.gzen.io)"},
 	{Name: "gzen-learn", Path: "apps/gzen-learn", ProjectName: "gzen-learn", Description: "Language learning platform (learn.gzen.io)"},
 	{Name: "gzen-invest", Path: "apps/gzen-invest", ProjectName: "gzen-invest", Description: "Investment Infographics (invest.gzen.io)"},
 }
@@ -83,7 +83,7 @@ func loadEnv() {
 }
 
 func printUsage() {
-	fmt.Println("🪷 GrowZen Workspace Tool (`gzen-tool`)")
+	fmt.Println("gZen Workspace Tool (`gzen-tool`)")
 	fmt.Println("Usage:")
 	fmt.Println("  gzen-tool <command> [arguments]")
 	fmt.Println()

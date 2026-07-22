@@ -15,14 +15,14 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 ## Phase 1: Cleanup & Foundation
 
 ### Content Rewrites
-- [x] Rewrite `content/en/about.md` — Go-focused bio, tech stack, GDE journey
-- [x] Rewrite `content/zh/about.md` — matching Chinese version
-- [x] Rewrite `content/ja/about.md` — matching Japanese version
+- [x] Rewrite `content/about.md` — Go-focused bio (EN only)
+- [x] Remove zh/ja language concept and content dirs
 
 ### Configuration
-- [x] Update `hugo.toml` — hero text, taglines, descriptions for all 3 languages
+- [x] Update `hugo.toml` — EN-only, no language subdir
 - [x] Update `config/_default/params.toml` — mainSections, article defaults
 - [x] Update `config/_default/menus.toml` — Blog, Speaking, Resources, Playground, Donate
+- [x] Add `config/_default/languages.en.toml` with author + hero params
 
 ### Homepage
 - [x] Rewrite `layouts/partials/home/custom.html` — Go hero, pillar cards, featured posts
@@ -34,9 +34,7 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 - [x] Update `layouts/partials/footer.html` — Go topic links + donation CTA
 
 ### i18n
-- [x] Update `i18n/en.toml` — new nav strings, Go-focused labels
-- [x] Update `i18n/zh.toml` — matching Chinese
-- [x] Update `i18n/ja.toml` — matching Japanese
+- [x] Keep theme EN strings only; site templates use plain English (no zh/ja)
 
 ### Design
 - [x] Add JetBrains Mono to `extend-head.html` font loading
@@ -61,15 +59,12 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 
 ## Phase 2: Blog System
 
-- [x] Create `content/en/blog/` directory structure
-- [x] Create `content/zh/blog/` directory structure
-- [x] Create `content/ja/blog/` directory structure
+- [x] Create `content/blog/` directory structure (EN only, flat)
 - [ ] Blog list template (`layouts/blog/list.html`) — chronological, tag filter, pagination
 - [ ] Blog single template (`layouts/blog/single.html`) — code blocks, TOC, related posts
-- [ ] Tag taxonomy support
-- [ ] RSS feed generation
-- [x] Seed 3-5 initial Go blog posts (EN)
-- [ ] Translate seed posts to ZH/JA
+- [x] Tag taxonomy support (Blowfish defaults)
+- [x] RSS feed generation
+- [x] Seed 3 initial Go blog posts (EN)
 
 ## Phase 3: Supporting Pages
 
@@ -94,7 +89,12 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 
 ## Phase 5: Launch & Iterate
 
-- [ ] Deploy to Cloudflare Pages
+- [x] Fix EN-only routing (no `/en` prefix; content at `content/`)
+- [x] Fix homepage Recent Posts query
+- [x] Add GitHub Action deploy workflow for Cloudflare Pages
+- [x] Fix wrangler output path docs (`apps/gzen/public`)
+- [ ] Configure CF Pages project secrets + domain binding
+- [ ] Align www DNS (currently Vercel) with apex Cloudflare
 - [ ] Cross-browser testing
 - [ ] Publish first 3 Go blog posts
 - [ ] Share on dev.to / Go community / social
@@ -102,5 +102,5 @@ Tracks the transformation from ecosystem gateway to Go advocacy blog and portfol
 
 ---
 
-**Status**: Phase 1 complete / Phase 2 in progress
-**Last Updated**: 2026-07-18
+**Status**: EN-only routing + deploy pipeline fixed; live domain still needs CF secrets/DNS
+**Last Updated**: 2026-07-22

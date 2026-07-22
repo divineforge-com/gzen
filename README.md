@@ -36,9 +36,10 @@ The main site covers six Go domains:
 
 - **Generator**: [Hugo](https://gohugo.io) Extended — zero client-side runtime
 - **Theme**: [Blowfish](https://blowfish.page) + custom CSS overrides
-- **Typography**: JetBrains Mono (code/headings) + Noto Sans/Serif SC (body)
-- **Hosting**: Cloudflare Pages — instant global CDN
-- **Monorepo tool**: Custom Go CLI [`gzen-tool`](./cmd/gzen-tool) — parallel multi-site builds in <200ms
+- **Typography**: JetBrains Mono (code/headings) + system UI body
+- **Language**: English only
+- **Hosting**: Cloudflare Pages — GitHub Action deploy on `main` (`apps/gzen`)
+- **Monorepo tool**: Custom Go CLI [`gzen-tool`](./cmd/gzen-tool) — parallel multi-site builds
 
 ---
 
@@ -65,7 +66,7 @@ cd apps/gzen && hugo server
 1. **Clarity before Tools** — choose the right tool, use it well, keep it simple
 2. **Warm minimalism** — cream palette, saffron accents, generous whitespace
 3. **Code-first aesthetic** — JetBrains Mono typography communicates precision and craftsmanship
-4. **Developer experience** — fast builds, zero runtime deps, trilingual from day one
+4. **Developer experience** — fast builds, zero runtime deps, English-first clarity
 
 ---
 

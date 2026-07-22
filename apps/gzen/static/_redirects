@@ -1,4 +1,13 @@
-# Cloudflare Pages redirects
+# Cloudflare Pages redirects for gzen.io
+
+# Legacy multilingual paths → EN root
+/en / 301
+/en/ / 301
+/en/* /:splat 301
+/zh/* /:splat 301
+/ja/* /:splat 301
+/zh-cn/* /:splat 301
+/zh-tw/* /:splat 301
 
 # 404 fallback
 /*  /404.html  404

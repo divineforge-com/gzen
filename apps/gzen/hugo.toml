@@ -1,8 +1,18 @@
 baseURL = "https://gzen.io/"
 title = "gZen.io"
 theme = "blowfish"
+languageCode = "en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+disableLanguages = []
 enableRobotsTXT = true
 summaryLength = 70
+buildDrafts = false
+buildFuture = false
+enableEmoji = true
+
+[pagination]
+  pagerSize = 12
 
 [markup]
   [markup.goldmark]
@@ -18,23 +28,23 @@ summaryLength = 70
     baseName = "rss"
 
 [outputs]
-  home    = ["HTML", "JSON", "RSS"]
-  section = ["HTML", "RSS"]
+  home     = ["HTML", "JSON", "RSS"]
+  section  = ["HTML", "RSS"]
   taxonomy = ["HTML"]
-  term    = ["HTML"]
+  term     = ["HTML"]
 
 [taxonomies]
   tag      = "tags"
   category = "categories"
 
 [params]
-  brand          = "gZen.io"
-  brandSubtitle  = "Learning Go"
-  brandTagline   = "One article at a time."
-  subtitle    = "Go Beyond. Build Better."
-  description = "gZen.io — A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out."
-  heroKicker  = "Go (Golang)"
-  heroTitle   = "Learning in public."
-  heroLead    = "A small space for Go articles, patterns, and honest notes from someone still figuring it out."
-  heroAction  = "Read the blog"
-  tagline     = "// one article at a time"
+  brand         = "gZen.io"
+  brandSubtitle = "Learning Go"
+  brandTagline  = "One article at a time."
+  subtitle      = "Go Beyond. Build Better."
+  description   = "gZen.io — A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out."
+  heroKicker    = "Go (Golang)"
+  heroTitle     = "Learning in public."
+  heroLead      = "A small space for Go articles, patterns, and honest notes from someone still figuring it out."
+  heroAction    = "Read the blog"
+  tagline       = "// one article at a time"

@@ -5,27 +5,27 @@
         <span class="gzen-brand-mark" aria-hidden="true">GZ</span>
         <span>
           <strong>{{ .Site.Title }}</strong>
-          <small>{{ .Site.Language.Params.subtitle | default "Go Beyond. Build Better." }}</small>
+          <small>{{ .Site.Params.subtitle | default "Go Beyond. Build Better." }}</small>
         </span>
       </div>
       <p class="gzen-footer-tagline">
-        {{ .Site.Language.Params.description | default "A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out." }}
+        {{ .Site.Params.description | default "A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out." }}
       </p>
     </div>
 
     <div class="gzen-footer-links">
       <div class="gzen-footer-col">
-        <h4>{{ i18n "nav_blog" | default "Content" }}</h4>
-        <a href="{{ "blog" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_blog" | default "Blog" }}</a>
-        <a href="{{ "speaking" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_speaking" | default "Speaking" }}</a>
-        <a href="{{ "resources" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_resources" | default "Resources" }}</a>
+        <h4>Content</h4>
+        <a href="{{ "blog/" | relURL }}" class="gzen-footer-link">Blog</a>
+        <a href="{{ "speaking/" | relURL }}" class="gzen-footer-link">Speaking</a>
+        <a href="{{ "resources/" | relURL }}" class="gzen-footer-link">Resources</a>
       </div>
-      
+
       <div class="gzen-footer-col">
-        <h4>{{ i18n "nav_origin" | default "Connect" }}</h4>
+        <h4>Connect</h4>
         <a href="https://github.com/divineforge" target="_blank" rel="noopener" class="gzen-footer-link">GitHub</a>
-        <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-footer-link gzen-coffee-link">☕ {{ i18n "donate_coffee" | default "Buy Me a Coffee" }}</a>
-        <a href="{{ "donate" | relLangURL }}" class="gzen-footer-link">{{ i18n "nav_donate" | default "Donate" }}</a>
+        <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener" class="gzen-footer-link gzen-coffee-link">☕ Buy Me a Coffee</a>
+        <a href="{{ "donate/" | relURL }}" class="gzen-footer-link">Donate</a>
       </div>
     </div>
   </div>

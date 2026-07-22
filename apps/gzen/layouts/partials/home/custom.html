@@ -1,15 +1,15 @@
-{{/* GZen.io — humble landing page */}}
+{{/* GZen.io — humble landing page (EN only) */}}
 
 <section class="gzen-home-hero" aria-labelledby="gzen-home-title">
   <div class="gzen-hero-copy">
-    <p class="gzen-kicker">{{ .Site.Language.Params.heroKicker | default "Go (Golang)" }}</p>
-    <h1 id="gzen-home-title">{{ .Site.Language.Params.heroTitle | default "Learning in public." }}</h1>
-    <p class="gzen-lead">{{ .Site.Language.Params.heroLead | default "A small space for Go articles, patterns, and honest notes from someone still figuring it out." }}</p>
+    <p class="gzen-kicker">{{ .Site.Params.heroKicker | default "Go (Golang)" }}</p>
+    <h1 id="gzen-home-title">{{ .Site.Params.heroTitle | default "Learning in public." }}</h1>
+    <p class="gzen-lead">{{ .Site.Params.heroLead | default "A small space for Go articles, patterns, and honest notes from someone still figuring it out." }}</p>
     <div class="gzen-hero-actions">
-      <a href="{{ "blog" | relLangURL }}" class="gzen-primary-link">
-        {{ .Site.Language.Params.heroAction | default "Read the blog" }}
+      <a href="{{ "blog/" | relURL }}" class="gzen-primary-link">
+        {{ .Site.Params.heroAction | default "Read the blog" }}
       </a>
-      <a href="{{ "about" | relLangURL }}" class="gzen-secondary-link">
+      <a href="{{ "about/" | relURL }}" class="gzen-secondary-link">
         About me
       </a>
     </div>
@@ -50,7 +50,6 @@
 
 <div class="gzen-home-content">
 
-  {{/* Simple tagline */}}
   <div class="gzen-tagline-banner">
     <blockquote class="gzen-tagline-code">
       <span class="gzen-token-comment">// one article at a time</span>
@@ -72,25 +71,29 @@
     </blockquote>
   </div>
 
-  {{/* Recent blog posts */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
       <h2>Recent Posts</h2>
-      <a href="{{ "blog" | relLangURL }}" class="gzen-secondary-link" style="font-size:0.8rem; padding:0.4rem 0.8rem;">All posts →</a>
+      <a href="{{ "blog/" | relURL }}" class="gzen-secondary-link" style="font-size:0.8rem; padding:0.4rem 0.8rem;">All posts →</a>
     </div>
     <div class="gzen-grid">
-      {{ range first 3 (where .Site.RegularPages "Section" "blog") }}
-      <a href="{{ .Permalink }}" class="gzen-card gzen-glass-card">
+      {{ $posts := where .Site.RegularPages "Section" "blog" }}
+      {{ if not $posts }}
+        {{ $posts = where .Site.RegularPages "Type" "blog" }}
+      {{ end }}
+      {{ range first 3 $posts }}
+      <a href="{{ .RelPermalink }}" class="gzen-card gzen-glass-card">
         <span class="gzen-card-tag">{{ .Date.Format "Jan 2006" }}</span>
         <h3>{{ .Title }}</h3>
         <p>{{ .Description | default (truncate 120 .Summary) }}</p>
         <span class="gzen-card-url">Read →</span>
       </a>
+      {{ else }}
+      <p class="gzen-lead">No posts yet — check back soon.</p>
       {{ end }}
     </div>
   </section>
 
-  {{/* What I write about — simple */}}
   <section class="gzen-section">
     <div class="gzen-section-heading">
       <h2>What I Write About</h2>
@@ -114,7 +117,6 @@
     </div>
   </section>
 
-  {{/* Support CTA — modest */}}
   <section class="gzen-section">
     <div class="gzen-card gzen-glass-card gzen-support-card no-hover">
       <div class="gzen-support-content">

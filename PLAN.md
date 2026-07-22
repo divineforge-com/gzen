@@ -164,7 +164,7 @@ gzen.io/
 | Layer | Technology | Rationale |
 |-------|-----------|-----------|
 | **Generator** | Hugo (Extended) | Go-built, sub-200ms builds, zero runtime deps |
-| **Theme** | Blowfish (custom overrides) | Proven trilingual support, search-ready |
+| **Theme** | Blowfish (custom overrides) | Clean defaults + custom gZen chrome |
 | **Styling** | Tailwind CSS + custom CSS | Warm palette retained, code-friendly additions |
 | **Fonts** | **JetBrains Mono** (code/headings) + Noto Sans/Serif (body) | Developer aesthetic, Go branding alignment |
 | **Hosting** | Cloudflare Pages | Global CDN, instant deploy, custom domain |
@@ -388,8 +388,9 @@ The other apps (`gzen-ki`, `gzen-learn`, `gzen-invest`) remain unchanged in the 
 
 ---
 
-**Status**: Planning Phase  
-**Last Updated**: 2026-07-19  
-**Next Step**: Confirm plan, begin Phase 1 cleanup  
+**Status**: EN-only site structure + deploy workflow ready (2026-07-22). Live apex still needs CF secrets/DNS.  
+**Last Updated**: 2026-07-22  
+**Next Step**: Push + configure Cloudflare Pages secrets; align www DNS  
 **Brand**: gZen.io (lowercase g, CamelCase Z)  
-**Target**: AWS Champion Builder · Cloud · AI · Platform
+**Target**: AWS Champion Builder · Cloud · AI · Platform  
+**Language**: English only

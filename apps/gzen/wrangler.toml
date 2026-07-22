@@ -1,0 +1,5 @@
+# gzen.io main site — Cloudflare Pages project config
+# Used by wrangler when deploying apps/gzen/public
+name = "gzen"
+pages_build_output_dir = "public"
+compatibility_date = "2026-05-10"
