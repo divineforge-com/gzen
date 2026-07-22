@@ -1,16 +1,14 @@
 # Dependencies
 **/node_modules/
-package-lock.json
 
 # Build output
 dist/
 .astro/
 **/.wrangler/
 
-# Hugo leftovers
+# Hugo leftovers (other apps; portal is Astro — keep apps/gzen/public)
 apps/gzen-hugo-backup/
 apps/gzen/_archive_content_2026-07-22/
-apps/gzen/public/
 apps/gzen/resources/
 
 # Environment

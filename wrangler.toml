@@ -1,10 +1,15 @@
 # Root wrangler is intentionally NOT used for gzen.io page builds.
-# Each app deploys from apps/<name>/public via gzen-tool / CF project settings.
+# Each app deploys from its own Cloudflare Pages project settings.
 #
-# Cloudflare Pages Git integration for project "gzen" should use:
+# Cloudflare Pages — project "gzen" (gzen.io):
 #   Root directory: apps/gzen
+#   Build command:  npm run build
+#   Build output:   dist
+#   Node version:   22 (or current LTS)
+#
+# Cloudflare Pages — project "gzen-om" (om.gzen.io):
+#   Root directory: apps/gzen-om
 #   Build command:  hugo --gc --minify
 #   Build output:   public
-#   HUGO_VERSION:   0.147.9  (or match apps/gzen/.hugo-version)
 name = "gzen-monorepo"
 compatibility_date = "2026-05-10"
