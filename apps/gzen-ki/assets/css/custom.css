@@ -101,6 +101,13 @@ header a[href="/"]::before {
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   border-color: rgba(var(--jade), 0.4);
 }
+.herb-card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  border-color: rgba(var(--jade), 0.4);
+  outline: 2px solid rgb(var(--jade));
+  outline-offset: 2px;
+}
 
 /* Nature stripe at top */
 .herb-stripe { height: 4px; width: 100%; }
@@ -165,10 +172,17 @@ header a[href="/"]::before {
   background: rgb(var(--jade)); color: #fff;
   border-color: rgb(var(--jade));
 }
+.gallery-filter-btn:focus-visible {
+  outline: 2px solid rgb(var(--jade));
+  outline-offset: 2px;
+  background: rgb(var(--jade)); color: #fff;
+  border-color: rgb(var(--jade));
+}
 .dark .gallery-filter-btn {
   border-color: rgba(255,255,255,0.15); color: #a0987e;
 }
-.dark .gallery-filter-btn.active {
+.dark .gallery-filter-btn.active,
+.dark .gallery-filter-btn:focus-visible {
   background: rgb(var(--jade)); color: #fff; border-color: rgb(var(--jade));
 }
 
@@ -188,6 +202,10 @@ header a[href="/"]::before {
   border-radius: 0.75rem;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+}
+.movement-card:focus-visible {
+  outline: 2px solid rgb(var(--jade));
+  outline-offset: 2px;
 }
 .dark .movement-card { border-color: rgba(255,255,255,0.08); }
 .movement-card-head {
@@ -271,6 +289,12 @@ header a[href="/"]::before {
 .gzen-sec-card:hover {
   transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-color: rgba(var(--jade), 0.45); text-decoration: none !important;
+}
+.gzen-sec-card:focus-visible {
+  transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: rgba(var(--jade), 0.45); text-decoration: none !important;
+  outline: 2px solid rgb(var(--jade));
+  outline-offset: 2px;
 }
 .gzen-sec-icon { font-size: 1.5rem; line-height: 1; margin-bottom: 0.3rem; }
 .gzen-sec-name { font-size: 1rem; font-weight: 700; color: rgb(var(--warm-ink));
