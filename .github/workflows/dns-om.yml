@@ -1,0 +1,41 @@
+name: Add om.gzen.io DNS record
+
+on: workflow_dispatch
+
+jobs:
+  dns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        id: dns
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ZONE_ID: f33c36efe41326ee8eb3fec453e05c1e
+        with:
+          script: |
+            const token = process.env.CF_TOKEN;
+            const zone = process.env.ZONE_ID;
+
+            // Add CNAME: om → gzen-om.pages.dev
+            const body = {
+              type: 'CNAME',
+              name: 'om',
+              content: 'gzen-om.pages.dev',
+              ttl: 120,
+              proxied: true,
+            };
+            const res = await fetch(
+              `https://api.cloudflare.com/client/v4/zones/${zone}/dns_records`,
+              {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify(body),
+              }
+            );
+            const data = await res.json();
+            if (data.success) {
+              core.notice(`DNS record created! ID: ${data.result.id}`);
+              core.setOutput('record_id', data.result.id);
+            } else {
+              core.setFailed(`DNS error: ${JSON.stringify(data.errors)}`);
+            }
