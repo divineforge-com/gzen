@@ -1,50 +1,11 @@
 baseURL = "https://gzen.io/"
-title = "gZen.io"
-theme = "blowfish"
+title = "gZen"
 languageCode = "en"
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
-disableLanguages = []
+disableKinds = ["taxonomy", "term", "RSS", "sitemap", "section"]
 enableRobotsTXT = true
-summaryLength = 70
-buildDrafts = false
-buildFuture = false
-enableEmoji = true
-
-[pagination]
-  pagerSize = 12
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.renderer]
-      unsafe = true
-  [markup.highlight]
-    style = "monokai"
-    noClasses = false
-
-[outputFormats]
-  [outputFormats.RSS]
-    mediatype = "application/rss+xml"
-    baseName = "rss"
-
-[outputs]
-  home     = ["HTML", "JSON", "RSS"]
-  section  = ["HTML", "RSS"]
-  taxonomy = ["HTML"]
-  term     = ["HTML"]
-
-[taxonomies]
-  tag      = "tags"
-  category = "categories"
 
 [params]
-  brand         = "gZen.io"
-  brandSubtitle = "Learning Go"
-  brandTagline  = "One article at a time."
-  subtitle      = "Go Beyond. Build Better."
-  description   = "gZen.io — A small Go learning journal. Articles, patterns, and honest notes from someone still figuring it out."
-  heroKicker    = "Go (Golang)"
-  heroTitle     = "Learning in public."
-  heroLead      = "A small space for Go articles, patterns, and honest notes from someone still figuring it out."
-  heroAction    = "Read the blog"
-  tagline       = "// one article at a time"
+  description = "gZen — a quiet portal. K.I.L.O. · observe first."
+  kiloQuote = "Kilo: to watch, observe, examine. Read the signs before you move."
+  kiloNote = "In Hawaiian knowledge practice, the kilo studies sky, ocean, and land with patience — then acts from understanding, not noise."

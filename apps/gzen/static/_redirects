@@ -1,13 +1,41 @@
-# Cloudflare Pages redirects for gzen.io
+# Cloudflare Pages redirects — gZen portal
 
-# Legacy multilingual paths → EN root
+# Path fabric → subdomains
+/ki       https://ki.gzen.io/       302
+/ki/      https://ki.gzen.io/       302
+/ki/*     https://ki.gzen.io/:splat 302
+
+/invest       https://invest.gzen.io/       302
+/invest/      https://invest.gzen.io/       302
+/invest/*     https://invest.gzen.io/:splat 302
+
+/learn       https://learn.gzen.io/       302
+/learn/      https://learn.gzen.io/       302
+/learn/*     https://learn.gzen.io/:splat 302
+
+/om       https://om.gzen.io/       302
+/om/      https://om.gzen.io/       302
+/om/*     https://om.gzen.io/:splat 302
+
+# Legacy tech blog routes → DivineForge
+/blog    https://divineforge.com/essays/ 301
+/blog/   https://divineforge.com/essays/ 301
+/blog/*  https://divineforge.com/essays/ 301
+/about   https://divineforge.com/about/  301
+/about/  https://divineforge.com/about/  301
+/speaking   https://divineforge.com/about/ 301
+/speaking/  https://divineforge.com/about/ 301
+/resources  https://divineforge.com/essays/ 301
+/resources/ https://divineforge.com/essays/ 301
+/playground https://gzen.io/ 301
+/playground/ https://gzen.io/ 301
+/donate   https://buymeacoffee.com/divineforge 302
+/donate/  https://buymeacoffee.com/divineforge 302
+
+# Old language prefixes
 /en / 301
 /en/ / 301
 /en/* /:splat 301
-/zh/* /:splat 301
-/ja/* /:splat 301
-/zh-cn/* /:splat 301
-/zh-tw/* /:splat 301
 
-# 404 fallback
+# 404
 /*  /404.html  404

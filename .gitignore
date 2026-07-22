@@ -11,8 +11,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Generated CSS
+# Generated CSS (allow gzen-om manual CSS)
 **/static/css/
+!/home/ubuntu/development/gzen/apps/gzen-om/static/css/
+!apps/gzen-om/static/css/
 
 # Logs
 *.log
@@ -38,3 +40,9 @@ yarn-error.log*
 _archive/
 .archive/
 
+
+# Portal no longer uses Blowfish
+apps/gzen/themes._unused_blowfish/
+apps/gzen/_archive_content_2026-07-22/
+apps/gzen/public/
+apps/gzen/resources/

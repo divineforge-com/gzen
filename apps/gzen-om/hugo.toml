@@ -1,0 +1,27 @@
+baseURL = "https://om.gzen.io/"
+title = "唵 · gZen Om"
+languageCode = "zh-Hans"
+defaultContentLanguage = "zh"
+disableLanguages = []
+enableRobotsTXT = true
+summaryLength = 80
+hasCJKLanguage = true
+
+[params]
+  description = "gZen Om — 佛教学习笔记。静中观心，如实知见。"
+  author = "gZen"
+  brand = "唵"
+  subtitle = "静中观心"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

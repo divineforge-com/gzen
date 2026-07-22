@@ -1,0 +1,25 @@
+{{ define "main" }}
+  {{ if .IsHome }}
+  <section class="hero">
+    <p class="kicker">O · OM · 唵</p>
+    <h1>{{ .Site.Title }}</h1>
+    <p class="lede">{{ .Site.Params.description }}</p>
+  </section>
+  <section class="list">
+    <h2>最近笔记</h2>
+    <ul>
+      {{ range first 10 (where .Site.RegularPages "Section" "notes") }}
+      <li>
+        <a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong></a>
+        <span class="meta">{{ .Date.Format "2006-01-02" }}</span>
+        <p>{{ .Description }}</p>
+      </li>
+      {{ else }}
+      <li>还没有笔记。</li>
+      {{ end }}
+    </ul>
+  </section>
+  {{ else }}
+    {{ .Content }}
+  {{ end }}
+{{ end }}
