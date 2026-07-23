@@ -8,6 +8,8 @@ interface Props {
 
 const { door, index } = Astro.props;
 const delayClass = `reveal-d${Math.min(index + 2, 5)}`;
+const firstChar = door.name[0];
+const rest = door.name.slice(1);
 ---
 
 <a
@@ -18,16 +20,11 @@ const delayClass = `reveal-d${Math.min(index + 2, 5)}`;
 >
   <div class="door-inner">
     <div class="door-top">
-      <span class="glyph">
-        <span class="letter">{door.letter}</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <span class="label">{door.label}</span>
-      </span>
       <span class="pulse" aria-hidden="true"></span>
     </div>
 
     <div class="door-mid">
-      <h2>{door.name}</h2>
+      <h2><span class="first-char">{firstChar}</span>{rest}</h2>
       <p>{door.blurb}</p>
     </div>
 
@@ -128,31 +125,7 @@ const delayClass = `reveal-d${Math.min(index + 2, 5)}`;
   .door-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .glyph {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    color: color-mix(in srgb, var(--door-tone) 70%, #fff);
-  }
-
-  .letter {
-    color: var(--door-tone);
-  }
-
-  .sep {
-    opacity: 0.45;
-  }
-
-  .label {
-    color: var(--muted);
+    justify-content: flex-end;
   }
 
   .pulse {
@@ -181,10 +154,15 @@ const delayClass = `reveal-d${Math.min(index + 2, 5)}`;
 
   h2 {
     margin: 0 0 0.4rem;
-    font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+    font-size: clamp(1.5rem, 4vw, 1.8rem);
     font-weight: 550;
     letter-spacing: -0.03em;
     line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .first-char {
+    color: var(--door-tone);
   }
 
   p {
