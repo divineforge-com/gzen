@@ -1,5 +1,5 @@
 baseURL = 'https://learn.gzen.io/'
-locale = 'en-us'
+languageName = 'en-us'
 title = 'GZen — Japanese, Korean & Russian Language Learning'
 
 [params]
