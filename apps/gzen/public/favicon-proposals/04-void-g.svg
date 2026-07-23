@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="gZen void-g">
+  <!-- D · Void-g: filled geometric g cut from a square field — high contrast at 16px; silence as form. -->
+  <rect width="32" height="32" rx="2" fill="#050505"/>
+  <!-- Solid letterform built from paths (counter is negative space) -->
+  <path
+    fill="#f4f4f4"
+    d="
+      M16 6.2
+      c4.9 0 8.6 3.5 8.6 8.1
+      c0 2.1-.7 3.9-1.9 5.2
+      v4.1
+      c0 3.4-2.5 5.4-6.1 5.4
+      c-2.7 0-4.9-1.1-5.9-3
+      l2.1-1.2
+      c.7 1.2 2 1.9 3.7 1.9
+      c2 0 3.5-1.1 3.5-3.1
+      v-1.1
+      c-1.2 1.1-2.9 1.7-4.8 1.7
+      c-4.6 0-8-3.5-8-8
+      c0-4.5 3.5-8 7.8-8
+      zm0 2.5
+      c-3.1 0-5.4 2.3-5.4 5.5
+      s2.3 5.5 5.4 5.5
+      c3.1 0 5.5-2.3 5.5-5.5
+      s-2.4-5.5-5.5-5.5z
+    "
+  />
+  <!-- Small amber void-dot in the counter — attention / observation -->
+  <circle cx="16" cy="14.3" r="1.3" fill="#c45c26"/>
+</svg>

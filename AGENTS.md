@@ -26,3 +26,12 @@ Cloudflare Pages auto-builds from `main`. Each CF project is configured in the d
 | `gzen-om` | `apps/gzen-om` | `hugo --gc --minify` | `public` | om.gzen.io |
 
 Push to `main` → CF auto-builds.
+
+## Notify when changes are ready to see
+
+**Development technique:** after any **visible** change (portal UI, deploy, favicon, design), notify William via **StackySentinel** (`@divineforgeBot`) with a Tailscale or production URL. Do not wait for “where do I look?”.
+
+- Skill: `.agents/skills/stackysentinel-notify/SKILL.md` (also `~/.grok/skills/stackysentinel-notify/`)
+- Script: `.agents/skills/stackysentinel-notify/scripts/notify.sh`
+- Portal dev: `http://rustypandora.banjo-scala.ts.net:1318` (port 1318)
+- Bot is **not** Nova (`@novananamiBot`)

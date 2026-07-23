@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="gZen enso-g">
+  <!-- A · Enso-g: open zen circle as the bowl of a lowercase g. Incomplete ring = observation, not certainty. -->
+  <rect width="32" height="32" rx="2" fill="#050505"/>
+  <!-- Outer enso (open gap at ~1–2 o'clock) -->
+  <path
+    d="M22.2 9.2
+       A9.2 9.2 0 1 0 23.5 12.8"
+    fill="none"
+    stroke="#f4f4f4"
+    stroke-width="2.1"
+    stroke-linecap="round"
+  />
+  <!-- Descender stem of g -->
+  <path
+    d="M23.4 13.2
+       C24.6 15.8 24.2 20.2 21.2 22.4
+       C18.6 24.3 15.2 24 13.6 22.6"
+    fill="none"
+    stroke="#f4f4f4"
+    stroke-width="2.1"
+    stroke-linecap="round"
+  />
+  <!-- Ignition / observation point at the enso gap -->
+  <circle cx="23.2" cy="9.6" r="1.35" fill="#c45c26"/>
+</svg>

@@ -1,0 +1,77 @@
+---
+import { site } from "../data/doors";
+---
+
+<footer class="foot reveal reveal-d5">
+  <div class="foot-left">
+    <span class="brand">gZen</span>
+    <span class="sep" aria-hidden="true">·</span>
+    <span class="whisper" title="Origin · not co-brand">{site.originWhisper}</span>
+  </div>
+  <div class="foot-right">
+    <a href="https://divineforge.com">DivineForge</a>
+    <span class="sep" aria-hidden="true">·</span>
+    <span class="muted">engineering</span>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    margin-top: clamp(3rem, 8vw, 4.5rem);
+    padding: 1.5rem 0 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    font-size: 0.78rem;
+    color: var(--dim);
+    transition: border-color 0.35s var(--ease);
+  }
+
+  .foot-left,
+  .foot-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .whisper {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    opacity: 0.85;
+  }
+
+  .sep {
+    opacity: 0.5;
+  }
+
+  .muted {
+    color: var(--dim);
+  }
+
+  a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color 0.15s var(--ease),
+      color 0.15s var(--ease);
+  }
+
+  a:hover,
+  a:focus-visible {
+    border-bottom-color: var(--accent);
+    outline: none;
+  }
+</style>

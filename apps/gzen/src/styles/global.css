@@ -1,0 +1,199 @@
+/* gZen.IO — two temperatures: cool monastery (default) · warm ignition */
+
+:root,
+html[data-theme="monastery"] {
+  --bg: #04050a;
+  --bg-elevated: #0a0c12;
+  --ink: #e8eaef;
+  --muted: #8b919c;
+  --dim: #5a606c;
+  --line: rgba(200, 210, 230, 0.08);
+  --line-strong: rgba(200, 210, 230, 0.16);
+  --accent: #7d8b9a;
+  --accent-soft: rgba(125, 139, 154, 0.2);
+  --card: #07090e;
+  --glow: rgba(160, 180, 220, 0.04);
+  --focus: #e8eaef;
+  --wash-1: rgba(90, 120, 160, 0.06);
+  --wash-2: rgba(45, 90, 80, 0.05);
+  --wash-3: rgba(70, 80, 120, 0.04);
+  --cursor-glow: rgba(120, 150, 190, 0.05);
+  --theme-color: #04050a;
+  color-scheme: dark;
+}
+
+html[data-theme="ignite"] {
+  --bg: #0a0705;
+  --bg-elevated: #120e0a;
+  --ink: #f4f0eb;
+  --muted: #9a8f84;
+  --dim: #6b6158;
+  --line: rgba(255, 220, 180, 0.09);
+  --line-strong: rgba(255, 220, 180, 0.18);
+  --accent: #c45c26;
+  --accent-soft: rgba(196, 92, 38, 0.2);
+  --card: #0e0a08;
+  --glow: rgba(255, 200, 140, 0.05);
+  --focus: #f4f0eb;
+  --wash-1: rgba(196, 92, 38, 0.09);
+  --wash-2: rgba(140, 70, 30, 0.06);
+  --wash-3: rgba(90, 50, 20, 0.05);
+  --cursor-glow: rgba(196, 92, 38, 0.07);
+  --theme-color: #0a0705;
+  color-scheme: dark;
+}
+
+:root {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Menlo, Consolas,
+    monospace;
+  --max: 960px;
+  --radius: 2px;
+}
+
+/* Theme-dependent copy (no FOUC if data-theme set in <head>) */
+.copy-ignite {
+  display: none;
+}
+html[data-theme="ignite"] .copy-monastery {
+  display: none;
+}
+html[data-theme="ignite"] .copy-ignite {
+  display: contents;
+}
+html[data-theme="monastery"] .copy-monastery,
+html:not([data-theme]) .copy-monastery {
+  display: contents;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition:
+    background-color 0.45s var(--ease),
+    color 0.35s var(--ease);
+}
+
+/* Ambient wash — theme via CSS vars */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--wash-1), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, var(--wash-2), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 10% 80%, var(--wash-3), transparent 45%);
+  transition: opacity 0.45s var(--ease);
+}
+
+/* Fine grain */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.32;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  mix-blend-mode: overlay;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+/* —— Motion system —— */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: reveal 0.8s var(--ease-out) forwards;
+  }
+
+  .reveal-d1 {
+    animation-delay: 0.08s;
+  }
+  .reveal-d2 {
+    animation-delay: 0.16s;
+  }
+  .reveal-d3 {
+    animation-delay: 0.28s;
+  }
+  .reveal-d4 {
+    animation-delay: 0.4s;
+  }
+  .reveal-d5 {
+    animation-delay: 0.52s;
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

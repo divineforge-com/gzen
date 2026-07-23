@@ -1,0 +1,117 @@
+---
+import { site } from "../data/doors";
+
+const m = site.themes.monastery;
+const i = site.themes.ignite;
+---
+
+<header class="hero">
+  <p class="eyebrow reveal">gZen · playground</p>
+
+  <h1 class="wordmark reveal reveal-d1">
+    <span class="g">g</span><span class="zen">Zen</span><span class="dot">.</span><span class="io">IO</span>
+  </h1>
+
+  <p class="tagline reveal reveal-d2">
+    <span class="tag-line" aria-hidden="true"></span>
+    <span class="tag-text">
+      <span class="copy-monastery">{m.tagline}</span>
+      <span class="copy-ignite">{i.tagline}</span>
+    </span>
+    <span class="tag-line" aria-hidden="true"></span>
+  </p>
+
+  <p class="lede reveal reveal-d2">
+    <span class="copy-monastery">{m.lede}</span>
+    <span class="copy-ignite">{i.lede}</span>
+  </p>
+</header>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: clamp(4.5rem, 12vw, 7.5rem) 0 clamp(2rem, 5vw, 2.75rem);
+  }
+
+  .eyebrow {
+    margin: 0 0 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .wordmark {
+    margin: 0;
+    font-size: clamp(3.4rem, 14vw, 6.5rem);
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 0.95;
+    color: var(--ink);
+  }
+
+  .wordmark .g {
+    font-weight: 400;
+    opacity: 0.92;
+  }
+
+  .wordmark .zen {
+    font-weight: 550;
+  }
+
+  .wordmark .dot {
+    color: var(--accent);
+    font-weight: 400;
+    transition: color 0.35s var(--ease);
+  }
+
+  .wordmark .io {
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    opacity: 0.88;
+  }
+
+  .tagline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.75rem 0 0;
+  }
+
+  .tag-text {
+    font-family: var(--font-mono);
+    font-size: clamp(0.72rem, 2vw, 0.82rem);
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    transition: color 0.35s var(--ease);
+  }
+
+  /* display:contents children need the span to still paint */
+  .tag-text :global(.copy-monastery),
+  .tag-text :global(.copy-ignite) {
+    /* contents — parent styles apply */
+  }
+
+  .tag-line {
+    display: block;
+    width: clamp(1.5rem, 8vw, 3.5rem);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+  }
+
+  .lede {
+    margin: 1.1rem auto 0;
+    max-width: 26rem;
+    color: var(--muted);
+    font-size: clamp(0.98rem, 2.2vw, 1.08rem);
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    transition: color 0.35s var(--ease);
+  }
+</style>

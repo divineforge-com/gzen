@@ -1,407 +1,62 @@
 ---
-const title = "gZen";
-const description =
-  "gZen — a quiet portal. K.I.L.O. · observe first. Four doors. No noise.";
-const url = "https://gzen.io/";
-
-const doors = [
-  {
-    letter: "K",
-    label: "KI",
-    name: "Ki",
-    host: "ki.gzen.io",
-    href: "https://ki.gzen.io/",
-    blurb: "Vitality, body, and traditional practice notebooks.",
-  },
-  {
-    letter: "I",
-    label: "INVEST",
-    name: "Invest",
-    host: "invest.gzen.io",
-    href: "https://invest.gzen.io/",
-    blurb: "Capital clarity through charts and quiet study.",
-  },
-  {
-    letter: "L",
-    label: "LEARN",
-    name: "Learn",
-    host: "learn.gzen.io",
-    href: "https://learn.gzen.io/",
-    blurb: "Languages, one honest lesson at a time.",
-  },
-  {
-    letter: "O",
-    label: "OM · 唵",
-    name: "Om",
-    host: "om.gzen.io",
-    href: "https://om.gzen.io/",
-    blurb: "Buddhist teaching in Chinese — stillness before speech.",
-  },
-] as const;
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Starfield from "../components/Starfield.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
+import Hero from "../components/Hero.astro";
+import DoorGrid from "../components/DoorGrid.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={url} />
+<BaseLayout>
+  <Starfield />
 
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={url} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="gZen" />
-    <meta property="og:locale" content="en_US" />
+  <main class="wrap">
+    <ThemeToggle />
+    <Hero />
+    <DoorGrid />
+    <SiteFooter />
+  </main>
 
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+  <div class="cursor-glow" aria-hidden="true"></div>
+</BaseLayout>
 
-    <meta name="theme-color" content="#fafafa" />
-    <meta name="color-scheme" content="light" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+<style>
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 1.75rem) 2.5rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
 
-    <style is:global>
-      :root {
-        --bg: #fafafa;
-        --ink: #111111;
-        --muted: #6b6b6b;
-        --line: #e5e5e5;
-        --accent: #b45309;
-        --card: #ffffff;
-        --focus: #111111;
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      }
+  .cursor-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(
+      520px circle at var(--px, 50%) var(--py, 20%),
+      var(--cursor-glow),
+      transparent 55%
+    );
+    opacity: 0.9;
+    transition: opacity 0.4s var(--ease);
+  }
 
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
+  @media (prefers-reduced-motion: reduce), (pointer: coarse) {
+    .cursor-glow {
+      display: none;
+    }
+  }
 
-      html {
-        -webkit-text-size-adjust: 100%;
-        text-size-adjust: 100%;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background: var(--bg);
-        color: var(--ink);
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          "Segoe UI",
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
-        font-weight: 400;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      /* Quiet entry — Tesla stillness, not decoration */
-      @media (prefers-reduced-motion: no-preference) {
-        body {
-          animation: enter 0.55s var(--ease) both;
-        }
-      }
-
-      @keyframes enter {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-
-      .wrap {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: clamp(4rem, 12vw, 7.5rem) 1.5rem 3rem;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-      }
-
-      .mark {
-        margin: 0 0 1.35rem;
-        font-family:
-          ui-monospace,
-          "JetBrains Mono",
-          SFMono-Regular,
-          Menlo,
-          Consolas,
-          monospace;
-        font-size: 0.7rem;
-        font-weight: 500;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      h1 {
-        margin: 0 0 0.85rem;
-        font-size: clamp(2.6rem, 7vw, 3.75rem);
-        font-weight: 500;
-        letter-spacing: -0.045em;
-        line-height: 1.02;
-        color: var(--ink);
-      }
-
-      h1 em {
-        font-style: normal;
-        color: var(--accent);
-        font-weight: 500;
-      }
-
-      .lede {
-        margin: 0;
-        max-width: 32rem;
-        color: var(--muted);
-        font-size: 1.05rem;
-        line-height: 1.55;
-      }
-
-      .quote-wrap {
-        margin: 2.75rem 0 0;
-        padding: 1.35rem 0 0;
-        border-top: 1px solid var(--line);
-      }
-
-      blockquote {
-        margin: 0;
-        padding: 0;
-        border: 0;
-        max-width: 34rem;
-        font-size: 1.02rem;
-        font-weight: 450;
-        letter-spacing: -0.015em;
-        line-height: 1.45;
-        color: var(--ink);
-      }
-
-      blockquote::before {
-        content: "\201C";
-        color: var(--accent);
-        margin-right: 0.05em;
-      }
-
-      .quote-note {
-        margin: 0.55rem 0 0;
-        max-width: 36rem;
-        color: var(--muted);
-        font-size: 0.92rem;
-        line-height: 1.55;
-      }
-
-      .kilo {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-        margin: 3.25rem 0 0;
-      }
-
-      @media (min-width: 640px) {
-        .kilo {
-          grid-template-columns: 1fr 1fr;
-          gap: 0.85rem;
-        }
-      }
-
-      a.tile {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 9rem;
-        padding: 1.3rem 1.25rem 1.15rem;
-        text-decoration: none;
-        color: inherit;
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 2px;
-        transition:
-          border-color 0.18s var(--ease),
-          transform 0.18s var(--ease),
-          box-shadow 0.18s var(--ease);
-      }
-
-      a.tile:hover,
-      a.tile:focus-visible {
-        border-color: var(--ink);
-        outline: none;
-        transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-      }
-
-      a.tile:focus-visible {
-        outline: 2px solid var(--focus);
-        outline-offset: 2px;
-      }
-
-      .glyph {
-        margin: 0 0 0.65rem;
-        font-family:
-          ui-monospace,
-          "JetBrains Mono",
-          SFMono-Regular,
-          Menlo,
-          Consolas,
-          monospace;
-        font-size: 0.68rem;
-        font-weight: 500;
-        letter-spacing: 0.2em;
-        color: var(--accent);
-      }
-
-      .tile h2 {
-        margin: 0 0 0.3rem;
-        font-size: 1.18rem;
-        font-weight: 550;
-        letter-spacing: -0.025em;
-        line-height: 1.2;
-      }
-
-      .tile p {
-        margin: 0;
-        flex: 1;
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.45;
-      }
-
-      .tile .host {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.2rem;
-        margin-top: 0.9rem;
-        font-family:
-          ui-monospace,
-          SFMono-Regular,
-          Menlo,
-          Consolas,
-          monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.02em;
-        color: var(--muted);
-        transition: color 0.15s var(--ease);
-      }
-
-      a.tile:hover .host,
-      a.tile:focus-visible .host {
-        color: var(--accent);
-      }
-
-      .arrow {
-        display: inline-block;
-        opacity: 0;
-        transform: translateX(-2px);
-        transition:
-          opacity 0.15s var(--ease),
-          transform 0.15s var(--ease);
-      }
-
-      a.tile:hover .arrow,
-      a.tile:focus-visible .arrow {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      footer {
-        margin-top: auto;
-        padding: 2.75rem 0 0.25rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1.5rem;
-        align-items: center;
-        justify-content: space-between;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 0.82rem;
-      }
-
-      footer a {
-        color: var(--ink);
-        text-decoration: none;
-        border-bottom: 1px solid transparent;
-        transition: border-color 0.15s var(--ease);
-      }
-
-      footer a:hover,
-      footer a:focus-visible {
-        border-bottom-color: var(--accent);
-        outline: none;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation: none !important;
-          transition: none !important;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <main class="wrap">
-      <header>
-        <p class="mark">gZen · K.I.L.O.</p>
-        <h1>Observe <em>first</em>.</h1>
-        <p class="lede">
-          A quiet nexus of imagination, study, and tools. Four doors. No noise.
-        </p>
-      </header>
-
-      <div class="quote-wrap">
-        <blockquote>
-          Kilo: to watch, observe, examine. Read the signs before you move.
-        </blockquote>
-        <p class="quote-note">
-          In Hawaiian knowledge practice, the kilo studies sky, ocean, and land
-          with patience — then acts from understanding, not noise.
-        </p>
-      </div>
-
-      <section class="kilo" aria-label="K.I.L.O. portals">
-        {
-          doors.map((d) => (
-            <a class="tile" href={d.href}>
-              <div>
-                <p class="glyph">
-                  {d.letter} · {d.label}
-                </p>
-                <h2>{d.name}</h2>
-                <p>{d.blurb}</p>
-              </div>
-              <span class="host">
-                {d.host}
-                <span class="arrow" aria-hidden="true">
-                  →
-                </span>
-              </span>
-            </a>
-          ))
-        }
-      </section>
-
-      <footer>
-        <span>gZen playground</span>
-        <div>
-          <a href="https://divineforge.com">DivineForge</a>
-          &middot; engineering &amp; advocacy
-        </div>
-      </footer>
-    </main>
-  </body>
-</html>
+  :global(.door-key-flash) {
+    border-color: var(--line-strong) !important;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.06),
+      0 0 32px color-mix(in srgb, var(--door-tone, var(--accent)) 22%, transparent) !important;
+  }
+</style>

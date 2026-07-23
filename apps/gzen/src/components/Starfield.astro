@@ -1,0 +1,57 @@
+---
+/** Lightweight CSS starfield — no canvas, no deps */
+const stars = Array.from({ length: 48 }, (_, i) => {
+  const x = ((i * 47) % 100) + (i % 7) * 0.3;
+  const y = ((i * 31) % 100) + (i % 5) * 0.4;
+  const s = 0.6 + (i % 4) * 0.35;
+  const o = 0.25 + (i % 5) * 0.12;
+  const d = 4 + (i % 8) * 1.2;
+  return { x, y, s, o, d };
+});
+---
+
+<div class="starfield" aria-hidden="true">
+  {
+    stars.map((st) => (
+      <span
+        class="star"
+        style={`left:${st.x}%;top:${st.y}%;width:${st.s}px;height:${st.s}px;--o:${st.o};--d:${st.d}s`}
+      />
+    ))
+  }
+</div>
+
+<style>
+  .starfield {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .star {
+    position: absolute;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ink) 92%, var(--accent));
+    opacity: var(--o);
+    transition: background 0.4s var(--ease);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .star {
+      animation: twinkle var(--d) ease-in-out infinite alternate;
+    }
+  }
+
+  @keyframes twinkle {
+    from {
+      opacity: calc(var(--o) * 0.35);
+      transform: scale(0.85);
+    }
+    to {
+      opacity: var(--o);
+      transform: scale(1);
+    }
+  }
+</style>

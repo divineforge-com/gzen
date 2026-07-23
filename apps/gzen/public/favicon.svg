@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="gZen">
-  <rect width="64" height="64" rx="2" fill="#fafafa"/>
+  <rect width="64" height="64" rx="2" fill="#050505"/>
   <text
     x="32"
     y="41"
     text-anchor="middle"
     font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
-    font-size="20"
+    font-size="18"
     font-weight="500"
     letter-spacing="0.02em"
-    fill="#111111"
-  >GZ</text>
+    fill="#f4f4f4"
+  >gZ</text>
+  <circle cx="52" cy="12" r="2" fill="#c45c26"/>
 </svg>

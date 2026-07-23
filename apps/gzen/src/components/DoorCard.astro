@@ -1,0 +1,240 @@
+---
+import type { Door } from "../data/doors";
+
+interface Props {
+  door: Door;
+  index: number;
+}
+
+const { door, index } = Astro.props;
+const delayClass = `reveal-d${Math.min(index + 2, 5)}`;
+---
+
+<a
+  class:list={["door", "reveal", delayClass]}
+  href={door.href}
+  data-door={door.letter}
+  style={`--door-tone: ${door.tone}`}
+>
+  <div class="door-inner">
+    <div class="door-top">
+      <span class="glyph">
+        <span class="letter">{door.letter}</span>
+        <span class="sep" aria-hidden="true">·</span>
+        <span class="label">{door.label}</span>
+      </span>
+      <span class="pulse" aria-hidden="true"></span>
+    </div>
+
+    <div class="door-mid">
+      <h2>{door.name}</h2>
+      <p>{door.blurb}</p>
+    </div>
+
+    <div class="door-bot">
+      <span class="host">{door.host}</span>
+      <span class="arrow" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M3 8h10M9 4l4 4-4 4"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>
+
+<style>
+  .door {
+    --pad: clamp(1.1rem, 2.5vw, 1.35rem);
+    position: relative;
+    display: block;
+    aspect-ratio: 1 / 1;
+    text-decoration: none;
+    color: inherit;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      border-color 0.28s var(--ease),
+      transform 0.35s var(--ease),
+      box-shadow 0.35s var(--ease),
+      background 0.28s var(--ease);
+  }
+
+  /* Soft corner light — SpaceX panel feel */
+  .door::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.04) 0%, transparent 42%),
+      radial-gradient(
+        120% 80% at 100% 0%,
+        color-mix(in srgb, var(--door-tone) 18%, transparent),
+        transparent 55%
+      );
+    opacity: 0.85;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease);
+  }
+
+  .door::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    pointer-events: none;
+    transition: border-color 0.28s var(--ease);
+  }
+
+  .door:hover,
+  .door:focus-visible {
+    border-color: var(--line-strong);
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.04),
+      0 18px 40px rgba(0, 0, 0, 0.45),
+      0 0 48px color-mix(in srgb, var(--door-tone) 12%, transparent);
+    background: var(--bg-elevated);
+    outline: none;
+  }
+
+  .door:hover::after,
+  .door:focus-visible::after {
+    border-color: color-mix(in srgb, var(--door-tone) 35%, transparent);
+  }
+
+  .door:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  .door-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: var(--pad);
+  }
+
+  .door-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .glyph {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: color-mix(in srgb, var(--door-tone) 70%, #fff);
+  }
+
+  .letter {
+    color: var(--door-tone);
+  }
+
+  .sep {
+    opacity: 0.45;
+  }
+
+  .label {
+    color: var(--muted);
+  }
+
+  .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--door-tone);
+    opacity: 0.55;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--door-tone) 40%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .door:hover .pulse,
+    .door:focus-visible .pulse {
+      animation: pulse-soft 1.6s var(--ease) infinite;
+    }
+  }
+
+  .door-mid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0.35rem 0;
+  }
+
+  h2 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(1.35rem, 3.5vw, 1.65rem);
+    font-weight: 550;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+    max-width: 16ch;
+  }
+
+  .door-bot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .host {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    color: var(--dim);
+    transition: color 0.2s var(--ease);
+  }
+
+  .arrow {
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--dim);
+    transition:
+      color 0.2s var(--ease),
+      border-color 0.2s var(--ease),
+      background 0.2s var(--ease),
+      transform 0.25s var(--ease);
+  }
+
+  .door:hover .host,
+  .door:focus-visible .host {
+    color: var(--ink);
+  }
+
+  .door:hover .arrow,
+  .door:focus-visible .arrow {
+    color: var(--ink);
+    border-color: var(--line-strong);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateX(2px);
+  }
+</style>

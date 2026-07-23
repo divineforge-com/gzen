@@ -6,4 +6,15 @@ export default defineConfig({
   build: {
     assets: "_astro",
   },
+  server: {
+    host: true,
+    port: 1318,
+    // Allow Cloudflare quick tunnels / remote preview hosts
+    allowedHosts: true,
+  },
+  vite: {
+    server: {
+      allowedHosts: true,
+    },
+  },
 });

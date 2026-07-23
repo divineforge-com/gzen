@@ -7,3 +7,5 @@ gZen is the **playground / knowledge nexus**, not the engineering blog.
 - Engineering / speaking / consulting → DivineForge (`../divineforge/web`)
 
 See `AGENTS.md` and `BRAND.md`.
+
+When a visual change is ready to review, notify via StackySentinel (`@divineforgeBot`) — skill `stackysentinel-notify` / `.agents/skills/stackysentinel-notify/`.

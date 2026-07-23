@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="gZen orbit-g">
+  <!-- B · Orbit-g: monoline lowercase g; ear becomes a thin orbital path around a quiet core. -->
+  <rect width="32" height="32" rx="2" fill="#050505"/>
+  <!-- Orbital ring -->
+  <circle
+    cx="15.5"
+    cy="14.2"
+    r="7.4"
+    fill="none"
+    stroke="#f4f4f4"
+    stroke-width="1.7"
+  />
+  <!-- Inner quiet core (planet / mind) -->
+  <circle cx="15.5" cy="14.2" r="2.1" fill="#f4f4f4"/>
+  <!-- g descender + open ear continuing the orbit -->
+  <path
+    d="M22.9 14.2
+       V21.4
+       C22.9 24.8 19.8 26.4 16.6 26.4
+       C13.8 26.4 11.8 25.2 11.2 23.4"
+    fill="none"
+    stroke="#f4f4f4"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Satellite / observation spark on the orbit -->
+  <circle cx="22.6" cy="10.2" r="1.25" fill="#c45c26"/>
+</svg>

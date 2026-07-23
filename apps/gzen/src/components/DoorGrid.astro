@@ -1,0 +1,77 @@
+---
+import { doors } from "../data/doors";
+import DoorCard from "./DoorCard.astro";
+---
+
+<section class="doors" aria-label="Four doors">
+  <div class="doors-head reveal reveal-d3">
+    <h2 class="section-label">Enter</h2>
+    <p class="section-note">
+      <span class="copy-monastery">Four square doors</span>
+      <span class="copy-ignite">Four doors · one system</span>
+      <span class="keys" title="Keyboard shortcuts"> · K I L O</span>
+    </p>
+  </div>
+
+  <div class="grid">
+    {doors.map((door, i) => <DoorCard door={door} index={i} />)}
+  </div>
+</section>
+
+<style>
+  .doors {
+    margin-top: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .doors-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .section-label {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .section-note {
+    margin: 0;
+    font-size: 0.82rem;
+    color: var(--dim);
+  }
+
+  .keys {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    opacity: 0.75;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  @media (min-width: 720px) {
+    .grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
