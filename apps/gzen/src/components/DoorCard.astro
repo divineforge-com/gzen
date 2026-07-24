@@ -1,15 +1,15 @@
 ---
-import type { Door } from "../data/doors";
+import type { Door } from "../data/doors"
 
 interface Props {
-  door: Door;
-  index: number;
+  door: Door
+  index: number
 }
 
-const { door, index } = Astro.props;
-const delayClass = `reveal-d${Math.min(index + 2, 5)}`;
-const firstChar = door.name[0];
-const rest = door.name.slice(1);
+const { door, index } = Astro.props
+const delayClass = `reveal-d${Math.min(index + 2, 5)}`
+const firstChar = door.name[0]
+const rest = door.name.slice(1)
 ---
 
 <a
@@ -17,7 +17,7 @@ const rest = door.name.slice(1);
   href={door.href}
   data-door={door.letter}
   style={`--door-tone: ${door.tone}`}
->
+  aria-keyshortcuts={door.letter}>
   <div class="door-inner">
     <div class="door-top">
       <span class="pulse" aria-hidden="true"></span>
