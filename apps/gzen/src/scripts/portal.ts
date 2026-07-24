@@ -35,6 +35,7 @@ function applyTheme(theme: ThemeId) {
         ? "Warm ignition on. Switch to cool monastery."
         : "Cool monastery on. Switch to warm ignition.",
     );
+    btn.setAttribute("aria-checked", theme === "ignite" ? "true" : "false");
   }
 }
 
