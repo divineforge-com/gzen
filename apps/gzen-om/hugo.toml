@@ -1,6 +1,6 @@
 baseURL = "https://om.gzen.io/"
 title = "唵 · gZen Om"
-languageName = "zh-Hans"
+languageCode = "zh-Hans"
 defaultContentLanguage = "zh"
 disableLanguages = []
 enableRobotsTXT = true
