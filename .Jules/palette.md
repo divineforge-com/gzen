@@ -1,0 +1,3 @@
+## 2025-07-25 - Custom Keyboard Shortcuts Must Expose aria-keyshortcuts
+**Learning:** For custom keyboard interactions (like toggling themes with 'T' or accessing door links with 'K, I, L, O'), users of assistive technologies and sighted users alike may be unaware of these shortcuts unless explicitly surfaced via `aria-keyshortcuts` and standard `title` tooltips.
+**Action:** When implementing application-specific hotkeys (e.g., inside `scripts/portal.ts`), verify the associated HTML elements include `aria-keyshortcuts` and a visual indicator like a `title` attribute.

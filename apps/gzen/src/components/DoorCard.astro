@@ -16,6 +16,8 @@ const rest = door.name.slice(1);
   class:list={["door", "reveal", delayClass]}
   href={door.href}
   data-door={door.letter}
+  aria-keyshortcuts={door.letter}
+  title={`(Press ${door.letter})`}
   style={`--door-tone: ${door.tone}`}
 >
   <div class="door-inner">
