@@ -17,6 +17,8 @@ const rest = door.name.slice(1);
   href={door.href}
   data-door={door.letter}
   style={`--door-tone: ${door.tone}`}
+  aria-keyshortcuts={door.letter}
+  title={`Keyboard shortcut: ${door.letter}`}
 >
   <div class="door-inner">
     <div class="door-top">
