@@ -1,117 +1,171 @@
 ---
-import { site } from "../data/doors";
+import { site } from "../data/paths";
 
 const m = site.themes.monastery;
 const i = site.themes.ignite;
 ---
 
 <header class="hero">
-  <p class="eyebrow reveal">gZen · playground</p>
+  <div class="hero-flow" aria-hidden="true"></div>
+
+  <p class="eyebrow reveal">gZen · strategic flow</p>
 
   <h1 class="wordmark reveal reveal-d1">
-    <span class="g">g</span><span class="zen">Zen</span><span class="dot">.</span><span class="io">IO</span>
+    <span class="g">g</span><span class="zen">Zen</span>
   </h1>
 
-  <p class="tagline reveal reveal-d2">
-    <span class="tag-line" aria-hidden="true"></span>
-    <span class="tag-text">
-      <span class="copy-monastery">{m.tagline}</span>
-      <span class="copy-ignite">{i.tagline}</span>
-    </span>
-    <span class="tag-line" aria-hidden="true"></span>
+  <p class="hook reveal reveal-d2">{site.hook}</p>
+
+  <p class="subhead reveal reveal-d2">{site.subhead}</p>
+
+  <p class="theme-line reveal reveal-d3">
+    <span class="copy-monastery">{m.tagline} · {m.lede}</span>
+    <span class="copy-ignite">{i.tagline} · {i.lede}</span>
   </p>
 
-  <p class="lede reveal reveal-d2">
-    <span class="copy-monastery">{m.lede}</span>
-    <span class="copy-ignite">{i.lede}</span>
-  </p>
+  <div class="cta-row reveal reveal-d3">
+    <a class="cta-primary" href="#paths">Enter the four paths</a>
+    <a class="cta-ghost" href="#protocol">Daily protocol</a>
+  </div>
 </header>
 
 <style>
   .hero {
+    position: relative;
     text-align: center;
-    padding: clamp(4.5rem, 12vw, 7.5rem) 0 clamp(2rem, 5vw, 2.75rem);
+    padding: clamp(5.5rem, 14vw, 9rem) 0 clamp(3.5rem, 8vw, 5.5rem);
+    max-width: 42rem;
+    margin: 0 auto;
   }
 
-  .eyebrow {
-    margin: 0 0 1.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    color: var(--dim);
+  .hero-flow {
+    position: absolute;
+    left: 50%;
+    top: 18%;
+    width: min(28rem, 90vw);
+    height: min(28rem, 90vw);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      var(--flow) 0%,
+      transparent 68%
+    );
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-flow {
+      animation: flow-drift 12s var(--ease-fluid) infinite;
+    }
   }
 
   .wordmark {
     margin: 0;
-    font-size: clamp(3.4rem, 14vw, 6.5rem);
+    font-size: clamp(3.6rem, 15vw, 6.75rem);
     font-weight: 500;
     letter-spacing: -0.055em;
-    line-height: 0.95;
+    line-height: 0.92;
     color: var(--ink);
   }
 
   .wordmark .g {
     font-weight: 400;
-    opacity: 0.92;
-  }
-
-  .wordmark .zen {
-    font-weight: 550;
-  }
-
-  .wordmark .dot {
-    color: var(--accent);
-    font-weight: 400;
-    transition: color 0.35s var(--ease);
-  }
-
-  .wordmark .io {
-    font-weight: 400;
-    letter-spacing: -0.04em;
     opacity: 0.88;
   }
 
-  .tagline {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1.75rem 0 0;
+  .wordmark .zen {
+    font-weight: 560;
   }
 
-  .tag-text {
-    font-family: var(--font-mono);
-    font-size: clamp(0.72rem, 2vw, 0.82rem);
+  .hook {
+    margin: clamp(1.75rem, 4vw, 2.25rem) 0 0;
+    font-size: clamp(1.35rem, 3.5vw, 1.85rem);
     font-weight: 500;
-    letter-spacing: 0.28em;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+
+  .subhead {
+    margin: 1rem auto 0;
+    max-width: 28rem;
+    color: var(--muted);
+    font-size: clamp(0.98rem, 2.1vw, 1.08rem);
+    line-height: 1.65;
+  }
+
+  .theme-line {
+    margin: 1.5rem auto 0;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
-    white-space: nowrap;
     transition: color 0.35s var(--ease);
   }
 
-  /* display:contents children need the span to still paint */
-  .tag-text :global(.copy-monastery),
-  .tag-text :global(.copy-ignite) {
-    /* contents — parent styles apply */
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem 1rem;
+    margin-top: 2.25rem;
   }
 
-  .tag-line {
-    display: block;
-    width: clamp(1.5rem, 8vw, 3.5rem);
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
-  }
-
-  .lede {
-    margin: 1.1rem auto 0;
-    max-width: 26rem;
-    color: var(--muted);
-    font-size: clamp(0.98rem, 2.2vw, 1.08rem);
-    line-height: 1.55;
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.45rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.9rem;
+    font-weight: 550;
     letter-spacing: -0.01em;
-    transition: color 0.35s var(--ease);
+    text-decoration: none;
+    transition:
+      transform 0.3s var(--ease),
+      box-shadow 0.3s var(--ease),
+      opacity 0.2s var(--ease);
+  }
+
+  .cta-primary:hover,
+  .cta-primary:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    outline: none;
+  }
+
+  .cta-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    transition:
+      border-color 0.25s var(--ease),
+      color 0.25s var(--ease),
+      background 0.25s var(--ease);
+  }
+
+  .cta-ghost:hover,
+  .cta-ghost:focus-visible {
+    border-color: var(--accent);
+    color: var(--ink);
+    background: var(--accent-soft);
+    outline: none;
   }
 </style>

@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "astro dev --port 1318",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "astro build && node ./scripts/strip-local-only.mjs",
+    "preview": "astro preview",
+    "proposal": "bash ../../.agents/skills/stackysentinel-notify/scripts/proposal.sh"
   },
   "dependencies": {
     "astro": "^5.0.0"

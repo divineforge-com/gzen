@@ -34,4 +34,5 @@ Push to `main` → CF auto-builds.
 - Skill: `.agents/skills/stackysentinel-notify/SKILL.md` (also `~/.grok/skills/stackysentinel-notify/`)
 - Script: `.agents/skills/stackysentinel-notify/scripts/notify.sh`
 - Portal dev: `http://rustypandora.banjo-scala.ts.net:1318` (port 1318)
+- Asset proposals (local only): `http://rustypandora.banjo-scala.ts.net:1318/proposal` — Stacky command `proposal.sh` / `npm run proposal`
 - Bot is **not** Nova (`@novananamiBot`)

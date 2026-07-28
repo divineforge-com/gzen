@@ -1,0 +1,98 @@
+---
+import { site } from "../data/paths";
+
+const { framework } = site;
+---
+
+<section class="framework" id="framework" aria-labelledby="framework-title">
+  <header class="head reveal">
+    <p class="eyebrow">Section 02 · Core framework</p>
+    <h2 class="section-title" id="framework-title">{framework.title}</h2>
+    <p class="section-lead">{framework.lead}</p>
+  </header>
+
+  <div class="matrix">
+    {
+      framework.matrix.map((item, i) => (
+        <article class:list={["cell", "reveal", `reveal-d${Math.min(i + 1, 5)}`]}>
+          <span class="num" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <h3>{item.q}</h3>
+          <p>{item.a}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .framework {
+    padding: var(--space-section) 0 0;
+  }
+
+  .head {
+    max-width: 36rem;
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .matrix {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  @media (min-width: 640px) {
+    .matrix {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .cell {
+    position: relative;
+    padding: clamp(1.35rem, 3vw, 1.75rem);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--bg-elevated) 90%, transparent),
+      transparent
+    );
+    transition:
+      border-color 0.3s var(--ease),
+      background 0.3s var(--ease),
+      transform 0.35s var(--ease);
+  }
+
+  .cell:hover {
+    border-color: var(--line-strong);
+    transform: translateY(-2px);
+    background: var(--bg-elevated);
+  }
+
+  .num {
+    display: block;
+    margin-bottom: 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+
+  h3 {
+    margin: 0 0 0.55rem;
+    font-size: 1.15rem;
+    font-weight: 550;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+</style>

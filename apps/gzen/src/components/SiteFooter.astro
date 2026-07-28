@@ -1,76 +1,84 @@
 ---
-import { site } from "../data/doors";
+import { site } from "../data/paths";
 ---
 
-<footer class="foot reveal reveal-d5">
-  <div class="foot-left">
-    <span class="brand">gZen</span>
+<footer class="foot reveal">
+  <div class="foot-brand">
+    <span class="mark">gZen</span>
+    <span class="domain">gzen.io</span>
     <span class="sep" aria-hidden="true">·</span>
     <span class="whisper" title="Origin · not co-brand">{site.originWhisper}</span>
   </div>
-  <div class="foot-right">
-    <a href="https://divineforge.com">DivineForge</a>
+  <div class="foot-links">
+    <a href="#anatomy">Anatomy</a>
+    <a href="#framework">Flow</a>
+    <a href="#paths">Paths</a>
+    <a href="#protocol">Protocol</a>
     <span class="sep" aria-hidden="true">·</span>
-    <span class="muted">engineering</span>
+    <a href="https://divineforge.com">DivineForge</a>
   </div>
 </footer>
 
 <style>
   .foot {
-    margin-top: clamp(3rem, 8vw, 4.5rem);
-    padding: 1.5rem 0 0.5rem;
+    margin-top: var(--space-section);
+    padding: 1.75rem 0 0.75rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
+    gap: 1rem 1.75rem;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid var(--line);
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--dim);
-    transition: border-color 0.35s var(--ease);
   }
 
-  .foot-left,
-  .foot-right {
+  .foot-brand,
+  .foot-links {
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
     flex-wrap: wrap;
+    gap: 0.5rem 0.75rem;
   }
 
-  .brand {
-    color: var(--muted);
-    font-weight: 500;
-    letter-spacing: -0.02em;
+  .mark {
+    color: var(--ink);
+    font-weight: 550;
+    letter-spacing: -0.03em;
+    font-size: 0.95rem;
+  }
+
+  .domain {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    color: var(--dim);
   }
 
   .whisper {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     letter-spacing: 0.04em;
     color: var(--dim);
     opacity: 0.85;
   }
 
   .sep {
-    opacity: 0.5;
-  }
-
-  .muted {
-    color: var(--dim);
+    opacity: 0.45;
   }
 
   a {
-    color: var(--ink);
+    color: var(--muted);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition:
-      border-color 0.15s var(--ease),
-      color 0.15s var(--ease);
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease);
   }
 
   a:hover,
   a:focus-visible {
+    color: var(--ink);
     border-bottom-color: var(--accent);
     outline: none;
   }

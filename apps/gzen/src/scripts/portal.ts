@@ -1,5 +1,5 @@
 /**
- * Lightweight portal interactivity — theme, doors, ambient.
+ * Lightweight portal interactivity — theme, paths, ambient.
  * Respects prefers-reduced-motion.
  */
 
@@ -7,8 +7,8 @@ const STORAGE_KEY = "gzen-theme";
 type ThemeId = "monastery" | "ignite";
 
 const THEME_COLORS: Record<ThemeId, string> = {
-  monastery: "#04050a",
-  ignite: "#0a0705",
+  monastery: "#06080c",
+  ignite: "#0c0907",
 };
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -61,38 +61,34 @@ function initThemeToggle() {
   });
 }
 
-function initMagneticDoors() {
+function initMagneticPaths() {
   if (reduceMotion || window.matchMedia("(pointer: coarse)").matches) return;
 
-  const doors = document.querySelectorAll<HTMLElement>(".door");
+  const pathEls = document.querySelectorAll<HTMLElement>(".path");
 
-  doors.forEach((door) => {
+  pathEls.forEach((el) => {
     const onMove = (e: PointerEvent) => {
-      const rect = door.getBoundingClientRect();
+      const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
       const px = (x / rect.width - 0.5) * 2;
-      const py = (y / rect.height - 0.5) * 2;
-      door.style.setProperty("--mx", `${px}`);
-      door.style.setProperty("--my", `${py}`);
-      door.style.transform = `translateY(-3px) perspective(600px) rotateX(${(-py * 2.5).toFixed(2)}deg) rotateY(${(px * 2.5).toFixed(2)}deg)`;
+      el.style.setProperty("--mx", `${px}`);
+      el.style.transform = `translateX(${(4 + px * 2).toFixed(2)}px)`;
     };
 
     const onLeave = () => {
-      door.style.transform = "";
-      door.style.removeProperty("--mx");
-      door.style.removeProperty("--my");
+      el.style.transform = "";
+      el.style.removeProperty("--mx");
     };
 
-    door.addEventListener("pointermove", onMove);
-    door.addEventListener("pointerleave", onLeave);
-    door.addEventListener("blur", onLeave);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", onLeave);
+    el.addEventListener("blur", onLeave);
   });
 }
 
 function initKeyboardHint() {
-  const doors = Array.from(document.querySelectorAll<HTMLAnchorElement>(".door"));
-  if (!doors.length) return;
+  const pathEls = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
+  if (!pathEls.length) return;
 
   window.addEventListener("keydown", (e) => {
     const key = e.key.toUpperCase();
@@ -101,12 +97,12 @@ function initKeyboardHint() {
     if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) {
       return;
     }
-    const door = doors.find((d) => d.dataset.door === key);
-    if (door) {
+    const path = pathEls.find((d) => d.dataset.path === key);
+    if (path) {
       e.preventDefault();
-      door.focus();
-      door.classList.add("door-key-flash");
-      window.setTimeout(() => door.classList.remove("door-key-flash"), 350);
+      path.focus();
+      path.classList.add("path-key-flash");
+      window.setTimeout(() => path.classList.remove("path-key-flash"), 350);
     }
   });
 }
@@ -139,6 +135,6 @@ function initAmbientPointer() {
 }
 
 initThemeToggle();
-initMagneticDoors();
+initMagneticPaths();
 initKeyboardHint();
 initAmbientPointer();

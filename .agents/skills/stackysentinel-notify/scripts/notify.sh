@@ -9,7 +9,13 @@
 #   STACKY_SECRETS_ENV   default divineforge stacky secrets path
 set -euo pipefail
 
-SECRETS="${STACKY_SECRETS_ENV:-/home/ubuntu/development/divineforge/rustypandora/stacky/secrets.env}"
+SECRETS="${STACKY_SECRETS_ENV:-}"
+if [[ -z "$SECRETS" ]]; then
+  for cand in     /home/ubuntu/development/dforge/rustypandora/stacky/secrets.env     /home/ubuntu/development/divineforge/rustypandora/stacky/secrets.env; do
+    if [[ -f "$cand" ]]; then SECRETS="$cand"; break; fi
+  done
+  SECRETS="${SECRETS:-/home/ubuntu/development/dforge/rustypandora/stacky/secrets.env}"
+fi
 CHAT_ID="${STACKYSENTINEL_CHAT_ID:-162481195}"
 
 if [[ -z "${TELEGRAM_BOT_TOKEN:-}" && -f "$SECRETS" ]]; then

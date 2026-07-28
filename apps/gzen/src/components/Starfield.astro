@@ -1,11 +1,11 @@
 ---
-/** Lightweight CSS starfield — no canvas, no deps */
-const stars = Array.from({ length: 48 }, (_, i) => {
-  const x = ((i * 47) % 100) + (i % 7) * 0.3;
-  const y = ((i * 31) % 100) + (i % 5) * 0.4;
-  const s = 0.6 + (i % 4) * 0.35;
-  const o = 0.25 + (i % 5) * 0.12;
-  const d = 4 + (i % 8) * 1.2;
+/** Sparse floating particles — calm energy, not visual noise */
+const stars = Array.from({ length: 28 }, (_, i) => {
+  const x = ((i * 53) % 97) + (i % 5) * 0.4;
+  const y = ((i * 37) % 95) + (i % 4) * 0.5;
+  const s = 0.5 + (i % 3) * 0.4;
+  const o = 0.18 + (i % 4) * 0.1;
+  const d = 6 + (i % 7) * 1.4;
   return { x, y, s, o, d };
 });
 ---
@@ -33,9 +33,9 @@ const stars = Array.from({ length: 48 }, (_, i) => {
   .star {
     position: absolute;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--ink) 92%, var(--accent));
+    background: color-mix(in srgb, var(--ink) 80%, var(--accent));
     opacity: var(--o);
-    transition: background 0.4s var(--ease);
+    transition: background 0.45s var(--ease);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -46,8 +46,8 @@ const stars = Array.from({ length: 48 }, (_, i) => {
 
   @keyframes twinkle {
     from {
-      opacity: calc(var(--o) * 0.35);
-      transform: scale(0.85);
+      opacity: calc(var(--o) * 0.3);
+      transform: scale(0.9);
     }
     to {
       opacity: var(--o);

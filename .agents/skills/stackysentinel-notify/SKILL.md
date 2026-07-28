@@ -29,7 +29,7 @@ This is the default close-out for visual work on this machine.
 | Display | **Stacky-Sentinels Mk V** |
 | Username | **@divineforgeBot** |
 | Chat | `162481195` (William) |
-| Token | `TELEGRAM_BOT_TOKEN` in `divineforge/rustypandora/stacky/secrets.env` |
+| Token | `TELEGRAM_BOT_TOKEN` in `dforge/rustypandora/stacky/secrets.env` (fallback: `divineforge/...`) |
 
 **Not Nova.** Nova is `@novananamiBot` (Hermes). Do not use Nova for these review pings unless the user asks.
 
@@ -105,6 +105,39 @@ Keep it scannable:
 | Production | `https://gzen.io` |
 
 Port **1318** = Astro portal (`apps/gzen`). Confirm with `ss`/`curl` if unsure.
+
+| Surface | URL |
+|---------|-----|
+| **gZen asset proposals (local only)** | `http://rustypandora.banjo-scala.ts.net:1318/proposal` |
+
+`/proposal` is **dev-only**. Production build strips it (`npm run build` → `strip-local-only.mjs`). Never publish mark drafts to gzen.io.
+
+### Function command: `/proposal`
+
+**In Telegram** (Stacky-Sentinels / `@divineforgeBot` menu):
+
+- Tap **Menu → proposal** or send `/proposal`
+- Bot replies with Tailscale + IP links to the local gZen asset gallery
+- Implemented in Go: `dforge/rustypandora/nova/main.go` → binary `stacky-telegram` → `systemctl restart stacky-telegram`
+
+**From agents / CLI** (outbound notify, no need for user to type `/proposal`):
+
+```bash
+# from anywhere — uses notify.sh under the hood
+~/.grok/skills/stackysentinel-notify/scripts/proposal.sh
+
+# health only
+~/.grok/skills/stackysentinel-notify/scripts/proposal.sh --check
+
+# or from portal app
+cd apps/gzen && npm run proposal
+```
+
+Agent triggers: “send proposal”, “/proposal”, “logo review”, “favicon proposals”, “asset gallery”.
+
+**Shipped mark:** `enso-g` (favicon on portal). Gallery still lists alternates for future review.
+
+After sending: William opens the link, replies with a mark id if changing (e.g. `orbit-g`).
 
 ## When to fire
 

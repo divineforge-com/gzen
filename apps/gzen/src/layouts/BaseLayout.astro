@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { site } from "../data/doors";
+import { site } from "../data/paths";
 
 interface Props {
   title?: string;
@@ -35,7 +35,7 @@ const canonical = site.url;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <meta name="theme-color" content="#04050a" id="meta-theme-color" />
+    <meta name="theme-color" content="#06080c" id="meta-theme-color" />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
@@ -47,7 +47,7 @@ const canonical = site.url;
           var t = localStorage.getItem("gzen-theme");
           if (t !== "ignite" && t !== "monastery") t = "monastery";
           document.documentElement.setAttribute("data-theme", t);
-          var c = t === "ignite" ? "#0a0705" : "#04050a";
+          var c = t === "ignite" ? "#0c0907" : "#06080c";
           var m = document.getElementById("meta-theme-color");
           if (m) m.setAttribute("content", c);
         } catch (e) {
