@@ -3,5 +3,5 @@ pages_build_output_dir = "public"
 pages_build_command = "hugo --gc --minify"
 compatibility_date = "2026-05-10"
 
-[env.production]
+[vars]
 HUGO_VERSION = "0.147.9"
