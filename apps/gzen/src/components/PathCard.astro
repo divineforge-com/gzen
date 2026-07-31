@@ -17,6 +17,8 @@ const poleLabel =
   href={path.href}
   data-path={path.letter}
   style={`--path-tone: ${path.tone}`}
+  aria-keyshortcuts={path.letter}
+  title={`Press ${path.letter} to jump`}
 >
   <div class="path-letter" aria-hidden="true">{path.letter}</div>
 
