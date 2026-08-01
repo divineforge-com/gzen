@@ -9,14 +9,14 @@ interface Props {
 const { path, index } = Astro.props;
 const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
 const poleLabel =
-  path.pole === "G" ? "Fire" : path.pole === "Zen" ? "Peace" : "Flow";
+  path.pole === "G" ? "Fire" : path.pole === "Zen" ? "Peace" : "Fire + Peace";
 
 // Strategic flow tags — absorbed from Framework section
 const flowTag: Record<string, string> = {
-  K: "Patient progress &middot; body compounds",
-  I: "Urgent action &middot; seize the window",
+  K: "Patient progress &middot; vitality compounds",
+  I: "Urgent action &middot; windows close",
   L: "Observe first &middot; then execute",
-  O: "Hard stop &middot; protect stillness",
+  O: "Hard stop &middot; stillness is the strategy",
 };
 ---
 
@@ -65,6 +65,9 @@ const flowTag: Record<string, string> = {
       )
     }
   </div>
+
+  <!-- K.I.L.O. letter chip for scannability -->
+  <span class="path-letter-chip" aria-hidden="true">{path.letter}</span>
 
   <div class="path-body">
     <div class="path-meta">
@@ -172,6 +175,26 @@ const flowTag: Record<string, string> = {
     height: 60%;
   }
 
+  /* K·I·L·O letter chip — visible acronym reinforcement */
+  .path-letter-chip {
+    position: absolute;
+    top: clamp(0.5rem, 1.5vw, 0.75rem);
+    right: clamp(0.5rem, 1.5vw, 0.75rem);
+    z-index: 1;
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1;
+    color: color-mix(in srgb, var(--path-tone) 18%, transparent);
+    pointer-events: none;
+    transition: color 0.35s var(--ease);
+  }
+
+  .path:hover .path-letter-chip,
+  .path:focus-visible .path-letter-chip {
+    color: color-mix(in srgb, var(--path-tone) 28%, transparent);
+  }
+
   .path-body {
     position: relative;
     z-index: 1;
@@ -229,8 +252,7 @@ const flowTag: Record<string, string> = {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--dim);
-    opacity: 0.75;
-    transition: color 0.3s var(--ease), opacity 0.3s var(--ease);
+    transition: color 0.3s var(--ease);
   }
 
   .path:hover .path-flow,

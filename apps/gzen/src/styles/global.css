@@ -6,7 +6,7 @@ html[data-theme="monastery"] {
   --bg-elevated: #0c0f16;
   --ink: #eef0f4;
   --muted: #8f96a3;
-  --dim: #5c6370;
+  --dim: #7d8594;
   --line: rgba(200, 214, 240, 0.07);
   --line-strong: rgba(200, 214, 240, 0.14);
   --accent: #6b9e8a;
@@ -30,7 +30,7 @@ html[data-theme="ignite"] {
   --bg-elevated: #14100c;
   --ink: #f5f1ec;
   --muted: #9c9186;
-  --dim: #6e645a;
+  --dim: #8a7f74;
   --line: rgba(255, 220, 180, 0.08);
   --line-strong: rgba(255, 220, 180, 0.16);
   --accent: #d97845;

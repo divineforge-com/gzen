@@ -27,7 +27,7 @@ export const paths: readonly Path[] = [
     name: "Invest",
     host: "invest.gzen.io",
     href: "https://invest.gzen.io/",
-    blurb: "Capital with clarity. Build wealth without frantic noise.",
+    blurb: "Capital with clarity. Build wealth without the noise.",
     pole: "G",
     tone: "#c45c26",
   },
@@ -37,7 +37,7 @@ export const paths: readonly Path[] = [
     name: "Learn",
     host: "learn.gzen.io",
     href: "https://learn.gzen.io/",
-    blurb: "One honest lesson. Skill that compounds in silence.",
+    blurb: "One honest lesson. Skill that builds in silence.",
     pole: "G",
     tone: "#3b6ea5",
   },
@@ -47,7 +47,7 @@ export const paths: readonly Path[] = [
     name: "Om",
     host: "om.gzen.io",
     href: "https://om.gzen.io/",
-    blurb: "Stillness before speech. Protect the mind that executes.",
+    blurb: "Stillness before speech. Guard the mind that executes.",
     pole: "Zen",
     tone: "#8b5a2b",
   },
@@ -59,17 +59,17 @@ export const site = {
   shortName: "gZen",
   title: "gZen — The hustle without the burnout",
   description:
-    "gZen: high-intensity execution with absolute mental clarity. Secure progress. Protect your peace. Four paths — Ki, Invest, Learn, Om.",
+    "The hustle without the burnout. High-intensity execution with absolute mental clarity. Four paths — Ki, Invest, Learn, Om. Build with force. Rest with intention.",
   url: "https://gzen.io/",
   hook: "The hustle without the burnout.",
   subhead:
-    "Master high-intensity execution and absolute mental clarity. Build with force. Rest with intention.",
+    "Build with force. Rest with intention.",
   themes: {
     monastery: {
       id: "monastery" as const,
       label: "Cool monastery",
       tagline: "Protect your peace.",
-      lede: "Still mind. Clear edge. No noise.",
+      lede: "Still mind. Clear edge. Nothing wasted.",
       themeColor: "#06080c",
     },
     ignite: {
@@ -83,7 +83,7 @@ export const site = {
   originWhisper: "kilo · observe before you move",
   anatomy: {
     title: "The anatomy of a gZen achiever",
-    lead: "Two poles. One system. Neither works alone.",
+    lead: "Two poles — Fire and Peace, and the Flow between them. Neither works alone.",
     fire: {
       label: "The Fire · G",
       title: "Drive",
@@ -129,7 +129,7 @@ export const site = {
   },
   protocol: {
     title: "Daily gZen Protocol",
-    lead: "Three check-ins. Instant value — no account required.",
+    lead: "Three check-ins. No account. No setup. Just the practice.",
     steps: [
       {
         name: "Energy",

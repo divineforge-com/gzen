@@ -9,11 +9,13 @@ import PathCard from "./PathCard.astro";
       <p class="eyebrow">K · I · L · O</p>
       <h2 class="section-title">Four paths. One system.</h2>
       <p class="section-lead">
-        Two poles — <strong>Fire</strong> (drive) and <strong>Peace</strong> (stillness).
-        Neither works alone. Each path is a practice of gZen: execute where it compounds,
-        rest where it protects.
+        Two poles — <strong>Fire</strong> (drive), <strong>Peace</strong> (stillness), and the <strong>Flow</strong> between them.
+        Execute where it compounds. Rest where it protects.
       </p>
-      <p class="section-hint">
+      <p class="section-rhythm">
+        Every path runs on a rhythm: urgent action, patient progress, hard stop, or observe first.
+      </p>
+      <p class="section-hint" aria-hidden="true">
         Press <kbd>K</kbd> <kbd>I</kbd> <kbd>L</kbd> <kbd>O</kbd> to jump.
       </p>
     </div>
@@ -39,8 +41,15 @@ import PathCard from "./PathCard.astro";
     font-weight: 550;
   }
 
+  .section-rhythm {
+    margin: 0.65rem 0 0;
+    color: var(--dim);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
   .section-hint {
-    margin: 0.75rem 0 0;
+    margin: 0.5rem 0 0;
     color: var(--dim);
     font-size: 0.82rem;
     line-height: 1.5;
@@ -57,6 +66,13 @@ import PathCard from "./PathCard.astro";
     border-radius: 4px;
     color: var(--dim);
     background: color-mix(in srgb, var(--card-solid) 80%, transparent);
+  }
+
+  /* Hide keyboard hint on touch devices */
+  @media (pointer: coarse) {
+    .section-hint {
+      display: none;
+    }
   }
 
   .grid {
