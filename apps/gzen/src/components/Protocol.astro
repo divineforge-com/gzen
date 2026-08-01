@@ -116,4 +116,31 @@ const { protocol } = site;
     color: var(--dim);
     line-height: 1.5;
   }
+
+  @media (max-width: 480px) {
+    .panel {
+      padding: clamp(1.35rem, 3vw, 1.75rem);
+    }
+
+    .head {
+      margin-bottom: 1.5rem;
+    }
+
+    .step {
+      padding: 1.1rem 0;
+    }
+
+    .step-name {
+      font-size: 1.05rem;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+    }
+
+    .hint {
+      margin: 1.25rem 0 0;
+      font-size: 0.82rem;
+    }
+  }
 </style>

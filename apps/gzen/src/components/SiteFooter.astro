@@ -10,8 +10,6 @@ import { site } from "../data/paths";
     <span class="whisper" title="Origin · not co-brand">{site.originWhisper}</span>
   </div>
   <div class="foot-links">
-    <a href="#anatomy">Anatomy</a>
-    <a href="#framework">Flow</a>
     <a href="#paths">Paths</a>
     <a href="#protocol">Protocol</a>
     <span class="sep" aria-hidden="true">·</span>
@@ -81,5 +79,20 @@ import { site } from "../data/paths";
     color: var(--ink);
     border-bottom-color: var(--accent);
     outline: none;
+  }
+
+  @media (max-width: 480px) {
+    .foot {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.75rem;
+      padding: 1.5rem 0 0.75rem;
+    }
+
+    .foot-brand,
+    .foot-links {
+      justify-content: center;
+    }
   }
 </style>

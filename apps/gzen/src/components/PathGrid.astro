@@ -9,7 +9,11 @@ import PathCard from "./PathCard.astro";
       <p class="eyebrow">K · I · L · O</p>
       <h2 class="section-title">Four paths. One system.</h2>
       <p class="section-lead">
-        Each path is a practice of gZen — drive where it compounds, stillness where it protects.
+        Two poles — <strong>Fire</strong> (drive) and <strong>Peace</strong> (stillness).
+        Neither works alone. Each path is a practice of gZen: execute where it compounds,
+        rest where it protects.
+      </p>
+      <p class="section-hint">
         Press <kbd>K</kbd> <kbd>I</kbd> <kbd>L</kbd> <kbd>O</kbd> to jump.
       </p>
     </div>
@@ -27,10 +31,22 @@ import PathCard from "./PathCard.astro";
 
   .paths-head {
     margin-bottom: clamp(2rem, 5vw, 2.75rem);
-    max-width: 36rem;
+    max-width: 40rem;
   }
 
-  .section-lead kbd {
+  .section-lead strong {
+    color: var(--ink);
+    font-weight: 550;
+  }
+
+  .section-hint {
+    margin: 0.75rem 0 0;
+    color: var(--dim);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .section-hint kbd {
     display: inline-block;
     margin: 0 0.1em;
     padding: 0.1em 0.4em;

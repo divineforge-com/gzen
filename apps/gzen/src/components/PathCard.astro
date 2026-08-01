@@ -10,6 +10,14 @@ const { path, index } = Astro.props;
 const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
 const poleLabel =
   path.pole === "G" ? "Fire" : path.pole === "Zen" ? "Peace" : "Flow";
+
+// Strategic flow tags — absorbed from Framework section
+const flowTag: Record<string, string> = {
+  K: "Patient progress &middot; body compounds",
+  I: "Urgent action &middot; seize the window",
+  L: "Observe first &middot; then execute",
+  O: "Hard stop &middot; protect stillness",
+};
 ---
 
 <a
@@ -18,7 +26,45 @@ const poleLabel =
   data-path={path.letter}
   style={`--path-tone: ${path.tone}`}
 >
-  <div class="path-letter" aria-hidden="true">{path.letter}</div>
+  <!-- Symbolic icon for each K.I.L.O. portal -->
+  <div class="path-icon" aria-hidden="true">
+    {
+      path.letter === "K" ? (
+        <!-- Ki · Vitality — stylised pulse / leaf -->
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4c-4 8-6 16-4 24" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          <path d="M20 4c4 8 6 16 4 24" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          <circle cx="20" cy="30" r="5" stroke="currentColor" stroke-width="1.25"/>
+          <path d="M12 20c2-2 8-2 16 0" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      ) : path.letter === "I" ? (
+        <!-- Invest · Capital — geometric upward diamond / growth -->
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 6l8 12H12l8-12z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+          <path d="M20 18v16" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          <path d="M14 28l6-4 6 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="11" cy="11" r="1.5" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+          <circle cx="29" cy="11" r="1.5" stroke="currentColor" stroke-width="0.8" opacity="0.5"/>
+        </svg>
+      ) : path.letter === "L" ? (
+        <!-- Learn · Knowledge — open book / light -->
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 8h10l2 4h12v16H8V8z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+          <path d="M20 12v16" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/>
+          <circle cx="14" cy="20" r="3" stroke="currentColor" stroke-width="1.25"/>
+          <path d="M15 19l4-4" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="14" cy="20" r="7" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
+        </svg>
+      ) : (
+        <!-- Om · Stillness — enso circle + wave -->
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.25" stroke-dasharray="72 16" stroke-linecap="round"/>
+          <path d="M10 26c3-4 6-4 10 0 3 3 7 3 10 0" stroke="currentColor" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="3" stroke="currentColor" stroke-width="1"/>
+        </svg>
+      )
+    }
+  </div>
 
   <div class="path-body">
     <div class="path-meta">
@@ -27,6 +73,7 @@ const poleLabel =
     </div>
     <h3 class="path-name">{path.name}</h3>
     <p class="path-blurb">{path.blurb}</p>
+    <p class="path-flow" set:html={flowTag[path.letter] || ""}></p>
   </div>
 
   <span class="arrow" aria-hidden="true">
@@ -94,22 +141,35 @@ const poleLabel =
     outline-offset: 3px;
   }
 
-  .path-letter {
+  /* -------- Symbolic icon -------- */
+  .path-icon {
     position: relative;
     z-index: 1;
     display: grid;
     place-items: center;
-    width: clamp(2.75rem, 6vw, 3.25rem);
-    height: clamp(2.75rem, 6vw, 3.25rem);
-    border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--path-tone) 35%, var(--line));
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    width: clamp(3rem, 7vw, 3.75rem);
+    height: clamp(3rem, 7vw, 3.75rem);
+    border-radius: var(--radius-sm);
+    border: 1px solid color-mix(in srgb, var(--path-tone) 30%, var(--line));
     color: var(--path-tone);
     background: color-mix(in srgb, var(--path-tone) 8%, transparent);
     flex-shrink: 0;
+    transition:
+      border-color 0.35s var(--ease),
+      background 0.35s var(--ease),
+      transform 0.35s var(--ease);
+  }
+
+  .path:hover .path-icon,
+  .path:focus-visible .path-icon {
+    border-color: color-mix(in srgb, var(--path-tone) 50%, var(--line-strong));
+    background: color-mix(in srgb, var(--path-tone) 14%, transparent);
+    transform: scale(1.05);
+  }
+
+  .path-icon svg {
+    width: 60%;
+    height: 60%;
   }
 
   .path-body {
@@ -160,6 +220,25 @@ const poleLabel =
     max-width: 38ch;
   }
 
+  /* Strategic flow tag — absorbed from Framework */
+  .path-flow {
+    margin: 0.55rem 0 0;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dim);
+    opacity: 0.75;
+    transition: color 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  .path:hover .path-flow,
+  .path:focus-visible .path-flow {
+    color: color-mix(in srgb, var(--path-tone) 70%, var(--muted));
+    opacity: 1;
+  }
+
   .arrow {
     position: relative;
     z-index: 1;
@@ -191,20 +270,61 @@ const poleLabel =
     transform: translateX(3px);
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     .path {
       grid-template-columns: auto 1fr;
-      grid-template-rows: auto auto;
+      grid-template-rows: auto;
+      gap: clamp(0.75rem, 2vw, 1.25rem);
+      padding: clamp(1rem, 2.5vw, 1.3rem);
     }
 
-    .arrow {
-      grid-column: 2;
-      justify-self: start;
+    .path-icon {
+      width: clamp(2.5rem, 10vw, 3.25rem);
+      height: clamp(2.5rem, 10vw, 3.25rem);
+      border-radius: var(--radius-sm);
+      align-self: start;
       margin-top: 0.15rem;
+    }
+
+    .path-icon svg {
+      width: 55%;
+      height: 55%;
+    }
+
+    /* Hide arrow on mobile — entire card is tappable */
+    .arrow {
+      display: none;
     }
 
     .path-blurb {
       max-width: none;
+    }
+
+    .path-flow {
+      font-size: 0.6rem;
+      letter-spacing: 0.06em;
+      margin-top: 0.45rem;
+    }
+
+    .path-meta {
+      gap: 0.35rem 0.65rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .path-name {
+      font-size: 1.15rem;
+    }
+  }
+
+  /* Tablet — keep arrow but tighten */
+  @media (min-width: 641px) and (max-width: 900px) {
+    .path-icon {
+      width: clamp(2.75rem, 5vw, 3.25rem);
+      height: clamp(2.75rem, 5vw, 3.25rem);
+    }
+
+    .path {
+      gap: clamp(0.9rem, 2vw, 1.5rem);
     }
   }
 </style>

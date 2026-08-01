@@ -3,8 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Starfield from "../components/Starfield.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
 import Hero from "../components/Hero.astro";
-import Anatomy from "../components/Anatomy.astro";
-import Framework from "../components/Framework.astro";
 import PathGrid from "../components/PathGrid.astro";
 import Protocol from "../components/Protocol.astro";
 import SiteFooter from "../components/SiteFooter.astro";
@@ -16,8 +14,6 @@ import SiteFooter from "../components/SiteFooter.astro";
 
   <main class="wrap">
     <Hero />
-    <Anatomy />
-    <Framework />
     <PathGrid />
     <Protocol />
     <SiteFooter />
@@ -31,12 +27,14 @@ import SiteFooter from "../components/SiteFooter.astro";
     position: relative;
     z-index: 1;
     max-width: var(--max);
+    width: 100%;
     margin: 0 auto;
     padding: 0 clamp(1.35rem, 4.5vw, 2rem) clamp(2.5rem, 6vw, 3.5rem);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     min-height: 100dvh;
+    overflow-x: hidden;
   }
 
   .cursor-glow {

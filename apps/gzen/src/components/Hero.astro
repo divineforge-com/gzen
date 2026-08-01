@@ -168,4 +168,39 @@ const i = site.themes.ignite;
     background: var(--accent-soft);
     outline: none;
   }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: clamp(3rem, 10vw, 5rem) 0 clamp(2rem, 5vw, 3rem);
+    }
+
+    .wordmark {
+      font-size: clamp(2.75rem, 12vw, 4.5rem);
+    }
+
+    .hook {
+      font-size: clamp(1.15rem, 3vw, 1.45rem);
+      margin-top: 1.25rem;
+    }
+
+    .subhead {
+      font-size: 0.92rem;
+      max-width: 24rem;
+    }
+
+    .cta-row {
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 1.75rem;
+    }
+
+    .cta-primary,
+    .cta-ghost {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+      font-size: 0.88rem;
+      padding: 0.8rem 1.2rem;
+    }
+  }
 </style>
