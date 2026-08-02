@@ -25,6 +25,8 @@ const flowTag: Record<string, string> = {
   href={path.href}
   data-path={path.letter}
   style={`--path-tone: ${path.tone}`}
+  aria-keyshortcuts={path.letter}
+  title={`Explore ${path.name} (Shortcut: ${path.letter})`}
 >
   <!-- Symbolic icon for each K.I.L.O. portal -->
   <div class="path-icon" aria-hidden="true">
