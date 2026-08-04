@@ -1,0 +1,3 @@
+## 2024-08-04 - Keyboard Shortcut Accessibility Pattern
+**Learning:** Custom interactive elements with keyboard shortcuts (like Theme Toggle's 'T' and Path Cards' 'K', 'I', 'L', 'O') need explicit `aria-keyshortcuts` attributes so screen readers can announce them. Sighted users also benefit from a visual hint, often provided in the `title` attribute.
+**Action:** When implementing or modifying interactive elements that have global keyboard shortcut listeners (e.g., via `window.addEventListener('keydown')`), always ensure `aria-keyshortcuts` and a visual `title` hint are present on the corresponding focusable element.
