@@ -1,0 +1,3 @@
+## 2026-08-05 - Keyboard Shortcut Accessibility Pattern
+**Learning:** Interactive elements in this application (like the Theme Toggle and Path Cards) implement custom keyboard shortcuts (e.g., 'T' for theme, 'K'/'I'/'L'/'O' for paths) without exposing these shortcuts to screen readers or sighted users on hover. This creates a hidden interaction layer that many users will miss.
+**Action:** Always include the `aria-keyshortcuts` attribute on elements with custom JavaScript keyboard bindings, and surface the shortcut visually (e.g., in a `title` attribute or tooltip) so all users can discover them.
