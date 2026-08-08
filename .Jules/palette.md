@@ -1,0 +1,3 @@
+## 2025-02-13 - Keyboard Shortcut Discoverability
+**Learning:** Custom interactive elements with keyboard shortcuts (like Theme Toggle or K.I.L.O. paths) often hide these shortcuts from assistive technologies. Relying on JS event listeners isn't enough; screen readers need semantic attributes, and sighted users need visual hints (like `title` attributes) if the shortcut isn't visible in the UI text.
+**Action:** Always add the `aria-keyshortcuts` attribute to elements with custom keyboard interactions, and ensure a visual hint exists (e.g., appending `(Key)` to the `title` or using `<kbd>` instructions) so all users can discover them.
