@@ -24,6 +24,8 @@ const flowTag: Record<string, string> = {
   class:list={["path", "reveal", delayClass]}
   href={path.href}
   data-path={path.letter}
+  title={`${path.name} (Press ${path.letter})`}
+  aria-keyshortcuts={path.letter}
   style={`--path-tone: ${path.tone}`}
 >
   <!-- Symbolic icon for each K.I.L.O. portal -->
