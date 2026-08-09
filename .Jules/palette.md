@@ -1,0 +1,4 @@
+
+## 2024-05-18 - Keyboard Shortcut Discoverability
+**Learning:** While the portal has global keydown event listeners for quick theme toggling ('T') and jumping to specific sections/paths ('K', 'I', 'L', 'O'), these shortcuts are practically invisible to users—especially those relying on screen readers or those who don't read the documentation. Simply attaching a `keydown` listener in javascript does not provide any discoverability.
+**Action:** Always ensure that custom keyboard shortcuts implemented via JavaScript are paired with appropriate ARIA attributes (specifically `aria-keyshortcuts`) on the corresponding interactive elements. Furthermore, visual hints should be added, typically within the element's `title` attribute or a visible tooltip, so that sighted users are also aware of the available shortcuts (e.g., `title="Cool monastery · warm ignition (Press T)"`).
