@@ -1,0 +1,3 @@
+## 2024-11-20 - Exposing Custom Keyboard Shortcuts
+**Learning:** The Astro portal defines JS-driven custom keyboard shortcuts (e.g., 'T' for theme toggle, 'K', 'I', 'L', 'O' for path portals) that are not exposed to screen readers or sighted users. Without `aria-keyshortcuts` and visual hints, users are unaware these efficient navigation options exist, reducing discoverability.
+**Action:** When implementing custom JS keyboard shortcuts for interactive elements, always pair them with the `aria-keyshortcuts` attribute for assistive technologies and include a visual hint (e.g., in the `title` attribute or a visible tooltip) for sighted users to ensure the feature is discoverable.
