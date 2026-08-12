@@ -1,0 +1,4 @@
+## 2024-10-25 - Expose Custom Keyboard Shortcuts
+
+**Learning:** When elements have custom JavaScript keyboard shortcuts (like `T` for theme, or `K/I/L/O` for doors), they are inaccessible to screen reader users and hidden from sighted users without proper attributes. The `aria-keyshortcuts` attribute exposes these bindings to assistive technologies, while appending the shortcut to the `title` attribute makes it discoverable on hover for sighted users.
+**Action:** When creating or modifying interactive elements with custom keybindings, always add `aria-keyshortcuts` and include the shortcut text in the `title` attribute for full accessibility.
