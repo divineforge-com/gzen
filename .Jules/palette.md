@@ -1,0 +1,3 @@
+## 2024-05-18 - Keyboard Shortcut Discoverability
+**Learning:** Hidden keyboard shortcuts (like "T" for theme toggle and K/I/L/O for paths) are great for power users but often go undiscovered, and fail WCAG guidelines if they lack accessible indications. Exposing them via standard `aria-keyshortcuts` allows screen readers to announce them, and adding them to the `title` attribute provides a non-intrusive tooltip for sighted mouse users to discover them naturally.
+**Action:** Always add `aria-keyshortcuts` and append `(Shortcut: [Key])` to the `title` attribute on elements that have hidden global or local keyboard shortcut event listeners.
