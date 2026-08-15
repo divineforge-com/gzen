@@ -37,3 +37,6 @@ Thumbs.db
 _archive/
 .archive/
 **/.hugo_build.lock
+
+# Graphify output
+graphify-out/
