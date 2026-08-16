@@ -1,282 +1,166 @@
-# gZen Motion & Teleportation Portal Specification
+# gZen Motion & Teleportation Architecture (GSAP + Anime.js v4)
 
 **Brand Split**: Z · E · N Triad (Zen · Economy · Neural)  
 **Target App**: `apps/gzen` (gzen.io landing, Astro 5 static)  
-**Design Persona**: UX/UI + Motion Designer (Tesla/xAI-clean minimal + gZen saffron & cream)
+**Design Language**: Tesla/xAI-clean minimal + gZen saffron & cream  
+**Motion Stack**: GSAP 3.15+ (Timelines, quickTo, Inertia, SVG Draw) & Anime.js v4 (Springs & Micro-interactions)
 
 ---
 
-## 1. anime.js Integration Architecture
+## 1. Dual-Engine Motion Architecture
 
-### Package & Version Recommendation
-- **Installation**:
-  ```bash
-  npm i animejs
-  ```
-- **Recommended Version**: `animejs` **v4.5.0** (latest stable release on npm).
-  - **Why v4?** Native ES module (ESM) export structure cleanly integrates into Astro 5 client bundling (`import anime from 'animejs'`) without requiring CJS interop helpers or legacy script loaders.
-  - **Fallback**: If v3 syntax is preferred by team conventions, `animejs@^3.2.2` works with standard `import anime from 'animejs'`.
+In modern high-performance Astro 5 web apps, combining **GSAP** (GreenSock) and **Anime.js** provides optimal performance and aesthetic quality:
 
-### Astro 5 Client Script Integration Pattern
-Astro 5 compiles client scripts placed inside component `<script>` tags using Vite into optimized, cache-busted static bundles.
-- **Global Portal Controller Pattern**:
-  Keep animation logic modular inside `src/scripts/portal-motion.ts` and initialize it from `src/scripts/portal.ts` or `<script>` tags inside `index.astro` / `PathGrid.astro`.
-
-```ts
-// src/scripts/portal-motion.ts
-import anime from "animejs";
-
-export function initPortalAnimations(): void {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  // Entrance & interaction timelines initialized here
-}
-```
-
-- **SSR Safety**: Since Astro 5 renders HTML at build time, all `anime.js` manipulations MUST run client-side inside standard browser DOM events (`DOMContentLoaded`, Astro page lifecycle, or client `<script>` module execution).
+| Role | Engine | Why |
+|---|---|---|
+| **Timeline Choreography & Intro Sequencing** | **GSAP** (`gsap.timeline()`) | Absolute timeline control, label alignment, nested staggers, and sub-pixel precision. |
+| **Magnetic 3D Tilt & Pointer Tracking** | **GSAP** (`gsap.quickTo()`) | Zero garbage collection overhead, continuous 60fps tracking without RAF lag. |
+| **SVG Path Drawing & Concentric Ring Spin** | **GSAP** (`gsap.to()`) & CSS | Hardware-accelerated stroke transforms and continuous smooth drift. |
+| **Elastic Spring Micro-Interactions** | **Anime.js v4** (`animate`, `spring`) | Compact declarative springs for keyboard shortcuts and toggle switches. |
+| **Accessibility Fallback** | `prefers-reduced-motion` | Automatic bypass of transforms with immediate DOM state resolution. |
 
 ---
 
-## 2. Teleportation Entrance Timeline
+## 2. GSAP Integration Patterns in Astro 5
 
-### Motion Choreography
-The entrance sequence unfolds as a synchronized spatial energy wave when stepping onto gZen.io:
+### Native ESM Import
+Astro 5 and Vite cleanly bundle GSAP via native ESM:
 
-```
-[0ms] ─────────────────── [200ms] ───────────── [500ms] ───────────── [600ms] ──────────── [900ms] ──── [1600ms]
- Ambient Wash Fade         Hero Z·E·N Unfold    Portal Rings Draw      Cards Stagger Lift    CTA & Glyphs Pulse
- opacity: 0 -> 1           spacing & scale      strokeDashoffset -> 0  translateY & scale    scale: 0.85 -> 1.0
-```
-
-| Phase | Target Selector | Property Animated | From -> To | Duration | Easing | Stagger / Delay |
-|---|---|---|---|---|---|---|
-| **Phase 1** | `.hero-zen-letters span` | `opacity`, `translateY`, `letterSpacing` | `0 -> 1`, `24px -> 0px`, `0.05em -> 0.25em` | 800ms | `cubicBezier(0.16, 1, 0.3, 1)` | `stagger(100ms)`, start @ 200ms |
-| **Phase 2** | `.portal-ring-path` | `strokeDashoffset` | `anime.setDashoffset -> 0` | 1000ms | `cubicBezier(0.25, 1, 0.5, 1)` | `stagger(150ms)`, start @ 500ms |
-| **Phase 3** | `.portal-card` | `opacity`, `translateY`, `scale` | `0 -> 1`, `40px -> 0px`, `0.95 -> 1.0` | 900ms | `cubicBezier(0.16, 1, 0.3, 1)` | `stagger(120ms)`, start @ 600ms |
-| **Phase 4** | `.portal-glyph`, `.teleport-cta` | `opacity`, `scale` | `0 -> 1`, `0.85 -> 1.0` | 600ms | `cubicBezier(0.34, 1.56, 0.64, 1)` (elastic pop) | `stagger(80ms)`, start @ 900ms |
-
-### Implementer Code Blueprint
 ```ts
-import anime from "animejs";
+import { gsap } from "gsap";
+```
 
-export function playEntranceTimeline() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+### High-Performance Magnetic 3D Physics (`quickTo`)
+Avoid recreating tweens inside continuous `mousemove` event listeners. Instead, create persistent `quickTo` functions:
 
-  const tl = anime.timeline({
-    easing: "cubicBezier(0.16, 1, 0.3, 1)",
+```ts
+function initMagneticCard(card: HTMLElement) {
+  const setRotX = gsap.quickTo(card, "rotateX", { duration: 0.35, ease: "power2.out" });
+  const setRotY = gsap.quickTo(card, "rotateY", { duration: 0.35, ease: "power2.out" });
+  const setZ = gsap.quickTo(card, "z", { duration: 0.35, ease: "power2.out" });
+
+  card.addEventListener("mousemove", (e: MouseEvent) => {
+    const rect = card.getBoundingClientRect();
+    const xPct = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const yPct = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
+    setRotX(-yPct * 4.5);
+    setRotY(xPct * 4.5);
+    setZ(10);
   });
 
-  tl.add({
-    targets: ".hero-zen-letters .glyph",
-    opacity: [0, 1],
-    translateY: [24, 0],
-    letterSpacing: ["0.05em", "0.25em"],
-    duration: 800,
-    delay: anime.stagger(100),
-  })
-    .add(
-      {
-        targets: ".portal-ring-path",
-        strokeDashoffset: [anime.setDashoffset, 0],
-        duration: 1000,
-        easing: "cubicBezier(0.25, 1, 0.5, 1)",
-        delay: anime.stagger(150),
-      },
-      "-=600"
-    )
-    .add(
-      {
-        targets: ".portal-card",
-        opacity: [0, 1],
-        translateY: [40, 0],
-        scale: [0.95, 1],
-        duration: 900,
-        delay: anime.stagger(120),
-      },
-      "-=800"
-    )
-    .add(
-      {
-        targets: ".portal-glyph, .teleport-cta",
-        opacity: [0, 1],
-        scale: [0.85, 1],
-        duration: 600,
-        delay: anime.stagger(80),
-      },
-      "-=500"
-    );
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {
+      rotateX: 0,
+      rotateY: 0,
+      z: 0,
+      duration: 0.6,
+      ease: "elastic.out(1, 0.7)",
+    });
+  });
 }
 ```
 
 ---
 
-## 3. Per-Card Hover & Pointer Interactions
+## 3. Teleportation Entrance Sequence
 
-Each portal card reacts dynamically to the user's presence with zero spatial clutter:
+The entrance sequence synchronizes the hero title, Z·E·N portals, and ambient field into an orchestrated wave:
 
-### A. Portal-Ring Morph (Stroke-Draw & Rotation)
-- **Behavior**: On `mouseenter`, the portal's concentric SVG rings spin smoothly, brighten to saffron accent (`var(--accent)`), and thicken.
-- **Code Sketch**:
-  ```ts
-  function bindRingMorph(card: HTMLElement) {
-    const ringOuter = card.querySelector(".portal-ring-outer");
-    const ringInner = card.querySelector(".portal-ring-inner");
+```
+[0ms] ───────────────── [150ms] ───────────── [350ms] ───────────── [500ms] ──────────── [850ms]
+ Ambient Wash Fade       Hero Wordmark        Portal Headings       Cards Stagger In      Badges & Glows
+ opacity: 0 -> 1         y: 30->0, scale: 0.96  opacity: 0 -> 1       y: 40->0, scale: 0.95  scale pop
+```
 
-    card.addEventListener("mouseenter", () => {
-      anime({
-        targets: ringOuter,
-        rotate: "+=180deg",
-        stroke: "var(--accent)",
-        strokeWidth: [1, 2],
-        duration: 1200,
-        easing: "cubicBezier(0.2, 0.8, 0.2, 1)",
-      });
-      anime({
-        targets: ringInner,
-        rotate: "-=90deg",
-        opacity: [0.4, 0.85],
-        duration: 800,
-        easing: "easeOutQuad",
-      });
-    });
-  }
-  ```
+```ts
+export function playEntranceChoreography() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-### B. Magnetic 3D Tilt
-- **Behavior**: Cursor position relative to card center computes subtle pitch (`rotateX`) and roll (`rotateY`).
-- **Code Sketch**:
-  ```ts
-  function bindMagneticTilt(card: HTMLElement) {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+  const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    card.addEventListener("mousemove", (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      anime({
-        targets: card,
-        rotateY: x * 12,
-        rotateX: -y * 12,
-        translateZ: 10,
-        duration: 180,
-        easing: "easeOutQuad",
-      });
-    });
-
-    card.addEventListener("mouseleave", () => {
-      anime({
-        targets: card,
-        rotateY: 0,
-        rotateX: 0,
-        translateZ: 0,
-        duration: 600,
-        easing: "cubicBezier(0.16, 1, 0.3, 1)",
-      });
-    });
-  }
-  ```
-
-### C. Letter Glyph Pulse
-- **Behavior**: Prominent card letter (`Z`, `E`, `N`) pulses warmly on card focus.
-- **Code Sketch**:
-  ```ts
-  function pulseGlyph(glyphEl: HTMLElement) {
-    anime({
-      targets: glyphEl,
-      scale: [1, 1.08, 1],
-      opacity: [0.85, 1, 0.85],
-      duration: 1400,
-      easing: "easeInOutSine",
-      loop: false,
-    });
-  }
-  ```
-
-### D. Particle / Teleport Dust Drift
-- **Behavior**: Concentric dust particles drift slowly toward portal core, accelerating on mouse hover.
-- **Code Sketch**:
-  ```ts
-  function animateDustParticles(container: HTMLElement) {
-    anime({
-      targets: container.querySelectorAll(".dust-particle"),
-      translateY: () => anime.random(-20, -60),
-      translateX: () => anime.random(-15, 15),
-      scale: [0.4, 1, 0.2],
-      opacity: [0, 0.6, 0],
-      duration: () => anime.random(2000, 4000),
-      delay: anime.stagger(200),
-      loop: true,
-      easing: "easeInOutQuad",
-    });
-  }
-  ```
+  tl.fromTo(
+    ".hero .reveal",
+    { opacity: 0, y: 28, scale: 0.97 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.85, stagger: 0.08 }
+  )
+  .fromTo(
+    ".paths-head .reveal, .paths-head",
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.7 },
+    "-=0.5"
+  )
+  .fromTo(
+    ".path",
+    { opacity: 0, y: 36, scale: 0.96 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.1 },
+    "-=0.4"
+  );
+}
+```
 
 ---
 
-## 4. Triad Layout & Teleport CTA Behavior
+## 4. SVG Portal Ring Mechanics
 
-### Layout Architecture
-- **Desktop (≥ 900px)**: 3-column horizontal triad grid (`grid-template-columns: repeat(3, 1fr)`). Equal weight cards with monolithic portal aspect ratio (`aspect-ratio: 4 / 5` or `min-height: 440px`).
-- **Mobile (< 900px)**: Stacked vertical portals (`grid-template-columns: 1fr`). Clean horizontal row cards with portal ring left, Z/E/N title center, arrow right.
+Each portal (Zen, Economy, Neural) features concentric geometric SVG rings that respond dynamically to pointer proximity and focus:
 
-### Teleport CTA Step-Through Metaphor
-Clicking a portal card or its **Teleport CTA** initiates a seamless spatial step-through prior to location navigation:
+1. **Zen Portal (Enso Circle + Vitality Spark)**:
+   - Outer ring spins smoothly on enter (`rotate: "+=180deg"`).
+   - Inner spark pulses with warm emerald / forest tone (`#2d6b4f`).
 
-1. Intercept navigation (`e.preventDefault()`).
-2. Selected portal ring expands to fill view (`scale: 1.6`, `opacity: 0.1`, `duration: 350ms`).
-3. Non-selected portals contract into background (`scale: 0.88`, `opacity: 0`, `duration: 250ms`).
-4. Window redirects to destination domain (`ki.gzen.io`, `invest.gzen.io`, `learn.gzen.io`) at animation completion.
+2. **Economy Portal (Capital Geometric Diamond)**:
+   - Diamond facet rotates and brightens with saffron gold (`#d97706`).
+   - SVG stroke expands from 1.2px to 2.2px.
+
+3. **Neural Portal (Command Signal Network)**:
+   - Interconnected node network draws connection rays via `strokeDashoffset`.
+   - Indigo accent pulse (`#3b82f6`).
+
+---
+
+## 5. Teleport Navigation Step-Through
+
+Clicking a portal card initiates a cinematic spatial step-through:
 
 ```ts
-function bindTeleportStepThrough(card: HTMLAnchorElement) {
+export function bindTeleportStepThrough(card: HTMLAnchorElement) {
   card.addEventListener("click", (e: MouseEvent) => {
-    if (e.metaKey || e.ctrlKey) return; // Allow opening in new tab
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return; // Allow new-tab opening
     e.preventDefault();
     const href = card.href;
 
-    anime.timeline({ easing: "cubicBezier(0.7, 0, 0.84, 0)" })
-      .add({
-        targets: card,
-        scale: 1.5,
-        opacity: 0.1,
-        duration: 350,
-      })
-      .add(
-        {
-          targets: `.portal-card:not([data-path="${card.dataset.path}"])`,
-          scale: 0.88,
-          opacity: 0,
-          duration: 250,
-        },
-        "-=350"
-      )
-      .finished.then(() => {
+    gsap.timeline({
+      onComplete: () => {
         window.location.href = href;
-      });
+      },
+    })
+    .to(card, {
+      scale: 1.04,
+      borderColor: "var(--accent)",
+      boxShadow: "0 0 40px rgba(235, 120, 39, 0.4)",
+      duration: 0.2,
+      ease: "power2.out",
+    })
+    .to(
+      ".path:not([data-path='" + card.dataset.path + "'])",
+      {
+        opacity: 0.2,
+        scale: 0.96,
+        duration: 0.25,
+        ease: "power2.inOut",
+      },
+      0
+    );
   });
 }
 ```
 
 ---
 
-## 5. Accessibility, Reduced-Motion & Coarse-Pointer Fallbacks
+## 6. Accessibility & Performance Directives
 
-- **Reduced Motion (`prefers-reduced-motion: reduce`)**:
-  - All `anime.js` timelines check `window.matchMedia("(prefers-reduced-motion: reduce)").matches` and exit early.
-  - Elements render immediately with `opacity: 1`, `transform: none`, and `strokeDashoffset: 0`.
-  - Hover states revert to instant CSS transitions (`transition: border-color 0.2s, background-color 0.2s`).
-- **Coarse Pointer (Mobile / Touch)**:
-  - 3D magnetic tilt is disabled to avoid touch scrolling interference.
-  - Ring stroke animations trigger on `:active` tap state instead of continuous hover.
-
----
-
-## 6. Integration Touchpoints in Existing Codebase
-
-| File | Change Description |
-|---|---|
-| `src/data/paths.ts` | Re-shape `Path` type to `letter: "Z" \| "E" \| "N"`. Define 3 portal paths:<br>• **Z**: Zen (`om.gzen.io` / `ki.gzen.io`) — Mind-body-soul energy flow<br>• **E**: Economy (`invest.gzen.io`) — Personal economy & capital leverage<br>• **N**: Neural (`learn.gzen.io`) — Neural language & cognitive clarity |
-| `src/components/PathCard.astro` | Replace K/I/L/O SVG icon logic with concentric portal ring SVG (`.portal-ring-path`, `.portal-ring-outer`, `.portal-ring-inner`). Add `.portal-glyph`, `.teleport-cta` elements, and `data-path="Z"|"E"|"N"`. |
-| `src/components/PathGrid.astro` | Update header copy to **Z · E · N**, change desktop CSS grid to `grid-template-columns: repeat(3, 1fr)`, update keyboard shortcuts hint from `<kbd>K</kbd><kbd>I</kbd><kbd>L</kbd><kbd>O</kbd>` to `<kbd>Z</kbd> <kbd>E</kbd> <kbd>N</kbd>`. |
-| `src/scripts/portal.ts` | Update `initKeyboardHint()` to bind keys `Z`, `E`, `N` to highlight and navigate corresponding portal cards. Import and initialize `initPortalAnimations()`. |
-| `src/pages/index.astro` | Update hero title to feature Z·E·N brand mark spans for synchronized timeline target selection. |
+1. **Reduced Motion**: If `prefers-reduced-motion: reduce` is active, completely skip GSAP/Anime timelines and set opacity/transforms to neutral immediately.
+2. **Coarse Pointer**: Disable 3D tilt tracking on mobile/touch screens (`@media (pointer: coarse)`) to preserve native fluid touch scrolling.
+3. **GPU Layering**: Animate exclusively `transform` (`x`, `y`, `z`, `rotate`, `scale`) and `opacity`. Never animate `top`, `left`, `margin`, or `width`/`height`.
+4. **Cleanup & Garbage Collection**: Reuse tween instances or clear timers to ensure zero memory accumulation across long SPA sessions.

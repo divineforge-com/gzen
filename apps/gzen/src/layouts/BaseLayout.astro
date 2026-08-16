@@ -24,6 +24,13 @@ const canonical = site.url;
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
+    <!-- Subdomain DNS prefetch & preconnect for zero-latency teleportation -->
+    <link rel="dns-prefetch" href="//zen.gzen.io" />
+    <link rel="dns-prefetch" href="//economy.gzen.io" />
+    <link rel="dns-prefetch" href="//neural.gzen.io" />
+    <link rel="preconnect" href="https://zen.gzen.io" crossorigin />
+    <link rel="preconnect" href="https://economy.gzen.io" crossorigin />
+    <link rel="preconnect" href="https://neural.gzen.io" crossorigin />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
