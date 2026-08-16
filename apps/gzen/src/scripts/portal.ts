@@ -151,28 +151,53 @@ function initKineticCards() {
   if (!cards.length) return;
 
   cards.forEach((card) => {
-    const svgZ = card.querySelector<SVGCircleElement>(".portal-svg-z .ring-outer");
-    const svgE = card.querySelector<SVGPathElement>(".portal-svg-e .diamond-head");
-    const svgN = card.querySelectorAll<SVGCircleElement>(".portal-svg-n circle");
+    const svgZRing = card.querySelector<SVGCircleElement>(".portal-svg-z .ring-outer");
+    const svgZTri = card.querySelector<SVGPolygonElement>(".portal-svg-z .tri-core");
+    const svgEDiamond = card.querySelectorAll<SVGElement>(".portal-svg-e .diamond-facet");
+    const svgEAlloc = card.querySelector<SVGPathElement>(".portal-svg-e .alloc-ray");
+    const svgNNodes = card.querySelectorAll<SVGCircleElement>(".portal-svg-n .neural-node");
+    const svgNChords = card.querySelectorAll<SVGLineElement>(".portal-svg-n .neural-chord");
+    const watermark = card.querySelector<HTMLElement>(".path-watermark");
 
     const triggerGlyphEnter = () => {
-      if (svgZ) {
-        gsap.to(svgZ, { rotation: "+=120", transformOrigin: "20px 20px", duration: 1.0, ease: "power2.out" });
+      if (svgZRing) {
+        gsap.to(svgZRing, { rotation: "+=180", transformOrigin: "22px 22px", duration: 1.2, ease: "power2.out" });
       }
-      if (svgE) {
-        gsap.to(svgE, { y: -2, duration: 0.35, ease: "back.out(2)" });
+      if (svgZTri) {
+        gsap.to(svgZTri, { scale: 1.15, transformOrigin: "22px 21px", duration: 0.35, ease: "back.out(2)" });
       }
-      if (svgN.length) {
-        gsap.to(svgN, { scale: 1.25, transformOrigin: "center", duration: 0.3, stagger: 0.05, ease: "back.out(2)" });
+      if (svgEDiamond.length) {
+        gsap.to(svgEDiamond, { y: -2.5, scaleY: 1.05, transformOrigin: "22px 17px", duration: 0.35, ease: "back.out(2)" });
+      }
+      if (svgEAlloc) {
+        gsap.to(svgEAlloc, { scale: 1.3, transformOrigin: "22px 17px", duration: 0.3, ease: "power2.out" });
+      }
+      if (svgNNodes.length) {
+        gsap.to(svgNNodes, { scale: 1.35, transformOrigin: "center", duration: 0.3, stagger: 0.04, ease: "back.out(2)" });
+      }
+      if (svgNChords.length) {
+        gsap.to(svgNChords, { strokeOpacity: 1, duration: 0.25 });
+      }
+      if (watermark) {
+        gsap.to(watermark, { opacity: 0.28, scale: 1.05, duration: 0.4, ease: "power2.out" });
       }
     };
 
     const resetGlyphs = () => {
-      if (svgE) {
-        gsap.to(svgE, { y: 0, duration: 0.4, ease: "power2.out" });
+      if (svgZTri) {
+        gsap.to(svgZTri, { scale: 1, duration: 0.4, ease: "power2.out" });
       }
-      if (svgN.length) {
-        gsap.to(svgN, { scale: 1, duration: 0.3, ease: "power2.out" });
+      if (svgEDiamond.length) {
+        gsap.to(svgEDiamond, { y: 0, scaleY: 1, duration: 0.4, ease: "power2.out" });
+      }
+      if (svgEAlloc) {
+        gsap.to(svgEAlloc, { scale: 1, duration: 0.35, ease: "power2.out" });
+      }
+      if (svgNNodes.length) {
+        gsap.to(svgNNodes, { scale: 1, duration: 0.3, ease: "power2.out" });
+      }
+      if (watermark) {
+        gsap.to(watermark, { opacity: 0.12, scale: 1, duration: 0.5, ease: "power2.out" });
       }
     };
 

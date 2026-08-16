@@ -11,7 +11,10 @@ export type Path = {
   protocolDetail: string;
   flowTag: string;
   pole: "G" | "Zen" | "Both";
-  /** Accent for glyph — quiet but distinct */
+  /** Sacred Geometric Shape signature */
+  geometryName: string;
+  geometrySymbol: string;
+  /** Accent for glyph and glass sheen — quiet but distinct */
   tone: string;
   shortcut: string;
 };
@@ -30,7 +33,9 @@ export const paths: readonly Path[] = [
     protocolDetail: "Body and sleep first. If the vessel is empty, no plan holds.",
     flowTag: "Vitality & Stillness",
     pole: "Zen",
-    tone: "#2d6b4f",
+    geometryName: "Sacred Enso Tri-Monad",
+    geometrySymbol: "○ · △",
+    tone: "#3da374",
     shortcut: "Z",
   },
   {
@@ -46,7 +51,9 @@ export const paths: readonly Path[] = [
     protocolDetail: "Capital and outcomes. High intensity, clear allocation, then stop cleanly.",
     flowTag: "Capital Architecture",
     pole: "G",
-    tone: "#c45c26",
+    geometryName: "Sacred Octahedron Lattice",
+    geometrySymbol: "◇ · ⬡",
+    tone: "#e0682b",
     shortcut: "E",
   },
   {
@@ -62,7 +69,9 @@ export const paths: readonly Path[] = [
     protocolDetail: "Joy, signal, and command — authentic clarity rather than leftover energy.",
     flowTag: "Signal & Syntax",
     pole: "Both",
-    tone: "#3b6ea5",
+    geometryName: "Sacred Neural Constellation",
+    geometrySymbol: "⬡ · ⚯",
+    tone: "#4d8ee8",
     shortcut: "N",
   },
 ] as const;
