@@ -1421,6 +1421,53 @@ function initTributeParallax() {
   }
 }
 
+/**
+ * 16. Bottom Parallax & Dynamic Specular Sheen for Gift Card & Crystal Geometry
+ */
+function initGiftParallax() {
+  const gift = document.getElementById("gift");
+  const giftGeo = document.getElementById("giftGeo");
+  const card = document.querySelector<HTMLElement>(".gift-card");
+
+  if (!gift || !giftGeo) return;
+
+  if (!reduceMotion) {
+    let targetScrollY = 0;
+    let currentScrollY = 0;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        targetScrollY = window.scrollY;
+      },
+      { passive: true }
+    );
+
+    gsap.ticker.add(() => {
+      currentScrollY += (targetScrollY - currentScrollY) * 0.1;
+      const giftTop = gift.offsetTop;
+      const scrollDiff = currentScrollY + window.innerHeight - giftTop;
+
+      if (scrollDiff > 0) {
+        const rot = (scrollDiff * 0.14) % 360;
+        const scale = Math.min(1.22, 0.95 + scrollDiff * 0.0003);
+        const translateY = scrollDiff * 0.055;
+        giftGeo.style.transform = `translate3d(0, ${translateY}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+      }
+    });
+  }
+
+  if (card && !isTouch) {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty("--gift-mx", `${x.toFixed(1)}%`);
+      card.style.setProperty("--gift-my", `${y.toFixed(1)}%`);
+    });
+  }
+}
+
 // Lifecycle Initializations
 initIntroChoreography();
 initWebAudioResonance();
@@ -1438,3 +1485,4 @@ initAmbientPointer();
 initKeyboardHint();
 initBuyMeACoffeeModal();
 initTributeParallax();
+initGiftParallax();

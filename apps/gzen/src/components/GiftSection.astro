@@ -1,0 +1,875 @@
+---
+/**
+ * GiftSection.astro — Open Sovereign AI Prompt & Contemplative Engineering Seed
+ * Features a 3D low-poly faceted gift crystal, interactive prompt tabs,
+ * and a one-click prompt copy engine for all major AI agents.
+ */
+import { AGENT_PROMPTS } from "../data/prompts";
+---
+
+<section class="gift-section" id="gift" aria-label="gZen Open Agent Prompt & Sovereign Gift">
+  <!-- Parallax Geometric Gift Coordinate Stage -->
+  <div class="gift-geo-wrapper" aria-hidden="true">
+    <div class="gift-geo-stage" id="giftGeo">
+      <svg class="gift-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="gift-core-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.3" />
+            <stop offset="45%" stop-color="#fbbf24" stop-opacity="0.2" />
+            <stop offset="80%" stop-color="#f97316" stop-opacity="0.12" />
+            <stop offset="100%" stop-color="#04070c" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="gift-facet-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.95" />
+            <stop offset="100%" stop-color="#0891b2" stop-opacity="0.6" />
+          </linearGradient>
+          <linearGradient id="gift-facet-gold" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#fde68a" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#d97706" stop-opacity="0.55" />
+          </linearGradient>
+          <linearGradient id="gift-facet-fire" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fdba74" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="#ea580c" stop-opacity="0.6" />
+          </linearGradient>
+        </defs>
+
+        <!-- Ambient Core Luminescence -->
+        <circle cx="200" cy="200" r="170" fill="url(#gift-core-glow)" />
+
+        <!-- Concentric Coordinate Rings -->
+        <circle cx="200" cy="200" r="180" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+        <circle cx="200" cy="200" r="145" stroke="rgba(34, 211, 238, 0.25)" stroke-width="1" stroke-dasharray="4 6" class="geo-ring-spin" />
+        <circle cx="200" cy="200" r="95" stroke="rgba(251, 191, 36, 0.2)" stroke-width="1" />
+        <circle cx="200" cy="200" r="45" stroke="rgba(249, 115, 22, 0.3)" stroke-width="1" stroke-dasharray="2 4" class="geo-ring-counter" />
+
+        <!-- 24-Tick Outer Degree Dial -->
+        <g class="gift-ticks" opacity="0.45">
+          {
+            Array.from({ length: 24 }, (_, i) => {
+              const angle = (i * 15 * Math.PI) / 180;
+              const r1 = i % 2 === 0 ? 172 : 176;
+              const r2 = 180;
+              const x1 = 200 + Math.cos(angle) * r1;
+              const y1 = 200 + Math.sin(angle) * r1;
+              const x2 = 200 + Math.cos(angle) * r2;
+              const y2 = 200 + Math.sin(angle) * r2;
+              return (
+                <line
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke={i % 3 === 0 ? "rgba(34, 211, 238, 0.7)" : i % 3 === 1 ? "rgba(251, 191, 36, 0.7)" : "rgba(249, 115, 22, 0.7)"}
+                  stroke-width={i % 2 === 0 ? 1.5 : 0.8}
+                />
+              );
+            })
+          }
+        </g>
+
+        <!-- Laser Crosshair Axes -->
+        <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 5" />
+        <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 5" />
+
+        <!-- Sacred Inscribed Hexagram & Octagon Wireframe -->
+        <polygon points="200,55 305,100 345,200 305,300 200,345 95,300 55,200 95,100" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" fill="none" />
+        <polygon points="200,100 286,250 114,250" stroke="rgba(34, 211, 238, 0.25)" stroke-width="1" fill="none" class="gift-poly-a" />
+        <polygon points="200,300 114,150 286,150" stroke="rgba(249, 115, 22, 0.22)" stroke-width="1" fill="none" class="gift-poly-b" />
+
+        <!-- 3D Low-Poly Faceted Gift Crystal / Polyhedron Core -->
+        <g class="gift-polygon-crystal" transform="translate(145, 135)">
+          <!-- Rising Prismatic Vector Sparks -->
+          <polygon points="20,12 25,2 22,-2 17,8" fill="url(#gift-facet-cyan)" opacity="0.85" class="spark-poly spark-1" />
+          <polygon points="55,14 62,4 58,-1 51,9" fill="url(#gift-facet-gold)" opacity="0.95" class="spark-poly spark-2" />
+          <polygon points="85,16 92,6 89,1 82,11" fill="url(#gift-facet-fire)" opacity="0.75" class="spark-poly spark-3" />
+
+          <!-- Top Facets of the 3D Polyhedron Gift Crystal -->
+          <polygon points="55,20 20,40 55,52 90,40" fill="url(#gift-facet-cyan)" stroke="#22d3ee" stroke-width="1.2" stroke-linejoin="round" />
+          <polygon points="55,20 90,40 102,68 68,58" fill="url(#gift-facet-gold)" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+          <polygon points="55,20 20,40 8,68 42,58" fill="url(#gift-facet-fire)" stroke="#f97316" stroke-width="1" stroke-linejoin="round" />
+
+          <!-- Body Facets of the 3D Crystal -->
+          <polygon points="20,40 55,52 55,88 15,74" fill="url(#gift-facet-cyan)" stroke="#22d3ee" stroke-width="1.2" stroke-linejoin="round" />
+          <polygon points="55,52 90,40 95,74 55,88" fill="url(#gift-facet-gold)" stroke="#fbbf24" stroke-width="1.2" stroke-linejoin="round" />
+          <polygon points="15,74 55,88 55,108 22,96" fill="url(#gift-facet-fire)" stroke="#f97316" stroke-width="1" stroke-linejoin="round" />
+          <polygon points="55,88 95,74 88,96 55,108" fill="url(#gift-facet-cyan)" stroke="#22d3ee" stroke-width="1" stroke-linejoin="round" />
+
+          <!-- Faceted Ribbon / Energy Coordinate Chords -->
+          <polygon points="55,18 57,52 53,88 55,109" stroke="#fff" stroke-width="1" stroke-dasharray="2 3" opacity="0.7" />
+          <polygon points="18,39 55,53 92,39" stroke="#fff" stroke-width="1" stroke-dasharray="2 3" opacity="0.7" />
+
+          <!-- Center Prismatic Singularity Spark -->
+          <polygon points="55,48 59,52 55,56 51,52" fill="#fff" opacity="0.95" />
+        </g>
+
+        <!-- Cardinal Telemetry Degree Labels -->
+        <text x="200" y="38" fill="rgba(34, 211, 238, 0.75)" font-family="var(--font-mono)" font-size="8" letter-spacing="2" text-anchor="middle">GIFT // 000°</text>
+        <text x="368" y="203" fill="rgba(255, 255, 255, 0.4)" font-family="var(--font-mono)" font-size="7" letter-spacing="1" text-anchor="middle">090°</text>
+        <text x="200" y="372" fill="rgba(249, 115, 22, 0.75)" font-family="var(--font-mono)" font-size="8" letter-spacing="2" text-anchor="middle">EQUILIBRIUM // 180°</text>
+        <text x="32" y="203" fill="rgba(255, 255, 255, 0.4)" font-family="var(--font-mono)" font-size="7" letter-spacing="1" text-anchor="middle">270°</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Frosted Glass Gift Container Card -->
+  <div class="gift-card reveal">
+    <div class="gift-ambient-glow" aria-hidden="true"></div>
+
+    <!-- Header Telemetry & Title -->
+    <div class="gift-header">
+      <div class="telemetry-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span class="badge-tag">GIFT // OPEN SOVEREIGN PROMPT FOR AI AGENTS</span>
+      </div>
+      <span class="geo-coord" aria-hidden="true">φ 1.618 · AGENTIC SEED</span>
+    </div>
+
+    <div class="gift-body">
+      <h2 class="gift-title">
+        The Agentic Seed: <span class="chromatic-gift-text">Teach Any AI.</span>
+      </h2>
+      <p class="gift-lead">
+        Equip Claude, ChatGPT, Gemini, DeepSeek, Cursor, Hermes, or your local agent with the complete gZen Tri-Elemental worldview and 60fps kinetic web motion architecture.
+        Zero sensitive data — pure contemplative engineering & mathematical vector guidance.
+      </p>
+    </div>
+
+    <!-- Interactive Prompt Selector Tabs -->
+    <div class="prompt-tabs-nav" role="tablist" aria-label="Select AI Prompt Package">
+      {
+        AGENT_PROMPTS.map((p, index) => (
+          <button
+            type="button"
+            role="tab"
+            class={`prompt-tab-btn ${index === 0 ? "active" : ""}`}
+            id={`tab-btn-${p.id}`}
+            data-prompt-id={p.id}
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`tab-panel-${p.id}`}
+          >
+            <!-- Polygon Geometric Diamond Icon -->
+            <svg class="tab-diamond-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polygon points="8,1.5 14.5,8 8,14.5 1.5,8" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="currentColor" fill-opacity="0.15" />
+              <polygon points="8,4.5 11.5,8 8,11.5 4.5,8" fill="currentColor" opacity="0.6" />
+            </svg>
+            <span class="tab-btn-title">{p.name}</span>
+            <span class="tab-btn-badge">{p.badge}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Active Prompt Meta & Token Indicator -->
+    <div class="prompt-meta-bar">
+      <div class="meta-left">
+        <span class="meta-indicator">●</span>
+        <span id="prompt-desc-text" class="meta-desc">
+          {AGENT_PROMPTS[0].description}
+        </span>
+      </div>
+      <div class="meta-right">
+        <span class="meta-tokens" id="prompt-tokens-badge">{AGENT_PROMPTS[0].tokenEstimate}</span>
+        <span class="meta-format">SYSTEM PROMPT // MARKDOWN</span>
+      </div>
+    </div>
+
+    <!-- Interactive Glassmorphic Prompt Terminal Window -->
+    <div class="prompt-terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dots" aria-hidden="true">
+          <span class="dot dot-cyan"></span>
+          <span class="dot dot-gold"></span>
+          <span class="dot dot-fire"></span>
+        </div>
+        <span class="terminal-title" id="terminal-file-title">gzen-universal-agent-prompt.md</span>
+        <button type="button" id="terminal-select-all-btn" class="terminal-select-btn" title="Select entire prompt text">
+          Select All
+        </button>
+      </div>
+
+      <div class="terminal-content">
+        <pre class="prompt-pre"><code id="prompt-code-display" class="prompt-code">{AGENT_PROMPTS[0].content}</code></pre>
+      </div>
+    </div>
+
+    <!-- Action Controls: Primary Copy Button & Compatible Agent Badges -->
+    <div class="gift-actions">
+      <div class="copy-action-wrapper">
+        <button type="button" id="copy-agent-prompt-btn" class="gift-btn-primary" aria-label="Copy gZen AI System Prompt to Clipboard">
+          <span class="btn-icon-wrap" id="gift-copy-icon-wrap" aria-hidden="true">
+            <!-- Polygon Geometric Copy Icon -->
+            <svg class="geo-icon-copy" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="2,2 10,2 10,4 4,4 4,10 2,10" fill="currentColor" opacity="0.5"></polygon>
+              <polygon points="5,5 13,5 13,13 5,13" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"></polygon>
+              <polygon points="8,5 13,5 13,10" fill="currentColor" opacity="0.3"></polygon>
+            </svg>
+          </span>
+          <span id="gift-copy-text" class="btn-text">Copy Agent Prompt</span>
+          <!-- Polygon Geometric Forward Chevron -->
+          <svg class="geo-icon-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="13.5,8 8,2.5 8,6 2.5,6 2.5,10 8,10 8,13.5" fill="currentColor" stroke="currentColor" stroke-width="0.75" stroke-linejoin="round"></polygon>
+          </svg>
+        </button>
+
+        <span class="copy-feedback-msg" id="gift-copy-feedback" aria-live="polite"></span>
+      </div>
+
+      <!-- Compatible AI Agent Ecosystem Badges -->
+      <div class="agent-eco-row">
+        <span class="eco-label">Compatible with:</span>
+        <div class="eco-badges">
+          <span class="agent-chip">Claude 3.7 / 4</span>
+          <span class="agent-chip">ChatGPT (GPT-4o/o3)</span>
+          <span class="agent-chip">Gemini 3.7 / Pro</span>
+          <span class="agent-chip">DeepSeek V3 / R1</span>
+          <span class="agent-chip">Cursor & Windsurf</span>
+          <span class="agent-chip">Hermes Agent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Inlined prompt data for instantaneous zero-latency client switching
+  import { AGENT_PROMPTS } from "../data/prompts";
+
+  const promptsMap = new Map(AGENT_PROMPTS.map((p) => [p.id, p]));
+
+  function initGiftPromptEngine() {
+    const tabBtns = document.querySelectorAll<HTMLButtonElement>(".prompt-tab-btn");
+    const codeDisplay = document.getElementById("prompt-code-display");
+    const descText = document.getElementById("prompt-desc-text");
+    const tokensBadge = document.getElementById("prompt-tokens-badge");
+    const fileTitle = document.getElementById("terminal-file-title");
+    const copyBtn = document.getElementById("copy-agent-prompt-btn");
+    const copyText = document.getElementById("gift-copy-text");
+    const copyIconWrap = document.getElementById("gift-copy-icon-wrap");
+    const feedbackMsg = document.getElementById("gift-copy-feedback");
+    const selectAllBtn = document.getElementById("terminal-select-all-btn");
+
+    let currentPromptId = "universal";
+
+    // Tab Switching
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-prompt-id") as string;
+        const prompt = promptsMap.get(id as any);
+        if (!prompt) return;
+
+        currentPromptId = id;
+
+        tabBtns.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+
+        if (codeDisplay) codeDisplay.textContent = prompt.content;
+        if (descText) descText.textContent = prompt.description;
+        if (tokensBadge) tokensBadge.textContent = prompt.tokenEstimate;
+        if (fileTitle) fileTitle.textContent = `gzen-${prompt.id}-prompt.md`;
+
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try { navigator.vibrate(8); } catch {}
+        }
+      });
+    });
+
+    // Select All in Terminal
+    selectAllBtn?.addEventListener("click", () => {
+      if (codeDisplay) {
+        const range = document.createRange();
+        range.selectNodeContents(codeDisplay);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      }
+    });
+
+    // Copy Button
+    let copyTimer: number | undefined;
+    copyBtn?.addEventListener("click", async () => {
+      const prompt = promptsMap.get(currentPromptId as any);
+      if (!prompt) return;
+
+      const contentToCopy = prompt.content;
+
+      let copySuccess = false;
+
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(contentToCopy);
+          copySuccess = true;
+        } catch {
+          copySuccess = false;
+        }
+      }
+
+      if (!copySuccess) {
+        try {
+          const textarea = document.createElement("textarea");
+          textarea.value = contentToCopy;
+          textarea.style.position = "fixed";
+          textarea.style.top = "-9999px";
+          textarea.style.left = "-9999px";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          copySuccess = document.execCommand("copy");
+          document.body.removeChild(textarea);
+        } catch {
+          copySuccess = false;
+        }
+      }
+
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try { navigator.vibrate([15, 30, 20]); } catch {}
+      }
+
+      if (copyText && copyIconWrap) {
+        if (copySuccess) {
+          copyText.textContent = "Copied to Clipboard!";
+          copyIconWrap.innerHTML = `<svg class="geo-icon-copy" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="6,12.5 2,8.5 3.5,7 6,9.5 12.5,3 14,4.5" fill="#22d3ee" stroke="#22d3ee" stroke-width="0.5" stroke-linejoin="round"/></svg>`;
+
+          if (feedbackMsg) feedbackMsg.textContent = "Ready to paste into your AI agent!";
+
+          window.clearTimeout(copyTimer);
+          copyTimer = window.setTimeout(() => {
+            copyText.textContent = "Copy Agent Prompt";
+            copyIconWrap.innerHTML = `<svg class="geo-icon-copy" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="2,2 10,2 10,4 4,4 4,10 2,10" fill="currentColor" opacity="0.5" /><polygon points="5,5 13,5 13,13 5,13" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none" /><polygon points="8,5 13,5 13,10" fill="currentColor" opacity="0.3" /></svg>`;
+            if (feedbackMsg) feedbackMsg.textContent = "";
+          }, 3000);
+        } else {
+          copyText.textContent = "Prompt Selected Above";
+          if (codeDisplay) {
+            const range = document.createRange();
+            range.selectNodeContents(codeDisplay);
+            const selection = window.getSelection();
+            selection?.removeAllRanges();
+            selection?.addRange(range);
+          }
+        }
+      }
+    });
+  }
+
+  // Initialize on load and on Astro page swaps
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initGiftPromptEngine);
+  } else {
+    initGiftPromptEngine();
+  }
+</script>
+
+<style>
+  .gift-section {
+    position: relative;
+    margin-top: clamp(4.5rem, 10vw, 7.5rem);
+    padding: clamp(2rem, 5vw, 3.5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Parallax Geometric Wrapper */
+  .gift-geo-wrapper {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(320px, 60vw, 540px);
+    height: clamp(320px, 60vw, 540px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.85;
+  }
+
+  .gift-geo-stage {
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transform-origin: center center;
+  }
+
+  .gift-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .geo-ring-spin {
+    transform-origin: 200px 200px;
+    animation: giftRingSpin 40s linear infinite;
+  }
+
+  .geo-ring-counter {
+    transform-origin: 200px 200px;
+    animation: giftRingSpin 25s linear infinite reverse;
+  }
+
+  .gift-poly-a {
+    transform-origin: 200px 200px;
+    animation: giftPolyA 30s ease-in-out infinite alternate;
+  }
+
+  .gift-poly-b {
+    transform-origin: 200px 200px;
+    animation: giftPolyB 35s ease-in-out infinite alternate;
+  }
+
+  .spark-1 { animation: sparkRise 3s ease-in-out infinite; }
+  .spark-2 { animation: sparkRise 3.5s ease-in-out infinite 0.7s; }
+  .spark-3 { animation: sparkRise 2.8s ease-in-out infinite 1.4s; }
+
+  @keyframes giftRingSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes giftPolyA {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(60deg) scale(1.08); }
+  }
+
+  @keyframes giftPolyB {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(-60deg) scale(0.92); }
+  }
+
+  @keyframes sparkRise {
+    0%, 100% { transform: translateY(0) scaleY(1); opacity: 0.4; }
+    50% { transform: translateY(-6px) scaleY(1.25); opacity: 0.95; }
+  }
+
+  /* Frosted Glass Gift Container Card */
+  .gift-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 44rem;
+    padding: clamp(2rem, 4.5vw, 3rem);
+    border-radius: 20px;
+    background: rgba(6, 10, 16, 0.24);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+    box-shadow:
+      0 12px 40px -6px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+      inset 0 0 32px 0 rgba(34, 211, 238, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+    transition:
+      transform 0.3s var(--ease),
+      border-color 0.3s var(--ease),
+      box-shadow 0.3s var(--ease);
+  }
+
+  .gift-card:hover {
+    border-color: rgba(34, 211, 238, 0.4);
+    box-shadow:
+      0 16px 48px -6px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+      inset 0 0 42px 0 rgba(34, 211, 238, 0.14);
+  }
+
+  .gift-ambient-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      450px circle at var(--gift-mx, 50%) var(--gift-my, 40%),
+      rgba(34, 211, 238, 0.12),
+      transparent 65%
+    );
+    pointer-events: none;
+    opacity: 0.9;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .gift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .telemetry-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(34, 211, 238, 0.08);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22d3ee;
+    box-shadow: 0 0 8px #22d3ee;
+  }
+
+  .badge-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: #67e8f9;
+    font-weight: 600;
+  }
+
+  .geo-coord {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+  }
+
+  .gift-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 3.8vw, 2.3rem);
+    font-weight: 750;
+    line-height: 1.22;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0 0 0.65rem;
+  }
+
+  .chromatic-gift-text {
+    background: linear-gradient(135deg, #22d3ee 0%, #38bdf8 30%, #fbbf24 60%, #f97316 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: giftChromaticShift 8s ease infinite alternate;
+  }
+
+  @keyframes giftChromaticShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  .gift-lead {
+    font-size: 0.94rem;
+    line-height: 1.62;
+    color: var(--muted);
+    margin: 0;
+    max-width: 50ch;
+  }
+
+  /* Prompt Tabs Navigation */
+  .prompt-tabs-nav {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.75rem;
+  }
+
+  .prompt-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.48rem 0.95rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition:
+      background 0.2s var(--ease),
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      transform 0.2s var(--ease);
+  }
+
+  .tab-diamond-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .tab-btn-badge {
+    font-size: 0.65rem;
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--dim);
+  }
+
+  .prompt-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: var(--ink);
+  }
+
+  .prompt-tab-btn.active {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: rgba(34, 211, 238, 0.45);
+    color: #22d3ee;
+    box-shadow: 0 0 16px -2px rgba(34, 211, 238, 0.25);
+  }
+
+  .prompt-tab-btn.active .tab-btn-badge {
+    background: rgba(34, 211, 238, 0.2);
+    color: #67e8f9;
+  }
+
+  /* Prompt Meta Bar */
+  .prompt-meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--dim);
+    flex-wrap: wrap;
+  }
+
+  .meta-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .meta-indicator {
+    color: #22d3ee;
+    font-size: 0.6rem;
+  }
+
+  .meta-desc {
+    color: var(--muted);
+  }
+
+  .meta-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .meta-tokens {
+    padding: 0.15em 0.45em;
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+    border-radius: 4px;
+    border: 1px solid rgba(251, 191, 36, 0.25);
+  }
+
+  .meta-format {
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Glassmorphic Prompt Terminal */
+  .prompt-terminal {
+    width: 100%;
+    border-radius: 12px;
+    background: rgba(4, 7, 12, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .terminal-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0.85rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+  }
+
+  .terminal-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .terminal-dots .dot {
+    width: 8px;
+    height: 8px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+
+  .dot-cyan { background: #22d3ee; opacity: 0.85; }
+  .dot-gold { background: #fbbf24; opacity: 0.85; }
+  .dot-fire { background: #f97316; opacity: 0.85; }
+
+  .terminal-title {
+    color: var(--dim);
+    letter-spacing: 0.04em;
+  }
+
+  .terminal-select-btn {
+    background: transparent;
+    border: none;
+    color: var(--dim);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    cursor: pointer;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    transition: color 0.2s var(--ease), background 0.2s var(--ease);
+  }
+
+  .terminal-select-btn:hover {
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .terminal-content {
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 0.85rem 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+
+  .terminal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  .terminal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+
+  .prompt-pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .prompt-code {
+    font-family: inherit;
+  }
+
+  /* Action Controls */
+  .gift-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    margin-top: 0.25rem;
+  }
+
+  .copy-action-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .gift-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #04070c;
+    background: linear-gradient(135deg, #22d3ee 0%, #38bdf8 40%, #fbbf24 100%);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px -2px rgba(34, 211, 238, 0.4);
+    transition:
+      transform 0.25s var(--ease),
+      box-shadow 0.3s var(--ease);
+  }
+
+  .gift-btn-primary:hover,
+  .gift-btn-primary:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px -2px rgba(34, 211, 238, 0.6);
+    outline: none;
+  }
+
+  .btn-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+  }
+
+  .geo-icon-copy {
+    width: 15px;
+    height: 15px;
+  }
+
+  .geo-icon-arrow {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .gift-btn-primary:hover .geo-icon-arrow {
+    transform: translateX(2px);
+  }
+
+  .copy-feedback-msg {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: #22d3ee;
+    font-weight: 500;
+  }
+
+  /* Compatible AI Agent Ecosystem Badges */
+  .agent-eco-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .eco-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--dim);
+    letter-spacing: 0.04em;
+  }
+
+  .eco-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .agent-chip {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    padding: 0.2em 0.55em;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .prompt-tabs-nav {
+      flex-direction: column;
+    }
+    .prompt-tab-btn {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+</style>
