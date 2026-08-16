@@ -21,8 +21,27 @@ import ElementCard from "./ElementCard.astro";
     </div>
   </header>
 
-  <div class="grid">
+  <div class="grid" id="elements-carousel">
     {elements.map((element, i) => <ElementCard element={element} index={i} />)}
+  </div>
+
+  <!-- Mobile Swipe Rail & Quick Indicator -->
+  <div class="mobile-swipe-rail" role="tablist" aria-label="Mobile element pagination">
+    <button type="button" class="swipe-dot dot-water active" data-swipe-target="Z" aria-label="View Water (Zen) Element">
+      <span class="dot-glow" aria-hidden="true"></span>
+      <span class="dot-kanji">水</span>
+      <span class="dot-name">Water</span>
+    </button>
+    <button type="button" class="swipe-dot dot-earth" data-swipe-target="E" aria-label="View Earth (Economy) Element">
+      <span class="dot-glow" aria-hidden="true"></span>
+      <span class="dot-kanji">地</span>
+      <span class="dot-name">Earth</span>
+    </button>
+    <button type="button" class="swipe-dot dot-fire" data-swipe-target="N" aria-label="View Fire (Neural) Element">
+      <span class="dot-glow" aria-hidden="true"></span>
+      <span class="dot-kanji">火</span>
+      <span class="dot-name">Fire</span>
+    </button>
   </div>
 </section>
 
@@ -86,12 +105,91 @@ import ElementCard from "./ElementCard.astro";
   .grid {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
-  @media (min-width: 960px) {
+  /* Mobile Swipe Carousel Layout */
+  .mobile-swipe-rail {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
     .grid {
-      gap: 1.5rem;
+      flex-direction: row;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 1rem;
+      -webkit-overflow-scrolling: touch;
+      padding: 0.5rem 0.25rem 1.25rem;
+      gap: 1rem;
+      scrollbar-width: none;
+    }
+
+    .grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    :global(.element-card) {
+      flex: 0 0 calc(100vw - 3.25rem);
+      max-width: 440px;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+    }
+
+    .mobile-swipe-rail {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.65rem;
+      margin-top: 0.75rem;
+    }
+
+    .swipe-dot {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--dim);
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+    }
+
+    .dot-glow {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .dot-kanji {
+      font-weight: 700;
+    }
+
+    .dot-water.active {
+      color: #22d3ee;
+      background: rgba(34, 211, 238, 0.12);
+      border-color: rgba(34, 211, 238, 0.45);
+      box-shadow: 0 0 12px rgba(34, 211, 238, 0.3);
+    }
+
+    .dot-earth.active {
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.12);
+      border-color: rgba(251, 191, 36, 0.45);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.3);
+    }
+
+    .dot-fire.active {
+      color: #f97316;
+      background: rgba(249, 115, 22, 0.12);
+      border-color: rgba(249, 115, 22, 0.45);
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.3);
     }
   }
 </style>

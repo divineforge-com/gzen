@@ -3,7 +3,7 @@ import { animate } from "animejs";
 import { ANIMATION_SEEDS } from "../data/animation-seeds";
 
 /**
- * gZen Tri-Elemental Kinetic Motion & Practice Ignition Engine
+ * gZen Tri-Elemental Kinetic Motion, Web Audio Resonance & Practice Ignition Engine
  * Dual-Engine Stack: GSAP 3.15+ (Timelines, quickTo, Inertia, Parallax) + Anime.js v4 (Elastic Springs)
  *
  * Design Language: Tesla/xAI ultra-clean minimalism + Tri-Elemental Sovereignty (Water · Earth · Fire).
@@ -11,6 +11,45 @@ import { ANIMATION_SEEDS } from "../data/animation-seeds";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+// Elemental Configuration Map
+const ELEMENT_CONFIG = {
+  Z: {
+    name: "Water",
+    kanji: "水",
+    tone: "#22d3ee",
+    secondary: "#0d9488",
+    glow: "rgba(34, 211, 238, 0.14)",
+    cursorGlow: "rgba(34, 211, 238, 0.08)",
+    audioFreq: 432,
+    subFreq: 216,
+    waveform: "sine" as OscillatorType,
+  },
+  E: {
+    name: "Earth",
+    kanji: "地",
+    tone: "#fbbf24",
+    secondary: "#d97706",
+    glow: "rgba(251, 191, 36, 0.14)",
+    cursorGlow: "rgba(251, 191, 36, 0.08)",
+    audioFreq: 528,
+    subFreq: 264,
+    waveform: "triangle" as OscillatorType,
+  },
+  N: {
+    name: "Fire",
+    kanji: "火",
+    tone: "#f97316",
+    secondary: "#ef4444",
+    glow: "rgba(249, 115, 22, 0.14)",
+    cursorGlow: "rgba(249, 115, 22, 0.08)",
+    audioFreq: 741,
+    subFreq: 370.5,
+    waveform: "triangle" as OscillatorType,
+  },
+} as const;
+
+type ElementKey = keyof typeof ELEMENT_CONFIG;
 
 /**
  * 1. Intro Stagger Choreography (GSAP Timeline)
@@ -57,7 +96,7 @@ function initIntroChoreography() {
         ".hero .hook",
         ".hero .subhead",
         ".hero .element-trinity-row",
-        ".hero .cta-row",
+        ".hero .hero-actions",
       ],
       { opacity: 0, y: 26, scale: 0.98 },
       {
@@ -97,7 +136,499 @@ function initIntroChoreography() {
 }
 
 /**
- * 2. Scroll-Triggered In-Card Centerpiece Activation
+ * Global Elemental Audio Resonance Manager (Zero-Dependency Web Audio API)
+ */
+let audioCtx: AudioContext | null = null;
+let masterGain: GainNode | null = null;
+let osc1: OscillatorNode | null = null;
+let osc2: OscillatorNode | null = null;
+let biquadFilter: BiquadFilterNode | null = null;
+let isAudioActive = false;
+let currentActiveElement: ElementKey = "Z";
+
+function setResonanceFrequency(elementKey: ElementKey) {
+  currentActiveElement = elementKey;
+  const cfg = ELEMENT_CONFIG[elementKey];
+
+  if (isAudioActive && audioCtx && osc1 && osc2 && masterGain) {
+    const now = audioCtx.currentTime;
+    try {
+      osc1.frequency.cancelScheduledValues(now);
+      osc2.frequency.cancelScheduledValues(now);
+      osc1.frequency.exponentialRampToValueAtTime(cfg.audioFreq, now + 0.6);
+      osc2.frequency.exponentialRampToValueAtTime(cfg.subFreq, now + 0.6);
+
+      const statusEl = document.getElementById("audio-status-indicator");
+      if (statusEl) {
+        statusEl.textContent = `${cfg.kanji} ${cfg.audioFreq}Hz`;
+      }
+    } catch {
+      // Fallback direct set
+      osc1.frequency.setValueAtTime(cfg.audioFreq, now);
+      osc2.frequency.setValueAtTime(cfg.subFreq, now);
+    }
+  }
+}
+
+function initWebAudioResonance() {
+  const toggleBtn = document.getElementById("audio-resonance-toggle");
+  const statusIndicator = document.getElementById("audio-status-indicator");
+  if (!toggleBtn) return;
+
+  const startAudio = async () => {
+    try {
+      const AudioContextClass = window.AudioContext;
+      if (!AudioContextClass) return;
+
+      if (!audioCtx) {
+        audioCtx = new AudioContextClass();
+      }
+      if (audioCtx.state === "suspended") {
+        await audioCtx.resume();
+      }
+
+      const cfg = ELEMENT_CONFIG[currentActiveElement];
+
+      // Master gain node
+      masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      masterGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 1.2);
+
+      // Lowpass Filter for warm, analog harmonic tone
+      biquadFilter = audioCtx.createBiquadFilter();
+      biquadFilter.type = "lowpass";
+      biquadFilter.frequency.setValueAtTime(850, audioCtx.currentTime);
+      biquadFilter.Q.setValueAtTime(1.2, audioCtx.currentTime);
+
+      // Fundamental Oscillator
+      osc1 = audioCtx.createOscillator();
+      osc1.type = cfg.waveform;
+      osc1.frequency.setValueAtTime(cfg.audioFreq, audioCtx.currentTime);
+
+      // Sub-harmonic Octave Oscillator
+      osc2 = audioCtx.createOscillator();
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(cfg.subFreq, audioCtx.currentTime);
+
+      // Routing
+      osc1.connect(biquadFilter);
+      osc2.connect(biquadFilter);
+      biquadFilter.connect(masterGain);
+      masterGain.connect(audioCtx.destination);
+
+      osc1.start();
+      osc2.start();
+
+      isAudioActive = true;
+      toggleBtn.classList.add("active");
+      if (statusIndicator) {
+        statusIndicator.textContent = `${cfg.kanji} ${cfg.audioFreq}Hz`;
+      }
+    } catch {
+      // Audio autoplay policy or device fallback
+      isAudioActive = false;
+    }
+  };
+
+  const stopAudio = () => {
+    if (!audioCtx || !masterGain) return;
+    try {
+      const now = audioCtx.currentTime;
+      masterGain.gain.cancelScheduledValues(now);
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+
+      setTimeout(() => {
+        try {
+          osc1?.stop();
+          osc2?.stop();
+          osc1?.disconnect();
+          osc2?.disconnect();
+        } catch {}
+        osc1 = null;
+        osc2 = null;
+        isAudioActive = false;
+        toggleBtn.classList.remove("active");
+        if (statusIndicator) {
+          statusIndicator.textContent = "Muted";
+        }
+      }, 520);
+    } catch {
+      isAudioActive = false;
+      toggleBtn.classList.remove("active");
+      if (statusIndicator) statusIndicator.textContent = "Muted";
+    }
+  };
+
+  toggleBtn.addEventListener("click", () => {
+    if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+      try { navigator.vibrate(10); } catch {}
+    }
+
+    if (isAudioActive) {
+      stopAudio();
+    } else {
+      startAudio();
+    }
+  });
+}
+
+/**
+ * 2. Dynamic Global Elemental Resonance (Harmonic Shift)
+ * Modulates background GeometricField, cursor glow, and Web Audio across Water, Earth, and Fire
+ */
+function initGlobalElementalResonance() {
+  const root = document.documentElement;
+  const cards = Array.from(document.querySelectorAll<HTMLElement>(".element-card"));
+  const geoStage = document.getElementById("geoStage");
+
+  const applyElementalTheme = (key: ElementKey) => {
+    const cfg = ELEMENT_CONFIG[key];
+    currentActiveElement = key;
+
+    // Update CSS Custom Properties
+    root.style.setProperty("--active-element-tone", cfg.tone);
+    root.style.setProperty("--cursor-glow", cfg.cursorGlow);
+
+    if (geoStage) {
+      geoStage.style.setProperty("--geo-active-tone", cfg.tone);
+    }
+
+    // Sync Web Audio frequency
+    setResonanceFrequency(key);
+
+    // Sync Mobile Swipe Dots
+    const dots = document.querySelectorAll<HTMLElement>(".swipe-dot");
+    dots.forEach((dot) => {
+      const target = dot.dataset.swipeTarget;
+      if (target === key) {
+        dot.classList.add("active");
+      } else {
+        dot.classList.remove("active");
+      }
+    });
+  };
+
+  // Scroll focal tracking with IntersectionObserver
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          const card = entry.target as HTMLElement;
+          const letter = card.dataset.element as ElementKey | undefined;
+          if (letter && ELEMENT_CONFIG[letter]) {
+            applyElementalTheme(letter);
+          }
+        }
+      });
+    },
+    {
+      threshold: [0.35, 0.6, 0.8],
+      rootMargin: "-60px 0px -60px 0px",
+    }
+  );
+
+  cards.forEach((card) => {
+    observer.observe(card);
+
+    // Hover focal shift for desktop
+    if (!isTouch) {
+      card.addEventListener("mouseenter", () => {
+        const letter = card.dataset.element as ElementKey | undefined;
+        if (letter && ELEMENT_CONFIG[letter]) {
+          applyElementalTheme(letter);
+        }
+      });
+    }
+  });
+}
+
+/**
+ * 3. Interactive Hero Trinity Badges (Smooth Scroll & Focal Snap)
+ */
+function initHeroTrinityBadges() {
+  const pills = Array.from(document.querySelectorAll<HTMLAnchorElement>(".tri-pill"));
+  if (!pills.length) return;
+
+  pills.forEach((pill) => {
+    pill.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetKey = pill.dataset.target as ElementKey | undefined;
+      if (!targetKey) return;
+
+      const targetCard = document.getElementById(`element-${targetKey}`);
+      if (!targetCard) return;
+
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try { navigator.vibrate(15); } catch {}
+      }
+
+      // Smooth scroll to card
+      targetCard.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+
+      // Focal Snap Pulse
+      animate(targetCard, {
+        scale: [1, 1.035, 1],
+        duration: 450,
+        ease: "outBack(2)",
+      });
+
+      targetCard.classList.add("element-key-flash");
+      setTimeout(() => {
+        targetCard.classList.remove("element-key-flash");
+      }, 500);
+    });
+  });
+}
+
+/**
+ * 4. Interactive In-Card Micro-Practices (Water Breath Pacer, Earth Compounding, Fire Spark)
+ */
+function initInCardMicroPractices() {
+  // WATER: 4-7-8 Somatic Breath Pacer
+  const breathCard = document.getElementById("element-Z");
+  if (breathCard) {
+    const breathBtn = breathCard.querySelector<HTMLButtonElement>('[data-action="breath"]');
+    const phaseLabel = breathCard.querySelector<HTMLElement>("[data-breath-phase]");
+    const barInhale = breathCard.querySelector<HTMLElement>('[data-phase-bar="inhale"]');
+    const barHold = breathCard.querySelector<HTMLElement>('[data-phase-bar="hold"]');
+    const barExhale = breathCard.querySelector<HTMLElement>('[data-phase-bar="exhale"]');
+    const disc = breathCard.querySelector<SVGCircleElement>(".geo-ambient-disc");
+
+    let isBreathing = false;
+    let breathTimer: number | null = null;
+    let breathPhase: "inhale" | "hold" | "exhale" = "inhale";
+
+    const clearBars = () => {
+      barInhale?.classList.remove("active");
+      barHold?.classList.remove("active");
+      barExhale?.classList.remove("active");
+    };
+
+    const runBreathCycle = () => {
+      if (!isBreathing) return;
+
+      // 1. Inhale (4s)
+      breathPhase = "inhale";
+      clearBars();
+      barInhale?.classList.add("active");
+      if (phaseLabel) phaseLabel.textContent = "INHALE (4s) · EXPAND VESSEL";
+
+      if (disc) {
+        gsap.to(disc, { attr: { r: 85 }, opacity: 0.9, duration: 4, ease: "sine.inOut" });
+      }
+
+      breathTimer = window.setTimeout(() => {
+        if (!isBreathing) return;
+
+        // 2. Hold (7s)
+        breathPhase = "hold";
+        clearBars();
+        barHold?.classList.add("active");
+        if (phaseLabel) phaseLabel.textContent = "HOLD (7s) · IMMUTABLE STILLNESS";
+
+        if (disc) {
+          gsap.to(disc, { opacity: 0.6, duration: 7, ease: "sine.inOut" });
+        }
+
+        breathTimer = window.setTimeout(() => {
+          if (!isBreathing) return;
+
+          // 3. Exhale (8s)
+          breathPhase = "exhale";
+          clearBars();
+          barExhale?.classList.add("active");
+          if (phaseLabel) phaseLabel.textContent = "EXHALE (8s) · RELEASE FRICTION";
+
+          if (disc) {
+            gsap.to(disc, { attr: { r: 55 }, opacity: 0.4, duration: 8, ease: "sine.inOut" });
+          }
+
+          breathTimer = window.setTimeout(() => {
+            if (isBreathing) runBreathCycle();
+          }, 8000);
+        }, 7000);
+      }, 4000);
+    };
+
+    if (breathBtn) {
+      breathBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try { navigator.vibrate(12); } catch {}
+        }
+
+        isBreathing = !isBreathing;
+        if (isBreathing) {
+          const btnText = breathBtn.querySelector<HTMLElement>(".btn-text");
+          if (btnText) btnText.textContent = "Pause Breath Guide";
+          breathBtn.style.borderColor = "var(--element-tone)";
+          runBreathCycle();
+        } else {
+          clearTimeout(breathTimer);
+          clearBars();
+          const btnText = breathBtn.querySelector<HTMLElement>(".btn-text");
+          if (btnText) btnText.textContent = "Begin 4-7-8 Rhythm";
+          if (phaseLabel) phaseLabel.textContent = "4-7-8 RHYTHM · PAUSED";
+          breathBtn.style.borderColor = "";
+          if (disc) gsap.to(disc, { attr: { r: 75 }, opacity: 0.5, duration: 1 });
+        }
+      });
+    }
+  }
+
+  // EARTH: Compounding Capital Tier Simulator
+  const earthCard = document.getElementById("element-E");
+  if (earthCard) {
+    const tierBtns = Array.from(earthCard.querySelectorAll<HTMLButtonElement>(".tier-btn"));
+    const multLabel = earthCard.querySelector<HTMLElement>("[data-compound-mult]");
+    const readoutLabel = earthCard.querySelector<HTMLElement>("[data-compound-readout]");
+    const octaGroup = earthCard.querySelector<SVGGElement>(".geo-octahedron-group");
+
+    const tierData: Record<string, { label: string; readout: string; scale: number; rot: number }> = {
+      "1": { label: "1.0x BASE VELOCITY", readout: "100% Focused Linear Output", scale: 0.95, rot: 0 },
+      "3.2": { label: "3.2x ASYMMETRIC", readout: "+320% Compounded Reserve", scale: 1.08, rot: 15 },
+      "10": { label: "10.0x SOVEREIGN", readout: "+1,000% Immutable Shield", scale: 1.22, rot: 45 },
+    };
+
+    tierBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        tierBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const tier = btn.dataset.tier || "3.2";
+        const data = tierData[tier];
+
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try { navigator.vibrate(10); } catch {}
+        }
+
+        if (multLabel && data) multLabel.textContent = data.label;
+        if (readoutLabel && data) {
+          const valEl = readoutLabel.querySelector(".readout-value");
+          if (valEl) valEl.textContent = data.readout;
+        }
+
+        if (octaGroup && data) {
+          gsap.to(octaGroup, {
+            scale: data.scale,
+            rotation: data.rot,
+            transformOrigin: "100px 100px",
+            duration: 0.6,
+            ease: "back.out(1.8)",
+          });
+        }
+      });
+    });
+  }
+
+  // FIRE: Neural Command Syntax Spark Simulator
+  const fireCard = document.getElementById("element-N");
+  if (fireCard) {
+    const sparkBtn = fireCard.querySelector<HTMLButtonElement>('[data-action="spark"]');
+    const sparkStatus = fireCard.querySelector<HTMLElement>("[data-spark-status]");
+    const nodes = Array.from(fireCard.querySelectorAll<HTMLElement>(".spark-node"));
+    const svgNodes = Array.from(fireCard.querySelectorAll<SVGElement>(".geo-node"));
+
+    let isSparking = false;
+
+    if (sparkBtn) {
+      sparkBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (isSparking) return;
+        isSparking = true;
+
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try { navigator.vibrate([15, 30, 20]); } catch {}
+        }
+
+        // Step 1: Prompt
+        nodes.forEach((n) => n.classList.remove("active"));
+        nodes[0]?.classList.add("active");
+        if (sparkStatus) sparkStatus.textContent = "SYNTAX // PROMPT DISPATCHED";
+
+        gsap.fromTo(svgNodes, { scale: 1 }, { scale: 1.5, stagger: 0.04, duration: 0.25, ease: "power2.out" });
+
+        // Step 2: L1 Bridge Orchestration
+        setTimeout(() => {
+          nodes.forEach((n) => n.classList.remove("active"));
+          nodes[1]?.classList.add("active");
+          if (sparkStatus) sparkStatus.textContent = "ORCHESTRATE // L1 KINETIC BRIDGE";
+
+          // Step 3: Velocity Execution
+          setTimeout(() => {
+            nodes.forEach((n) => n.classList.remove("active"));
+            nodes[2]?.classList.add("active");
+            if (sparkStatus) sparkStatus.textContent = "EXECUTE // 60FPS SYNTHESIS";
+
+            // Reset after delay
+            setTimeout(() => {
+              nodes.forEach((n) => n.classList.remove("active"));
+              nodes[0]?.classList.add("active");
+              if (sparkStatus) sparkStatus.textContent = "STANDBY // READY";
+              isSparking = false;
+            }, 1200);
+          }, 450);
+        }, 400);
+      });
+    }
+  }
+}
+
+/**
+ * 5. Mobile Swipe Carousel Rail Tracking
+ */
+function initMobileSwipeCarousel() {
+  const carousel = document.getElementById("elements-carousel");
+  const dots = Array.from(document.querySelectorAll<HTMLButtonElement>(".swipe-dot"));
+  if (!carousel || !dots.length) return;
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const targetKey = dot.dataset.swipeTarget;
+      if (!targetKey) return;
+
+      const targetCard = document.getElementById(`element-${targetKey}`);
+      if (targetCard) {
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try { navigator.vibrate(10); } catch {}
+        }
+
+        targetCard.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      }
+    });
+  });
+
+  // Track horizontal scroll for dot active state
+  let scrollTimeout: number | null = null;
+  carousel.addEventListener(
+    "scroll",
+    () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(() => {
+        const scrollLeft = carousel.scrollLeft;
+        const width = carousel.offsetWidth;
+        const index = Math.round(scrollLeft / (width * 0.85));
+        const clamped = Math.max(0, Math.min(index, dots.length - 1));
+
+        dots.forEach((d, i) => {
+          if (i === clamped) d.classList.add("active");
+          else d.classList.remove("active");
+        });
+      }, 60);
+    },
+    { passive: true }
+  );
+}
+
+/**
+ * 6. Scroll-Triggered In-Card Centerpiece Activation
  * Unspools outer dials and scales inner geometry as each card scrolls into the focal viewport
  */
 function initScrollTriggeredCenterpieces() {
@@ -115,7 +646,6 @@ function initScrollTriggeredCenterpieces() {
         if (!svg) return;
 
         if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
-          // Card entered focal zone
           const dial = svg.querySelector<SVGElement>(".geo-dial");
           const polyGroup = svg.querySelector<SVGElement>(
             ".geo-triangle-group, .geo-octahedron-group, .geo-neural-constellation"
@@ -168,211 +698,119 @@ function initScrollTriggeredCenterpieces() {
 }
 
 /**
- * 3. High-Performance 3D Kinetic Tilt & Mobile Touch Gesture Engine
- * Desktop: 60fps GC-Free Magnetic 3D Physics (gsap.quickTo)
- * Mobile: Tactile Touch Compression, Specular Finger Glow, Elastic Swipe Snap, and Haptic Feedback
+ * 7. High-Performance 3D Kinetic Tilt & Mobile Touch Gesture Engine
  */
 function initKineticCards() {
-  if (reduceMotion) return;
-
-  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".element-card"));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>(".element-card"));
   if (!cards.length) return;
 
+  const cfg = ANIMATION_SEEDS.cardPhysics;
+
   cards.forEach((card) => {
-    const letter = card.dataset.element;
-    const svg = card.querySelector<SVGSVGElement>(".geo-svg");
-    const ambientDisc = card.querySelector<SVGCircleElement>(".geo-ambient-disc");
-    const dial = card.querySelector<SVGElement>(".geo-dial");
-    const polyGroup = card.querySelector<SVGElement>(
-      ".geo-triangle-group, .geo-octahedron-group, .geo-neural-constellation"
-    );
-    const centerPulse = card.querySelector<SVGElement>(".geo-center-pulse");
+    const glowEl = card.querySelector<HTMLElement>(".element-ambient-glow");
+    let bounds = card.getBoundingClientRect();
 
-    const triggerGlyphEnter = () => {
-      if (dial) {
-        gsap.to(dial, {
-          rotation: "+=90",
-          transformOrigin: "100px 100px",
-          duration: 1.2,
-          ease: "power2.out",
-        });
-      }
-      if (polyGroup) {
-        gsap.to(polyGroup, {
-          scale: 1.08,
-          transformOrigin: "100px 100px",
-          duration: 0.35,
-          ease: "back.out(1.8)",
-        });
-      }
-      if (ambientDisc) {
-        gsap.to(ambientDisc, { r: 88, duration: 0.4, ease: "power2.out" });
-      }
-      if (centerPulse) {
-        gsap.to(centerPulse, { scale: 1.4, transformOrigin: "100px 100px", duration: 0.4, ease: "back.out(2)" });
-      }
+    const updateBounds = () => {
+      bounds = card.getBoundingClientRect();
     };
 
-    const resetGlyphs = () => {
-      if (polyGroup) {
-        gsap.to(polyGroup, {
-          scale: 1,
-          transformOrigin: "100px 100px",
-          duration: 0.45,
-          ease: "power2.out",
-        });
-      }
-      if (ambientDisc) {
-        gsap.to(ambientDisc, { r: 75, duration: 0.45, ease: "power2.out" });
-      }
-      if (centerPulse) {
-        gsap.to(centerPulse, { scale: 1, transformOrigin: "100px 100px", duration: 0.4, ease: "power2.out" });
-      }
-    };
+    window.addEventListener("resize", updateBounds, { passive: true });
+    window.addEventListener("scroll", updateBounds, { passive: true });
 
     if (!isTouch) {
-      // Desktop 3D Magnetic Parallax Tracking
       const setRotX = gsap.quickTo(card, "rotateX", {
-        duration: ANIMATION_SEEDS.timings.tiltInertia,
+        duration: cfg.tiltInertia,
         ease: "power2.out",
       });
       const setRotY = gsap.quickTo(card, "rotateY", {
-        duration: ANIMATION_SEEDS.timings.tiltInertia,
+        duration: cfg.tiltInertia,
         ease: "power2.out",
       });
       const setZ = gsap.quickTo(card, "z", {
-        duration: ANIMATION_SEEDS.timings.tiltInertia,
-        ease: "power2.out",
-      });
-      const setScale = gsap.quickTo(card, "scale", {
-        duration: 0.3,
+        duration: cfg.tiltInertia,
         ease: "power2.out",
       });
 
-      let bounds: DOMRect | null = null;
-
-      card.addEventListener("mouseenter", () => {
-        bounds = card.getBoundingClientRect();
-        setScale(ANIMATION_SEEDS.timings.hoverScale);
-        triggerGlyphEnter();
-      });
-
-      card.addEventListener("mousemove", (e: MouseEvent) => {
-        if (!bounds) bounds = card.getBoundingClientRect();
+      const onPointerMove = (e: PointerEvent) => {
         const x = e.clientX - bounds.left;
         const y = e.clientY - bounds.top;
-        const xPct = (x / bounds.width - 0.5) * 2;
-        const yPct = (y / bounds.height - 0.5) * 2;
 
-        const rotX = -yPct * ANIMATION_SEEDS.spatialTilt.maxPitchDeg;
-        const rotY = xPct * ANIMATION_SEEDS.spatialTilt.maxRollDeg;
+        const normX = (x / bounds.width - 0.5) * 2;
+        const normY = (y / bounds.height - 0.5) * 2;
+
+        const rotX = -normY * cfg.maxTiltDeg;
+        const rotY = normX * cfg.maxTiltDeg;
 
         setRotX(rotX);
         setRotY(rotY);
-        setZ(ANIMATION_SEEDS.spatialTilt.elevationPx);
+        setZ(cfg.hoverElevateZ);
 
-        card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
-        card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
-      });
+        if (glowEl) {
+          card.style.setProperty("--mx", `${x.toFixed(1)}px`);
+          card.style.setProperty("--my", `${y.toFixed(1)}px`);
+        }
+      };
 
-      card.addEventListener("mouseleave", () => {
-        bounds = null;
-        gsap.to(card, {
-          rotateX: 0,
-          rotateY: 0,
-          z: 0,
-          scale: 1,
-          duration: 0.65,
-          ease: ANIMATION_SEEDS.easings.magneticReturn.gsap,
-        });
+      const onPointerLeave = () => {
+        setRotX(0);
+        setRotY(0);
+        setZ(0);
+        if (glowEl) {
+          card.style.setProperty("--mx", "50%");
+          card.style.setProperty("--my", "40%");
+        }
+      };
 
-        card.style.removeProperty("--mx");
-        card.style.removeProperty("--my");
-        resetGlyphs();
-      });
+      card.addEventListener("pointermove", onPointerMove, { passive: true });
+      card.addEventListener("pointerleave", onPointerLeave, { passive: true });
     } else {
-      // Mobile Touch Gestures & Tactile Compression
       let touchStartX = 0;
-      let touchStartY = 0;
-      let bounds: DOMRect | null = null;
       let isTouching = false;
 
       const onTouchStart = (e: TouchEvent) => {
-        if (e.touches.length !== 1) return;
-        const touch = e.touches[0];
-        bounds = card.getBoundingClientRect();
-        touchStartX = touch.clientX;
-        touchStartY = touch.clientY;
         isTouching = true;
+        updateBounds();
+        const touch = e.touches[0];
+        touchStartX = touch.clientX;
+        const x = touch.clientX - bounds.left;
+        const y = touch.clientY - bounds.top;
 
-        card.classList.add("is-touching");
-
-        // Micro haptic pulse on mobile touch
-        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-          try {
-            navigator.vibrate(ANIMATION_SEEDS.mobileGestures.hapticPulseDurationMs);
-          } catch {
-            // Non-blocking haptic fallback
-          }
+        if (glowEl) {
+          card.style.setProperty("--mx", `${x.toFixed(1)}px`);
+          card.style.setProperty("--my", `${y.toFixed(1)}px`);
         }
 
-        // Tactile compression
         gsap.to(card, {
-          scale: ANIMATION_SEEDS.mobileGestures.touchCompressionScale,
+          scale: 0.985,
           duration: 0.12,
           ease: "power2.out",
         });
-
-        const x = touch.clientX - bounds.left;
-        const y = touch.clientY - bounds.top;
-        card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
-        card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
-
-        triggerGlyphEnter();
       };
 
       const onTouchMove = (e: TouchEvent) => {
-        if (!isTouching || !bounds || e.touches.length !== 1) return;
+        if (!isTouching) return;
         const touch = e.touches[0];
-        const dx = touch.clientX - touchStartX;
-        const dy = touch.clientY - touchStartY;
-
-        // Update dynamic specular finger highlight
         const x = touch.clientX - bounds.left;
         const y = touch.clientY - bounds.top;
-        card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
-        card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
 
-        // Horizontal swipe micro-deflection
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 6) {
-          const maxDisp = ANIMATION_SEEDS.mobileGestures.maxSwipeDisplacementPx;
-          const clampedX = Math.sign(dx) * Math.min(maxDisp, Math.abs(dx) * 0.28);
-          gsap.set(card, { x: clampedX });
+        if (glowEl) {
+          card.style.setProperty("--mx", `${x.toFixed(1)}px`);
+          card.style.setProperty("--my", `${y.toFixed(1)}px`);
         }
+
+        const deltaX = (touch.clientX - touchStartX) * 0.15;
+        const clampedDeltaX = Math.max(-12, Math.min(12, deltaX));
+        card.style.transform = `translateX(${clampedDeltaX.toFixed(1)}px) scale(0.985)`;
       };
 
       const onTouchEnd = () => {
-        if (!isTouching) return;
         isTouching = false;
-        bounds = null;
-        card.classList.remove("is-touching");
-
-        // Elastic spring-damper snap return
         gsap.to(card, {
           scale: 1,
           x: 0,
-          duration: 0.48,
-          ease: ANIMATION_SEEDS.mobileGestures.touchReturnSpring,
+          duration: 0.35,
+          ease: "elastic.out(1, 0.7)",
         });
-
-        window.setTimeout(() => {
-          if (!isTouching) {
-            card.style.removeProperty("--mx");
-            card.style.removeProperty("--my");
-          }
-        }, 250);
-
-        resetGlyphs();
       };
 
       card.addEventListener("touchstart", onTouchStart, { passive: true });
@@ -384,7 +822,7 @@ function initKineticCards() {
 }
 
 /**
- * 4. Cinematic Teleportation Step-Through Transition with Mobile Haptics
+ * 8. Cinematic Teleportation Step-Through Transition with Mobile Haptics
  */
 function initTeleportation() {
   const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".element-card"));
@@ -392,17 +830,18 @@ function initTeleportation() {
 
   cards.forEach((card) => {
     card.addEventListener("click", (e: MouseEvent) => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // Permit opening new tabs
+      const target = e.target as HTMLElement | null;
+      // Do not navigate if user clicked inside micro-practice interactive widget
+      if (target && target.closest(".micro-practice")) {
+        return;
+      }
+
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       e.preventDefault();
       const href = card.href;
 
-      // Multi-pulse teleportation haptic on mobile
       if (typeof navigator !== "undefined" && "vibrate" in navigator) {
-        try {
-          navigator.vibrate([12, 35, 18]);
-        } catch {
-          // Non-blocking
-        }
+        try { navigator.vibrate([12, 35, 18]); } catch {}
       }
 
       if (reduceMotion) {
@@ -437,7 +876,7 @@ function initTeleportation() {
 }
 
 /**
- * 5. Multi-Layer Scroll Parallax (GSAP Ticker Lerp)
+ * 9. Multi-Layer Scroll Parallax (GSAP Ticker Lerp)
  */
 function initScrollParallax() {
   if (reduceMotion) return;
@@ -459,7 +898,6 @@ function initScrollParallax() {
   );
 
   gsap.ticker.add(() => {
-    // Silky lerp for sub-pixel motion
     currentScrollY += (targetScrollY - currentScrollY) * 0.12;
 
     if (heroFlow) {
@@ -477,14 +915,14 @@ function initScrollParallax() {
       starfield.style.transform = `translate3d(0, ${-currentScrollY * 0.06}px, 0)`;
     }
 
-    if (elementsGrid && currentScrollY > 20) {
+    if (elementsGrid && currentScrollY > 20 && !isTouch) {
       elementsGrid.style.transform = `translate3d(0, ${Math.min(12, currentScrollY * 0.02)}px, 0)`;
     }
   });
 }
 
 /**
- * 6. Kinetic Sacred & Coordinate Geometry Engine (Scroll & Parallax Driven)
+ * 10. Kinetic Sacred & Coordinate Geometry Engine (Scroll & Parallax Driven)
  */
 function initGeometricField() {
   const geoStage = document.getElementById("geoStage");
@@ -505,7 +943,6 @@ function initGeometricField() {
 
   const cfg = ANIMATION_SEEDS.geometricField;
 
-  // 3D Perspective Mouse Tilt (GC-Free quickTo setters)
   let setStageRotX: ((v: number) => void) | null = null;
   let setStageRotY: ((v: number) => void) | null = null;
   let setStageX: ((v: number) => void) | null = null;
@@ -544,7 +981,6 @@ function initGeometricField() {
     );
   }
 
-  // Scroll-Driven Kinetic Evolution Loop
   let baseDialAngle = 0;
   let basePolyAngle = 0;
   let targetScrollY = 0;
@@ -559,21 +995,17 @@ function initGeometricField() {
   );
 
   gsap.ticker.add(() => {
-    // Increment ambient idle rotation
     baseDialAngle = (baseDialAngle + cfg.rotationSpeedIdle) % 360;
     basePolyAngle = (basePolyAngle + cfg.counterRotationSpeedIdle) % 360;
 
-    // Smooth scroll position lerp
     smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
 
-    // 1. Dial & Polyhedra Counter-Rotations
     const dialAngle = baseDialAngle + smoothScrollY * cfg.scrollRotationFactor;
     const polyAngle = basePolyAngle + smoothScrollY * cfg.scrollCounterFactor;
 
     geoOuterDial.style.transform = `rotate(${dialAngle.toFixed(2)}deg)`;
     geoPolyhedra.style.transform = `rotate(${polyAngle.toFixed(2)}deg)`;
 
-    // 2. Hexagram Harmonic Sub-Rotations
     if (geoHexA) {
       geoHexA.style.transform = `rotate(${(smoothScrollY * 0.15).toFixed(2)}deg)`;
       geoHexA.style.transformOrigin = "400px 400px";
@@ -583,24 +1015,20 @@ function initGeometricField() {
       geoHexB.style.transformOrigin = "400px 400px";
     }
 
-    // 3. Stage Vertical Parallax & Dynamic Expansion
     const stageY = smoothScrollY * 0.38;
     const stageScale = 1 + Math.min(0.28, (smoothScrollY / 700) * cfg.scrollScaleFactor);
     geoStage.style.transform = `translate(-50%, calc(-50% + ${stageY.toFixed(1)}px)) scale(${stageScale.toFixed(3)})`;
 
-    // 4. Enso SVG Dynamic Stroke Unfold
     if (geoEnsoPath) {
       const unfoldOffset = Math.max(0, cfg.ensoDashUnfoldLength - smoothScrollY * 1.35);
       geoEnsoPath.style.strokeDashoffset = `${unfoldOffset.toFixed(1)}`;
     }
 
-    // 5. Telemetry Axis Translation
     if (geoTelemetryX) {
       const axisOffset = smoothScrollY * 0.25;
       geoTelemetryX.style.transform = `translateY(${axisOffset.toFixed(1)}px)`;
     }
 
-    // 6. Harmonic Vertices Constellation Pulse
     if (geoVertices) {
       const vertexOpacity = Math.min(1, 0.65 + Math.sin(smoothScrollY * 0.01 + baseDialAngle * 0.05) * 0.35);
       geoVertices.style.opacity = `${vertexOpacity.toFixed(2)}`;
@@ -609,7 +1037,7 @@ function initGeometricField() {
 }
 
 /**
- * 7. Ambient Cursor Glow with Smooth Lerp
+ * 11. Ambient Cursor Glow with Smooth Lerp
  */
 function initAmbientPointer() {
   if (reduceMotion || isTouch) return;
@@ -641,7 +1069,7 @@ function initAmbientPointer() {
 }
 
 /**
- * 8. Mobile Device Orientation (Gyroscope Parallax)
+ * 12. Mobile Device Orientation (Gyroscope Parallax)
  */
 function initDeviceOrientationParallax() {
   if (reduceMotion || typeof window === "undefined" || !("DeviceOrientationEvent" in window)) return;
@@ -678,7 +1106,7 @@ function initDeviceOrientationParallax() {
 }
 
 /**
- * 9. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
+ * 13. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
  */
 function initKeyboardHint() {
   const cardEls = Array.from(document.querySelectorAll<HTMLAnchorElement>(".element-card"));
@@ -703,7 +1131,6 @@ function initKeyboardHint() {
         return;
       }
 
-      // Snappy elastic spring pop
       animate(card, {
         scale: [0.95, 1.04, 1],
         duration: 380,
@@ -723,6 +1150,11 @@ function initKeyboardHint() {
 
 // Lifecycle Initializations
 initIntroChoreography();
+initWebAudioResonance();
+initGlobalElementalResonance();
+initHeroTrinityBadges();
+initInCardMicroPractices();
+initMobileSwipeCarousel();
 initScrollTriggeredCenterpieces();
 initKineticCards();
 initTeleportation();

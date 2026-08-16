@@ -8,39 +8,53 @@ import { site } from "../data/elements";
   <p class="eyebrow reveal">{site.eyebrow}</p>
 
   <h1 class="wordmark reveal reveal-d1">
-    <span class="chromatic-logo"><span class="g">g</span><span class="zen">Zen</span></span>
+    <span class="chromatic-logo" aria-label="gZen">
+      <span class="g">g</span><span class="zen">Zen</span>
+    </span>
   </h1>
 
   <p class="hook reveal reveal-d2">{site.hook}</p>
 
   <p class="subhead reveal reveal-d2">{site.subhead}</p>
 
-  <!-- Tri-Elemental Equilibrium Badges -->
-  <div class="element-trinity-row reveal reveal-d3">
-    <div class="tri-pill pill-water">
-      <span class="pill-dot"></span>
+  <!-- Tri-Elemental Equilibrium Interactive Badges -->
+  <div class="element-trinity-row reveal reveal-d3" role="navigation" aria-label="Elemental Quick Navigation">
+    <a class="tri-pill pill-water" href="#element-Z" data-target="Z" aria-label="Navigate to Water (Zen) Practice">
+      <span class="pill-dot" aria-hidden="true"></span>
       <span class="pill-kanji">水</span>
       <span class="pill-name">Water · Stillness</span>
-    </div>
-    <div class="tri-pill pill-earth">
-      <span class="pill-dot"></span>
+    </a>
+    <a class="tri-pill pill-earth" href="#element-E" data-target="E" aria-label="Navigate to Earth (Economy) Practice">
+      <span class="pill-dot" aria-hidden="true"></span>
       <span class="pill-kanji">地</span>
       <span class="pill-name">Earth · Foundation</span>
-    </div>
-    <div class="tri-pill pill-fire">
-      <span class="pill-dot"></span>
+    </a>
+    <a class="tri-pill pill-fire" href="#element-N" data-target="N" aria-label="Navigate to Fire (Neural) Practice">
+      <span class="pill-dot" aria-hidden="true"></span>
       <span class="pill-kanji">火</span>
       <span class="pill-name">Fire · Ignition</span>
-    </div>
+    </a>
   </div>
 
-  <div class="cta-row reveal reveal-d3">
-    <a class="cta-primary" href="#elements">
-      <span>{site.cta}</span>
-      <svg class="cta-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 3.5V12.5M8 12.5L4 8.5M8 12.5L12 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
+  <div class="hero-actions reveal reveal-d3">
+    <div class="cta-row">
+      <a class="cta-primary" href="#elements">
+        <span>{site.cta}</span>
+        <svg class="cta-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 3.5V12.5M8 12.5L4 8.5M8 12.5L12 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <button id="audio-resonance-toggle" class="audio-toggle" type="button" aria-label="Toggle Elemental Audio Resonance" title="Toggle 432Hz / 528Hz / 741Hz Harmonic Resonance">
+        <span class="audio-waves" aria-hidden="true">
+          <span class="wave-bar bar-1"></span>
+          <span class="wave-bar bar-2"></span>
+          <span class="wave-bar bar-3"></span>
+          <span class="wave-bar bar-4"></span>
+        </span>
+        <span class="audio-label">Resonance</span>
+        <span class="audio-status" id="audio-status-indicator">Muted</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -115,15 +129,23 @@ import { site } from "../data/elements";
   .wordmark {
     margin: 0 0 1.2rem;
     font-family: var(--font-display);
-    font-size: clamp(3.8rem, 12vw, 6.25rem);
-    font-weight: 450;
-    letter-spacing: -0.04em;
-    line-height: 0.92;
+    font-size: clamp(4.2rem, 13.5vw, 7.25rem);
+    font-weight: 850;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    padding-bottom: 0.15em;
+    overflow: visible;
   }
 
-  /* Ever-Shifting Chromatic Gradient Wordmark */
+  /* Ever-Shifting Chromatic Gradient Wordmark — Wide, Bold, Lower-Height Ratio */
   .chromatic-logo {
-    display: inline-block;
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    transform: scale(1.08, 0.90);
+    transform-origin: center center;
+    padding: 0.08em 0.22em 0.28em 0.12em;
+    margin-bottom: -0.15em;
     background: linear-gradient(
       135deg,
       #22d3ee 0%,
@@ -137,12 +159,20 @@ import { site } from "../data/elements";
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: chromatic-perpetual 12s ease-in-out infinite;
-    filter: drop-shadow(0 0 24px rgba(34, 211, 238, 0.2));
+    filter: drop-shadow(0 0 28px rgba(34, 211, 238, 0.28));
+    overflow: visible;
   }
 
   .chromatic-logo .g {
+    font-weight: 900;
     font-feature-settings: "ss01" on;
-    margin-right: -0.04em;
+    margin-right: -0.02em;
+    transform: translateY(-0.01em);
+  }
+
+  .chromatic-logo .zen {
+    font-weight: 800;
+    letter-spacing: -0.02em;
   }
 
   @keyframes chromatic-perpetual {
@@ -176,7 +206,7 @@ import { site } from "../data/elements";
     font-weight: 400;
   }
 
-  /* Tri-Elemental Row */
+  /* Tri-Elemental Interactive Navigation Row */
   .element-trinity-row {
     display: flex;
     justify-content: center;
@@ -190,16 +220,24 @@ import { site } from "../data/elements";
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.3rem 0.75rem;
+    padding: 0.38rem 0.85rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     font-family: var(--font-mono);
-    font-size: 0.74rem;
+    font-size: 0.76rem;
     letter-spacing: 0.04em;
     color: var(--muted);
-    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      transform 0.25s var(--ease),
+      border-color 0.25s var(--ease),
+      background 0.25s var(--ease),
+      box-shadow 0.25s var(--ease),
+      color 0.25s var(--ease);
   }
 
   .pill-dot {
@@ -220,16 +258,39 @@ import { site } from "../data/elements";
   .pill-fire .pill-dot { background: #f97316; box-shadow: 0 0 6px #f97316; }
   .pill-fire .pill-kanji { color: #f97316; }
 
-  .tri-pill:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.16);
+  .tri-pill:hover,
+  .tri-pill:focus-visible {
+    transform: translateY(-2px) scale(1.04);
     color: var(--ink);
+    outline: none;
+  }
+
+  .pill-water:hover, .pill-water:focus-visible {
+    background: rgba(34, 211, 238, 0.12);
+    border-color: rgba(34, 211, 238, 0.4);
+    box-shadow: 0 4px 18px -2px rgba(34, 211, 238, 0.35);
+  }
+  .pill-earth:hover, .pill-earth:focus-visible {
+    background: rgba(251, 191, 36, 0.12);
+    border-color: rgba(251, 191, 36, 0.4);
+    box-shadow: 0 4px 18px -2px rgba(251, 191, 36, 0.35);
+  }
+  .pill-fire:hover, .pill-fire:focus-visible {
+    background: rgba(249, 115, 22, 0.12);
+    border-color: rgba(249, 115, 22, 0.4);
+    box-shadow: 0 4px 18px -2px rgba(249, 115, 22, 0.35);
+  }
+
+  .hero-actions {
+    margin-top: 0.5rem;
   }
 
   .cta-row {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 0.85rem;
+    flex-wrap: wrap;
   }
 
   .cta-primary {
@@ -266,5 +327,89 @@ import { site } from "../data/elements";
 
   .cta-primary:hover .cta-arrow {
     transform: translateY(2px);
+  }
+
+  /* Web Audio Resonance Toggle */
+  .audio-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.78rem 1.25rem;
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition:
+      transform 0.25s var(--ease),
+      border-color 0.25s var(--ease),
+      background 0.25s var(--ease),
+      color 0.25s var(--ease),
+      box-shadow 0.25s var(--ease);
+  }
+
+  .audio-toggle:hover,
+  .audio-toggle:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(34, 211, 238, 0.35);
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink);
+    outline: none;
+  }
+
+  .audio-waves {
+    display: inline-flex;
+    align-items: center;
+    gap: 2.5px;
+    height: 14px;
+  }
+
+  .wave-bar {
+    display: inline-block;
+    width: 2.5px;
+    height: 4px;
+    background: var(--dim);
+    border-radius: 99px;
+    transition: background 0.3s var(--ease), height 0.3s var(--ease);
+  }
+
+  .audio-status {
+    font-size: 0.72rem;
+    color: var(--dim);
+    padding: 0.1em 0.45em;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+  }
+
+  .audio-toggle.active {
+    background: rgba(34, 211, 238, 0.1);
+    border-color: rgba(34, 211, 238, 0.45);
+    color: var(--ink);
+    box-shadow: 0 0 20px -2px rgba(34, 211, 238, 0.3);
+  }
+
+  .audio-toggle.active .wave-bar {
+    background: #22d3ee;
+    animation: wave-bounce 1.2s ease-in-out infinite alternate;
+  }
+
+  .audio-toggle.active .bar-1 { animation-delay: 0.0s; }
+  .audio-toggle.active .bar-2 { animation-delay: 0.2s; }
+  .audio-toggle.active .bar-3 { animation-delay: 0.4s; }
+  .audio-toggle.active .bar-4 { animation-delay: 0.15s; }
+
+  .audio-toggle.active .audio-status {
+    color: #22d3ee;
+    background: rgba(34, 211, 238, 0.15);
+  }
+
+  @keyframes wave-bounce {
+    0% { height: 4px; }
+    100% { height: 14px; }
   }
 </style>

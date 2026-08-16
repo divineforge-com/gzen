@@ -100,15 +100,15 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
       <defs>
         <!-- Radial glow for core convergence -->
         <radialGradient id="geoGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35" />
-          <stop offset="40%" stop-color="var(--accent)" stop-opacity="0.1" />
-          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+          <stop offset="0%" stop-color="var(--geo-active-tone, var(--accent))" stop-opacity="0.35" />
+          <stop offset="40%" stop-color="var(--geo-active-tone, var(--accent))" stop-opacity="0.1" />
+          <stop offset="100%" stop-color="var(--geo-active-tone, var(--accent))" stop-opacity="0" />
         </radialGradient>
 
         <linearGradient id="axisBeam" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.6" />
+          <stop offset="0%" stop-color="var(--geo-active-tone, var(--accent))" stop-opacity="0.6" />
           <stop offset="50%" stop-color="var(--line-strong)" stop-opacity="0.2" />
-          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.6" />
+          <stop offset="100%" stop-color="var(--geo-active-tone, var(--accent))" stop-opacity="0.6" />
         </linearGradient>
       </defs>
 
@@ -348,8 +348,9 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
+    background: var(--geo-active-tone, var(--accent));
+    box-shadow: 0 0 8px var(--geo-active-tone, var(--accent));
+    transition: background 0.4s var(--ease), box-shadow 0.4s var(--ease);
   }
 
   /* Core Geometric Stage */
@@ -384,8 +385,9 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
   }
 
   .geo-enso-path {
-    filter: drop-shadow(0 0 6px var(--accent));
-    transition: stroke 0.4s var(--ease);
+    stroke: var(--geo-active-tone, var(--accent));
+    filter: drop-shadow(0 0 6px var(--geo-active-tone, var(--accent)));
+    transition: stroke 0.4s var(--ease), filter 0.4s var(--ease);
   }
 
   .geo-ambient-glow {

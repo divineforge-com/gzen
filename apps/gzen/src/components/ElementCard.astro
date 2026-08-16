@@ -12,6 +12,7 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
 
 <a
   class:list={["element-card", "reveal", delayClass]}
+  id={`element-${element.letter}`}
   href={element.href}
   data-element={element.letter}
   style={`--element-tone: ${element.tone}; --element-secondary: ${element.toneSecondary}; --element-gradient: ${element.gradient}`}
@@ -237,6 +238,72 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
         <span class="practice-title">{element.practiceTitle}</span>
       </div>
       <p class="practice-text">{element.practiceDetail}</p>
+    </div>
+
+    <!-- Interactive In-Card Micro-Practice Module -->
+    <div class={`micro-practice practice-${element.element.toLowerCase()}`} data-practice={element.letter}>
+      {
+        element.letter === "Z" ? (
+          <!-- WATER: 4-7-8 Somatic Breath Pacer -->
+          <div class="practice-widget widget-breath">
+            <div class="widget-head">
+              <span class="widget-tag">SOMATIC GUIDE</span>
+              <span class="widget-phase" data-breath-phase>4-7-8 RHYTHM · TAP TO BREATHE</span>
+            </div>
+            <div class="breath-pacer-row">
+              <button type="button" class="practice-btn btn-breath" data-action="breath" aria-label="Toggle 4-7-8 Somatic Breath Pacer">
+                <span class="btn-pulse-disc" aria-hidden="true"></span>
+                <span class="btn-text">Begin Breath Cycle</span>
+              </button>
+              <div class="breath-indicator" aria-hidden="true">
+                <div class="breath-bar bar-inhale" data-phase-bar="inhale"><span>Inhale 4s</span></div>
+                <div class="breath-bar bar-hold" data-phase-bar="hold"><span>Hold 7s</span></div>
+                <div class="breath-bar bar-exhale" data-phase-bar="exhale"><span>Exhale 8s</span></div>
+              </div>
+            </div>
+          </div>
+        ) : element.letter === "E" ? (
+          <!-- EARTH: Compounding Output Tier Simulator -->
+          <div class="practice-widget widget-compound">
+            <div class="widget-head">
+              <span class="widget-tag">CAPITAL SIMULATOR</span>
+              <span class="widget-multiplier" data-compound-mult>3.2x ASYMMETRIC</span>
+            </div>
+            <div class="compound-tier-row">
+              <div class="tier-buttons" role="group" aria-label="Select compounding tier">
+                <button type="button" class="tier-btn" data-tier="1" aria-label="1x Base Output">1.0x</button>
+                <button type="button" class="tier-btn active" data-tier="3.2" aria-label="3.2x Asymmetric Compounding">3.2x</button>
+                <button type="button" class="tier-btn" data-tier="10" aria-label="10x Sovereign Autonomy">10.0x</button>
+              </div>
+              <div class="tier-readout" data-compound-readout>
+                <span class="readout-label">Shield:</span>
+                <span class="readout-value">+320% Compounded Reserve</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <!-- FIRE: Neural Syntax Spark Simulator -->
+          <div class="practice-widget widget-spark">
+            <div class="widget-head">
+              <span class="widget-tag">COMMAND SYNTAX</span>
+              <span class="widget-status" data-spark-status>STANDBY // READY</span>
+            </div>
+            <div class="spark-action-row">
+              <button type="button" class="practice-btn btn-spark" data-action="spark" aria-label="Ignite Neural Command Syntax">
+                <span class="btn-spark-icon" aria-hidden="true">⚡</span>
+                <span class="btn-text">Ignite Command Vector</span>
+              </button>
+              <div class="spark-steps" aria-hidden="true">
+                <span class="spark-node node-1 active" data-spark-node="1">PROMPT</span>
+                <span class="spark-arrow">→</span>
+                <span class="spark-node node-2" data-spark-node="2">L1 BRIDGE</span>
+                <span class="spark-arrow">→</span>
+                <span class="spark-node node-3" data-spark-node="3">VELOCITY</span>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </div>
   </div>
 
@@ -496,6 +563,211 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
     color: var(--dim);
   }
 
+  /* Micro-Practice Interactive Widgets */
+  .micro-practice {
+    position: relative;
+    z-index: 2;
+    margin-top: 1rem;
+    padding: 0.85rem 1.1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  }
+
+  .micro-practice:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: color-mix(in srgb, var(--element-tone) 35%, rgba(255, 255, 255, 0.12));
+  }
+
+  .widget-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.65rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+  }
+
+  .widget-tag {
+    color: var(--element-tone);
+    font-weight: 600;
+  }
+
+  .widget-phase,
+  .widget-multiplier,
+  .widget-status {
+    color: var(--muted);
+  }
+
+  /* Practice Action Buttons */
+  .practice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 550;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    cursor: pointer;
+    transition: transform 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+
+  .practice-btn:hover,
+  .practice-btn:focus-visible {
+    transform: scale(1.03);
+    background: color-mix(in srgb, var(--element-tone) 15%, transparent);
+    border-color: var(--element-tone);
+    box-shadow: 0 0 16px -2px color-mix(in srgb, var(--element-tone) 30%, transparent);
+    outline: none;
+  }
+
+  .btn-pulse-disc {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--element-tone);
+    box-shadow: 0 0 8px var(--element-tone);
+  }
+
+  .btn-spark-icon {
+    font-size: 0.85rem;
+    color: var(--element-tone);
+  }
+
+  /* Water Breath Pacer */
+  .breath-pacer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .breath-indicator {
+    display: flex;
+    gap: 4px;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .breath-bar {
+    flex: 1;
+    padding: 0.25rem 0.35rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--dim);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    transition: all 0.3s var(--ease);
+  }
+
+  .breath-bar.active {
+    color: #04070c;
+    background: var(--element-tone);
+    border-color: var(--element-tone);
+    font-weight: 600;
+    box-shadow: 0 0 12px color-mix(in srgb, var(--element-tone) 40%, transparent);
+  }
+
+  /* Earth Compounding Simulator */
+  .compound-tier-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .tier-buttons {
+    display: flex;
+    gap: 4px;
+  }
+
+  .tier-btn {
+    padding: 0.35rem 0.7rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+  }
+
+  .tier-btn:hover {
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .tier-btn.active {
+    color: #04070c;
+    background: var(--element-tone);
+    border-color: var(--element-tone);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--element-tone) 35%, transparent);
+  }
+
+  .tier-readout {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .readout-value {
+    color: var(--element-tone);
+    font-weight: 600;
+    margin-left: 0.25rem;
+  }
+
+  /* Fire Command Syntax Simulator */
+  .spark-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .spark-steps {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--dim);
+  }
+
+  .spark-node {
+    padding: 0.2rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: all 0.3s var(--ease);
+  }
+
+  .spark-node.active {
+    color: #04070c;
+    background: var(--element-tone);
+    border-color: var(--element-tone);
+    font-weight: 600;
+    box-shadow: 0 0 10px color-mix(in srgb, var(--element-tone) 40%, transparent);
+  }
+
+  .spark-arrow {
+    color: var(--dim);
+    font-size: 0.65rem;
+  }
   /* Card Action Footer */
   .card-footer {
     position: relative;
