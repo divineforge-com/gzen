@@ -58,6 +58,16 @@ export interface MotionSeedConfig {
     perspectiveMaxRollDeg: number;
     ensoDashUnfoldLength: number;
   };
+  mobileGestures: {
+    touchCompressionScale: number;
+    touchReturnSpring: string;
+    swipeThresholdPx: number;
+    maxSwipeDisplacementPx: number;
+    gyroMaxPitchDeg: number;
+    gyroMaxRollDeg: number;
+    gyroInertia: number;
+    hapticPulseDurationMs: number;
+  };
 }
 
 export const ANIMATION_SEEDS: MotionSeedConfig = {
@@ -128,5 +138,15 @@ export const ANIMATION_SEEDS: MotionSeedConfig = {
     perspectiveMaxPitchDeg: 7.5,
     perspectiveMaxRollDeg: 7.5,
     ensoDashUnfoldLength: 700,
+  },
+  mobileGestures: {
+    touchCompressionScale: 0.978,
+    touchReturnSpring: "elastic.out(1, 0.7)",
+    swipeThresholdPx: 35,
+    maxSwipeDisplacementPx: 14,
+    gyroMaxPitchDeg: 6.0,
+    gyroMaxRollDeg: 6.0,
+    gyroInertia: 0.35,
+    hapticPulseDurationMs: 8,
   },
 };

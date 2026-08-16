@@ -140,42 +140,22 @@ function initIntroChoreography() {
 }
 
 /**
- * 2. High-Performance 3D Kinetic Tilt & Magnetic Specular Illumination (GSAP quickTo)
+ * 2. High-Performance 3D Kinetic Tilt & Mobile Touch Gesture Engine
+ * Desktop: 60fps GC-Free Magnetic 3D Physics (gsap.quickTo)
+ * Mobile: Tactile Touch Compression, Specular Finger Glow, Elastic Swipe Snap, and Haptic Feedback
  */
 function initKineticCards() {
-  if (reduceMotion || isTouch) return;
+  if (reduceMotion) return;
 
   const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
+  if (!cards.length) return;
 
   cards.forEach((card) => {
-    // Pre-allocate quickTo setters for 60fps GC-free tracking
-    const setRotX = gsap.quickTo(card, "rotateX", {
-      duration: ANIMATION_SEEDS.timings.tiltInertia,
-      ease: "power2.out",
-    });
-    const setRotY = gsap.quickTo(card, "rotateY", {
-      duration: ANIMATION_SEEDS.timings.tiltInertia,
-      ease: "power2.out",
-    });
-    const setZ = gsap.quickTo(card, "z", {
-      duration: ANIMATION_SEEDS.timings.tiltInertia,
-      ease: "power2.out",
-    });
-    const setScale = gsap.quickTo(card, "scale", {
-      duration: 0.3,
-      ease: "power2.out",
-    });
-
-    let bounds: DOMRect | null = null;
     const svgZ = card.querySelector<SVGCircleElement>(".portal-svg-z .ring-outer");
     const svgE = card.querySelector<SVGPathElement>(".portal-svg-e .diamond-head");
     const svgN = card.querySelectorAll<SVGCircleElement>(".portal-svg-n circle");
 
-    const onEnter = () => {
-      bounds = card.getBoundingClientRect();
-      setScale(ANIMATION_SEEDS.timings.hoverScale);
-
-      // Micro-animations on portal SVG glyphs
+    const triggerGlyphEnter = () => {
       if (svgZ) {
         gsap.to(svgZ, { rotation: "+=120", transformOrigin: "20px 20px", duration: 1.0, ease: "power2.out" });
       }
@@ -187,40 +167,7 @@ function initKineticCards() {
       }
     };
 
-    const onMove = (e: MouseEvent) => {
-      if (!bounds) bounds = card.getBoundingClientRect();
-      const x = e.clientX - bounds.left;
-      const y = e.clientY - bounds.top;
-      const xPct = (x / bounds.width - 0.5) * 2;
-      const yPct = (y / bounds.height - 0.5) * 2;
-
-      const rotX = -yPct * ANIMATION_SEEDS.spatialTilt.maxPitchDeg;
-      const rotY = xPct * ANIMATION_SEEDS.spatialTilt.maxRollDeg;
-
-      setRotX(rotX);
-      setRotY(rotY);
-      setZ(ANIMATION_SEEDS.spatialTilt.elevationPx);
-
-      // Smoothly project specular radial sheen
-      card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
-      card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
-    };
-
-    const onLeave = () => {
-      bounds = null;
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        z: 0,
-        scale: 1,
-        duration: 0.65,
-        ease: ANIMATION_SEEDS.easings.magneticReturn.gsap,
-      });
-
-      card.style.removeProperty("--mx");
-      card.style.removeProperty("--my");
-
-      // Reset SVG glyph transforms
+    const resetGlyphs = () => {
       if (svgE) {
         gsap.to(svgE, { y: 0, duration: 0.4, ease: "power2.out" });
       }
@@ -229,14 +176,161 @@ function initKineticCards() {
       }
     };
 
-    card.addEventListener("mouseenter", onEnter);
-    card.addEventListener("mousemove", onMove);
-    card.addEventListener("mouseleave", onLeave);
+    if (!isTouch) {
+      // Desktop 3D Magnetic Parallax Tracking
+      const setRotX = gsap.quickTo(card, "rotateX", {
+        duration: ANIMATION_SEEDS.timings.tiltInertia,
+        ease: "power2.out",
+      });
+      const setRotY = gsap.quickTo(card, "rotateY", {
+        duration: ANIMATION_SEEDS.timings.tiltInertia,
+        ease: "power2.out",
+      });
+      const setZ = gsap.quickTo(card, "z", {
+        duration: ANIMATION_SEEDS.timings.tiltInertia,
+        ease: "power2.out",
+      });
+      const setScale = gsap.quickTo(card, "scale", {
+        duration: 0.3,
+        ease: "power2.out",
+      });
+
+      let bounds: DOMRect | null = null;
+
+      card.addEventListener("mouseenter", () => {
+        bounds = card.getBoundingClientRect();
+        setScale(ANIMATION_SEEDS.timings.hoverScale);
+        triggerGlyphEnter();
+      });
+
+      card.addEventListener("mousemove", (e: MouseEvent) => {
+        if (!bounds) bounds = card.getBoundingClientRect();
+        const x = e.clientX - bounds.left;
+        const y = e.clientY - bounds.top;
+        const xPct = (x / bounds.width - 0.5) * 2;
+        const yPct = (y / bounds.height - 0.5) * 2;
+
+        const rotX = -yPct * ANIMATION_SEEDS.spatialTilt.maxPitchDeg;
+        const rotY = xPct * ANIMATION_SEEDS.spatialTilt.maxRollDeg;
+
+        setRotX(rotX);
+        setRotY(rotY);
+        setZ(ANIMATION_SEEDS.spatialTilt.elevationPx);
+
+        card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
+        card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
+      });
+
+      card.addEventListener("mouseleave", () => {
+        bounds = null;
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          z: 0,
+          scale: 1,
+          duration: 0.65,
+          ease: ANIMATION_SEEDS.easings.magneticReturn.gsap,
+        });
+
+        card.style.removeProperty("--mx");
+        card.style.removeProperty("--my");
+        resetGlyphs();
+      });
+    } else {
+      // Mobile Touch Gestures & Tactile Compression
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let bounds: DOMRect | null = null;
+      let isTouching = false;
+
+      const onTouchStart = (e: TouchEvent) => {
+        if (e.touches.length !== 1) return;
+        const touch = e.touches[0];
+        bounds = card.getBoundingClientRect();
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isTouching = true;
+
+        card.classList.add("is-touching");
+
+        // Micro haptic pulse on mobile touch
+        if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+          try {
+            navigator.vibrate(ANIMATION_SEEDS.mobileGestures.hapticPulseDurationMs);
+          } catch {
+            // Non-blocking haptic fallback
+          }
+        }
+
+        // Tactile compression
+        gsap.to(card, {
+          scale: ANIMATION_SEEDS.mobileGestures.touchCompressionScale,
+          duration: 0.12,
+          ease: "power2.out",
+        });
+
+        const x = touch.clientX - bounds.left;
+        const y = touch.clientY - bounds.top;
+        card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
+        card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
+
+        triggerGlyphEnter();
+      };
+
+      const onTouchMove = (e: TouchEvent) => {
+        if (!isTouching || !bounds || e.touches.length !== 1) return;
+        const touch = e.touches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+
+        // Update dynamic specular finger highlight
+        const x = touch.clientX - bounds.left;
+        const y = touch.clientY - bounds.top;
+        card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
+        card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
+
+        // Horizontal swipe micro-deflection (if not predominantly vertical scrolling)
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 6) {
+          const maxDisp = ANIMATION_SEEDS.mobileGestures.maxSwipeDisplacementPx;
+          const clampedX = Math.sign(dx) * Math.min(maxDisp, Math.abs(dx) * 0.28);
+          gsap.set(card, { x: clampedX });
+        }
+      };
+
+      const onTouchEnd = () => {
+        if (!isTouching) return;
+        isTouching = false;
+        bounds = null;
+        card.classList.remove("is-touching");
+
+        // Elastic spring-damper snap return
+        gsap.to(card, {
+          scale: 1,
+          x: 0,
+          duration: 0.48,
+          ease: ANIMATION_SEEDS.mobileGestures.touchReturnSpring,
+        });
+
+        window.setTimeout(() => {
+          if (!isTouching) {
+            card.style.removeProperty("--mx");
+            card.style.removeProperty("--my");
+          }
+        }, 250);
+
+        resetGlyphs();
+      };
+
+      card.addEventListener("touchstart", onTouchStart, { passive: true });
+      card.addEventListener("touchmove", onTouchMove, { passive: true });
+      card.addEventListener("touchend", onTouchEnd, { passive: true });
+      card.addEventListener("touchcancel", onTouchEnd, { passive: true });
+    }
   });
 }
 
 /**
- * 3. Cinematic Teleportation Step-Through Transition
+ * 3. Cinematic Teleportation Step-Through Transition with Mobile Haptics
  */
 function initTeleportation() {
   const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
@@ -247,6 +341,15 @@ function initTeleportation() {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // Permit opening new tabs
       e.preventDefault();
       const href = card.href;
+
+      // Multi-pulse teleportation haptic on mobile
+      if (typeof navigator !== "undefined" && "vibrate" in navigator) {
+        try {
+          navigator.vibrate([12, 35, 18]);
+        } catch {
+          // Non-blocking
+        }
+      }
 
       if (reduceMotion) {
         window.location.href = href;
@@ -278,7 +381,6 @@ function initTeleportation() {
     });
   });
 }
-
 /**
  * 4. Multi-Layer Scroll Parallax (GSAP Ticker Lerp)
  */
@@ -481,6 +583,45 @@ function initAmbientPointer() {
     shell.style.setProperty("--py", `${(currentY * 100).toFixed(2)}%`);
   });
 }
+/**
+ * 7. Mobile Device Orientation (Gyroscope Parallax)
+ * Subtle 3D spatial pitch and roll on handheld devices
+ */
+function initDeviceOrientationParallax() {
+  if (reduceMotion || typeof window === "undefined" || !("DeviceOrientationEvent" in window)) return;
+
+  const geoStage = document.getElementById("geoStage");
+  if (!geoStage) return;
+
+  const cfg = ANIMATION_SEEDS.mobileGestures;
+  let targetRoll = 0;
+  let targetPitch = 0;
+  let currentRoll = 0;
+  let currentPitch = 0;
+
+  const handleOrientation = (e: DeviceOrientationEvent) => {
+    if (e.gamma === null || e.beta === null) return;
+    // gamma: left-right roll [-90, 90]
+    // beta: front-back pitch [-180, 180], viewing pitch centered around ~38 deg
+    const normRoll = Math.max(-1, Math.min(1, e.gamma / 25));
+    const normPitch = Math.max(-1, Math.min(1, (e.beta - 38) / 25));
+
+    targetRoll = normRoll * cfg.gyroMaxRollDeg;
+    targetPitch = normPitch * cfg.gyroMaxPitchDeg;
+  };
+
+  window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+
+  gsap.ticker.add(() => {
+    currentRoll += (targetRoll - currentRoll) * 0.08;
+    currentPitch += (targetPitch - currentPitch) * 0.08;
+
+    if (Math.abs(currentRoll) > 0.05 || Math.abs(currentPitch) > 0.05) {
+      geoStage.style.setProperty("--gyro-rot-x", `${(-currentPitch).toFixed(2)}deg`);
+      geoStage.style.setProperty("--gyro-rot-y", `${currentRoll.toFixed(2)}deg`);
+    }
+  });
+}
 
 /**
  * 7. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
@@ -531,6 +672,7 @@ initThemeToggle();
 initIntroChoreography();
 initKineticCards();
 initTeleportation();
+initDeviceOrientationParallax();
 initScrollParallax();
 initGeometricField();
 initAmbientPointer();

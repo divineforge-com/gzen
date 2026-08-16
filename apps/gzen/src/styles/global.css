@@ -7,21 +7,22 @@ html[data-theme="monastery"] {
   --ink: #eef0f4;
   --muted: #8f96a3;
   --dim: #7d8594;
-  --line: rgba(200, 214, 240, 0.07);
-  --line-strong: rgba(200, 214, 240, 0.14);
+  --line: rgba(200, 214, 240, 0.08);
+  --line-strong: rgba(200, 214, 240, 0.18);
   --accent: #6b9e8a;
-  --accent-soft: rgba(107, 158, 138, 0.18);
+  --accent-soft: rgba(107, 158, 138, 0.2);
   --accent-warm: #c45c26;
-  --card: rgba(10, 12, 18, 0.72);
+  --card: rgba(8, 12, 18, 0.38);
+  --card-hover: rgba(14, 20, 30, 0.52);
   --card-solid: #0a0c12;
-  --glow: rgba(140, 180, 200, 0.05);
+  --glow: rgba(140, 180, 200, 0.08);
   --focus: #eef0f4;
-  --wash-1: rgba(90, 140, 160, 0.07);
-  --wash-2: rgba(45, 110, 90, 0.06);
-  --wash-3: rgba(70, 90, 140, 0.04);
-  --cursor-glow: rgba(107, 158, 138, 0.06);
+  --wash-1: rgba(90, 140, 160, 0.09);
+  --wash-2: rgba(45, 110, 90, 0.07);
+  --wash-3: rgba(70, 90, 140, 0.05);
+  --cursor-glow: rgba(107, 158, 138, 0.08);
   --theme-color: #06080c;
-  --flow: rgba(107, 158, 138, 0.12);
+  --flow: rgba(107, 158, 138, 0.14);
   color-scheme: dark;
 }
 
@@ -31,21 +32,22 @@ html[data-theme="ignite"] {
   --ink: #f5f1ec;
   --muted: #9c9186;
   --dim: #8a7f74;
-  --line: rgba(255, 220, 180, 0.08);
-  --line-strong: rgba(255, 220, 180, 0.16);
+  --line: rgba(255, 220, 180, 0.09);
+  --line-strong: rgba(255, 220, 180, 0.2);
   --accent: #d97845;
-  --accent-soft: rgba(217, 120, 69, 0.18);
+  --accent-soft: rgba(217, 120, 69, 0.22);
   --accent-warm: #d97845;
-  --card: rgba(14, 10, 8, 0.75);
+  --card: rgba(16, 11, 8, 0.42);
+  --card-hover: rgba(24, 16, 11, 0.58);
   --card-solid: #0e0a08;
-  --glow: rgba(255, 200, 140, 0.06);
+  --glow: rgba(255, 200, 140, 0.09);
   --focus: #f5f1ec;
-  --wash-1: rgba(196, 92, 38, 0.1);
-  --wash-2: rgba(140, 70, 30, 0.07);
-  --wash-3: rgba(90, 50, 20, 0.05);
-  --cursor-glow: rgba(217, 120, 69, 0.08);
+  --wash-1: rgba(196, 92, 38, 0.12);
+  --wash-2: rgba(140, 70, 30, 0.09);
+  --wash-3: rgba(90, 50, 20, 0.06);
+  --cursor-glow: rgba(217, 120, 69, 0.1);
   --theme-color: #0c0907;
-  --flow: rgba(217, 120, 69, 0.12);
+  --flow: rgba(217, 120, 69, 0.15);
   color-scheme: dark;
 }
 

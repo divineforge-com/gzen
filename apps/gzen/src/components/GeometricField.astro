@@ -371,8 +371,9 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
     height: 100%;
     overflow: visible;
     transform-origin: 400px 400px;
+    transform: perspective(900px) rotateX(var(--gyro-rot-x, 0deg)) rotateY(var(--gyro-rot-y, 0deg));
+    transition: transform 0.1s ease-out;
   }
-
   .geo-outer-dial,
   .geo-polyhedra,
   .geo-enso-layer,
@@ -396,13 +397,16 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
       display: none;
     }
     .geo-stage {
-      width: 110vw;
-      height: 110vw;
-      top: 32%;
-      opacity: 0.65;
+      width: 95vw;
+      height: 95vw;
+      top: 36%;
+      opacity: 0.78;
+    }
+    .geo-grid-matrix {
+      background-size: 36px 36px;
+      opacity: 0.25;
     }
   }
-
   @media (prefers-reduced-motion: reduce) {
     .geo-stage {
       transform: translate(-50%, -50%) !important;

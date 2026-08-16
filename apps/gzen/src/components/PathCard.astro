@@ -97,19 +97,28 @@ const poleLabel =
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: flex-start;
-    gap: clamp(1rem, 3vw, 1.75rem);
-    padding: clamp(1.35rem, 3vw, 1.85rem) clamp(1.25rem, 2.8vw, 1.75rem);
+    gap: clamp(0.9rem, 2.5vw, 1.75rem);
+    padding: clamp(1.2rem, 3vw, 1.85rem) clamp(1.1rem, 2.8vw, 1.75rem);
     text-decoration: none;
     color: inherit;
     background: var(--card);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+    box-shadow:
+      0 4px 24px -2px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+      inset 0 0 24px 0 color-mix(in srgb, var(--path-tone) 5%, transparent);
     overflow: hidden;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+    will-change: transform, box-shadow;
     transition:
       border-color 0.3s var(--ease),
       background 0.3s var(--ease),
       box-shadow 0.3s var(--ease);
+  }
 
   .path::before {
     content: "";
@@ -121,22 +130,50 @@ const poleLabel =
     background: var(--path-tone);
     opacity: 0.7;
     transition: opacity 0.3s var(--ease), height 0.3s var(--ease);
+    z-index: 1;
+  }
+
+  /* Dynamic Specular Sheen Layer (Follows Mouse & Touch) */
+  .path::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--path-tone) 15%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+    z-index: 0;
   }
 
   .path:hover,
-  .path:focus-visible {
+  .path:focus-visible,
+  .path.is-touching {
     border-color: color-mix(in srgb, var(--path-tone) 45%, var(--line-strong));
     background: var(--card-hover);
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.03),
-      0 12px 32px -8px color-mix(in srgb, var(--path-tone) 16%, transparent);
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 12px 36px -6px color-mix(in srgb, var(--path-tone) 20%, transparent),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+      inset 0 0 24px 0 color-mix(in srgb, var(--path-tone) 8%, transparent);
     outline: none;
   }
 
   .path:hover::before,
-  .path:focus-visible::before {
+  .path:focus-visible::before,
+  .path.is-touching::before {
     opacity: 1;
     height: 3px;
+  }
+
+  .path:hover::after,
+  .path:focus-visible::after,
+  .path.is-touching::after {
+    opacity: 1;
   }
 
   .path-icon {
@@ -259,18 +296,21 @@ const poleLabel =
   }
 
   .path-protocol {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 0.5rem 0.75rem;
     padding: 0.55rem 0.85rem;
-    background: color-mix(in srgb, var(--card-solid) 65%, transparent);
+    background: color-mix(in srgb, var(--card-solid) 35%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 0.82rem;
     line-height: 1.45;
   }
-
   .protocol-tag {
     font-family: var(--font-mono);
     font-size: 0.68rem;
