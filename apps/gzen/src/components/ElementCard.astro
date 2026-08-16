@@ -16,6 +16,8 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
   href={element.href}
   data-element={element.letter}
   style={`--element-tone: ${element.tone}; --element-secondary: ${element.toneSecondary}; --element-gradient: ${element.gradient}`}
+  aria-keyshortcuts={element.shortcut}
+  title={`Navigate to ${element.name} (Shortcut: ${element.shortcut})`}
 >
   <!-- Specular Ambient Floor Glow under card glass -->
   <div class="element-ambient-glow" aria-hidden="true"></div>
