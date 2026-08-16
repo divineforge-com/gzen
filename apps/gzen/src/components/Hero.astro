@@ -40,8 +40,8 @@ import { site } from "../data/elements";
     <div class="cta-row">
       <a class="cta-primary" href="#elements">
         <span>{site.cta}</span>
-        <svg class="cta-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M8 3.5V12.5M8 12.5L4 8.5M8 12.5L12 8.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="cta-arrow geo-arrow-down" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="8,13.5 13.5,8 10,8 10,2.5 6,2.5 6,8 2.5,8" fill="currentColor" stroke="currentColor" stroke-width="0.75" stroke-linejoin="round" />
         </svg>
       </a>
       <button id="audio-resonance-toggle" class="audio-toggle" type="button" aria-label="Toggle Elemental Audio Resonance" title="Toggle 432Hz / 528Hz / 741Hz Harmonic Resonance">
@@ -371,10 +371,10 @@ import { site } from "../data/elements";
 
   .wave-bar {
     display: inline-block;
-    width: 2.5px;
+    width: 3px;
     height: 4px;
     background: var(--dim);
-    border-radius: 99px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     transition: background 0.3s var(--ease), height 0.3s var(--ease);
   }
 

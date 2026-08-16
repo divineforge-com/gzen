@@ -1194,6 +1194,233 @@ function initKeyboardHint() {
   });
 }
 
+/**
+ * 14. DivineForge Buy Me a Coffee Modal Controller & Tier Selector
+ */
+function initBuyMeACoffeeModal() {
+  const openBtn = document.getElementById("open-bmc-modal");
+  const modal = document.getElementById("bmc-modal");
+  const closeBtn = document.getElementById("close-bmc-modal");
+  const backdrop = document.getElementById("bmc-backdrop");
+  const dialog = document.getElementById("bmc-dialog");
+  const copyBtn = document.getElementById("bmc-copy-link-btn");
+  const copyIconWrap = document.getElementById("bmc-copy-icon-wrap");
+  const copyText = document.getElementById("bmc-copy-text");
+  const tierCards = document.querySelectorAll<HTMLButtonElement>(".bmc-tier-card");
+  const directLink = document.getElementById("bmc-direct-link") as HTMLAnchorElement | null;
+
+  if (!modal || !dialog) return;
+
+  let isOpen = false;
+
+  const openModal = () => {
+    if (isOpen) return;
+    isOpen = true;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    if ("vibrate" in navigator) {
+      try {
+        navigator.vibrate([10, 30, 15]);
+      } catch {
+        // Ignore
+      }
+    }
+
+    if (!reduceMotion) {
+      gsap.killTweensOf([backdrop, dialog]);
+      gsap.fromTo(
+        backdrop,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.3, ease: "power2.out" }
+      );
+      gsap.fromTo(
+        dialog,
+        { scale: 0.88, y: 24, opacity: 0 },
+        { scale: 1, y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.4)" }
+      );
+
+      const emblem = dialog.querySelector(".bmc-emblem-svg");
+      if (emblem) {
+        animate(emblem, {
+          rotate: [-12, 6, 0],
+          scale: [0.85, 1.1, 1],
+          duration: 450,
+          ease: "outBack(2)",
+        });
+      }
+    } else {
+      if (backdrop) backdrop.style.opacity = "1";
+      dialog.style.opacity = "1";
+      dialog.style.transform = "none";
+    }
+
+    closeBtn?.focus();
+  };
+
+  const closeModal = () => {
+    if (!isOpen) return;
+    isOpen = false;
+
+    if (!reduceMotion) {
+      gsap.killTweensOf([backdrop, dialog]);
+      gsap.to(dialog, {
+        scale: 0.92,
+        y: 14,
+        opacity: 0,
+        duration: 0.22,
+        ease: "power3.in",
+      });
+      gsap.to(backdrop, {
+        opacity: 0,
+        duration: 0.22,
+        ease: "power3.in",
+        onComplete: () => {
+          modal.classList.remove("is-open");
+          modal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+          openBtn?.focus();
+        },
+      });
+    } else {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      openBtn?.focus();
+    }
+  };
+
+  openBtn?.addEventListener("click", openModal);
+  closeBtn?.addEventListener("click", closeModal);
+  backdrop?.addEventListener("click", closeModal);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) {
+      closeModal();
+    }
+  });
+
+  tierCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      tierCards.forEach((c) => {
+        c.classList.remove("active");
+        c.setAttribute("aria-checked", "false");
+      });
+      card.classList.add("active");
+      card.setAttribute("aria-checked", "true");
+
+      if (directLink) {
+        directLink.href = "https://buymeacoffee.com/divineforge";
+      }
+
+      if ("vibrate" in navigator) {
+        try {
+          navigator.vibrate(8);
+        } catch {
+          // Ignore
+        }
+      }
+
+      if (!reduceMotion) {
+        animate(card, {
+          scale: [0.96, 1.02, 1],
+          duration: 320,
+          ease: "outBack(2)",
+        });
+      }
+    });
+  });
+
+  let copyTimeout: number | undefined;
+  copyBtn?.addEventListener("click", async () => {
+    const url = "https://buymeacoffee.com/divineforge";
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = url;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+
+      if ("vibrate" in navigator) {
+        try {
+          navigator.vibrate(15);
+        } catch {
+          // Ignore
+        }
+      }
+
+      if (copyText && copyIconWrap) {
+        copyText.textContent = "Copied to Clipboard!";
+        copyIconWrap.innerHTML = `<svg class="geo-icon-copy" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="6,12.5 2,8.5 3.5,7 6,9.5 12.5,3 14,4.5" fill="#fbbf24" stroke="#fbbf24" stroke-width="0.5" stroke-linejoin="round"/></svg>`;
+
+        window.clearTimeout(copyTimeout);
+        copyTimeout = window.setTimeout(() => {
+          copyText.textContent = "Copy Link";
+          copyIconWrap.innerHTML = `<svg class="geo-icon-copy" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="2,2 10,2 10,4 4,4 4,10 2,10" fill="currentColor" opacity="0.5" /><polygon points="5,5 13,5 13,13 5,13" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none" /><polygon points="8,5 13,5 13,10" fill="currentColor" opacity="0.3" /></svg>`;
+        }, 2500);
+      }
+    } catch {
+      if (copyText) copyText.textContent = "URL: buymeacoffee.com/divineforge";
+    }
+  });
+}
+
+/**
+ * 15. Bottom Parallax & Dynamic Specular Sheen for Tribute Pedestal
+ */
+function initTributeParallax() {
+  const tribute = document.getElementById("tribute");
+  const tributeGeo = document.getElementById("tributeGeo");
+  const pedestal = document.querySelector<HTMLElement>(".tribute-pedestal");
+
+  if (!tribute || !tributeGeo) return;
+
+  if (!reduceMotion) {
+    let targetScrollY = 0;
+    let currentScrollY = 0;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        targetScrollY = window.scrollY;
+      },
+      { passive: true }
+    );
+
+    gsap.ticker.add(() => {
+      currentScrollY += (targetScrollY - currentScrollY) * 0.1;
+      const tributeTop = tribute.offsetTop;
+      const scrollDiff = currentScrollY + window.innerHeight - tributeTop;
+
+      if (scrollDiff > 0) {
+        const rot = (scrollDiff * 0.12) % 360;
+        const scale = Math.min(1.22, 0.95 + scrollDiff * 0.0003);
+        const translateY = scrollDiff * 0.06;
+        tributeGeo.style.transform = `translate3d(0, ${translateY}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+      }
+    });
+  }
+
+  if (pedestal && !isTouch) {
+    pedestal.addEventListener("mousemove", (e) => {
+      const rect = pedestal.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      pedestal.style.setProperty("--tribute-mx", `${x.toFixed(1)}%`);
+      pedestal.style.setProperty("--tribute-my", `${y.toFixed(1)}%`);
+    });
+  }
+}
+
 // Lifecycle Initializations
 initIntroChoreography();
 initWebAudioResonance();
@@ -1209,3 +1436,5 @@ initScrollParallax();
 initGeometricField();
 initAmbientPointer();
 initKeyboardHint();
+initBuyMeACoffeeModal();
+initTributeParallax();

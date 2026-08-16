@@ -1,0 +1,559 @@
+---
+/**
+ * BuyMeACoffeeModal.astro — Sovereign Tribute & DivineForge Patron Modal
+ * Glassmorphic interactive modal with faceted polygon geometric vector iconography.
+ */
+---
+
+<div id="bmc-modal" class="bmc-modal" role="dialog" aria-modal="true" aria-labelledby="bmc-title" aria-hidden="true">
+  <!-- Backdrop Blur Click Dismiss -->
+  <div class="bmc-backdrop" id="bmc-backdrop"></div>
+
+  <!-- Modal Dialog Window -->
+  <div class="bmc-dialog" id="bmc-dialog">
+    <div class="bmc-glow" aria-hidden="true"></div>
+
+    <!-- Modal Header -->
+    <div class="bmc-header">
+      <div class="bmc-brand">
+        <!-- 3D Faceted Polygon Coffee Cup Emblem -->
+        <div class="bmc-emblem-wrapper" aria-hidden="true">
+          <svg class="bmc-emblem-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="emblem-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde68a" />
+                <stop offset="100%" stop-color="#d97706" />
+              </linearGradient>
+            </defs>
+            <!-- Rising Polygon Steam -->
+            <polygon points="20,12 23,4 21,0 18,8" fill="url(#emblem-gold)" opacity="0.8" />
+            <polygon points="30,10 34,2 32,-2 28,6" fill="url(#emblem-gold)" opacity="0.95" />
+            <polygon points="40,13 43,5 41,1 38,9" fill="url(#emblem-gold)" opacity="0.75" />
+
+            <!-- Cup Rim Octagon -->
+            <polygon points="12,18 20,15 32,14 44,15 52,18 55,22 50,26 42,28 32,29 22,28 14,26 9,22" fill="#181410" stroke="#fbbf24" stroke-width="1.2" stroke-linejoin="round" />
+            <!-- Liquid Surface -->
+            <polygon points="14,19 22,17 32,16 42,17 50,19 52,21 48,24 40,26 32,27 24,26 16,24 12,21" fill="#d97706" fill-opacity="0.6" stroke="#fbbf24" stroke-width="0.5" />
+
+            <!-- Cup Body Facets -->
+            <polygon points="9,22 22,28 25,44 16,39" fill="#78350f" fill-opacity="0.6" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+            <polygon points="22,28 32,29 32,48 25,44" fill="url(#emblem-gold)" fill-opacity="0.45" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+            <polygon points="32,29 42,28 39,48 32,48" fill="url(#emblem-gold)" fill-opacity="0.8" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+            <polygon points="42,28 55,22 48,39 39,48" fill="#78350f" fill-opacity="0.6" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+
+            <!-- Base Facets -->
+            <polygon points="16,39 25,44 32,48 39,48 48,39 44,44 32,50 20,44" fill="#b45309" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+            <polygon points="20,48 32,52 44,48 41,55 32,57 23,55" fill="url(#emblem-gold)" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+
+            <!-- Faceted Polygon Handle -->
+            <polygon points="53,23 61,25 63,33 57,38 51,37 48,37 54,34 56,29 51,26" fill="url(#emblem-gold)" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+          </svg>
+        </div>
+
+        <div class="bmc-title-group">
+          <div class="bmc-telemetry">DIVINEFORGE // SANCTUARY PATRON</div>
+          <h3 id="bmc-title" class="bmc-heading">Fuel DivineForge</h3>
+        </div>
+      </div>
+
+      <!-- Polygon Geometric Close (X) Button -->
+      <button type="button" id="close-bmc-modal" class="bmc-close-btn" aria-label="Close dialog">
+        <svg class="geo-icon-close" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="8,6.5 12.5,2 14,3.5 9.5,8 14,12.5 12.5,14 8,9.5 3.5,14 2,12.5 6.5,8 2,3.5 3.5,2" fill="currentColor" stroke="currentColor" stroke-width="0.5" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+
+    <p class="bmc-subhead">
+      Every contribution fuels sovereign compute, autonomous AI agents, and uncompromised open-source tooling. Choose your support frequency:
+    </p>
+
+    <!-- Interactive Support Tier Cards (Faceted Polygon Vectors) -->
+    <div class="bmc-tiers" role="radiogroup" aria-label="Support Tier Options">
+      <!-- Tier 1: Somatic Fuel -->
+      <button type="button" class="bmc-tier-card" data-tier="5" role="radio" aria-checked="false">
+        <div class="tier-icon-wrap">
+          <!-- Faceted Polygon Water Droplet / Single Bean -->
+          <svg class="tier-geo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="12,2 19,13 16,21 8,21 5,13" stroke="#22d3ee" stroke-width="1.3" stroke-linejoin="round" fill="#22d3ee" fill-opacity="0.2" />
+            <polygon points="12,2 12,21 8,21 5,13" fill="#22d3ee" fill-opacity="0.3" />
+            <polygon points="12,6 15,13 12,18 9,13" fill="#fff" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="tier-meta">
+          <div class="tier-name-row">
+            <span class="tier-name">1 Fuel · Somatic (水)</span>
+            <span class="tier-price">$5</span>
+          </div>
+          <span class="tier-desc">Daily server compute & calm cycles</span>
+        </div>
+        <div class="tier-check-glyph" aria-hidden="true">
+          <polygon points="6,12.5 2,8.5 3.5,7 6,9.5 12.5,3 14,4.5" fill="currentColor" />
+        </div>
+      </button>
+
+      <!-- Tier 2: Foundation Reserve (Default Active) -->
+      <button type="button" class="bmc-tier-card active" data-tier="15" role="radio" aria-checked="true">
+        <div class="tier-popular-tag">MOST SACRED</div>
+        <div class="tier-icon-wrap">
+          <!-- Faceted Polygon Earth Octahedron / Three Beans -->
+          <svg class="tier-geo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="12,2 22,12 12,22 2,12" stroke="#fbbf24" stroke-width="1.3" stroke-linejoin="round" fill="#fbbf24" fill-opacity="0.2" />
+            <polygon points="12,2 12,22 2,12" fill="#fbbf24" fill-opacity="0.35" />
+            <polygon points="12,6 18,12 12,18 6,12" stroke="#fde68a" stroke-width="0.8" fill="none" />
+            <polygon points="12,8 15,12 12,16 9,12" fill="#fff" opacity="0.75" />
+          </svg>
+        </div>
+        <div class="tier-meta">
+          <div class="tier-name-row">
+            <span class="tier-name">3 Fuels · Reserve (地)</span>
+            <span class="tier-price">$15</span>
+          </div>
+          <span class="tier-desc">Sovereign memory & vector infrastructure</span>
+        </div>
+        <div class="tier-check-glyph" aria-hidden="true">
+          <polygon points="6,12.5 2,8.5 3.5,7 6,9.5 12.5,3 14,4.5" fill="currentColor" />
+        </div>
+      </button>
+
+      <!-- Tier 3: Neural Ignition -->
+      <button type="button" class="bmc-tier-card" data-tier="25" role="radio" aria-checked="false">
+        <div class="tier-icon-wrap">
+          <!-- Faceted Polygon Solar Dodecagram / Five Beans -->
+          <svg class="tier-geo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="12,1 15,7 22,8 17,13 18,20 12,17 6,20 7,13 2,8 9,7" stroke="#f97316" stroke-width="1.2" stroke-linejoin="round" fill="#f97316" fill-opacity="0.2" />
+            <polygon points="12,1 12,17 6,20 7,13 2,8 9,7" fill="#f97316" fill-opacity="0.35" />
+            <polygon points="12,6 15,12 12,15 9,12" fill="#fff" opacity="0.85" />
+          </svg>
+        </div>
+        <div class="tier-meta">
+          <div class="tier-name-row">
+            <span class="tier-name">5 Fuels · Ignition (火)</span>
+            <span class="tier-price">$25</span>
+          </div>
+          <span class="tier-desc">High-velocity multi-agent pipelines</span>
+        </div>
+        <div class="tier-check-glyph" aria-hidden="true">
+          <polygon points="6,12.5 2,8.5 3.5,7 6,9.5 12.5,3 14,4.5" fill="currentColor" />
+        </div>
+      </button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="bmc-actions">
+      <a
+        id="bmc-direct-link"
+        href="https://buymeacoffee.com/divineforge"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bmc-btn-primary"
+      >
+        <!-- Faceted Polygon Coffee Cup Icon -->
+        <svg class="geo-icon-cup" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="4,7 7,5 13,5 16,7 15,13 13,16 7,16 5,13" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="currentColor" fill-opacity="0.2" />
+          <polygon points="16,8 19,9 18,12 15,12" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" />
+          <polygon points="7,3 9,1 8,0 6,2" fill="currentColor" />
+          <polygon points="11,3 13,1 12,0 10,2" fill="currentColor" />
+        </svg>
+        <span>Proceed to buymeacoffee.com/divineforge</span>
+        <!-- Faceted Polygon External Link Vector -->
+        <svg class="geo-icon-external" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="7,2 2,2 2,14 14,14 14,9 12,9 12,12 4,12 4,4 7,4" fill="currentColor" />
+          <polygon points="9,2 14,2 14,7 11.5,4.5 7.5,8.5 6,7 10,3" fill="currentColor" />
+        </svg>
+      </a>
+
+      <button type="button" id="bmc-copy-link-btn" class="bmc-btn-copy" aria-label="Copy Buy Me a Coffee URL to clipboard">
+        <!-- Polygon Copy Icon (Swapped to Checkmark on Copy) -->
+        <span id="bmc-copy-icon-wrap" aria-hidden="true">
+          <svg class="geo-icon-copy" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="2,2 10,2 10,4 4,4 4,10 2,10" fill="currentColor" opacity="0.5" />
+            <polygon points="5,5 13,5 13,13 5,13" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none" />
+            <polygon points="8,5 13,5 13,10" fill="currentColor" opacity="0.3" />
+          </svg>
+        </span>
+        <span id="bmc-copy-text">Copy Link</span>
+      </button>
+    </div>
+
+    <!-- Modal Telemetry Footer -->
+    <div class="bmc-footer">
+      <span class="bmc-coord">SANCTUARY // buymeacoffee.com/divineforge</span>
+      <span class="bmc-note">DivineForge Architecture · No Cookies / Trackers</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bmc-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 2rem);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .bmc-modal.is-open {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Backdrop Blur */
+  .bmc-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(4, 7, 12, 0.78);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    cursor: pointer;
+  }
+
+  /* Modal Dialog Window */
+  .bmc-dialog {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 32rem;
+    padding: clamp(1.6rem, 4vw, 2.25rem);
+    border-radius: 20px;
+    background: rgba(8, 14, 22, 0.72);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(251, 191, 36, 0.28);
+    box-shadow:
+      0 24px 64px -12px rgba(0, 0, 0, 0.8),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+      inset 0 0 40px 0 rgba(251, 191, 36, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    text-align: left;
+    transform: scale(0.92) translateY(12px);
+    will-change: transform, opacity;
+  }
+
+  .bmc-glow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 140px;
+    background: radial-gradient(
+      140px circle at center top,
+      rgba(251, 191, 36, 0.22),
+      transparent 70%
+    );
+    pointer-events: none;
+    border-radius: 20px 20px 0 0;
+  }
+
+  /* Header */
+  .bmc-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .bmc-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .bmc-emblem-wrapper {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    padding: 4px;
+    border-radius: 10px;
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bmc-emblem-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .bmc-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .bmc-telemetry {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: #fbbf24;
+  }
+
+  .bmc-heading {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  /* Polygon Close Button */
+  .bmc-close-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background 0.2s var(--ease),
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      transform 0.2s var(--ease);
+  }
+
+  .bmc-close-btn:hover,
+  .bmc-close-btn:focus-visible {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  .geo-icon-close {
+    width: 13px;
+    height: 13px;
+  }
+
+  .bmc-subhead {
+    font-size: 0.86rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Support Tiers */
+  .bmc-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .bmc-tier-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition:
+      border-color 0.2s var(--ease),
+      background 0.2s var(--ease),
+      transform 0.2s var(--ease),
+      box-shadow 0.2s var(--ease);
+  }
+
+  .bmc-tier-card:hover {
+    border-color: rgba(251, 191, 36, 0.35);
+    background: rgba(251, 191, 36, 0.05);
+    transform: translateX(2px);
+  }
+
+  .bmc-tier-card.active {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.09);
+    box-shadow: 0 0 20px -4px rgba(251, 191, 36, 0.2);
+  }
+
+  .tier-popular-tag {
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 2px 7px;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #04070c;
+    background: linear-gradient(135deg, #fde68a, #fbbf24);
+    border-radius: 99px;
+  }
+
+  .tier-icon-wrap {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tier-geo-svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tier-meta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .tier-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tier-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .tier-price {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #fbbf24;
+  }
+
+  .tier-desc {
+    font-size: 0.74rem;
+    color: var(--dim);
+  }
+
+  .tier-check-glyph {
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    color: #fbbf24;
+    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+
+  .bmc-tier-card.active .tier-check-glyph {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  /* Actions */
+  .bmc-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding-top: 0.35rem;
+  }
+
+  .bmc-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #04070c;
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 60%, #d97706 100%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    text-decoration: none;
+    box-shadow: 0 4px 18px -2px rgba(251, 191, 36, 0.4);
+    cursor: pointer;
+    transition:
+      transform 0.2s var(--ease),
+      box-shadow 0.2s var(--ease),
+      filter 0.2s var(--ease);
+  }
+
+  .bmc-btn-primary:hover,
+  .bmc-btn-primary:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px -2px rgba(251, 191, 36, 0.6);
+    filter: brightness(1.05);
+    outline: none;
+  }
+
+  .bmc-btn-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.72rem 1.25rem;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition:
+      background 0.2s var(--ease),
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease);
+  }
+
+  .bmc-btn-copy:hover,
+  .bmc-btn-copy:focus-visible {
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.35);
+    color: #fde68a;
+    outline: none;
+  }
+
+  .geo-icon-cup {
+    width: 16px;
+    height: 16px;
+  }
+
+  .geo-icon-external {
+    width: 13px;
+    height: 13px;
+    opacity: 0.8;
+  }
+
+  .geo-icon-copy {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Footer */
+  .bmc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    color: var(--dim);
+  }
+
+  .bmc-coord {
+    letter-spacing: 0.04em;
+  }
+</style>

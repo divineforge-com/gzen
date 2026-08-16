@@ -1,0 +1,500 @@
+---
+/**
+ * TributeSection.astro — Sovereign Fuel & DivineForge Buy Me a Coffee Parallax Stage
+ * Precision polygon geometric architecture with parallax depth leading into the BMC modal.
+ */
+---
+
+<section class="tribute-section" id="tribute" aria-label="Sovereign Architecture Fuel & Tribute">
+  <!-- Parallax Geometric Coordinate Stage -->
+  <div class="tribute-geo-wrapper" aria-hidden="true">
+    <div class="tribute-geo-stage" id="tributeGeo">
+      <svg class="tribute-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="tribute-core-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.35" />
+            <stop offset="50%" stop-color="#f97316" stop-opacity="0.18" />
+            <stop offset="100%" stop-color="#04070c" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="facet-gold-bright" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fde68a" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="#d97706" stop-opacity="0.6" />
+          </linearGradient>
+          <linearGradient id="facet-gold-dim" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#d97706" stop-opacity="0.4" />
+            <stop offset="100%" stop-color="#78350f" stop-opacity="0.15" />
+          </linearGradient>
+        </defs>
+
+        <!-- Ambient Core Glow -->
+        <circle cx="200" cy="200" r="170" fill="url(#tribute-core-glow)" />
+
+        <!-- Concentric Coordinate Rings -->
+        <circle cx="200" cy="200" r="180" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" />
+        <circle cx="200" cy="200" r="140" stroke="rgba(251, 191, 36, 0.22)" stroke-width="1" stroke-dasharray="4 6" class="geo-ring-spin" />
+        <circle cx="200" cy="200" r="95" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
+        <circle cx="200" cy="200" r="45" stroke="rgba(251, 191, 36, 0.3)" stroke-width="1" stroke-dasharray="2 4" class="geo-ring-counter" />
+
+        <!-- 24-Tick Outer Precision Dial -->
+        <g class="tribute-ticks" opacity="0.45">
+          {
+            Array.from({ length: 24 }, (_, i) => {
+              const angle = (i * 15 * Math.PI) / 180;
+              const r1 = i % 2 === 0 ? 172 : 176;
+              const r2 = 180;
+              const x1 = 200 + Math.cos(angle) * r1;
+              const y1 = 200 + Math.sin(angle) * r1;
+              const x2 = 200 + Math.cos(angle) * r2;
+              const y2 = 200 + Math.sin(angle) * r2;
+              return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="rgba(251, 191, 36, 0.6)" stroke-width={i % 2 === 0 ? 1.5 : 0.8} />;
+            })
+          }
+        </g>
+
+        <!-- Crosshair Laser Coordinate Axes -->
+        <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 5" />
+        <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.75" stroke-dasharray="3 5" />
+
+        <!-- Inscribed Octagon & Sacred Hexagram Chords -->
+        <polygon points="200,60 299,101 340,200 299,299 200,340 101,299 60,200 101,101" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" fill="none" />
+        <polygon points="200,105 282,247 118,247" stroke="rgba(251, 191, 36, 0.25)" stroke-width="1" fill="none" class="tribute-poly-a" />
+        <polygon points="200,295 118,153 282,153" stroke="rgba(34, 211, 238, 0.2)" stroke-width="1" fill="none" class="tribute-poly-b" />
+
+        <!-- 3D Faceted Polygon Coffee Cup & Fuel Crystal Core -->
+        <g class="tribute-polygon-cup" transform="translate(140, 130) scale(1)">
+          <!-- Rising Faceted Steam Polygons -->
+          <polygon points="26,16 30,6 28,1 24,11" fill="url(#facet-gold-bright)" opacity="0.85" class="steam-poly steam-1" />
+          <polygon points="38,14 43,4 40,-1 35,9" fill="url(#facet-gold-bright)" opacity="0.95" class="steam-poly steam-2" />
+          <polygon points="50,17 54,7 52,2 48,12" fill="url(#facet-gold-bright)" opacity="0.75" class="steam-poly steam-3" />
+
+          <!-- Low-Poly 3D Wireframe Coffee Cup Facets -->
+          <!-- Top Rim Octagon -->
+          <polygon points="18,24 28,20 44,18 60,20 70,24 74,29 68,34 56,37 40,38 24,37 14,33 12,28" fill="#1e1b18" stroke="#fbbf24" stroke-width="1.2" stroke-linejoin="round" />
+          <!-- Inner Liquid Surface -->
+          <polygon points="20,25 30,22 44,20 58,22 68,25 71,28 66,32 54,35 40,36 26,35 17,31 15,28" fill="#d97706" fill-opacity="0.6" stroke="#fbbf24" stroke-width="0.6" />
+
+          <!-- Body Facet Mesh (Faceted Polygons) -->
+          <polygon points="12,28 24,37 28,58 18,51" fill="url(#facet-gold-dim)" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+          <polygon points="24,37 40,38 40,62 28,58" fill="url(#facet-gold-bright)" fill-opacity="0.4" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+          <polygon points="40,38 56,37 52,62 40,62" fill="url(#facet-gold-bright)" fill-opacity="0.75" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+          <polygon points="56,37 74,29 64,51 52,62" fill="url(#facet-gold-dim)" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+
+          <!-- Base Pedestal Facets -->
+          <polygon points="18,51 28,58 40,62 52,62 64,51 58,57 40,64 22,57" fill="#78350f" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+          <polygon points="24,62 40,67 56,62 52,70 40,73 28,70" fill="url(#facet-gold-bright)" fill-opacity="0.5" stroke="#fbbf24" stroke-width="1.2" stroke-linejoin="round" />
+
+          <!-- Faceted Polygon Geometric Handle -->
+          <polygon points="72,30 84,33 88,44 80,51 72,49 68,49 76,46 80,40 70,36" fill="url(#facet-gold-bright)" stroke="#fbbf24" stroke-width="1" stroke-linejoin="round" />
+
+          <!-- Floating Core Prismatic Spark -->
+          <polygon points="40,25 44,28 40,31 36,28" fill="#fff" opacity="0.9" />
+        </g>
+
+        <!-- Cardinal Telemetry Labels -->
+        <text x="200" y="38" fill="rgba(251, 191, 36, 0.7)" font-family="var(--font-mono)" font-size="8" letter-spacing="2" text-anchor="middle">TRIBUTE // 000°</text>
+        <text x="368" y="203" fill="rgba(255, 255, 255, 0.4)" font-family="var(--font-mono)" font-size="7" letter-spacing="1" text-anchor="middle">090°</text>
+        <text x="200" y="372" fill="rgba(251, 191, 36, 0.7)" font-family="var(--font-mono)" font-size="8" letter-spacing="2" text-anchor="middle">SANCTUARY // 180°</text>
+        <text x="32" y="203" fill="rgba(255, 255, 255, 0.4)" font-family="var(--font-mono)" font-size="7" letter-spacing="1" text-anchor="middle">270°</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Frosted Glass Tribute Pedestal Card -->
+  <div class="tribute-pedestal reveal">
+    <div class="pedestal-ambient-glow" aria-hidden="true"></div>
+
+    <div class="tribute-header">
+      <div class="telemetry-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span class="badge-tag">DIVINEFORGE // SANCTUARY FUEL & PATRONAGE</span>
+      </div>
+      <span class="geo-coord" aria-hidden="true">φ 1.618 · COORD 000°</span>
+    </div>
+
+    <div class="tribute-body">
+      <h2 class="tribute-title">
+        Fuel the <span class="gold-gradient">Sovereign Engine.</span>
+      </h2>
+      <p class="tribute-lead">
+        Open-source infrastructure, sovereign AI agents, and contemplative computing crafted without external compromise.
+        Support DivineForge directly on Buy Me a Coffee to power autonomous pipelines and research.
+      </p>
+    </div>
+
+    <!-- Action Trigger Controls -->
+    <div class="tribute-actions">
+      <button type="button" id="open-bmc-modal" class="tribute-btn-primary" aria-haspopup="dialog" aria-controls="bmc-modal">
+        <!-- Polygon Geometric Coffee Cup Icon -->
+        <svg class="geo-icon-btn" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="4,7 7,5 13,5 16,7 15,13 13,16 7,16 5,13" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="currentColor" fill-opacity="0.15" />
+          <polygon points="16,8 19,9 18,12 15,12" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round" fill="currentColor" fill-opacity="0.2" />
+          <polygon points="7,3 9,1 8,0 6,2" fill="currentColor" opacity="0.8" />
+          <polygon points="11,3 13,1 12,0 10,2" fill="currentColor" opacity="0.8" />
+          <polygon points="6,16 14,16 12,18 8,18" fill="currentColor" opacity="0.6" />
+        </svg>
+        <span>Fuel via Buy Me a Coffee</span>
+        <!-- Polygon Geometric Forward Chevron -->
+        <svg class="geo-icon-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="13.5,8 8,2.5 8,6 2.5,6 2.5,10 8,10 8,13.5" fill="currentColor" stroke="currentColor" stroke-width="0.75" stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <a href="https://buymeacoffee.com/divineforge" target="_blank" rel="noopener noreferrer" class="tribute-btn-secondary" title="Open buymeacoffee.com/divineforge in new tab">
+        <span class="link-label">buymeacoffee.com/divineforge</span>
+        <!-- Polygon Geometric External Link Icon -->
+        <svg class="geo-icon-external" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <polygon points="7,2 2,2 2,14 14,14 14,9 12,9 12,12 4,12 4,4 7,4" fill="currentColor" />
+          <polygon points="9,2 14,2 14,7 11.5,4.5 7.5,8.5 6,7 10,3" fill="currentColor" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tribute-section {
+    position: relative;
+    margin-top: clamp(4rem, 9vw, 7rem);
+    padding: clamp(2rem, 5vw, 3.5rem) 0 clamp(1.5rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Parallax Geometric Wrapper */
+  .tribute-geo-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(320px, 60vw, 540px);
+    height: clamp(320px, 60vw, 540px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.85;
+  }
+
+  .tribute-geo-stage {
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transform-origin: center center;
+  }
+
+  .tribute-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .geo-ring-spin {
+    transform-origin: 200px 200px;
+    animation: tributeRingSpin 40s linear infinite;
+  }
+
+  .geo-ring-counter {
+    transform-origin: 200px 200px;
+    animation: tributeRingSpin 25s linear infinite reverse;
+  }
+
+  .tribute-poly-a {
+    transform-origin: 200px 200px;
+    animation: tributePolyA 30s ease-in-out infinite alternate;
+  }
+
+  .tribute-poly-b {
+    transform-origin: 200px 200px;
+    animation: tributePolyB 35s ease-in-out infinite alternate;
+  }
+
+  .steam-1 {
+    animation: steamRise 3s ease-in-out infinite;
+  }
+  .steam-2 {
+    animation: steamRise 3.4s ease-in-out infinite 0.6s;
+  }
+  .steam-3 {
+    animation: steamRise 2.8s ease-in-out infinite 1.2s;
+  }
+
+  @keyframes tributeRingSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes tributePolyA {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    100% {
+      transform: rotate(60deg) scale(1.08);
+    }
+  }
+
+  @keyframes tributePolyB {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    100% {
+      transform: rotate(-60deg) scale(0.92);
+    }
+  }
+
+  @keyframes steamRise {
+    0%, 100% {
+      transform: translateY(0) scaleY(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: translateY(-5px) scaleY(1.2);
+      opacity: 0.95;
+    }
+  }
+
+  /* Frosted Glass Tribute Pedestal Card */
+  .tribute-pedestal {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 44rem;
+    padding: clamp(2rem, 4.5vw, 3rem);
+    border-radius: 20px;
+    background: rgba(6, 10, 16, 0.24);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid rgba(251, 191, 36, 0.22);
+    box-shadow:
+      0 12px 40px -6px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.14),
+      inset 0 0 32px 0 rgba(251, 191, 36, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+    transition:
+      transform 0.3s var(--ease),
+      border-color 0.3s var(--ease),
+      box-shadow 0.3s var(--ease);
+  }
+
+  .tribute-pedestal:hover {
+    border-color: rgba(251, 191, 36, 0.4);
+    box-shadow:
+      0 16px 48px -6px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+      inset 0 0 42px 0 rgba(251, 191, 36, 0.14);
+  }
+
+  .pedestal-ambient-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      450px circle at var(--tribute-mx, 50%) var(--tribute-my, 40%),
+      rgba(251, 191, 36, 0.15),
+      transparent 65%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .tribute-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .telemetry-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #fbbf24;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #fbbf24;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    box-shadow: 0 0 10px #fbbf24;
+  }
+
+  .geo-coord {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--dim);
+    letter-spacing: 0.06em;
+  }
+
+  .tribute-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .tribute-title {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 50%, #d97706 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tribute-lead {
+    font-size: clamp(0.88rem, 1.8vw, 0.98rem);
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 38rem;
+  }
+
+  .tribute-actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.25rem;
+    padding-top: 0.5rem;
+  }
+
+  .tribute-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+    color: #04070c;
+    background: linear-gradient(135deg, #fde68a 0%, #fbbf24 60%, #d97706 100%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px -2px rgba(251, 191, 36, 0.45);
+    transition:
+      transform 0.25s var(--ease),
+      box-shadow 0.3s var(--ease),
+      filter 0.25s var(--ease);
+  }
+
+  .tribute-btn-primary:hover,
+  .tribute-btn-primary:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px -2px rgba(251, 191, 36, 0.65);
+    filter: brightness(1.05);
+    outline: none;
+  }
+
+  .tribute-btn-primary:hover .geo-icon-arrow {
+    transform: translateX(3px);
+  }
+
+  .tribute-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.82rem 1.25rem;
+    font-size: 0.82rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.03em;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transition:
+      transform 0.25s var(--ease),
+      border-color 0.25s var(--ease),
+      background 0.25s var(--ease),
+      color 0.25s var(--ease);
+  }
+
+  .tribute-btn-secondary:hover,
+  .tribute-btn-secondary:focus-visible {
+    transform: translateY(-2px);
+    border-color: rgba(251, 191, 36, 0.4);
+    background: rgba(251, 191, 36, 0.08);
+    color: #fde68a;
+    outline: none;
+  }
+
+  /* Strict Polygon Geometric Icons */
+  .geo-icon-btn {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+
+  .geo-icon-arrow {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .geo-icon-external {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    opacity: 0.75;
+    transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+  }
+
+  .tribute-btn-secondary:hover .geo-icon-external {
+    opacity: 1;
+    transform: translate(1.5px, -1.5px);
+  }
+
+  @media (max-width: 640px) {
+    .tribute-pedestal {
+      padding: 1.6rem 1.25rem;
+    }
+
+    .tribute-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .tribute-btn-primary,
+    .tribute-btn-secondary {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .geo-ring-spin,
+    .geo-ring-counter,
+    .tribute-poly-a,
+    .tribute-poly-b,
+    .steam-1,
+    .steam-2,
+    .steam-3 {
+      animation: none;
+    }
+  }
+</style>

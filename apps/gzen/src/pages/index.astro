@@ -4,7 +4,9 @@ import Starfield from "../components/Starfield.astro";
 import GeometricField from "../components/GeometricField.astro";
 import Hero from "../components/Hero.astro";
 import ElementGrid from "../components/ElementGrid.astro";
+import TributeSection from "../components/TributeSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import BuyMeACoffeeModal from "../components/BuyMeACoffeeModal.astro";
 ---
 
 <BaseLayout>
@@ -14,8 +16,11 @@ import SiteFooter from "../components/SiteFooter.astro";
   <main class="wrap">
     <Hero />
     <ElementGrid />
+    <TributeSection />
     <SiteFooter />
   </main>
+
+  <BuyMeACoffeeModal />
 
   <div class="cursor-glow" aria-hidden="true"></div>
 </BaseLayout>
