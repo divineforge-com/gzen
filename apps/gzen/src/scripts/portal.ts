@@ -704,7 +704,11 @@ function initKineticCards() {
   const cards = Array.from(document.querySelectorAll<HTMLElement>(".element-card"));
   if (!cards.length) return;
 
-  const cfg = ANIMATION_SEEDS.cardPhysics;
+  const cfg = {
+    tiltInertia: ANIMATION_SEEDS.timings.tiltInertia || 0.35,
+    maxTiltDeg: ANIMATION_SEEDS.spatialTilt.maxPitchDeg || 4.5,
+    hoverElevateZ: ANIMATION_SEEDS.spatialTilt.elevationPx || 8,
+  };
 
   cards.forEach((card) => {
     const glowEl = card.querySelector<HTMLElement>(".element-ambient-glow");
@@ -928,10 +932,12 @@ function initGeometricField() {
   const geoStage = document.getElementById("geoStage");
   const geoOuterDial = document.getElementById("geoOuterDial");
   const geoPolyhedra = document.getElementById("geoPolyhedra");
+  const geoPhiRings = document.getElementById("geoPhiRings");
   const geoEnsoPath = document.getElementById("geoEnsoPath");
-  const geoHexA = document.querySelector<SVGPolygonElement>(".geo-hex-a");
-  const geoHexB = document.querySelector<SVGPolygonElement>(".geo-hex-b");
+  const geoHexA = document.getElementById("geoHexA") || document.querySelector<SVGPolygonElement>(".geo-hex-a");
+  const geoHexB = document.getElementById("geoHexB") || document.querySelector<SVGPolygonElement>(".geo-hex-b");
   const geoTelemetryX = document.querySelector<HTMLElement>(".geo-telemetry-x");
+  const geoTelemetryY = document.querySelector<HTMLElement>(".geo-telemetry-y");
   const geoVertices = document.getElementById("geoVertices");
 
   if (!geoStage || !geoOuterDial || !geoPolyhedra) return;
@@ -981,8 +987,10 @@ function initGeometricField() {
     );
   }
 
+  // Base angles for continuous silky idle auto-rotation at the top
   let baseDialAngle = 0;
   let basePolyAngle = 0;
+  let basePulse = 0;
   let targetScrollY = 0;
   let smoothScrollY = 0;
 
@@ -995,42 +1003,80 @@ function initGeometricField() {
   );
 
   gsap.ticker.add(() => {
-    baseDialAngle = (baseDialAngle + cfg.rotationSpeedIdle) % 360;
-    basePolyAngle = (basePolyAngle + cfg.counterRotationSpeedIdle) % 360;
+    // 1. Continuous auto-rotation at idle
+    baseDialAngle = (baseDialAngle + 0.22) % 360;
+    basePolyAngle = (basePolyAngle - 0.28) % 360;
+    basePulse += 0.025;
 
-    smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
+    // 2. Smooth scroll tracking with lerp
+    smoothScrollY += (targetScrollY - smoothScrollY) * 0.10;
 
-    const dialAngle = baseDialAngle + smoothScrollY * cfg.scrollRotationFactor;
-    const polyAngle = basePolyAngle + smoothScrollY * cfg.scrollCounterFactor;
+    // 3. Scroll-driven decomposition & rotation factors
+    const dialAngle = baseDialAngle + smoothScrollY * 0.44;
+    const polyAngle = basePolyAngle - smoothScrollY * 0.58;
 
-    geoOuterDial.style.transform = `rotate(${dialAngle.toFixed(2)}deg)`;
-    geoPolyhedra.style.transform = `rotate(${polyAngle.toFixed(2)}deg)`;
+    // Layer A: Outer Dial rotation & slight radial dilation
+    const dialScale = 1 + smoothScrollY * 0.00035;
+    geoOuterDial.style.transform = `rotate(${dialAngle.toFixed(2)}deg) scale(${dialScale.toFixed(4)})`;
+    geoOuterDial.style.transformOrigin = "400px 400px";
 
+    // Layer B: Nested Polyhedra counter-rotation & dimensional expansion
+    const polyScale = 1 + smoothScrollY * 0.00045;
+    geoPolyhedra.style.transform = `rotate(${polyAngle.toFixed(2)}deg) scale(${polyScale.toFixed(4)})`;
+    geoPolyhedra.style.transformOrigin = "400px 400px";
+
+    // Layer C: Concentric Phi Rings — Radial Decomposition on Scroll
+    if (geoPhiRings) {
+      const phiScale = 1 + smoothScrollY * 0.00095 + Math.sin(basePulse) * 0.015;
+      const phiRot = (baseDialAngle * 0.35 + smoothScrollY * 0.15).toFixed(2);
+      geoPhiRings.style.transform = `rotate(${phiRot}deg) scale(${phiScale.toFixed(4)})`;
+      geoPhiRings.style.transformOrigin = "400px 400px";
+    }
+
+    // Layer D: Interlocking Hexagram Star 3D Opposing Shearing
     if (geoHexA) {
-      geoHexA.style.transform = `rotate(${(smoothScrollY * 0.15).toFixed(2)}deg)`;
+      const hexARot = (baseDialAngle * 0.5 + smoothScrollY * 0.32).toFixed(2);
+      const hexATransX = (smoothScrollY * 0.02).toFixed(1);
+      const hexATransY = (-smoothScrollY * 0.015).toFixed(1);
+      geoHexA.style.transform = `translate(${hexATransX}px, ${hexATransY}px) rotate(${hexARot}deg)`;
       geoHexA.style.transformOrigin = "400px 400px";
     }
     if (geoHexB) {
-      geoHexB.style.transform = `rotate(${(-smoothScrollY * 0.22).toFixed(2)}deg)`;
+      const hexBRot = (-baseDialAngle * 0.45 - smoothScrollY * 0.38).toFixed(2);
+      const hexBTransX = (-smoothScrollY * 0.02).toFixed(1);
+      const hexBTransY = (smoothScrollY * 0.015).toFixed(1);
+      geoHexB.style.transform = `translate(${hexBTransX}px, ${hexBTransY}px) rotate(${hexBRot}deg)`;
       geoHexB.style.transformOrigin = "400px 400px";
     }
 
-    const stageY = smoothScrollY * 0.38;
-    const stageScale = 1 + Math.min(0.28, (smoothScrollY / 700) * cfg.scrollScaleFactor);
+    // Layer E: Stage Global Descent & Panoramic Decomposition Expansion
+    const stageY = smoothScrollY * 0.44;
+    const stageScale = 1 + Math.min(0.65, (smoothScrollY / 550) * 0.48);
     geoStage.style.transform = `translate(-50%, calc(-50% + ${stageY.toFixed(1)}px)) scale(${stageScale.toFixed(3)})`;
 
+    // Layer F: Dynamic Enso Vector Arc Unspooling
     if (geoEnsoPath) {
-      const unfoldOffset = Math.max(0, cfg.ensoDashUnfoldLength - smoothScrollY * 1.35);
+      const unfoldOffset = Math.max(0, 700 - smoothScrollY * 1.55);
       geoEnsoPath.style.strokeDashoffset = `${unfoldOffset.toFixed(1)}`;
     }
 
+    // Layer G: Coordinate Telemetry Axes Parallax
     if (geoTelemetryX) {
-      const axisOffset = smoothScrollY * 0.25;
+      const axisOffset = smoothScrollY * 0.28;
       geoTelemetryX.style.transform = `translateY(${axisOffset.toFixed(1)}px)`;
     }
+    if (geoTelemetryY) {
+      const axisYOffset = Math.sin(basePulse * 0.5) * 6;
+      geoTelemetryY.style.transform = `translateX(${axisYOffset.toFixed(1)}px)`;
+    }
 
+    // Layer H: Vertex Constellation Radial Dispersion
     if (geoVertices) {
-      const vertexOpacity = Math.min(1, 0.65 + Math.sin(smoothScrollY * 0.01 + baseDialAngle * 0.05) * 0.35);
+      const vertScale = 1 + smoothScrollY * 0.00065;
+      const vertRot = (smoothScrollY * 0.12).toFixed(2);
+      const vertexOpacity = Math.min(1, 0.72 + Math.sin(smoothScrollY * 0.01 + baseDialAngle * 0.05) * 0.28);
+      geoVertices.style.transform = `rotate(${vertRot}deg) scale(${vertScale.toFixed(4)})`;
+      geoVertices.style.transformOrigin = "400px 400px";
       geoVertices.style.opacity = `${vertexOpacity.toFixed(2)}`;
     }
   });

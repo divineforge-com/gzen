@@ -105,7 +105,9 @@ import ElementCard from "./ElementCard.astro";
   .grid {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: clamp(3.5rem, 8vw, 6.5rem);
+    position: relative;
+    z-index: 1;
   }
 
   /* Mobile Swipe Carousel Layout */

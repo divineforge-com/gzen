@@ -144,7 +144,19 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
         <circle cx="60" cy="400" r="4" fill="var(--accent)" />
       </g>
 
-      <!-- LAYER 2: Nested Sacred Polygons & Phi Harmonics -->
+      <!-- LAYER 2: Concentric Phi Harmonic Rings (Radial Decomposition on Scroll) -->
+      <g class="geo-phi-rings" id="geoPhiRings">
+        <circle cx="400" cy="400" r="310" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" class="geo-phi-circle phi-1" />
+        <circle cx="400" cy="400" r="270" stroke="var(--line-strong)" stroke-width="1" class="geo-phi-circle phi-2" />
+        <circle cx="400" cy="400" r="215" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="2 4" class="geo-phi-circle phi-3" />
+        <circle cx="400" cy="400" r="180" stroke="var(--line-strong)" stroke-width="1" class="geo-phi-circle phi-4" />
+        <circle cx="400" cy="400" r="140" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="3 3" class="geo-phi-circle phi-5" />
+        <circle cx="400" cy="400" r="110" stroke="var(--line-strong)" stroke-width="1" class="geo-phi-circle phi-6" />
+        <circle cx="400" cy="400" r="75" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="2 2" class="geo-phi-circle phi-7" />
+        <circle cx="400" cy="400" r="55" stroke="var(--line-strong)" stroke-width="0.85" class="geo-phi-circle phi-8" />
+      </g>
+
+      <!-- LAYER 3: Nested Sacred Polyhedra & Metatron Rays -->
       <g class="geo-polyhedra" id="geoPolyhedra">
         <!-- 12-sided Dodecagon Outer Geometry -->
         <polygon
@@ -155,41 +167,38 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
           class="geo-dodecagon"
         />
 
-        <!-- Phi Harmonic Concentric Circles -->
-        <circle cx="400" cy="400" r="270" stroke="var(--line)" stroke-width="1" />
-        <circle cx="400" cy="400" r="215" stroke="var(--line-strong)" stroke-width="0.75" stroke-dasharray="2 4" />
-        <circle cx="400" cy="400" r="180" stroke="var(--line)" stroke-width="1" />
-        <circle cx="400" cy="400" r="110" stroke="var(--line-strong)" stroke-width="1" />
-        <circle cx="400" cy="400" r="55" stroke="var(--line)" stroke-width="0.75" />
-
         <!-- Interlocking Merkabah / Hexagram Sacred Triangles -->
         <polygon
           points={hexagonPoints}
-          stroke="var(--accent)"
+          stroke="var(--geo-active-tone, var(--accent))"
           stroke-width="1.2"
-          stroke-opacity="0.45"
+          stroke-opacity="0.5"
           class="geo-hex-a"
+          id="geoHexA"
         />
         <polygon
           points={counterHexagonPoints}
-          stroke="var(--accent)"
+          stroke="var(--geo-active-tone, var(--accent))"
           stroke-width="1.2"
-          stroke-opacity="0.45"
+          stroke-opacity="0.5"
           class="geo-hex-b"
+          id="geoHexB"
         />
 
-        <!-- Star of David / Metatron Intersecting Rays -->
+        <!-- Star of David / Metatron Intersecting Vector Rays -->
         <line x1="400" y1="220" x2="400" y2="580" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" />
         <line x1="244" y1="310" x2="556" y2="490" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" />
         <line x1="244" y1="490" x2="556" y2="310" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" />
+        <line x1="400" y1="130" x2="400" y2="670" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="2 8" />
+        <line x1="130" y1="400" x2="670" y2="400" stroke="var(--line)" stroke-width="0.5" stroke-dasharray="2 8" />
       </g>
 
-      <!-- LAYER 3: Kinetic Enso Curve (Unfolds with Scroll) -->
+      <!-- LAYER 4: Kinetic Enso Curve (Unfolds & Sweeps with Scroll) -->
       <g class="geo-enso-layer" id="geoEnsoLayer">
         <!-- Open kinetic Enso spiral stroke -->
         <path
           d="M 400,290 A 110,110 0 1,1 315,330"
-          stroke="var(--accent)"
+          stroke="var(--geo-active-tone, var(--accent))"
           stroke-width="2.5"
           stroke-linecap="round"
           stroke-dasharray="700"
@@ -197,10 +206,10 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
           class="geo-enso-path"
           id="geoEnsoPath"
         />
-        <circle cx="315" cy="330" r="3.5" fill="var(--accent)" class="geo-enso-head" />
+        <circle cx="315" cy="330" r="3.5" fill="var(--geo-active-tone, var(--accent))" class="geo-enso-head" />
       </g>
 
-      <!-- LAYER 4: Harmonic Node Constellation -->
+      <!-- LAYER 5: Harmonic Satellite Node Constellation (Decomposing on Scroll) -->
       <g class="geo-vertices" id="geoVertices">
         {
           vertexNodes.map((v) => (
@@ -209,23 +218,23 @@ const vertexNodes = Array.from({ length: 12 }, (_, i) => {
               cy={v.cy}
               r={v.r}
               fill="var(--ink)"
-              fill-opacity="0.75"
+              fill-opacity="0.8"
               class="geo-vertex-node"
             />
           ))
         }
       </g>
 
-      <!-- LAYER 5: Central Singularity Core -->
+      <!-- LAYER 6: Central Singularity Core -->
       <g class="geo-core" id="geoCore">
-        <circle cx="400" cy="400" r="16" stroke="var(--accent)" stroke-width="1.5" />
+        <circle cx="400" cy="400" r="16" stroke="var(--geo-active-tone, var(--accent))" stroke-width="1.5" />
         <circle cx="400" cy="400" r="6" fill="var(--ink)" />
         <circle cx="400" cy="400" r="2" fill="var(--bg)" />
         <!-- Micro Crosshairs at Center -->
-        <line x1="380" y1="400" x2="392" y2="400" stroke="var(--accent)" stroke-width="1.5" />
-        <line x1="408" y1="400" x2="420" y2="400" stroke="var(--accent)" stroke-width="1.5" />
-        <line x1="400" y1="380" x2="400" y2="392" stroke="var(--accent)" stroke-width="1.5" />
-        <line x1="400" y1="408" x2="400" y2="420" stroke="var(--accent)" stroke-width="1.5" />
+        <line x1="380" y1="400" x2="392" y2="400" stroke="var(--geo-active-tone, var(--accent))" stroke-width="1.5" />
+        <line x1="408" y1="400" x2="420" y2="400" stroke="var(--geo-active-tone, var(--accent))" stroke-width="1.5" />
+        <line x1="400" y1="380" x2="400" y2="392" stroke="var(--geo-active-tone, var(--accent))" stroke-width="1.5" />
+        <line x1="400" y1="408" x2="400" y2="420" stroke="var(--geo-active-tone, var(--accent))" stroke-width="1.5" />
       </g>
     </svg>
   </div>
