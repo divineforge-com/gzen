@@ -2,7 +2,7 @@
  * gZen Motion & Teleportation Seed Tokens
  * Reference & configuration seed for GSAP (GreenSock) & Anime.js v4 kinetic stack.
  *
- * Design Language: Tesla/xAI ultra-clean minimalism + gZen saffron & cool monastery tones.
+ * Design Language: Tesla/xAI ultra-clean minimalism + Tri-Elemental Sovereignty (Water · Earth · Fire).
  */
 
 export interface EasingPreset {
@@ -36,11 +36,17 @@ export interface MotionSeedConfig {
     elevationPx: number;
     perspectivePx: number;
   };
-  portalRings: {
+  elementRings: {
     baseStrokeWidth: number;
     hoverStrokeWidth: number;
     rotationDuration: number;
     pulseScaleRange: [number, number];
+  };
+  centerpieceGeometry: {
+    dialRotationSpeed: number;
+    innerCounterRotationSpeed: number;
+    scrollScaleBloom: number;
+    strokeDrawDuration: number;
   };
   particles: {
     count: number;
@@ -68,6 +74,11 @@ export interface MotionSeedConfig {
     gyroInertia: number;
     hapticPulseDurationMs: number;
   };
+  triElements: {
+    water: { tone: string; secondary: string; kanji: string };
+    earth: { tone: string; secondary: string; kanji: string };
+    fire: { tone: string; secondary: string; kanji: string };
+  };
 }
 
 export const ANIMATION_SEEDS: MotionSeedConfig = {
@@ -94,7 +105,7 @@ export const ANIMATION_SEEDS: MotionSeedConfig = {
       gsap: "power4.inOut",
       css: "cubic-bezier(0.7, 0, 0.84, 0)",
       anime: "inOutExpo",
-      description: "Instantaneous warp acceleration for portal navigation and transitions",
+      description: "Instantaneous warp acceleration for element navigation and transitions",
     },
     magneticReturn: {
       gsap: "elastic.out(1, 0.6)",
@@ -117,11 +128,17 @@ export const ANIMATION_SEEDS: MotionSeedConfig = {
     elevationPx: 8,
     perspectivePx: 1000,
   },
-  portalRings: {
+  elementRings: {
     baseStrokeWidth: 1.25,
     hoverStrokeWidth: 2.2,
     rotationDuration: 12.0,
     pulseScaleRange: [0.98, 1.02],
+  },
+  centerpieceGeometry: {
+    dialRotationSpeed: 0.12,
+    innerCounterRotationSpeed: -0.18,
+    scrollScaleBloom: 1.08,
+    strokeDrawDuration: 0.9,
   },
   particles: {
     count: 36,
@@ -148,5 +165,10 @@ export const ANIMATION_SEEDS: MotionSeedConfig = {
     gyroMaxRollDeg: 6.0,
     gyroInertia: 0.35,
     hapticPulseDurationMs: 8,
+  },
+  triElements: {
+    water: { tone: "#22d3ee", secondary: "#0d9488", kanji: "水" },
+    earth: { tone: "#fbbf24", secondary: "#d97706", kanji: "地" },
+    fire: { tone: "#f97316", secondary: "#ef4444", kanji: "火" },
   },
 };

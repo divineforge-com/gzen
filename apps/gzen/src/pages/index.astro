@@ -2,20 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Starfield from "../components/Starfield.astro";
 import GeometricField from "../components/GeometricField.astro";
-import ThemeToggle from "../components/ThemeToggle.astro";
 import Hero from "../components/Hero.astro";
-import PathGrid from "../components/PathGrid.astro";
+import ElementGrid from "../components/ElementGrid.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 ---
 
 <BaseLayout>
   <Starfield />
   <GeometricField />
-  <ThemeToggle />
 
   <main class="wrap">
     <Hero />
-    <PathGrid />
+    <ElementGrid />
     <SiteFooter />
   </main>
 
@@ -57,14 +55,14 @@ import SiteFooter from "../components/SiteFooter.astro";
     }
   }
 
-  :global(.path-key-flash) {
+  :global(.element-key-flash) {
     border-color: color-mix(
       in srgb,
-      var(--path-tone, var(--accent)) 45%,
+      var(--element-tone, var(--accent)) 55%,
       var(--line-strong)
     ) !important;
     box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.05),
-      0 0 36px color-mix(in srgb, var(--path-tone, var(--accent)) 22%, transparent) !important;
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 0 42px color-mix(in srgb, var(--element-tone, var(--accent)) 30%, transparent) !important;
   }
 </style>

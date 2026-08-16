@@ -1,0 +1,97 @@
+---
+import { elements, site } from "../data/elements";
+import ElementCard from "./ElementCard.astro";
+---
+
+<section class="elements-section" id="elements" aria-label="The Three Sovereign Elements of gZen">
+  <header class="elements-head reveal">
+    <div>
+      <p class="eyebrow">Z · E · N // EQUILIBRIUM</p>
+      <h2 class="section-title">Three elements. Perpetual balance.</h2>
+      <p class="section-lead">
+        <strong>Water</strong> (Somatic Stillness), <strong>Earth</strong> (Capital Foundation), and <strong>Fire</strong> (Command Ignition).
+        The axis where biological vitality, immutable capital, and agentic synthesis converge.
+      </p>
+      <p class="section-maxim">
+        {site.maxim}
+      </p>
+      <p class="section-hint" aria-hidden="true">
+        Press <kbd>Z</kbd> <kbd>E</kbd> <kbd>N</kbd> to ignite elemental practice.
+      </p>
+    </div>
+  </header>
+
+  <div class="grid">
+    {elements.map((element, i) => <ElementCard element={element} index={i} />)}
+  </div>
+</section>
+
+<style>
+  .elements-section {
+    padding: var(--space-section) 0 0;
+  }
+
+  .elements-head {
+    margin-bottom: clamp(2.25rem, 5.5vw, 3.25rem);
+    max-width: 44rem;
+  }
+
+  .section-lead {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 1.6;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  .section-lead strong {
+    color: var(--ink);
+    font-weight: 550;
+  }
+
+  .section-maxim {
+    margin: 0.85rem 0 0;
+    color: var(--dim);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .section-hint {
+    margin: 0.75rem 0 0;
+    color: var(--dim);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .section-hint kbd {
+    display: inline-block;
+    margin: 0 0.1em;
+    padding: 0.12em 0.45em;
+    font-family: var(--font-mono);
+    font-size: 0.74em;
+    letter-spacing: 0.06em;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    color: var(--ink);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Hide keyboard hint on touch devices */
+  @media (pointer: coarse) {
+    .section-hint {
+      display: none;
+    }
+  }
+
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 960px) {
+    .grid {
+      gap: 1.5rem;
+    }
+  }
+</style>

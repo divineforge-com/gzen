@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { site } from "../data/paths";
+import { site } from "../data/elements";
 
 interface Props {
   title?: string;
@@ -15,7 +15,7 @@ const canonical = site.url;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="monastery">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,11 +26,12 @@ const canonical = site.url;
 
     <!-- Subdomain DNS prefetch & preconnect for zero-latency teleportation -->
     <link rel="dns-prefetch" href="//zen.gzen.io" />
-    <link rel="dns-prefetch" href="//economy.gzen.io" />
-    <link rel="dns-prefetch" href="//neural.gzen.io" />
+    <link rel="dns-prefetch" href="//co.gzen.io" />
+    <link rel="dns-prefetch" href="//ai.gzen.io" />
     <link rel="preconnect" href="https://zen.gzen.io" crossorigin />
-    <link rel="preconnect" href="https://economy.gzen.io" crossorigin />
-    <link rel="preconnect" href="https://neural.gzen.io" crossorigin />
+    <link rel="preconnect" href="https://co.gzen.io" crossorigin />
+    <link rel="preconnect" href="https://ai.gzen.io" crossorigin />
+
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -42,26 +43,10 @@ const canonical = site.url;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <meta name="theme-color" content="#06080c" id="meta-theme-color" />
+    <meta name="theme-color" content="#04070c" id="meta-theme-color" />
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
-
-    <!-- Prevent theme FOUC; default cool monastery -->
-    <script is:inline>
-      (function () {
-        try {
-          var t = localStorage.getItem("gzen-theme");
-          if (t !== "ignite" && t !== "monastery") t = "monastery";
-          document.documentElement.setAttribute("data-theme", t);
-          var c = t === "ignite" ? "#0c0907" : "#06080c";
-          var m = document.getElementById("meta-theme-color");
-          if (m) m.setAttribute("content", c);
-        } catch (e) {
-          document.documentElement.setAttribute("data-theme", "monastery");
-        }
-      })();
-    </script>
   </head>
   <body>
     <div class="shell" id="shell">

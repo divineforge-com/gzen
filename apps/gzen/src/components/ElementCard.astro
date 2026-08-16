@@ -1,0 +1,561 @@
+---
+import type { ElementData } from "../data/elements";
+
+interface Props {
+  element: ElementData;
+  index: number;
+}
+
+const { element, index } = Astro.props;
+const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
+---
+
+<a
+  class:list={["element-card", "reveal", delayClass]}
+  href={element.href}
+  data-element={element.letter}
+  style={`--element-tone: ${element.tone}; --element-secondary: ${element.toneSecondary}; --element-gradient: ${element.gradient}`}
+>
+  <!-- Specular Ambient Floor Glow under card glass -->
+  <div class="element-ambient-glow" aria-hidden="true"></div>
+
+  <!-- Top Metadata Bar -->
+  <div class="card-meta-bar">
+    <div class="element-badge">
+      <span class="kanji-glyph">{element.kanji}</span>
+      <span class="meta-label">{element.element.toUpperCase()} // {element.numeral}</span>
+    </div>
+    <div class="meta-right">
+      <span class="geo-sig">{element.geometrySymbol}</span>
+      <span class="shortcut-pill" aria-hidden="true">[{element.shortcut}]</span>
+    </div>
+  </div>
+
+  <!-- Featured Centerpiece Geometric Stage (Large SVG Vector Engine) -->
+  <div class="geo-centerpiece-stage" aria-hidden="true">
+    {
+      element.letter === "Z" ? (
+        <!-- Z · WATER (水) — Sacred Enso Tri-Monad & Dynamic Fluid Arc -->
+        <svg class="geo-svg geo-svg-water" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="water-core-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--element-tone)" stop-opacity="0.35" />
+              <stop offset="60%" stop-color="var(--element-secondary)" stop-opacity="0.12" />
+              <stop offset="100%" stop-color="transparent" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="water-stroke-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--element-tone)" />
+              <stop offset="100%" stop-color="var(--element-secondary)" />
+            </linearGradient>
+          </defs>
+
+          <!-- Core Ambient Glow -->
+          <circle class="geo-ambient-disc" cx="100" cy="100" r="75" fill="url(#water-core-glow)" />
+
+          <!-- Outer 36-Tick Azimuth Precision Ring (0° - 360°) -->
+          <g class="geo-dial geo-dial-water">
+            <circle class="geo-ring-outer" cx="100" cy="100" r="88" stroke="var(--element-tone)" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="2 4" />
+            <circle class="geo-ring-mid" cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.08)" stroke-width="0.75" />
+            <!-- Major Cardinal Azimuth Markers (0°, 90°, 180°, 270°) -->
+            <line x1="100" y1="10" x2="100" y2="18" stroke="var(--element-tone)" stroke-width="1.75" stroke-linecap="round" />
+            <line x1="190" y1="100" x2="182" y2="100" stroke="var(--element-tone)" stroke-width="1.75" stroke-linecap="round" />
+            <line x1="100" y1="190" x2="100" y2="182" stroke="var(--element-tone)" stroke-width="1.75" stroke-linecap="round" />
+            <line x1="10" y1="100" x2="18" y2="100" stroke="var(--element-tone)" stroke-width="1.75" stroke-linecap="round" />
+            <!-- Sub-quadrant tick notches -->
+            <circle cx="100" cy="100" r="88" stroke="var(--element-tone)" stroke-width="1.25" stroke-dasharray="0.5 15.35" stroke-linecap="round" opacity="0.6" />
+          </g>
+
+          <!-- Inscribed Sacred Equilateral Triangle (Mind · Body · Breath) -->
+          <g class="geo-triangle-group">
+            <polygon class="geo-poly geo-triangle" points="100,32 158,136 42,136" stroke="url(#water-stroke-grad)" stroke-width="1.35" stroke-linejoin="round" fill="rgba(34,211,238,0.02)" />
+            <polygon class="geo-poly geo-triangle-sub" points="100,52 142,126 58,126" stroke="rgba(255,255,255,0.12)" stroke-width="0.75" stroke-dasharray="3 3" stroke-linejoin="round" />
+            <!-- Vertex Energy Nodes -->
+            <circle class="geo-node" cx="100" cy="32" r="3" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="158" cy="136" r="3" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="42" cy="136" r="3" fill="var(--element-tone)" />
+          </g>
+
+          <!-- Concentric Golden Ratio Phi Rings (r=62, 44, 26) -->
+          <g class="geo-phi-rings">
+            <circle class="geo-ring-phi" cx="100" cy="100" r="62" stroke="var(--element-tone)" stroke-opacity="0.25" stroke-width="0.8" />
+            <circle class="geo-ring-phi" cx="100" cy="100" r="44" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" stroke-dasharray="4 2" />
+            <circle class="geo-ring-phi" cx="100" cy="100" r="26" stroke="var(--element-secondary)" stroke-opacity="0.3" stroke-width="1" />
+          </g>
+
+          <!-- Dynamic Unspooling Fluid Enso Arc -->
+          <path
+            class="geo-enso-path"
+            d="M 100 24 A 76 76 0 1 1 36 142 A 76 76 0 0 1 96 24"
+            stroke="url(#water-stroke-grad)"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-dasharray="480"
+            stroke-dashoffset="0"
+          />
+
+          <!-- Central Stillness Singularity Node -->
+          <circle class="geo-center-core" cx="100" cy="100" r="4" fill="var(--element-tone)" />
+          <circle class="geo-center-pulse" cx="100" cy="100" r="9" stroke="var(--element-tone)" stroke-width="0.75" stroke-dasharray="2 2" opacity="0.6" />
+        </svg>
+      ) : element.letter === "E" ? (
+        <!-- E · EARTH (地) — Sacred Octahedron Lattice & Asymmetric Compounding Rhombus -->
+        <svg class="geo-svg geo-svg-earth" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="earth-core-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--element-tone)" stop-opacity="0.35" />
+              <stop offset="60%" stop-color="var(--element-secondary)" stop-opacity="0.12" />
+              <stop offset="100%" stop-color="transparent" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="earth-stroke-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--element-tone)" />
+              <stop offset="100%" stop-color="var(--element-secondary)" />
+            </linearGradient>
+          </defs>
+
+          <!-- Core Ambient Glow -->
+          <circle class="geo-ambient-disc" cx="100" cy="100" r="75" fill="url(#earth-core-glow)" />
+
+          <!-- Outer 8-Point Octagonal Coordinate Grid & Azimuth Dial -->
+          <g class="geo-dial geo-dial-earth">
+            <polygon class="geo-ring-outer" points="100,12 162,38 188,100 162,162 100,188 38,162 12,100 38,38" stroke="var(--element-tone)" stroke-opacity="0.25" stroke-width="1" stroke-dasharray="3 3" />
+            <circle class="geo-ring-mid" cx="100" cy="100" r="78" stroke="rgba(255,255,255,0.08)" stroke-width="0.75" />
+            <!-- Cardinal Allocation Axes -->
+            <line x1="100" y1="16" x2="100" y2="184" stroke="rgba(255,255,255,0.08)" stroke-width="0.75" stroke-dasharray="2 4" />
+            <line x1="16" y1="100" x2="184" y2="100" stroke="rgba(255,255,255,0.08)" stroke-width="0.75" stroke-dasharray="2 4" />
+            <!-- 8 Cardinal Nodes -->
+            <circle cx="100" cy="12" r="2.5" fill="var(--element-tone)" />
+            <circle cx="188" cy="100" r="2.5" fill="var(--element-tone)" />
+            <circle cx="100" cy="188" r="2.5" fill="var(--element-tone)" />
+            <circle cx="12" cy="100" r="2.5" fill="var(--element-tone)" />
+          </g>
+
+          <!-- 3D Isometric Octahedron Wireframe Matrix -->
+          <g class="geo-octahedron-group">
+            <!-- Outer Compounding Diamond Rhombus -->
+            <polygon class="geo-poly geo-rhombus-major" points="100,24 168,100 100,176 32,100" stroke="url(#earth-stroke-grad)" stroke-width="1.6" stroke-linejoin="round" fill="rgba(251,191,36,0.02)" />
+            <!-- Inner Isometric Shading Chords -->
+            <polygon class="geo-poly geo-rhombus-mid" points="100,46 146,100 100,154 54,100" stroke="rgba(255,255,255,0.18)" stroke-width="0.9" stroke-linejoin="round" />
+            <polygon class="geo-poly geo-rhombus-core" points="100,68 126,100 100,132 74,100" stroke="var(--element-tone)" stroke-opacity="0.4" stroke-width="1.1" />
+            
+            <!-- Isometric 3D Perspective Ribs -->
+            <line x1="100" y1="24" x2="100" y2="176" stroke="url(#earth-stroke-grad)" stroke-width="1.2" />
+            <line x1="32" y1="100" x2="168" y2="100" stroke="url(#earth-stroke-grad)" stroke-width="1.2" />
+            <line x1="100" y1="24" x2="146" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="0.75" />
+            <line x1="100" y1="24" x2="54" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="0.75" />
+            <line x1="100" y1="176" x2="146" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="0.75" />
+            <line x1="100" y1="176" x2="54" y2="100" stroke="rgba(255,255,255,0.2)" stroke-width="0.75" />
+          </g>
+
+          <!-- Central Foundation Anchor & Capital Compounding Singularity -->
+          <rect class="geo-center-core" x="96" y="96" width="8" height="8" transform="rotate(45 100 100)" fill="var(--element-tone)" />
+          <circle class="geo-center-pulse" cx="100" cy="100" r="14" stroke="var(--element-tone)" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.6" />
+        </svg>
+      ) : (
+        <!-- N · FIRE (火) — Sacred Solar Dodecagram & Neural Constellation Matrix -->
+        <svg class="geo-svg geo-svg-fire" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="fire-core-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--element-tone)" stop-opacity="0.4" />
+              <stop offset="55%" stop-color="var(--element-secondary)" stop-opacity="0.16" />
+              <stop offset="100%" stop-color="transparent" stop-opacity="0" />
+            </radialGradient>
+            <linearGradient id="fire-stroke-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--element-tone)" />
+              <stop offset="100%" stop-color="var(--element-secondary)" />
+            </linearGradient>
+          </defs>
+
+          <!-- Core Ambient Glow -->
+          <circle class="geo-ambient-disc" cx="100" cy="100" r="78" fill="url(#fire-core-glow)" />
+
+          <!-- Outer 12-Point Dodecagram Solar Ignition Ring -->
+          <g class="geo-dial geo-dial-fire">
+            <circle class="geo-ring-outer" cx="100" cy="100" r="88" stroke="var(--element-tone)" stroke-opacity="0.22" stroke-width="1" stroke-dasharray="2 4" />
+            <circle class="geo-ring-mid" cx="100" cy="100" r="74" stroke="rgba(255,255,255,0.08)" stroke-width="0.75" />
+            <!-- 12 Radiating Burst Notches -->
+            <line x1="100" y1="8" x2="100" y2="16" stroke="var(--element-tone)" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="146" y1="20" x2="142" y2="28" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="180" y1="54" x2="172" y2="58" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="192" y1="100" x2="184" y2="100" stroke="var(--element-tone)" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="180" y1="146" x2="172" y2="142" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="146" y1="180" x2="142" y2="172" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="100" y1="192" x2="100" y2="184" stroke="var(--element-tone)" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="54" y1="180" x2="58" y2="172" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="20" y1="146" x2="28" y2="142" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="8" y1="100" x2="16" y2="100" stroke="var(--element-tone)" stroke-width="1.8" stroke-linecap="round" />
+            <line x1="20" y1="54" x2="28" y2="58" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+            <line x1="54" y1="20" x2="58" y2="28" stroke="var(--element-tone)" stroke-width="1.5" stroke-linecap="round" />
+          </g>
+
+          <!-- 12-Vertex Neural Constellation & Interlocking Hexagram Star -->
+          <g class="geo-neural-constellation">
+            <polygon class="geo-poly geo-star-a" points="100,28 162,136 38,136" stroke="url(#fire-stroke-grad)" stroke-width="1.4" stroke-linejoin="round" fill="rgba(249,115,22,0.02)" />
+            <polygon class="geo-poly geo-star-b" points="100,172 38,64 162,64" stroke="url(#fire-stroke-grad)" stroke-width="1.4" stroke-linejoin="round" fill="rgba(249,115,22,0.02)" />
+            <polygon class="geo-poly geo-star-inner" points="100,48 145,126 55,126" stroke="rgba(255,255,255,0.18)" stroke-width="0.75" stroke-dasharray="3 2" />
+            
+            <!-- Laser Vector Chords between Synaptic Vertices -->
+            <line x1="100" y1="28" x2="100" y2="172" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" stroke-dasharray="2 3" />
+            <line x1="38" y1="64" x2="162" y2="136" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" stroke-dasharray="2 3" />
+            <line x1="162" y1="64" x2="38" y2="136" stroke="rgba(255,255,255,0.15)" stroke-width="0.8" stroke-dasharray="2 3" />
+
+            <!-- Synapse Vertex Glow Points -->
+            <circle class="geo-node" cx="100" cy="28" r="3" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="162" cy="64" r="2.5" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="162" cy="136" r="3" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="100" cy="172" r="3" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="38" cy="136" r="3" fill="var(--element-tone)" />
+            <circle class="geo-node" cx="38" cy="64" r="2.5" fill="var(--element-tone)" />
+          </g>
+
+          <!-- Central Solar Ignition Singularity -->
+          <circle class="geo-center-core" cx="100" cy="100" r="5" fill="var(--element-tone)" />
+          <circle class="geo-center-pulse" cx="100" cy="100" r="15" stroke="var(--element-tone)" stroke-width="0.9" stroke-dasharray="2 2" opacity="0.7" />
+        </svg>
+      )
+    }
+  </div>
+
+  <!-- Content & Copywriting Matrix -->
+  <div class="element-body">
+    <div class="title-block">
+      <h3 class="element-heading">
+        <span class="letter-mark">{element.letter}</span>
+        <span class="heading-sep">·</span>
+        <span class="heading-name">{element.label}</span>
+        <span class="heading-kanji">{element.kanji}</span>
+      </h3>
+      <p class="archetype-label">{element.archetype}</p>
+      <p class="element-tagline">{element.tagline}</p>
+    </div>
+
+    <p class="element-blurb">{element.blurb}</p>
+
+    <!-- Practice Affirmation Capsule -->
+    <div class="practice-box">
+      <div class="practice-header">
+        <span class="practice-dot"></span>
+        <span class="practice-title">{element.practiceTitle}</span>
+      </div>
+      <p class="practice-text">{element.practiceDetail}</p>
+    </div>
+  </div>
+
+  <!-- Card Action Footer -->
+  <div class="card-footer">
+    <span class="explore-btn">
+      <span>Enter Practice</span>
+      <svg class="arrow-svg" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="host-badge">{element.host}</span>
+  </div>
+</a>
+
+<style>
+  .element-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.5rem, 3.8vw, 2.25rem);
+    border-radius: 16px;
+    background: rgba(6, 10, 16, 0.25);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 8px 32px -4px rgba(0, 0, 0, 0.45),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
+      inset 0 0 32px 0 color-mix(in srgb, var(--element-tone) 6%, transparent);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    transform-style: preserve-3d;
+    will-change: transform, box-shadow, border-color;
+    transition:
+      border-color 0.4s var(--ease),
+      box-shadow 0.4s var(--ease);
+  }
+
+  /* Specular Ambient Glow underneath glass */
+  .element-ambient-glow {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at var(--mx, 50%) var(--my, 40%),
+      color-mix(in srgb, var(--element-tone) 16%, transparent),
+      transparent 65%
+    );
+    opacity: 0.6;
+    transition: opacity 0.5s var(--ease);
+    z-index: 0;
+  }
+
+  /* Top Meta Bar */
+  .card-meta-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .element-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.65rem 0.25rem 0.45rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+  }
+
+  .kanji-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--element-tone) 20%, transparent);
+    color: var(--element-tone);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 550;
+  }
+
+  .meta-right {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .geo-sig {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--element-tone);
+    opacity: 0.85;
+  }
+
+  .shortcut-pill {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* Centerpiece Geometric Stage */
+  .geo-centerpiece-stage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: clamp(140px, 24vw, 190px);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  .geo-svg {
+    width: 100%;
+    height: 100%;
+    max-width: clamp(140px, 24vw, 190px);
+    max-height: clamp(140px, 24vw, 190px);
+    overflow: visible;
+  }
+
+  .geo-node {
+    filter: drop-shadow(0 0 6px var(--element-tone));
+  }
+
+  .geo-center-core {
+    filter: drop-shadow(0 0 8px var(--element-tone));
+  }
+
+  /* Body Section */
+  .element-body {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .element-heading {
+    margin: 0;
+    font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  .letter-mark {
+    color: var(--element-tone);
+    font-weight: 700;
+  }
+
+  .heading-sep {
+    opacity: 0.4;
+  }
+
+  .heading-kanji {
+    font-size: 0.9em;
+    color: var(--dim);
+    margin-left: 0.25rem;
+    font-weight: 400;
+  }
+
+  .archetype-label {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    opacity: 0.9;
+  }
+
+  .element-tagline {
+    margin: 0;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--element-tone);
+    letter-spacing: 0.02em;
+  }
+
+  .element-blurb {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* Practice Affirmation Box */
+  .practice-box {
+    margin-top: 0.4rem;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-left: 2.5px solid var(--element-tone);
+    backdrop-filter: blur(6px);
+  }
+
+  .practice-header {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .practice-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--element-tone);
+    box-shadow: 0 0 6px var(--element-tone);
+  }
+
+  .practice-title {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+
+  .practice-text {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--dim);
+  }
+
+  /* Card Action Footer */
+  .card-footer {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.88rem;
+    font-weight: 550;
+    color: var(--ink);
+    transition: gap 0.25s var(--ease), color 0.25s var(--ease);
+  }
+
+  .arrow-svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s var(--ease);
+  }
+
+  .host-badge {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--dim);
+    letter-spacing: 0.04em;
+  }
+
+  /* Interactions */
+  .element-card:hover {
+    border-color: color-mix(in srgb, var(--element-tone) 45%, rgba(255,255,255,0.12));
+    box-shadow:
+      0 16px 48px -8px rgba(0, 0, 0, 0.55),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+      inset 0 0 42px 0 color-mix(in srgb, var(--element-tone) 12%, transparent);
+  }
+
+  .element-card:hover .element-ambient-glow {
+    opacity: 0.95;
+  }
+
+  .element-card:hover .explore-btn {
+    color: var(--element-tone);
+    gap: 0.65rem;
+  }
+
+  .element-card:hover .arrow-svg {
+    transform: translateX(3px);
+  }
+
+  @media (pointer: coarse) {
+    .shortcut-pill {
+      display: none;
+    }
+  }
+</style>

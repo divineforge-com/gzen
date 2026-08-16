@@ -3,68 +3,25 @@ import { animate } from "animejs";
 import { ANIMATION_SEEDS } from "../data/animation-seeds";
 
 /**
- * gZen Kinetic Motion & Teleportation Engine
- * Dual-Engine Synergy: GSAP 3.15+ (Timelines, quickTo, Inertia) + Anime.js v4 (Elastic Springs)
+ * gZen Tri-Elemental Kinetic Motion & Practice Ignition Engine
+ * Dual-Engine Stack: GSAP 3.15+ (Timelines, quickTo, Inertia, Parallax) + Anime.js v4 (Elastic Springs)
  *
- * Design Language: Tesla/xAI ultra-clean minimalism + gZen saffron & cool monastery tones.
+ * Design Language: Tesla/xAI ultra-clean minimalism + Tri-Elemental Sovereignty (Water · Earth · Fire).
  */
-
-const STORAGE_KEY = "gzen-theme";
-type ThemeId = "monastery" | "ignite";
-
-const THEME_COLORS: Record<ThemeId, string> = {
-  monastery: "#0c0d0e",
-  ignite: "#120e0a",
-};
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const isTouch = window.matchMedia("(pointer: coarse)").matches;
-
-function currentTheme(): ThemeId {
-  const root = document.documentElement;
-  const theme = root.getAttribute("data-theme") as ThemeId | null;
-  return theme === "ignite" ? "ignite" : "monastery";
-}
-
-function applyTheme(theme: ThemeId) {
-  const root = document.documentElement;
-  root.setAttribute("data-theme", theme);
-  try {
-    localStorage.setItem(STORAGE_KEY, theme);
-  } catch {
-    // Non-blocking storage fallback
-  }
-
-  const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) {
-    meta.setAttribute("content", THEME_COLORS[theme]);
-  }
-
-  // Micro-interaction on theme toggle knob
-  const knob = document.querySelector<HTMLElement>(".theme-toggle .knob");
-  if (knob && !reduceMotion) {
-    gsap.fromTo(
-      knob,
-      { scale: 0.82 },
-      { scale: 1, duration: 0.35, ease: "back.out(2)" }
-    );
-  }
-}
-
-function initThemeToggle() {
-  const btn = document.getElementById("theme-toggle");
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    applyTheme(currentTheme() === "monastery" ? "ignite" : "monastery");
-  });
-}
 
 /**
  * 1. Intro Stagger Choreography (GSAP Timeline)
  */
 function initIntroChoreography() {
   if (reduceMotion) {
-    gsap.set(".reveal, .hero-flow, .path, .foot, .geo-stage, .geo-readouts", { opacity: 1, y: 0, scale: 1 });
+    gsap.set(".reveal, .hero-flow, .element-card, .foot, #geoStage, .geo-readouts", {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+    });
     return;
   }
 
@@ -78,19 +35,19 @@ function initIntroChoreography() {
   tl.fromTo(
     "#geoStage",
     { opacity: 0, scale: 0.72, rotate: -18 },
-    { opacity: 0.82, scale: 1, rotate: 0, duration: 1.35, ease: "power2.out" }
+    { opacity: 0.85, scale: 1, rotate: 0, duration: 1.35, ease: "power2.out" }
   )
     .fromTo(
       ".geo-readouts",
       { opacity: 0 },
-      { opacity: 0.45, duration: 1.1, ease: "power2.out" },
+      { opacity: 0.5, duration: 1.1, ease: "power2.out" },
       "-=1.0"
     )
-    // Hero ambient glow entrance
+    // Hero ambient elemental aura entrance
     .fromTo(
       ".hero-flow",
       { opacity: 0, scale: 0.75 },
-      { opacity: 0.85, scale: 1, duration: 1.2, ease: "power2.out" },
+      { opacity: 0.9, scale: 1, duration: 1.2, ease: "power2.out" },
       "-=0.9"
     )
     .fromTo(
@@ -99,7 +56,7 @@ function initIntroChoreography() {
         ".hero .wordmark",
         ".hero .hook",
         ".hero .subhead",
-        ".hero .theme-line",
+        ".hero .element-trinity-row",
         ".hero .cta-row",
       ],
       { opacity: 0, y: 26, scale: 0.98 },
@@ -112,92 +69,164 @@ function initIntroChoreography() {
       },
       "-=0.9"
     )
-    // Section header & portal cards reveal
+    // Elements section header & element cards reveal
     .fromTo(
-      ".paths-head",
-      { opacity: 0, y: 20 },
+      ".elements-head",
+      { opacity: 0, y: 22 },
       { opacity: 1, y: 0, duration: 0.7 },
       "-=0.5"
     )
     .fromTo(
-      ".path",
-      { opacity: 0, y: 32, scale: 0.97 },
+      ".element-card",
+      { opacity: 0, y: 36, scale: 0.97 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
         duration: 0.75,
-        stagger: 0.09,
+        stagger: 0.1,
       },
       "-=0.4"
     )
     .fromTo(
       ".foot",
-      { opacity: 0, y: 15 },
+      { opacity: 0, y: 16 },
       { opacity: 1, y: 0, duration: 0.6 },
       "-=0.3"
     );
 }
 
 /**
- * 2. High-Performance 3D Kinetic Tilt & Mobile Touch Gesture Engine
+ * 2. Scroll-Triggered In-Card Centerpiece Activation
+ * Unspools outer dials and scales inner geometry as each card scrolls into the focal viewport
+ */
+function initScrollTriggeredCenterpieces() {
+  if (reduceMotion) return;
+
+  const cards = Array.from(document.querySelectorAll<HTMLElement>(".element-card"));
+  if (!cards.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const card = entry.target as HTMLElement;
+        const letter = card.dataset.element;
+        const svg = card.querySelector<SVGSVGElement>(".geo-svg");
+        if (!svg) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+          // Card entered focal zone
+          const dial = svg.querySelector<SVGElement>(".geo-dial");
+          const polyGroup = svg.querySelector<SVGElement>(
+            ".geo-triangle-group, .geo-octahedron-group, .geo-neural-constellation"
+          );
+          const nodes = svg.querySelectorAll<SVGElement>(".geo-node");
+          const enso = svg.querySelector<SVGPathElement>(".geo-enso-path");
+
+          if (dial) {
+            gsap.to(dial, {
+              rotation: "+=60",
+              transformOrigin: "100px 100px",
+              duration: 1.4,
+              ease: "power2.out",
+            });
+          }
+
+          if (polyGroup) {
+            gsap.fromTo(
+              polyGroup,
+              { scale: 0.92, transformOrigin: "100px 100px" },
+              { scale: 1.04, duration: 0.8, ease: "back.out(1.5)" }
+            );
+          }
+
+          if (nodes.length) {
+            gsap.fromTo(
+              nodes,
+              { scale: 0.6, transformOrigin: "center" },
+              { scale: 1.25, duration: 0.5, stagger: 0.05, ease: "back.out(2)" }
+            );
+          }
+
+          if (enso && letter === "Z") {
+            gsap.fromTo(
+              enso,
+              { strokeDashoffset: 120 },
+              { strokeDashoffset: 0, duration: 1.2, ease: "power2.out" }
+            );
+          }
+        }
+      });
+    },
+    {
+      threshold: [0.25, 0.5, 0.75],
+      rootMargin: "-40px 0px -40px 0px",
+    }
+  );
+
+  cards.forEach((card) => observer.observe(card));
+}
+
+/**
+ * 3. High-Performance 3D Kinetic Tilt & Mobile Touch Gesture Engine
  * Desktop: 60fps GC-Free Magnetic 3D Physics (gsap.quickTo)
  * Mobile: Tactile Touch Compression, Specular Finger Glow, Elastic Swipe Snap, and Haptic Feedback
  */
 function initKineticCards() {
   if (reduceMotion) return;
 
-  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
+  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".element-card"));
   if (!cards.length) return;
 
   cards.forEach((card) => {
-    const svgZRing = card.querySelector<SVGCircleElement>(".portal-svg-z .ring-outer");
-    const svgZTri = card.querySelector<SVGPolygonElement>(".portal-svg-z .tri-core");
-    const svgEDiamond = card.querySelectorAll<SVGElement>(".portal-svg-e .diamond-facet");
-    const svgEAlloc = card.querySelector<SVGPathElement>(".portal-svg-e .alloc-ray");
-    const svgNNodes = card.querySelectorAll<SVGCircleElement>(".portal-svg-n .neural-node");
-    const svgNChords = card.querySelectorAll<SVGLineElement>(".portal-svg-n .neural-chord");
-    const watermark = card.querySelector<HTMLElement>(".path-watermark");
+    const letter = card.dataset.element;
+    const svg = card.querySelector<SVGSVGElement>(".geo-svg");
+    const ambientDisc = card.querySelector<SVGCircleElement>(".geo-ambient-disc");
+    const dial = card.querySelector<SVGElement>(".geo-dial");
+    const polyGroup = card.querySelector<SVGElement>(
+      ".geo-triangle-group, .geo-octahedron-group, .geo-neural-constellation"
+    );
+    const centerPulse = card.querySelector<SVGElement>(".geo-center-pulse");
 
     const triggerGlyphEnter = () => {
-      if (svgZRing) {
-        gsap.to(svgZRing, { rotation: "+=180", transformOrigin: "22px 22px", duration: 1.2, ease: "power2.out" });
+      if (dial) {
+        gsap.to(dial, {
+          rotation: "+=90",
+          transformOrigin: "100px 100px",
+          duration: 1.2,
+          ease: "power2.out",
+        });
       }
-      if (svgZTri) {
-        gsap.to(svgZTri, { scale: 1.15, transformOrigin: "22px 21px", duration: 0.35, ease: "back.out(2)" });
+      if (polyGroup) {
+        gsap.to(polyGroup, {
+          scale: 1.08,
+          transformOrigin: "100px 100px",
+          duration: 0.35,
+          ease: "back.out(1.8)",
+        });
       }
-      if (svgEDiamond.length) {
-        gsap.to(svgEDiamond, { y: -2.5, scaleY: 1.05, transformOrigin: "22px 17px", duration: 0.35, ease: "back.out(2)" });
+      if (ambientDisc) {
+        gsap.to(ambientDisc, { r: 88, duration: 0.4, ease: "power2.out" });
       }
-      if (svgEAlloc) {
-        gsap.to(svgEAlloc, { scale: 1.3, transformOrigin: "22px 17px", duration: 0.3, ease: "power2.out" });
-      }
-      if (svgNNodes.length) {
-        gsap.to(svgNNodes, { scale: 1.35, transformOrigin: "center", duration: 0.3, stagger: 0.04, ease: "back.out(2)" });
-      }
-      if (svgNChords.length) {
-        gsap.to(svgNChords, { strokeOpacity: 1, duration: 0.25 });
-      }
-      if (watermark) {
-        gsap.to(watermark, { opacity: 0.28, scale: 1.05, duration: 0.4, ease: "power2.out" });
+      if (centerPulse) {
+        gsap.to(centerPulse, { scale: 1.4, transformOrigin: "100px 100px", duration: 0.4, ease: "back.out(2)" });
       }
     };
 
     const resetGlyphs = () => {
-      if (svgZTri) {
-        gsap.to(svgZTri, { scale: 1, duration: 0.4, ease: "power2.out" });
+      if (polyGroup) {
+        gsap.to(polyGroup, {
+          scale: 1,
+          transformOrigin: "100px 100px",
+          duration: 0.45,
+          ease: "power2.out",
+        });
       }
-      if (svgEDiamond.length) {
-        gsap.to(svgEDiamond, { y: 0, scaleY: 1, duration: 0.4, ease: "power2.out" });
+      if (ambientDisc) {
+        gsap.to(ambientDisc, { r: 75, duration: 0.45, ease: "power2.out" });
       }
-      if (svgEAlloc) {
-        gsap.to(svgEAlloc, { scale: 1, duration: 0.35, ease: "power2.out" });
-      }
-      if (svgNNodes.length) {
-        gsap.to(svgNNodes, { scale: 1, duration: 0.3, ease: "power2.out" });
-      }
-      if (watermark) {
-        gsap.to(watermark, { opacity: 0.12, scale: 1, duration: 0.5, ease: "power2.out" });
+      if (centerPulse) {
+        gsap.to(centerPulse, { scale: 1, transformOrigin: "100px 100px", duration: 0.4, ease: "power2.out" });
       }
     };
 
@@ -314,7 +343,7 @@ function initKineticCards() {
         card.style.setProperty("--mx", `${((x / bounds.width) * 100).toFixed(1)}%`);
         card.style.setProperty("--my", `${((y / bounds.height) * 100).toFixed(1)}%`);
 
-        // Horizontal swipe micro-deflection (if not predominantly vertical scrolling)
+        // Horizontal swipe micro-deflection
         if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 6) {
           const maxDisp = ANIMATION_SEEDS.mobileGestures.maxSwipeDisplacementPx;
           const clampedX = Math.sign(dx) * Math.min(maxDisp, Math.abs(dx) * 0.28);
@@ -355,10 +384,10 @@ function initKineticCards() {
 }
 
 /**
- * 3. Cinematic Teleportation Step-Through Transition with Mobile Haptics
+ * 4. Cinematic Teleportation Step-Through Transition with Mobile Haptics
  */
 function initTeleportation() {
-  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
+  const cards = Array.from(document.querySelectorAll<HTMLAnchorElement>(".element-card"));
   if (!cards.length) return;
 
   cards.forEach((card) => {
@@ -389,8 +418,8 @@ function initTeleportation() {
 
       tl.to(card, {
         scale: 1.035,
-        borderColor: "var(--accent)",
-        boxShadow: "0 0 45px rgba(235, 120, 39, 0.4)",
+        borderColor: "var(--element-tone)",
+        boxShadow: "0 0 45px rgba(34, 211, 238, 0.4)",
         duration: 0.25,
         ease: "power2.out",
       }).to(
@@ -406,8 +435,9 @@ function initTeleportation() {
     });
   });
 }
+
 /**
- * 4. Multi-Layer Scroll Parallax (GSAP Ticker Lerp)
+ * 5. Multi-Layer Scroll Parallax (GSAP Ticker Lerp)
  */
 function initScrollParallax() {
   if (reduceMotion) return;
@@ -415,7 +445,7 @@ function initScrollParallax() {
   const heroFlow = document.querySelector<HTMLElement>(".hero-flow");
   const wordmark = document.querySelector<HTMLElement>(".wordmark");
   const starfield = document.querySelector<HTMLElement>(".starfield");
-  const pathsGrid = document.querySelector<HTMLElement>(".paths .grid");
+  const elementsGrid = document.querySelector<HTMLElement>(".elements-section .grid");
 
   let targetScrollY = 0;
   let currentScrollY = 0;
@@ -440,21 +470,21 @@ function initScrollParallax() {
 
     if (wordmark) {
       wordmark.style.transform = `translate3d(0, ${currentScrollY * 0.12}px, 0)`;
-      wordmark.style.opacity = `${Math.max(0.12, 1 - currentScrollY / 500)}`;
+      wordmark.style.opacity = `${Math.max(0.15, 1 - currentScrollY / 550)}`;
     }
 
     if (starfield) {
       starfield.style.transform = `translate3d(0, ${-currentScrollY * 0.06}px, 0)`;
     }
 
-    if (pathsGrid && currentScrollY > 20) {
-      pathsGrid.style.transform = `translate3d(0, ${Math.min(12, currentScrollY * 0.02)}px, 0)`;
+    if (elementsGrid && currentScrollY > 20) {
+      elementsGrid.style.transform = `translate3d(0, ${Math.min(12, currentScrollY * 0.02)}px, 0)`;
     }
   });
 }
 
 /**
- * 5. Kinetic Sacred & Coordinate Geometry Engine (Scroll & Parallax Driven)
+ * 6. Kinetic Sacred & Coordinate Geometry Engine (Scroll & Parallax Driven)
  */
 function initGeometricField() {
   const geoStage = document.getElementById("geoStage");
@@ -577,8 +607,9 @@ function initGeometricField() {
     }
   });
 }
+
 /**
- * 6. Ambient Cursor Glow with Smooth Lerp
+ * 7. Ambient Cursor Glow with Smooth Lerp
  */
 function initAmbientPointer() {
   if (reduceMotion || isTouch) return;
@@ -608,9 +639,9 @@ function initAmbientPointer() {
     shell.style.setProperty("--py", `${(currentY * 100).toFixed(2)}%`);
   });
 }
+
 /**
- * 7. Mobile Device Orientation (Gyroscope Parallax)
- * Subtle 3D spatial pitch and roll on handheld devices
+ * 8. Mobile Device Orientation (Gyroscope Parallax)
  */
 function initDeviceOrientationParallax() {
   if (reduceMotion || typeof window === "undefined" || !("DeviceOrientationEvent" in window)) return;
@@ -626,8 +657,6 @@ function initDeviceOrientationParallax() {
 
   const handleOrientation = (e: DeviceOrientationEvent) => {
     if (e.gamma === null || e.beta === null) return;
-    // gamma: left-right roll [-90, 90]
-    // beta: front-back pitch [-180, 180], viewing pitch centered around ~38 deg
     const normRoll = Math.max(-1, Math.min(1, e.gamma / 25));
     const normPitch = Math.max(-1, Math.min(1, (e.beta - 38) / 25));
 
@@ -649,11 +678,11 @@ function initDeviceOrientationParallax() {
 }
 
 /**
- * 7. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
+ * 9. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
  */
 function initKeyboardHint() {
-  const pathEls = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
-  if (!pathEls.length) return;
+  const cardEls = Array.from(document.querySelectorAll<HTMLAnchorElement>(".element-card"));
+  if (!cardEls.length) return;
 
   window.addEventListener("keydown", (e) => {
     const t = e.target as HTMLElement | null;
@@ -664,28 +693,28 @@ function initKeyboardHint() {
     const key = e.key.toUpperCase();
     if (!["Z", "E", "N"].includes(key)) return;
 
-    const path = pathEls.find((d) => d.dataset.path === key);
-    if (path) {
+    const card = cardEls.find((d) => d.dataset.element === key);
+    if (card) {
       e.preventDefault();
-      path.focus();
+      card.focus();
 
       if (reduceMotion) {
-        if (path.href) window.location.href = path.href;
+        if (card.href) window.location.href = card.href;
         return;
       }
 
       // Snappy elastic spring pop
-      animate(path, {
-        scale: [0.95, 1.035, 1],
+      animate(card, {
+        scale: [0.95, 1.04, 1],
         duration: 380,
         ease: "outBack(2)",
       });
 
-      path.classList.add("path-key-flash");
+      card.classList.add("element-key-flash");
       window.setTimeout(() => {
-        path.classList.remove("path-key-flash");
-        if (path.href) {
-          window.location.href = path.href;
+        card.classList.remove("element-key-flash");
+        if (card.href) {
+          window.location.href = card.href;
         }
       }, 340);
     }
@@ -693,8 +722,8 @@ function initKeyboardHint() {
 }
 
 // Lifecycle Initializations
-initThemeToggle();
 initIntroChoreography();
+initScrollTriggeredCenterpieces();
 initKineticCards();
 initTeleportation();
 initDeviceOrientationParallax();
