@@ -1,0 +1,3 @@
+## 2025-02-18 - Discoverability for Keyboard Interactive Elements
+ **Learning:** Interactive elements with custom keyboard shortcuts (such as the Path Cards in the Astro portal) often lack discoverability for both screen reader users and sighted users. While the shortcut logic exists in JavaScript, the UI components themselves were not exposing this.
+ **Action:** For any element utilizing a custom keyboard shortcut, include `aria-keyshortcuts` attribute for screen reader pronunciation and add `(Shortcut: [Key])` to the `title` attribute to provide a non-intrusive visual tooltip on hover.
