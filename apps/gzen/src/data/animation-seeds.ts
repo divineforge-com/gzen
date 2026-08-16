@@ -47,6 +47,17 @@ export interface MotionSeedConfig {
     driftSpeed: number;
     ambientOpacity: [number, number];
   };
+  geometricField: {
+    rotationSpeedIdle: number;
+    counterRotationSpeedIdle: number;
+    scrollRotationFactor: number;
+    scrollCounterFactor: number;
+    scrollScaleFactor: number;
+    tiltInertia: number;
+    perspectiveMaxPitchDeg: number;
+    perspectiveMaxRollDeg: number;
+    ensoDashUnfoldLength: number;
+  };
 }
 
 export const ANIMATION_SEEDS: MotionSeedConfig = {
@@ -106,5 +117,16 @@ export const ANIMATION_SEEDS: MotionSeedConfig = {
     count: 36,
     driftSpeed: 0.15,
     ambientOpacity: [0.15, 0.75],
+  },
+  geometricField: {
+    rotationSpeedIdle: 0.02,
+    counterRotationSpeedIdle: -0.028,
+    scrollRotationFactor: 0.28,
+    scrollCounterFactor: -0.38,
+    scrollScaleFactor: 0.16,
+    tiltInertia: 0.45,
+    perspectiveMaxPitchDeg: 7.5,
+    perspectiveMaxRollDeg: 7.5,
+    ensoDashUnfoldLength: 700,
   },
 };

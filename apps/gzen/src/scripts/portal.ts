@@ -64,7 +64,7 @@ function initThemeToggle() {
  */
 function initIntroChoreography() {
   if (reduceMotion) {
-    gsap.set(".reveal, .hero-flow, .path, .foot", { opacity: 1, y: 0, scale: 1 });
+    gsap.set(".reveal, .hero-flow, .path, .foot, .geo-stage, .geo-readouts", { opacity: 1, y: 0, scale: 1 });
     return;
   }
 
@@ -74,13 +74,25 @@ function initIntroChoreography() {
     },
   });
 
-  // Hero ambient glow entrance
+  // Kinetic Geometric Stage & Ambient Core reveal
   tl.fromTo(
-    ".hero-flow",
-    { opacity: 0, scale: 0.75 },
-    { opacity: 0.85, scale: 1, duration: 1.2, ease: "power2.out" }
+    "#geoStage",
+    { opacity: 0, scale: 0.72, rotate: -18 },
+    { opacity: 0.82, scale: 1, rotate: 0, duration: 1.35, ease: "power2.out" }
   )
-    // Hero typography staggered reveal
+    .fromTo(
+      ".geo-readouts",
+      { opacity: 0 },
+      { opacity: 0.45, duration: 1.1, ease: "power2.out" },
+      "-=1.0"
+    )
+    // Hero ambient glow entrance
+    .fromTo(
+      ".hero-flow",
+      { opacity: 0, scale: 0.75 },
+      { opacity: 0.85, scale: 1, duration: 1.2, ease: "power2.out" },
+      "-=0.9"
+    )
     .fromTo(
       [
         ".hero .eyebrow",
@@ -315,7 +327,131 @@ function initScrollParallax() {
 }
 
 /**
- * 5. Ambient Cursor Glow with Smooth Lerp
+ * 5. Kinetic Sacred & Coordinate Geometry Engine (Scroll & Parallax Driven)
+ */
+function initGeometricField() {
+  const geoStage = document.getElementById("geoStage");
+  const geoOuterDial = document.getElementById("geoOuterDial");
+  const geoPolyhedra = document.getElementById("geoPolyhedra");
+  const geoEnsoPath = document.getElementById("geoEnsoPath");
+  const geoHexA = document.querySelector<SVGPolygonElement>(".geo-hex-a");
+  const geoHexB = document.querySelector<SVGPolygonElement>(".geo-hex-b");
+  const geoTelemetryX = document.querySelector<HTMLElement>(".geo-telemetry-x");
+  const geoVertices = document.getElementById("geoVertices");
+
+  if (!geoStage || !geoOuterDial || !geoPolyhedra) return;
+
+  if (reduceMotion) {
+    gsap.set(geoStage, { opacity: 0.8 });
+    return;
+  }
+
+  const cfg = ANIMATION_SEEDS.geometricField;
+
+  // 3D Perspective Mouse Tilt (GC-Free quickTo setters)
+  let setStageRotX: ((v: number) => void) | null = null;
+  let setStageRotY: ((v: number) => void) | null = null;
+  let setStageX: ((v: number) => void) | null = null;
+  let setStageY: ((v: number) => void) | null = null;
+
+  if (!isTouch) {
+    setStageRotX = gsap.quickTo(geoStage, "rotateX", {
+      duration: cfg.tiltInertia,
+      ease: "power2.out",
+    });
+    setStageRotY = gsap.quickTo(geoStage, "rotateY", {
+      duration: cfg.tiltInertia,
+      ease: "power2.out",
+    });
+    setStageX = gsap.quickTo(geoStage, "x", {
+      duration: cfg.tiltInertia,
+      ease: "power2.out",
+    });
+    setStageY = gsap.quickTo(geoStage, "y", {
+      duration: cfg.tiltInertia,
+      ease: "power2.out",
+    });
+
+    window.addEventListener(
+      "pointermove",
+      (e) => {
+        const nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+
+        if (setStageRotX) setStageRotX(-ny * cfg.perspectiveMaxPitchDeg);
+        if (setStageRotY) setStageRotY(nx * cfg.perspectiveMaxRollDeg);
+        if (setStageX) setStageX(nx * 18);
+        if (setStageY) setStageY(ny * 14);
+      },
+      { passive: true }
+    );
+  }
+
+  // Scroll-Driven Kinetic Evolution Loop
+  let baseDialAngle = 0;
+  let basePolyAngle = 0;
+  let targetScrollY = 0;
+  let smoothScrollY = 0;
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      targetScrollY = window.scrollY;
+    },
+    { passive: true }
+  );
+
+  gsap.ticker.add(() => {
+    // Increment ambient idle rotation
+    baseDialAngle = (baseDialAngle + cfg.rotationSpeedIdle) % 360;
+    basePolyAngle = (basePolyAngle + cfg.counterRotationSpeedIdle) % 360;
+
+    // Smooth scroll position lerp
+    smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
+
+    // 1. Dial & Polyhedra Counter-Rotations
+    const dialAngle = baseDialAngle + smoothScrollY * cfg.scrollRotationFactor;
+    const polyAngle = basePolyAngle + smoothScrollY * cfg.scrollCounterFactor;
+
+    geoOuterDial.style.transform = `rotate(${dialAngle.toFixed(2)}deg)`;
+    geoPolyhedra.style.transform = `rotate(${polyAngle.toFixed(2)}deg)`;
+
+    // 2. Hexagram Harmonic Sub-Rotations
+    if (geoHexA) {
+      geoHexA.style.transform = `rotate(${(smoothScrollY * 0.15).toFixed(2)}deg)`;
+      geoHexA.style.transformOrigin = "400px 400px";
+    }
+    if (geoHexB) {
+      geoHexB.style.transform = `rotate(${(-smoothScrollY * 0.22).toFixed(2)}deg)`;
+      geoHexB.style.transformOrigin = "400px 400px";
+    }
+
+    // 3. Stage Vertical Parallax & Dynamic Expansion
+    const stageY = smoothScrollY * 0.38;
+    const stageScale = 1 + Math.min(0.28, (smoothScrollY / 700) * cfg.scrollScaleFactor);
+    geoStage.style.transform = `translate(-50%, calc(-50% + ${stageY.toFixed(1)}px)) scale(${stageScale.toFixed(3)})`;
+
+    // 4. Enso SVG Dynamic Stroke Unfold
+    if (geoEnsoPath) {
+      const unfoldOffset = Math.max(0, cfg.ensoDashUnfoldLength - smoothScrollY * 1.35);
+      geoEnsoPath.style.strokeDashoffset = `${unfoldOffset.toFixed(1)}`;
+    }
+
+    // 5. Telemetry Axis Translation
+    if (geoTelemetryX) {
+      const axisOffset = smoothScrollY * 0.25;
+      geoTelemetryX.style.transform = `translateY(${axisOffset.toFixed(1)}px)`;
+    }
+
+    // 6. Harmonic Vertices Constellation Pulse
+    if (geoVertices) {
+      const vertexOpacity = Math.min(1, 0.65 + Math.sin(smoothScrollY * 0.01 + baseDialAngle * 0.05) * 0.35);
+      geoVertices.style.opacity = `${vertexOpacity.toFixed(2)}`;
+    }
+  });
+}
+/**
+ * 6. Ambient Cursor Glow with Smooth Lerp
  */
 function initAmbientPointer() {
   if (reduceMotion || isTouch) return;
@@ -347,7 +483,7 @@ function initAmbientPointer() {
 }
 
 /**
- * 6. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
+ * 7. Z · E · N Keyboard Teleportation (Anime.js Spring Pop)
  */
 function initKeyboardHint() {
   const pathEls = Array.from(document.querySelectorAll<HTMLAnchorElement>(".path"));
@@ -396,5 +532,6 @@ initIntroChoreography();
 initKineticCards();
 initTeleportation();
 initScrollParallax();
+initGeometricField();
 initAmbientPointer();
 initKeyboardHint();

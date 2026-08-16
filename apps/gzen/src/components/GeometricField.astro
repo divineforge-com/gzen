@@ -1,0 +1,411 @@
+---
+/**
+ * GeometricField.astro — Kinetic Sacred & Coordinate Geometry Matrix
+ * Precision vector geometry engine blending Tesla/xAI aesthetic with Zen sacred geometry.
+ *
+ * Layers:
+ * 1. Global telemetry coordinate axes & crosshairs
+ * 2. Outer celestial dial (72-division degree ring + cardinal azimuth indicators)
+ * 3. Nested sacred polyhedra (Dodecagon, Metatron Hexagram, Phi concentric rings)
+ * 4. Scroll-driven kinetic Enso vector arc & vertex node constellation
+ * 5. Dynamic portal beam vectors
+ */
+
+// Generate 72 degree tick marks (every 5 degrees)
+const ticks = Array.from({ length: 72 }, (_, i) => {
+  const angle = (i * 5 * Math.PI) / 180;
+  const isMajor = i % 6 === 0; // Every 30 deg
+  const isMid = i % 3 === 0;   // Every 15 deg
+  const rOuter = 340;
+  const rInner = isMajor ? 322 : isMid ? 328 : 333;
+  const x1 = 400 + Math.cos(angle) * rInner;
+  const y1 = 400 + Math.sin(angle) * rInner;
+  const x2 = 400 + Math.cos(angle) * rOuter;
+  const y2 = 400 + Math.sin(angle) * rOuter;
+  return { x1, y1, x2, y2, isMajor, isMid, deg: i * 5 };
+});
+
+// Generate 12-point Dodecagon coordinates
+const dodecagonPoints = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i * 30 * Math.PI) / 180 - Math.PI / 2;
+  const r = 270;
+  const x = 400 + Math.cos(angle) * r;
+  const y = 400 + Math.sin(angle) * r;
+  return `${x.toFixed(1)},${y.toFixed(1)}`;
+}).join(" ");
+
+// Generate inner Hexagon coordinates
+const hexagonPoints = Array.from({ length: 6 }, (_, i) => {
+  const angle = (i * 60 * Math.PI) / 180 - Math.PI / 2;
+  const r = 180;
+  const x = 400 + Math.cos(angle) * r;
+  const y = 400 + Math.sin(angle) * r;
+  return `${x.toFixed(1)},${y.toFixed(1)}`;
+}).join(" ");
+
+// Generate counter Hexagon coordinates
+const counterHexagonPoints = Array.from({ length: 6 }, (_, i) => {
+  const angle = (i * 60 * Math.PI) / 180;
+  const r = 180;
+  const x = 400 + Math.cos(angle) * r;
+  const y = 400 + Math.sin(angle) * r;
+  return `${x.toFixed(1)},${y.toFixed(1)}`;
+}).join(" ");
+
+// Harmonic Vertex Nodes
+const vertexNodes = Array.from({ length: 12 }, (_, i) => {
+  const angle = (i * 30 * Math.PI) / 180;
+  const r = i % 2 === 0 ? 270 : 180;
+  const cx = 400 + Math.cos(angle) * r;
+  const cy = 400 + Math.sin(angle) * r;
+  return { cx, cy, r: i % 2 === 0 ? 3 : 2 };
+});
+---
+
+<div class="geometric-viewport" aria-hidden="true">
+  <!-- Subtle coordinate telemetry grid overlay -->
+  <div class="geo-grid-matrix"></div>
+
+  <!-- Full-viewport precision crosshair lines -->
+  <div class="geo-telemetry-axis geo-telemetry-x"></div>
+  <div class="geo-telemetry-axis geo-telemetry-y"></div>
+
+  <!-- Floating Telemetry Labels -->
+  <div class="geo-readouts">
+    <div class="geo-readout geo-readout-tl">
+      <span class="dot"></span>
+      <span class="label">COORD // 36°14′N · φ 1.618</span>
+    </div>
+    <div class="geo-readout geo-readout-tr">
+      <span class="label">SYS // KINETIC ZEN</span>
+      <span class="dot"></span>
+    </div>
+    <div class="geo-readout geo-readout-bl">
+      <span class="label">AZIMUTH // 000° — 360°</span>
+    </div>
+    <div class="geo-readout geo-readout-br">
+      <span class="label">VECTOR // SOVEREIGN</span>
+    </div>
+  </div>
+
+  <!-- Core Sacred & Kinetic Geometric SVG Apparatus -->
+  <div class="geo-stage" id="geoStage">
+    <svg
+      class="geo-svg"
+      viewBox="0 0 800 800"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <defs>
+        <!-- Radial glow for core convergence -->
+        <radialGradient id="geoGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35" />
+          <stop offset="40%" stop-color="var(--accent)" stop-opacity="0.1" />
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+        </radialGradient>
+
+        <linearGradient id="axisBeam" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.6" />
+          <stop offset="50%" stop-color="var(--line-strong)" stop-opacity="0.2" />
+          <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.6" />
+        </linearGradient>
+      </defs>
+
+      <!-- Center Ambient Core Glow -->
+      <circle cx="400" cy="400" r="280" fill="url(#geoGlow)" class="geo-ambient-glow" />
+
+      <!-- LAYER 1: Outer Celestial Dial (Tick Marks & Degree Ring) -->
+      <g class="geo-outer-dial" id="geoOuterDial">
+        <!-- Outer circumference bounding rings -->
+        <circle cx="400" cy="400" r="348" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 6" />
+        <circle cx="400" cy="400" r="340" stroke="var(--line-strong)" stroke-width="1.2" />
+        <circle cx="400" cy="400" r="316" stroke="var(--line)" stroke-width="0.8" />
+
+        <!-- 72 Precision Radial Ticks -->
+        {
+          ticks.map((t) => (
+            <line
+              x1={t.x1}
+              y1={t.y1}
+              x2={t.x2}
+              y2={t.y2}
+              stroke={t.isMajor ? "var(--accent)" : t.isMid ? "var(--line-strong)" : "var(--line)"}
+              stroke-width={t.isMajor ? "1.6" : t.isMid ? "1.1" : "0.75"}
+              stroke-opacity={t.isMajor ? "0.85" : "0.5"}
+            />
+          ))
+        }
+
+        <!-- 4 Cardinal Quadrant Nodes -->
+        <circle cx="400" cy="60" r="4" fill="var(--accent)" />
+        <circle cx="740" cy="400" r="4" fill="var(--accent)" />
+        <circle cx="400" cy="740" r="4" fill="var(--accent)" />
+        <circle cx="60" cy="400" r="4" fill="var(--accent)" />
+      </g>
+
+      <!-- LAYER 2: Nested Sacred Polygons & Phi Harmonics -->
+      <g class="geo-polyhedra" id="geoPolyhedra">
+        <!-- 12-sided Dodecagon Outer Geometry -->
+        <polygon
+          points={dodecagonPoints}
+          stroke="var(--line-strong)"
+          stroke-width="1"
+          stroke-dasharray="6 4"
+          class="geo-dodecagon"
+        />
+
+        <!-- Phi Harmonic Concentric Circles -->
+        <circle cx="400" cy="400" r="270" stroke="var(--line)" stroke-width="1" />
+        <circle cx="400" cy="400" r="215" stroke="var(--line-strong)" stroke-width="0.75" stroke-dasharray="2 4" />
+        <circle cx="400" cy="400" r="180" stroke="var(--line)" stroke-width="1" />
+        <circle cx="400" cy="400" r="110" stroke="var(--line-strong)" stroke-width="1" />
+        <circle cx="400" cy="400" r="55" stroke="var(--line)" stroke-width="0.75" />
+
+        <!-- Interlocking Merkabah / Hexagram Sacred Triangles -->
+        <polygon
+          points={hexagonPoints}
+          stroke="var(--accent)"
+          stroke-width="1.2"
+          stroke-opacity="0.45"
+          class="geo-hex-a"
+        />
+        <polygon
+          points={counterHexagonPoints}
+          stroke="var(--accent)"
+          stroke-width="1.2"
+          stroke-opacity="0.45"
+          class="geo-hex-b"
+        />
+
+        <!-- Star of David / Metatron Intersecting Rays -->
+        <line x1="400" y1="220" x2="400" y2="580" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" />
+        <line x1="244" y1="310" x2="556" y2="490" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" />
+        <line x1="244" y1="490" x2="556" y2="310" stroke="var(--line)" stroke-width="0.75" stroke-dasharray="4 6" />
+      </g>
+
+      <!-- LAYER 3: Kinetic Enso Curve (Unfolds with Scroll) -->
+      <g class="geo-enso-layer" id="geoEnsoLayer">
+        <!-- Open kinetic Enso spiral stroke -->
+        <path
+          d="M 400,290 A 110,110 0 1,1 315,330"
+          stroke="var(--accent)"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-dasharray="700"
+          stroke-dashoffset="0"
+          class="geo-enso-path"
+          id="geoEnsoPath"
+        />
+        <circle cx="315" cy="330" r="3.5" fill="var(--accent)" class="geo-enso-head" />
+      </g>
+
+      <!-- LAYER 4: Harmonic Node Constellation -->
+      <g class="geo-vertices" id="geoVertices">
+        {
+          vertexNodes.map((v) => (
+            <circle
+              cx={v.cx}
+              cy={v.cy}
+              r={v.r}
+              fill="var(--ink)"
+              fill-opacity="0.75"
+              class="geo-vertex-node"
+            />
+          ))
+        }
+      </g>
+
+      <!-- LAYER 5: Central Singularity Core -->
+      <g class="geo-core" id="geoCore">
+        <circle cx="400" cy="400" r="16" stroke="var(--accent)" stroke-width="1.5" />
+        <circle cx="400" cy="400" r="6" fill="var(--ink)" />
+        <circle cx="400" cy="400" r="2" fill="var(--bg)" />
+        <!-- Micro Crosshairs at Center -->
+        <line x1="380" y1="400" x2="392" y2="400" stroke="var(--accent)" stroke-width="1.5" />
+        <line x1="408" y1="400" x2="420" y2="400" stroke="var(--accent)" stroke-width="1.5" />
+        <line x1="400" y1="380" x2="400" y2="392" stroke="var(--accent)" stroke-width="1.5" />
+        <line x1="400" y1="408" x2="400" y2="420" stroke="var(--accent)" stroke-width="1.5" />
+      </g>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .geometric-viewport {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    perspective: 1200px;
+  }
+
+  /* Fine telemetry dotted grid */
+  .geo-grid-matrix {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(
+      var(--line-strong) 1px,
+      transparent 1px
+    );
+    background-size: 48px 48px;
+    background-position: center center;
+    opacity: 0.35;
+    mask-image: radial-gradient(circle at 50% 38%, black 20%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at 50% 38%, black 20%, transparent 75%);
+  }
+
+  /* Full viewport crosshair laser lines */
+  .geo-telemetry-axis {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.22;
+  }
+
+  .geo-telemetry-x {
+    left: 0;
+    right: 0;
+    top: 40vh;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--line) 15%,
+      var(--accent) 50%,
+      var(--line) 85%,
+      transparent 100%
+    );
+  }
+
+  .geo-telemetry-y {
+    top: 0;
+    bottom: 0;
+    left: 50vw;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      var(--line) 15%,
+      var(--accent) 50%,
+      var(--line) 85%,
+      transparent 100%
+    );
+  }
+
+  /* Telemetry Metadata Readouts */
+  .geo-readouts {
+    position: absolute;
+    inset: 0;
+    padding: clamp(1.25rem, 3vw, 2.5rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    pointer-events: none;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    opacity: 0.45;
+    text-transform: uppercase;
+  }
+
+  .geo-readout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .geo-readout-tl {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    justify-self: start;
+  }
+
+  .geo-readout-tr {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+  }
+
+  .geo-readout-bl {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+    justify-self: start;
+  }
+
+  .geo-readout-br {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    justify-self: end;
+  }
+
+  .geo-readout .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  /* Core Geometric Stage */
+  .geo-stage {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    width: clamp(520px, 68vw, 860px);
+    height: clamp(520px, 68vw, 860px);
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    will-change: transform;
+    opacity: 0.82;
+    transition: opacity 0.6s var(--ease);
+  }
+
+  .geo-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    transform-origin: 400px 400px;
+  }
+
+  .geo-outer-dial,
+  .geo-polyhedra,
+  .geo-enso-layer,
+  .geo-vertices,
+  .geo-core {
+    transform-origin: 400px 400px;
+    will-change: transform;
+  }
+
+  .geo-enso-path {
+    filter: drop-shadow(0 0 6px var(--accent));
+    transition: stroke 0.4s var(--ease);
+  }
+
+  .geo-ambient-glow {
+    transition: fill 0.5s var(--ease);
+  }
+
+  @media (max-width: 640px) {
+    .geo-readouts {
+      display: none;
+    }
+    .geo-stage {
+      width: 110vw;
+      height: 110vw;
+      top: 32%;
+      opacity: 0.65;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .geo-stage {
+      transform: translate(-50%, -50%) !important;
+    }
+  }
+</style>
