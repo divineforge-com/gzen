@@ -126,8 +126,15 @@ func handleBuild() {
 				return
 			}
 
-			// Run hugo --minify
-			cmd := exec.Command("hugo", "--minify")
+			var cmd *exec.Cmd
+			if a.Name == "gzen" {
+				// gzen is an Astro app, use pnpm run build
+				cmd = exec.Command("pnpm", "run", "build")
+			} else {
+				// Others are Hugo apps
+				cmd = exec.Command("hugo", "--minify")
+			}
+
 			cmd.Dir = a.Path
 			output, err := cmd.CombinedOutput()
 
