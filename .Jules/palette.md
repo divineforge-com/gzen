@@ -1,0 +1,7 @@
+## 2025-02-12 - ElementCard Custom Focus & Tooltip Shortcuts
+**Learning:** Adding `aria-keyshortcuts` to interactive components and binding the shortcut visual text in the `title` attribute acts as a highly discoverable tooltip without cluttering the mobile view or needing complex tooltip JS. When assigning keyboard shortcuts dynamically from data, always verify the property is populated (e.g. `shortcut ? ... : fallback`) to avoid rendering literal "undefined" in tooltips. Custom interactive cards (`.element-card`) without native focus indicators must explicitly get `:focus-visible` states to support keyboard navigation (using the matching component CSS variable for outline colors).
+**Action:** When creating new custom focusable cards, bind explicit `title` attributes that expose any associated keyboard shortcuts, make the shortcut interpolation conditional, and map their explicit `:focus-visible` outlines using `--element-tone` (or other standard theme variables).
+
+## 2025-02-13 - Hugo languageCode deprecation
+**Learning:** `languageCode` configuration property in `hugo.toml` has been deprecated in Hugo v0.158.0 and causes build issues in newer versions (like the Cloudflare Pages environment using Hugo > 0.160.0). Using `languageName` instead maintains compatibility and avoids strict parsing warnings/errors.
+**Action:** Always use `languageName` instead of `languageCode` for new Hugo projects and when updating legacy `hugo.toml` configurations.
