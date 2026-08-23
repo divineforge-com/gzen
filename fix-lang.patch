@@ -1,0 +1,20 @@
+--- a/apps/gzen-invest/hugo.toml
++++ b/apps/gzen-invest/hugo.toml
+@@ -1,6 +1,7 @@
+ baseURL = "https://invest.gzen.dev/"
+-languageCode = "en-us"
++languageCode = "en-US"
++languageName = "English"
+ title = "invest.gzen"
+ enableRobotsTXT = true
+
+--- a/apps/gzen-learn/hugo.toml
++++ b/apps/gzen-learn/hugo.toml
+@@ -1,6 +1,7 @@
+ baseURL = 'https://learn.gzen.io/'
+-languageCode = 'en-us'
++languageCode = 'en-US'
++languageName = 'English'
+ title = 'GZen — Japanese, Korean & Russian Language Learning'
+
+ [params]
