@@ -1,0 +1,3 @@
+## 2024-05-19 - Keyboard Shortcut Accessibility in Astro Cards
+**Learning:** Adding new tooling or dependencies (like `typescript`, `@astrojs/check`) into monorepo sub-apps during small UX tasks generates unintended `package.json` and `pnpm-lock.yaml` files. These break the monorepo structure and pollute PRs that are supposed to be strictly limited to minor UI/accessibility changes.
+**Action:** Always avoid running `pnpm add` or `pnpm install` for non-essential tooling just to satisfy linters when making micro-UX enhancements. Rely on existing linting tools in the workspace root, or just verify using the build step directly (`pnpm run build`).
