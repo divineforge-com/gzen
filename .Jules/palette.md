@@ -1,0 +1,3 @@
+## 2024-05-18 - Discoverable Keyboard Shortcuts
+**Learning:** Sighted users often miss keyboard shortcuts hidden only in `aria-keyshortcuts` or documentation, while adding standard tooltips (`title` attribute) helps discoverability without breaking clean UI design. Combining `title` and `aria-keyshortcuts` provides comprehensive access for both screen reader users and sighted power users.
+**Action:** Whenever implementing `aria-keyshortcuts` for interactive elements, consider appending `(Shortcut: [Key])` to the element's native `title` attribute for frictionless, non-intrusive discoverability.
