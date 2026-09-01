@@ -1,0 +1,1736 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+const gddMeta = {
+  title: "Zen Game Foundation — Game Design Document & Concept Review | gZen",
+  description: "Comprehensive Game Design Document (GDD) and 3D concept review for the gZen Zen Game: slow letter transit, low-poly isometric dioramas, and Buddhist contemplative mechanics.",
+};
+---
+
+<BaseLayout title={gddMeta.title} description={gddMeta.description}>
+  <div class="gdd-container">
+    <!-- Header / Navigation Bar -->
+    <header class="gdd-nav">
+      <div class="gdd-nav-inner">
+        <a href="/" class="brand-link">
+          <span class="brand-glyph">✦</span>
+          <span class="brand-name">gZen<strong>.io</strong></span>
+        </a>
+        <div class="nav-actions">
+          <span class="badge doc-badge">GDD-v1.0 • Living Spec</span>
+          <a href="#toc" class="nav-toc-link">Table of Contents</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-header">
+        <div class="zen-seal">ZEN-GDD</div>
+        <h1 class="hero-title">Zen Game Foundation</h1>
+        <p class="hero-subtitle">
+          Game Design Document, Technical Architecture & Diorama Concept
+        </p>
+        <div class="meta-strip">
+          <span><strong>Document ID:</strong> <code>ZEN-GAME-FOUNDATION-GDD-v1.0</code></span>
+          <span><strong>Pillars:</strong> Slow Transit · Brahmaviharas · Edge Relay</span>
+          <span><strong>Target:</strong> Web-First (R3F) &amp; Mobile (Capacitor / Godot)</span>
+        </div>
+      </div>
+
+      <!-- Hero Visual Art Frame -->
+      <div class="concept-showcase">
+        <div class="concept-frame">
+          <picture>
+            <source srcset="/assets/game-design/zen-world-concept.webp" type="image/webp" />
+            <img
+              src="/assets/game-design/zen-world-concept.png"
+              alt="gZen Zen World Concept - Low-poly floating diorama sanctuary with pagoda, willow tree, koi pond, and origami carrier crane"
+              class="concept-image"
+              loading="eager"
+            />
+          </picture>
+          <div class="concept-caption">
+            <div class="caption-left">
+              <span class="caption-tag">Concept Diorama by Agy</span>
+              <span class="caption-desc">Low-Poly Floating Sanctuary · Kyoto/Jiangnan Water Node · Procedural Mist &amp; Carrier Crane</span>
+            </div>
+            <div class="caption-right">
+              <a href="/assets/game-design/zen-world-concept.webp" target="_blank" rel="noopener noreferrer" class="view-raw-link">
+                View Full Canvas ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Table of Contents Quicklinks -->
+    <nav id="toc" class="toc-card" aria-label="Table of Contents">
+      <h2 class="toc-title">Document Directory</h2>
+      <div class="toc-grid">
+        <a href="#vision" class="toc-item">
+          <span class="toc-num">01</span>
+          <span class="toc-label">Executive Summary &amp; Vision</span>
+        </a>
+        <a href="#pillars" class="toc-item">
+          <span class="toc-num">02</span>
+          <span class="toc-label">Core Gameplay &amp; Slow Transit</span>
+        </a>
+        <a href="#dharma" class="toc-item">
+          <span class="toc-num">03</span>
+          <span class="toc-label">Buddhist Wisdom &amp; Seals</span>
+        </a>
+        <a href="#world" class="toc-item">
+          <span class="toc-num">04</span>
+          <span class="toc-label">Visual Design &amp; Dioramas</span>
+        </a>
+        <a href="#tech" class="toc-item">
+          <span class="toc-num">05</span>
+          <span class="toc-label">Engine Selection &amp; Edge Spec</span>
+        </a>
+        <a href="#roadmap" class="toc-item">
+          <span class="toc-num">06</span>
+          <span class="toc-label">Milestones &amp; Roadmap</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content Body -->
+    <main class="gdd-content">
+      <!-- Section 1: Vision -->
+      <section id="vision" class="doc-section">
+        <div class="section-badge">01. Vision &amp; Philosophy</div>
+        <h2>1. Executive Summary &amp; Philosophy</h2>
+        
+        <div class="callout-box">
+          <p class="quote-text">
+            "In an attention economy dominated by dopamine loops, algorithmic outrage, and real-time urgency, the gZen Zen Game offers an intentional counter-space: <strong>a world where messages travel slowly across real planetary distances, validation metrics do not exist, and interaction is grounded in the cultivation of the Four Immeasurables (Brahmaviharas).</strong>"
+          </p>
+        </div>
+
+        <p>
+          The <strong>gZen Zen Game</strong> is a tranquil, browser-native sanctuary of gentle human warmth and ancient contemplation. Situated at the intersection of modern mindful play and classical Buddhist philosophy, the experience merges the emotional intimacy of <em>Kind Words (lo fi chill beats to write to)</em>, the deliberateness of <em>Slowly</em>, and the contemplative elegance of <em>Monument Valley</em> and <em>Townscaper</em>.
+        </p>
+
+        <div class="immeasurables-grid">
+          <div class="immeasurable-card metta">
+            <div class="card-kanji">慈</div>
+            <div class="card-name">Mettā</div>
+            <div class="card-sub">Loving-Kindness</div>
+            <p class="card-wish">"May all beings be peaceful."</p>
+            <div class="card-manifest">Carrier Cranes &amp; Letters of Peace across planetary arcs.</div>
+          </div>
+          <div class="immeasurable-card karuna">
+            <div class="card-kanji">悲</div>
+            <div class="card-name">Karuṇā</div>
+            <div class="card-sub">Compassion</div>
+            <p class="card-wish">"May all beings be free of pain."</p>
+            <div class="card-manifest">Anonymous comfort requests &amp; compassionate listening.</div>
+          </div>
+          <div class="immeasurable-card mudita">
+            <div class="card-kanji">喜</div>
+            <div class="card-name">Muditā</div>
+            <div class="card-sub">Sympathetic Joy</div>
+            <p class="card-wish">"May all beings rejoice in good."</p>
+            <div class="card-manifest">Luminous floating river lanterns celebrating small victories.</div>
+          </div>
+          <div class="immeasurable-card upekkha">
+            <div class="card-kanji">捨</div>
+            <div class="card-name">Upekkhā</div>
+            <div class="card-sub">Equanimity</div>
+            <p class="card-wish">"All beings inherit their karma."</p>
+            <div class="card-manifest">Quiet stillness, dissolved lanterns, and unattached transit.</div>
+          </div>
+        </div>
+
+        <div class="pillars-sub-list">
+          <div class="sub-pillar-item">
+            <h4>🌿 Unrushed Connection</h4>
+            <p>True connection requires temporal distance and deliberate reflection rather than instant reply anxiety.</p>
+          </div>
+          <div class="sub-pillar-item">
+            <h4>🕊️ Radical Kindness Without Vanity</h4>
+            <p>Zero follower counts, zero public view tallies, zero thumbs-up/down, and zero competitive leaderboards.</p>
+          </div>
+          <div class="sub-pillar-item">
+            <h4>⛩️ Sanctuary of Sound &amp; Form</h4>
+            <p>Living dioramas reflecting real-world solar cycles, lunar phases, and gentle weather transitions.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Core Gameplay Pillars -->
+      <section id="pillars" class="doc-section">
+        <div class="section-badge">02. Gameplay Mechanics</div>
+        <h2>2. Core Gameplay Pillars</h2>
+
+        <div class="gameplay-pillars-grid">
+          <div class="pillar-box">
+            <div class="pillar-header">
+              <span class="pillar-num">Pillar I</span>
+              <h3>Slow Asynchronous Letter Transit</h3>
+            </div>
+            <p>
+              Letters travel based on the <strong>Great-Circle Haversine distance</strong> between the sender and recipient sanctuary nodes. Transit duration is bounded between <strong>1 hour minimum</strong> (same city) and <strong>24 hours maximum</strong> (antipodal transit).
+            </p>
+            <div class="formula-box">
+              <code>Δσ = 2 · arcsin( √(sin²(Δϕ/2) + cos(ϕ₁)cos(ϕ₂)sin²(Δλ/2)) )</code>
+              <br />
+              <code>Transit Time = T_base (1 hr) + [ Distance (km) / 500 km/h ]</code>
+            </div>
+            <p class="pillar-note">
+              Recipients see a graceful origami crane slowly approaching their horizon map, instilling peaceful anticipation.
+            </p>
+          </div>
+
+          <div class="pillar-box">
+            <div class="pillar-header">
+              <span class="pillar-num">Pillar II</span>
+              <h3>Floating Water Lanterns (Muditā)</h3>
+            </div>
+            <p>
+              Players cast short reflections, wishes, or expressions of sympathetic joy into their sanctuary's stream. Lanterns drift along procedural currents past worldwide visitors before dissolving into mist over 24–48 hours (*Anicca* / Impermanence).
+            </p>
+          </div>
+
+          <div class="pillar-box">
+            <div class="pillar-header">
+              <span class="pillar-num">Pillar III</span>
+              <h3>Carrier Cranes &amp; Comfort Requests</h3>
+            </div>
+            <p>
+              A player in distress may fold a <em>Silent Origami Crane</em> with an anonymous vulnerability. The engine gently pairs it with opt-in mindful wanderers worldwide for empathetic handwritten replies.
+            </p>
+          </div>
+
+          <div class="pillar-box">
+            <div class="pillar-header">
+              <span class="pillar-num">Pillar IV</span>
+              <h3>Gratitude-Only Feedback (Gasshō Bow)</h3>
+            </div>
+            <p>
+              No threaded argument loops or flame wars. Senders can only be thanked with a single **Gasshō (合十)** bow or a handcrafted **Gratitude Stamp (印章)**. Letters then tuck into the private Tea Chest.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Buddhist Wisdom & Stamps -->
+      <section id="dharma" class="doc-section">
+        <div class="section-badge">03. Dharma Seeds &amp; Seals</div>
+        <h2>3. Buddhist Wisdom &amp; Dharma Seeds</h2>
+
+        <div class="dharma-flow-card">
+          <div class="flow-step">
+            <span class="step-badge">Dawn</span>
+            <h4>Daily Dharma Seed</h4>
+            <p>Trilingual verse (EN / ZH / JA) blooming at local sunrise with 30-second silent breathing chime.</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <span class="step-badge">Practice</span>
+            <h4>Seal of Right Action</h4>
+            <p>Unlock traditional stone chop seals by practicing consistent kindness and thoughtful reflection.</p>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <span class="step-badge">Archive</span>
+            <h4>Handmade Paper Scroll</h4>
+            <p>Preserve heartfelt correspondences in a private, encrypted offline tea chest.</p>
+          </div>
+        </div>
+
+        <div class="seals-overview">
+          <h3>Collectible Zen Seals &amp; Stamps (印章 / 篆刻)</h3>
+          <p>
+            Players position and stamp cinnabar (硃砂) and saffron seals onto letter canvas with realistic ink pressure and fiber-bleed shaders.
+          </p>
+          <div class="seals-tags">
+            <span class="seal-pill">🌸 Plum Blossom (Early Spring)</span>
+            <span class="seal-pill">🎋 Bamboo Grove (Summer Rain)</span>
+            <span class="seal-pill">🍂 Autumn Ginkgo</span>
+            <span class="seal-pill">❄️ Pine Needle in Snow</span>
+            <span class="seal-pill">💧 Still River (止水)</span>
+            <span class="seal-pill">🕯️ Beginner's Mind (初心)</span>
+            <span class="seal-pill">🌟 Pure Radiance (明照)</span>
+            <span class="seal-pill">🪷 Great Compassion (大悲)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: World & Visual Design -->
+      <section id="world" class="doc-section">
+        <div class="section-badge">04. Visual, World Map &amp; Biomes</div>
+        <h2>4. Global World Map, Biomes &amp; Progressive Unlocking</h2>
+        
+        <p>
+          The world of gZen is designed as a simplified, stylized 3D low-poly globe divided hierarchically into <strong>Continents &rarr; Regional Sanctuaries &rarr; Country Nodes</strong>. The experience is framed in hand-painted water-ink (<em>Shanshui / Sumi-e</em>) wash shaders, soft ambient occlusion, and meditative depth-of-field tilt-shift.
+        </p>
+
+        <!-- World Map & Fog of Kindness Mechanics -->
+        <div class="mechanics-highlight-box">
+          <div class="highlight-badge">Core Macro System</div>
+          <h3>Progressive "Fog-of-Kindness" (善意之雾) &amp; Flight Path Visual Arcs</h3>
+          <div class="highlight-columns">
+            <div class="highlight-col">
+              <h4>🕊️ Origin Sanctuary Genesis</h4>
+              <p>
+                Every player begins within their local regional sanctuary (e.g. Kyoto Zen Garden, Jiangnan Water Canal, or Emerald Bamboo Grove). Distant continents and countries are softly veiled under an ethereal morning mist.
+              </p>
+            </div>
+            <div class="highlight-col">
+              <h4>✨ Mist-Clearing Resonance</h4>
+              <p>
+                As players write compassionate letters, send micro-blessings, and exchange correspondence across borders, distant regions clear their clouds, unlocking new regional 3D dioramas, traditional OST instruments, and native fauna.
+              </p>
+            </div>
+            <div class="highlight-col">
+              <h4>🌐 Real-Time Transit Arcs</h4>
+              <p>
+                Glowing spherical geodesic arcs trace real-time origami crane journeys between distant senders and receivers, leaving soft golden phosphor trails across the low-poly globe.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Showcase Gallery: 10 Imagined Scenes -->
+        <div class="gallery-header">
+          <h3>Visual Showcase: 10 Imagined Scenes &amp; Gameplay Moments</h3>
+          <p class="gallery-subtitle">
+            A curated gallery exploring macro world navigation, regional biomes, mindful writing tools, and collective meditative rituals.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Scene 1 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/world-map-continents.webp" type="image/webp" />
+                <img src="/assets/game-design/world-map-continents.png" alt="Global World Globe & Continent Progression - 3D stylized globe with glowing transit arcs and mist-shrouded continents" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge macro">World Map</span>
+                <span class="media-badge progression">Progression</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">01 / 10</div>
+              <h4>Global World Globe &amp; Continent Progression</h4>
+              <p class="scene-desc">
+                A stylized low-poly 3D globe suspended in tranquil midnight-slate space. Luminous geodesic flight arcs trace origami carrier cranes across oceans. Distant lands are softly shrouded in ethereal morning mist awaiting discovery through cross-border kindness.
+              </p>
+              <div class="scene-meta">
+                <span><strong>System:</strong> Macro Navigation</span>
+                <span><strong>Visual:</strong> Geodesic Arcs &amp; Mist Shaders</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 2 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/biome-east-asia-jiangnan.webp" type="image/webp" />
+                <img src="/assets/game-design/biome-east-asia-jiangnan.png" alt="East Asia Jiangnan Water Canal Sanctuary - Whitewashed pavilion, weeping willows, and floating lotuses" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge biome">East Asia</span>
+                <span class="media-badge gameplay">Aquatic Sanctuary</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">02 / 10</div>
+              <h4>East Asia: Jiangnan Water Canal Sanctuary</h4>
+              <p class="scene-desc">
+                Whitewashed Jiangnan pavilions with dark curved eaves, weeping willows gently swaying over emerald water canals, stone arched bridges, and floating pink lotus blossoms catching warm morning rays.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Biome:</strong> Jiangnan Water Canal</span>
+                <span><strong>Ritual:</strong> Floating Lantern Release</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 3 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/biome-south-asia-himalayas.webp" type="image/webp" />
+                <img src="/assets/game-design/biome-south-asia-himalayas.png" alt="South Asia Himalayan Mountain Stupa of Equanimity - High-altitude stone stupa with colorful prayer flags" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge biome">South Asia</span>
+                <span class="media-badge gameplay">Equanimity Node</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">03 / 10</div>
+              <h4>South Asia: Himalayan Stupa of Equanimity</h4>
+              <p class="scene-desc">
+                A serene high-altitude stone Stupa perched atop snow-dusted mountain ridges, surrounded by vibrant Buddhist prayer flags fluttering in alpine breezes under clear azure skies.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Biome:</strong> Alpine Peak &amp; Stupa</span>
+                <span><strong>Dharma:</strong> Upekkhā (Equanimity &amp; Letting Go)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 4 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/biome-southeast-asia-bamboo.webp" type="image/webp" />
+                <img src="/assets/game-design/biome-southeast-asia-bamboo.png" alt="Southeast Asia Emerald Bamboo Sanctuary - Sun-dappled bamboo forest with tea pavilion and mossy stream" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge biome">Southeast Asia</span>
+                <span class="media-badge gameplay">Tea &amp; Scroll Craft</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">04 / 10</div>
+              <h4>Southeast Asia: Emerald Bamboo Sanctuary</h4>
+              <p class="scene-desc">
+                Lush, sun-dappled emerald bamboo forest with a rustic open-air timber tea pavilion, bamboo water fountains (<em>Shishi-odoshi</em>), stepping stones over clear mossy streams, and gentle drifting mist.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Biome:</strong> Bamboo Forest</span>
+                <span><strong>Activity:</strong> Mindful Tea &amp; Scroll Drafting</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 5 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/biome-nordic-fjord.webp" type="image/webp" />
+                <img src="/assets/game-design/biome-nordic-fjord.png" alt="Northern Europe Nordic Fjord of Stillness - Minimalist cedar shelter beside mirror-calm fjord water and twilight aurora" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge biome">Northern Europe</span>
+                <span class="media-badge gameplay">Fjord Sanctuary</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">05 / 10</div>
+              <h4>Northern Europe: Nordic Fjord of Stillness</h4>
+              <p class="scene-desc">
+                Minimalist weathered cedar timber shelter and dock nestled beside crystalline mirror-calm fjord waters, framed by dramatic pine-covered granite cliffs and twilight starry skies with faint boreal aurora ribbons.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Biome:</strong> Nordic Fjord</span>
+                <span><strong>Atmosphere:</strong> Deep Silence &amp; Tidal Calms</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 6 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/gameplay-writing-desk.webp" type="image/webp" />
+                <img src="/assets/game-design/gameplay-writing-desk.png" alt="The Mindful Writing Desk - Washi paper, ceramic sumi inkstone, steaming tea, and wax seals" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge gameplay">Writing UI</span>
+                <span class="media-badge craft">Tactile Craft</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">06 / 10</div>
+              <h4>The Mindful Writing Desk</h4>
+              <p class="scene-desc">
+                An intimate isometric view of a tactile wooden writing desk with handmade textured Washi paper, ceramic sumi inkstone, steaming tea bowl, brass scissors, cinnabar seal paste, and warm amber candlelight.
+              </p>
+              <div class="scene-meta">
+                <span><strong>UI Mode:</strong> Letter Composition</span>
+                <span><strong>Features:</strong> Paper Texture &amp; Spring Physics</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 7 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/gameplay-crane-arrival.webp" type="image/webp" />
+                <img src="/assets/game-design/gameplay-crane-arrival.png" alt="Carrier Crane Arrival - Origami crane landing on wooden veranda and unfolding into a letter" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge gameplay">Delivery Loop</span>
+                <span class="media-badge animation">Origami Unfold</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">07 / 10</div>
+              <h4>Carrier Crane Arrival</h4>
+              <p class="scene-desc">
+                A luminous white and gold origami carrier crane landing gracefully on a polished wooden sanctuary veranda, gently unfolding its wings into a handwritten letter bathed in soft morning sunbeams.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Loop:</strong> Asynchronous Letter Delivery</span>
+                <span><strong>Interaction:</strong> Unfolding Haptic Animation</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 8 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/gameplay-river-lanterns.webp" type="image/webp" />
+                <img src="/assets/game-design/gameplay-river-lanterns.png" alt="The River of Shared Hopes - Floating lotus lanterns with flickering candlelight drifting on calm river" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge gameplay">Sympathetic Joy</span>
+                <span class="media-badge ritual">Muditā</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">08 / 10</div>
+              <h4>The River of Shared Hopes</h4>
+              <p class="scene-desc">
+                A twilight river illuminated by hundreds of floating low-poly origami lotus lanterns with warm flickering golden candlelight, drifting past mossy riverbanks and reflecting on calm dark water.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Mechanic:</strong> Ephemeral River Blessings</span>
+                <span><strong>Response:</strong> Single-Press Gasshō Bow</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 9 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/gameplay-stamp-collection.webp" type="image/webp" />
+                <img src="/assets/game-design/gameplay-stamp-collection.png" alt="Zen Travel & Wisdom Stamp Book - Accordion album filled with cinnabar seal chops and botanical stamps" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge craft">Stamp Book</span>
+                <span class="media-badge progression">Non-Vanity</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">09 / 10</div>
+              <h4>Zen Travel &amp; Wisdom Stamp Book</h4>
+              <p class="scene-desc">
+                An accordion-fold handmade mulberry paper passport album filled with authentic red cinnabar seal chops, geometric botanical stamps, regional temple seals, and calligraphy inscriptions from visited sanctuaries.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Collection:</strong> Regional &amp; Dharma Chops</span>
+                <span><strong>Design:</strong> Zero Vanity / Pure Memory</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 10 -->
+          <div class="gallery-card">
+            <div class="gallery-media">
+              <picture>
+                <source srcset="/assets/game-design/gameplay-bell-meditation.webp" type="image/webp" />
+                <img src="/assets/game-design/gameplay-bell-meditation.png" alt="The Great Bell of Mindfulness - Bronze temple bell emitting visible golden soundwave rings clearing mountain mist" loading="lazy" />
+              </picture>
+              <div class="media-badges">
+                <span class="media-badge ritual">Meditation</span>
+                <span class="media-badge audio">Harmonic Waves</span>
+              </div>
+            </div>
+            <div class="gallery-info">
+              <div class="scene-num">10 / 10</div>
+              <h4>The Great Bell of Mindfulness</h4>
+              <p class="scene-desc">
+                A monumental bronze temple bell suspended in an open-air timber tower. Striking the bell emits visible, expanding golden acoustic soundwave rings that ripple outward, dissipating ambient mountain fog and syncing wanderers worldwide.
+              </p>
+              <div class="scene-meta">
+                <span><strong>Ritual:</strong> Synchronous Soundwave Meditation</span>
+                <span><strong>Audio:</strong> 432 Hz Long-Decay Resonator</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Palette -->
+        <div class="palette-showcase">
+          <h3>gZen Brand Palette Spectrum</h3>
+          <div class="palette-swatches">
+            <div class="swatch" style="--c: #FFFAF4; --t: #2F2118;">
+              <span class="swatch-name">Warm Cream</span>
+              <code>#FFFAF4</code>
+            </div>
+            <div class="swatch" style="--c: #2F2118; --t: #FFFAF4;">
+              <span class="swatch-name">Ink Brown</span>
+              <code>#2F2118</code>
+            </div>
+            <div class="swatch" style="--c: #D97845; --t: #FFFFFF;">
+              <span class="swatch-name">Saffron Amber</span>
+              <code>#D97845</code>
+            </div>
+            <div class="swatch" style="--c: #2D6B4F; --t: #FFFFFF;">
+              <span class="swatch-name">Jade Ki</span>
+              <code>#2D6B4F</code>
+            </div>
+            <div class="swatch" style="--c: #C84B31; --t: #FFFFFF;">
+              <span class="swatch-name">Cinnabar</span>
+              <code>#C84B31</code>
+            </div>
+            <div class="swatch" style="--c: #9BA4B5; --t: #2F2118;">
+              <span class="swatch-name">Slate Mist</span>
+              <code>#9BA4B5</code>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Technical Architecture & Engine Selection -->
+      <section id="tech" class="doc-section">
+        <div class="section-badge">05. Engineering Architecture</div>
+        <h2>5. Technical Architecture &amp; Engine Selection</h2>
+
+        <div class="engine-verdict-box">
+          <div class="verdict-tag">Primary Architecture Decision</div>
+          <h3>Two-Track Unified Blueprint (Web-First R3F + Capacitor / Godot 4)</h3>
+          <p>
+            To achieve high launch velocity with zero backend maintenance and seamless mobile store portability, the client handles 100% of the diorama simulation, lighting, sound synthesis, and local drafting.
+          </p>
+        </div>
+
+        <div class="tech-comparison-table-wrapper">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Stack / Engine</th>
+                <th>Rendering &amp; Performance</th>
+                <th>Web Export</th>
+                <th>Mobile Native Export</th>
+                <th>Offline &amp; Footprint</th>
+                <th>Strategic Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="recommended-row">
+                <td><strong>React / Three.js (R3F) + Capacitor</strong></td>
+                <td>WebGL2 / WebGPU shaders, instant canvas embed</td>
+                <td>100% native DOM, ~3–8MB lightweight bundle</td>
+                <td>Capacitor 6+ iOS/Android bridge (Haptics, Push, SQLite)</td>
+                <td>IndexedDB / Wasm SQLite, zero server dependency</td>
+                <td><span class="badge success">Top Contender (Web-First)</span></td>
+              </tr>
+              <tr class="recommended-row">
+                <td><strong>Godot 4 (GDScript / C#)</strong></td>
+                <td>Vulkan / OpenGL ES3 dedicated diorama forward+</td>
+                <td>Clean Wasm build (~15MB compressed)</td>
+                <td>1-click native export to Xcode &amp; Gradle</td>
+                <td>Native SQLite/file persistence</td>
+                <td><span class="badge success">Top Contender (Dedicated)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Unity (URP)</strong></td>
+                <td>High fidelity 3D pipeline</td>
+                <td>Heavy WebGL builds (40–80MB+), memory overhead</td>
+                <td>Native iOS/Android</td>
+                <td>PlayerPrefs / SQLite</td>
+                <td><span class="badge danger">Rejected (Heavyweight)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Bevy / Rust (WebGPU)</strong></td>
+                <td>Extreme CPU efficiency, ECS</td>
+                <td>Experimental WebGPU support</td>
+                <td>Manual glue &amp; custom mobile toolchain</td>
+                <td>Pure Rust persistence</td>
+                <td><span class="badge danger">Rejected (Experimental)</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="edge-arch-block">
+          <h3>Client-Heavy / Thin-Edge Mailbox Relay</h3>
+          <div class="edge-grid">
+            <div class="edge-box">
+              <h4>Client Tier (Heavy &amp; Autonomous)</h4>
+              <ul>
+                <li>Procedural 3D diorama meshes &amp; mist particles</li>
+                <li>Local solar lighting &amp; astronomical math via SunCalc</li>
+                <li>Web Audio API procedural soundscape synthesis</li>
+                <li>IndexedDB offline-first mailbox, drafts, and stamp collections</li>
+              </ul>
+            </div>
+            <div class="edge-box">
+              <h4>Edge Backend Tier (Stateless Relay)</h4>
+              <ul>
+                <li>Cloudflare Workers (Hono API gateway) with geo-IP stamping</li>
+                <li>Cloudflare D1 &amp; KV ephemeral mailbox store (< 2KB payload)</li>
+                <li>Edge AI Sentiment Guard (Serverless Workers AI / Hermes)</li>
+                <li>Zero persistent game servers, zero simulation ticks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="code-schema-wrapper">
+          <div class="schema-header">Cloudflare D1 SQLite Schema Blueprint</div>
+          <pre class="schema-code"><code>-- Sanctuary Nodes
+CREATE TABLE sanctuaries (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    country_code TEXT NOT NULL,
+    latitude REAL NOT NULL,
+    longitude REAL NOT NULL,
+    biome_type TEXT NOT NULL, -- 'kyoto_garden', 'jiangnan_water', 'alpine_peak'
+    active_wanderers INTEGER DEFAULT 0
+);
+
+-- Letters in Transit
+CREATE TABLE letters (
+    id TEXT PRIMARY KEY,
+    sender_hash TEXT NOT NULL,
+    recipient_hash TEXT,
+    origin_sanctuary_id TEXT REFERENCES sanctuaries(id),
+    destination_sanctuary_id TEXT REFERENCES sanctuaries(id),
+    content_encrypted TEXT NOT NULL,
+    seal_type TEXT NOT NULL,
+    paper_texture TEXT NOT NULL,
+    status TEXT NOT NULL, -- 'in_flight', 'delivered', 'archived'
+    departure_time INTEGER NOT NULL,
+    arrival_time INTEGER NOT NULL,
+    created_at INTEGER NOT NULL
+);</code></pre>
+        </div>
+      </section>
+
+      <!-- Section 6: Roadmap -->
+      <section id="roadmap" class="doc-section">
+        <div class="section-badge">06. Interactive Roadmap</div>
+        <h2>6. Milestones &amp; Implementation Roadmap</h2>
+
+        <div class="timeline-grid">
+          <div class="timeline-card active">
+            <div class="timeline-phase">Phase 1 (Current)</div>
+            <h4>Specifications &amp; Visual Design</h4>
+            <ul>
+              <li>✓ Complete Foundation Game Design Document</li>
+              <li>✓ Concept diorama design by Agy</li>
+              <li>• Define GLTF 3D asset budget (&lt; 25k vertices)</li>
+              <li>• Implement edge AI moderation test harness</li>
+            </ul>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-phase">Phase 2</div>
+            <h4>WebGL Diorama &amp; Sound Prototype</h4>
+            <ul>
+              <li>• Astro + Three.js Kyoto diorama scaffold</li>
+              <li>• Procedural water shader &amp; raked sand maps</li>
+              <li>• Real-time SunCalc day/night lighting rig</li>
+              <li>• Howler.js spatial wind chime &amp; water synthesis</li>
+            </ul>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-phase">Phase 3</div>
+            <h4>Edge Letter Engine &amp; Queue</h4>
+            <ul>
+              <li>• Cloudflare Worker Hono Haversine calculator</li>
+              <li>• Cloudflare Queues temporal letter transit</li>
+              <li>• Interactive letter canvas with stamp physics</li>
+              <li>• Pre-flight edge sentiment safety filter</li>
+            </ul>
+          </div>
+          <div class="timeline-card">
+            <div class="timeline-phase">Phase 4</div>
+            <h4>gzen.io Ecosystem &amp; App Stores</h4>
+            <ul>
+              <li>• Production deployment under <code>zen.gzen.io</code></li>
+              <li>• Sync with <code>gzen-ki</code> 24 Solar Terms</li>
+              <li>• Capacitor packaging for iOS &amp; Android stores</li>
+              <li>• Trilingual onboarding guides (EN / ZH / JA)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Note -->
+      <div class="gdd-quote-footer">
+        <p>
+          "In the rush of everyday life, true communication is lost to speed. By making words travel as slow as the crane flies, we restore reverence to every character written."
+        </p>
+        <span class="quote-author">— The gZen Contemplative Engineering Collective</span>
+      </div>
+    </main>
+
+    <SiteFooter />
+  </div>
+</BaseLayout>
+
+<style>
+  /* gZen Theme Variables & Palette */
+  :root {
+    --gzen-cream: #FFFDF9;
+    --gzen-card-bg: rgba(255, 250, 244, 0.05);
+    --gzen-card-border: rgba(217, 120, 69, 0.22);
+    --gzen-saffron: #D97845;
+    --gzen-saffron-glow: rgba(217, 120, 69, 0.35);
+    --gzen-ink-light: #F8F4EE;
+    --gzen-ink-muted: #B8AAA0;
+    --gzen-jade: #2D6B4F;
+    --gzen-cinnabar: #C84B31;
+    --font-heading: "Cabinet Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .gdd-container {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+    color: var(--gzen-ink-light);
+  }
+
+  /* Navigation */
+  .gdd-nav {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 2.5rem;
+  }
+
+  .gdd-nav-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--gzen-ink-light);
+  }
+
+  .brand-glyph {
+    color: var(--gzen-saffron);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .doc-badge {
+    background: rgba(217, 120, 69, 0.15);
+    border: 1px solid var(--gzen-saffron);
+    color: #F8B58E;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .nav-toc-link {
+    color: var(--gzen-ink-muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .nav-toc-link:hover {
+    color: var(--gzen-saffron);
+  }
+
+  /* Hero Section */
+  .hero-section {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .zen-seal {
+    display: inline-block;
+    background: var(--gzen-cinnabar);
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 15px rgba(200, 75, 49, 0.3);
+  }
+
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    background: linear-gradient(135deg, #FFFFFF 20%, #F5D5B8 70%, var(--gzen-saffron) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    color: var(--gzen-ink-muted);
+    max-width: 44rem;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
+  }
+
+  .meta-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 0.82rem;
+    color: var(--gzen-ink-muted);
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    max-width: 46rem;
+    margin: 0 auto 2.5rem;
+  }
+
+  .meta-strip code {
+    color: #F8B58E;
+    font-family: var(--font-mono);
+  }
+
+  /* Concept Art Showcase Frame */
+  .concept-showcase {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
+
+  .concept-frame {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0B0E14;
+    border: 1px solid rgba(217, 120, 69, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 35px var(--gzen-saffron-glow);
+  }
+
+  .concept-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .concept-frame:hover .concept-image {
+    transform: scale(1.015);
+  }
+
+  .concept-caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(10, 14, 22, 0.85);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.85rem;
+  }
+
+  .caption-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: left;
+  }
+
+  .caption-tag {
+    font-weight: 700;
+    color: var(--gzen-saffron);
+  }
+
+  .caption-desc {
+    color: var(--gzen-ink-muted);
+    font-size: 0.8rem;
+  }
+
+  .view-raw-link {
+    color: #F8B58E;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    background: rgba(217, 120, 69, 0.15);
+    border: 1px solid rgba(217, 120, 69, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  .view-raw-link:hover {
+    background: var(--gzen-saffron);
+    color: #FFFFFF;
+  }
+
+  /* Table of Contents */
+  .toc-card {
+    background: rgba(18, 24, 34, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin: 3.5rem 0;
+  }
+
+  .toc-title {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    margin: 0 0 1rem;
+    color: var(--gzen-ink-light);
+  }
+
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--gzen-ink-light);
+    transition: all 0.2s ease;
+  }
+
+  .toc-item:hover {
+    background: rgba(217, 120, 69, 0.1);
+    border-color: var(--gzen-saffron);
+    transform: translateY(-2px);
+  }
+
+  .toc-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gzen-saffron);
+    font-weight: 700;
+  }
+
+  .toc-label {
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  /* Sections */
+  .gdd-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .doc-section {
+    scroll-margin-top: 2rem;
+    background: rgba(15, 20, 30, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .section-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--gzen-saffron);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .doc-section h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin: 0 0 1.5rem;
+    color: #FFFFFF;
+  }
+
+  .doc-section h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin: 2rem 0 1rem;
+    color: #F8D9C0;
+  }
+
+  .doc-section p {
+    line-height: 1.8;
+    color: var(--gzen-ink-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .callout-box {
+    background: rgba(217, 120, 69, 0.08);
+    border-left: 4px solid var(--gzen-saffron);
+    padding: 1.25rem 1.75rem;
+    border-radius: 0 12px 12px 0;
+    margin: 1.75rem 0;
+  }
+
+  .quote-text {
+    font-size: 1.05rem;
+    color: #FFF2E5 !important;
+    line-height: 1.7;
+    margin: 0 !important;
+  }
+
+  /* Brahmaviharas Grid */
+  .immeasurables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.25rem;
+    margin: 2.5rem 0;
+  }
+
+  .immeasurable-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-kanji {
+    font-size: 2.8rem;
+    font-weight: 700;
+    opacity: 0.15;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.8rem;
+  }
+
+  .card-name {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .card-sub {
+    font-size: 0.8rem;
+    color: var(--gzen-saffron);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .card-wish {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #E2E8F0 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  .card-manifest {
+    font-size: 0.78rem;
+    color: var(--gzen-ink-muted);
+    line-height: 1.5;
+  }
+
+  .pillars-sub-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .sub-pillar-item {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .sub-pillar-item h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1.05rem;
+    color: #FFFFFF;
+  }
+
+  .sub-pillar-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  /* Gameplay Pillars Grid */
+  .gameplay-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .pillar-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+
+  .pillar-header {
+    margin-bottom: 1rem;
+  }
+
+  .pillar-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--gzen-saffron);
+    font-weight: 700;
+  }
+
+  .pillar-header h3 {
+    margin: 0.25rem 0 0;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+  }
+
+  .formula-box {
+    background: #070B12;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    color: #A5F3FC;
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  .pillar-note {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: #D1D5DB !important;
+    margin: 0 !important;
+  }
+
+  /* Dharma Flow */
+  .dharma-flow-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(12, 16, 24, 0.7);
+    border: 1px solid rgba(217, 120, 69, 0.25);
+    border-radius: 16px;
+    padding: 1.75rem;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 12rem;
+  }
+
+  .step-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--gzen-saffron);
+    background: rgba(217, 120, 69, 0.15);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.4rem;
+  }
+
+  .flow-step h4 {
+    margin: 0 0 0.4rem;
+    color: #FFFFFF;
+  }
+
+  .flow-step p {
+    margin: 0;
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .flow-arrow {
+    font-size: 1.5rem;
+    color: var(--gzen-saffron);
+  }
+
+  .seals-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+
+  .seal-pill {
+    background: rgba(200, 75, 49, 0.12);
+    border: 1px solid rgba(200, 75, 49, 0.3);
+    color: #FFA592;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+  }
+
+  /* Fog of Kindness & Mechanics Box */
+  .mechanics-highlight-box {
+    background: linear-gradient(135deg, rgba(217, 120, 69, 0.08) 0%, rgba(45, 107, 79, 0.08) 100%);
+    border: 1px solid rgba(217, 120, 69, 0.25);
+    border-radius: 14px;
+    padding: 1.75rem;
+    margin: 2rem 0;
+  }
+
+  .highlight-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gzen-saffron);
+    margin-bottom: 0.4rem;
+  }
+
+  .mechanics-highlight-box h3 {
+    margin: 0 0 1.25rem;
+    color: #FFFFFF;
+    font-size: 1.25rem;
+  }
+
+  .highlight-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.5rem;
+  }
+
+  .highlight-col h4 {
+    margin: 0 0 0.5rem;
+    color: #FFF;
+    font-size: 0.95rem;
+  }
+
+  .highlight-col p {
+    margin: 0;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* 10-Scene Visual Showcase Gallery */
+  .gallery-header {
+    margin: 3.5rem 0 1.5rem;
+    text-align: left;
+  }
+
+  .gallery-header h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1.4rem;
+    color: #FFFFFF;
+  }
+
+  .gallery-subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
+    gap: 2rem;
+    margin: 2rem 0 3.5rem;
+  }
+
+  .gallery-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .gallery-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(217, 120, 69, 0.4);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  }
+
+  .gallery-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #111;
+    overflow: hidden;
+  }
+
+  .gallery-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .gallery-card:hover .gallery-media img {
+    transform: scale(1.04);
+  }
+
+  .media-badges {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .media-badge {
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    backdrop-filter: blur(8px);
+  }
+
+  .media-badge.macro {
+    background: rgba(217, 120, 69, 0.85);
+    color: #FFF;
+  }
+
+  .media-badge.progression {
+    background: rgba(45, 107, 79, 0.85);
+    color: #FFF;
+  }
+
+  .media-badge.biome {
+    background: rgba(155, 164, 181, 0.85);
+    color: #1A1A1A;
+  }
+
+  .media-badge.gameplay {
+    background: rgba(200, 75, 49, 0.85);
+    color: #FFF;
+  }
+
+  .media-badge.craft {
+    background: rgba(229, 185, 111, 0.85);
+    color: #2F2118;
+  }
+
+  .media-badge.animation {
+    background: rgba(110, 231, 183, 0.85);
+    color: #064E3B;
+  }
+
+  .media-badge.ritual {
+    background: rgba(167, 139, 250, 0.85);
+    color: #FFF;
+  }
+
+  .media-badge.audio {
+    background: rgba(245, 158, 11, 0.85);
+    color: #FFF;
+  }
+
+  .gallery-info {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .scene-num {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--gzen-saffron);
+    margin-bottom: 0.35rem;
+    letter-spacing: 0.05em;
+  }
+
+  .gallery-info h4 {
+    margin: 0 0 0.6rem;
+    color: #FFFFFF;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+
+  .scene-desc {
+    font-size: 0.83rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 1rem;
+    flex-grow: 1;
+  }
+
+  .scene-meta {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .scene-meta span strong {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  /* Swatches */
+  .palette-swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .swatch {
+    background: var(--c);
+    color: var(--t);
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 5.5rem;
+  }
+
+  .swatch-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .swatch code {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  /* Tech Table */
+  .engine-verdict-box {
+    background: rgba(45, 107, 79, 0.15);
+    border: 1px solid var(--gzen-jade);
+    padding: 1.5rem;
+    border-radius: 14px;
+    margin-bottom: 2rem;
+  }
+
+  .verdict-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: #6EE7B7;
+    margin-bottom: 0.3rem;
+  }
+
+  .engine-verdict-box h3 {
+    margin: 0 0 0.5rem;
+    color: #FFFFFF;
+  }
+
+  .engine-verdict-box p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #D1FAE5 !important;
+  }
+
+  .tech-comparison-table-wrapper {
+    overflow-x: auto;
+    margin: 2rem 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    text-align: left;
+  }
+
+  .tech-table th,
+  .tech-table td {
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .tech-table th {
+    background: rgba(255, 255, 255, 0.04);
+    color: #FFFFFF;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .recommended-row {
+    background: rgba(217, 120, 69, 0.05);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+  }
+
+  .badge.success {
+    background: rgba(45, 107, 79, 0.3);
+    border: 1px solid var(--gzen-jade);
+    color: #A7F3D0;
+  }
+
+  .badge.danger {
+    background: rgba(200, 75, 49, 0.2);
+    border: 1px solid rgba(200, 75, 49, 0.4);
+    color: #FECACA;
+  }
+
+  /* Edge Arch */
+  .edge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .edge-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .edge-box h4 {
+    margin: 0 0 0.75rem;
+    color: var(--gzen-saffron);
+  }
+
+  .edge-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    font-size: 0.85rem;
+    color: var(--gzen-ink-muted);
+    line-height: 1.7;
+  }
+
+  .code-schema-wrapper {
+    margin-top: 2rem;
+    background: #080C14;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .schema-header {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--gzen-saffron);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .schema-code {
+    padding: 1.2rem;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #93C5FD;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  /* Roadmap Timeline */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .timeline-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 1.25rem;
+  }
+
+  .timeline-card.active {
+    background: rgba(217, 120, 69, 0.08);
+    border-color: var(--gzen-saffron);
+  }
+
+  .timeline-phase {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--gzen-saffron);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-card h4 {
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    color: #FFFFFF;
+  }
+
+  .timeline-card ul {
+    margin: 0;
+    padding-left: 1rem;
+    font-size: 0.78rem;
+    color: var(--gzen-ink-muted);
+    line-height: 1.6;
+    list-style: none;
+  }
+
+  /* Quote Footer */
+  .gdd-quote-footer {
+    text-align: center;
+    max-width: 44rem;
+    margin: 4rem auto 0;
+    padding: 2.5rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .gdd-quote-footer p {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: #F8D9C0 !important;
+    line-height: 1.7;
+    margin: 0 0 1rem !important;
+  }
+
+  .quote-author {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--gzen-saffron);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 640px) {
+    .gdd-container {
+      padding: 0 1rem 3rem;
+    }
+    .concept-caption {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .flow-arrow {
+      display: none;
+    }
+  }
+</style>
