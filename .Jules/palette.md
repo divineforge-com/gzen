@@ -1,0 +1,3 @@
+## 2025-03-03 - [Interactive Card Keyboard Shortcuts Accessibility]
+**Learning:** Interactive elements with custom keyboard shortcuts (such as the Path Cards in the Astro portal) need both screen reader and sighted user hints. Without these, shortcuts are completely undiscoverable.
+**Action:** When adding global keyboard event listeners for UI components (like `initKeyboardHint()`), ensure the corresponding interactive HTML element (e.g. `<a>`, `<button>`) includes the `aria-keyshortcuts` attribute for screen readers, and a non-intrusive tooltip (e.g., appending `(Shortcut: [Key])` to the `title` attribute) for visual discovery.
