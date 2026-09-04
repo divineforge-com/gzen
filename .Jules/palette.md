@@ -1,0 +1,3 @@
+## 2023-10-24 - Element Card Focus States & A11y
+**Learning:** Custom UI components (like `.element-card`) that set `outline: none;` often lack default browser focus rings. We must explicitly define `:focus-visible` styles, typically mirroring `:hover` states, to ensure keyboard accessibility. Also, interactive elements with custom keyboard shortcuts should use `aria-keyshortcuts` and include a visible tooltip (e.g. `title` attribute with "(Shortcut: [Key])") for sighted users.
+**Action:** When creating or modifying custom UI cards/buttons that suppress outlines, always explicitly add `:focus-visible` mirroring the hover state and ensure keyboard shortcuts are exposed to screen readers and sighted users via `aria-keyshortcuts` and tooltips.
