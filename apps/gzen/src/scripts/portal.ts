@@ -395,8 +395,8 @@ function initInCardMicroPractices() {
     const disc = breathCard.querySelector<SVGCircleElement>(".geo-ambient-disc");
 
     let isBreathing = false;
-    let breathTimer: number | null = null;
-    let breathPhase: "inhale" | "hold" | "exhale" = "inhale";
+    let breathTimer: number | undefined;
+
 
     const clearBars = () => {
       barInhale?.classList.remove("active");
@@ -408,7 +408,7 @@ function initInCardMicroPractices() {
       if (!isBreathing) return;
 
       // 1. Inhale (4s)
-      breathPhase = "inhale";
+
       clearBars();
       barInhale?.classList.add("active");
       if (phaseLabel) phaseLabel.textContent = "INHALE (4s) · EXPAND VESSEL";
@@ -421,7 +421,7 @@ function initInCardMicroPractices() {
         if (!isBreathing) return;
 
         // 2. Hold (7s)
-        breathPhase = "hold";
+
         clearBars();
         barHold?.classList.add("active");
         if (phaseLabel) phaseLabel.textContent = "HOLD (7s) · IMMUTABLE STILLNESS";
@@ -434,7 +434,7 @@ function initInCardMicroPractices() {
           if (!isBreathing) return;
 
           // 3. Exhale (8s)
-          breathPhase = "exhale";
+
           clearBars();
           barExhale?.classList.add("active");
           if (phaseLabel) phaseLabel.textContent = "EXHALE (8s) · RELEASE FRICTION";
@@ -466,7 +466,7 @@ function initInCardMicroPractices() {
           breathBtn.style.borderColor = "var(--element-tone)";
           runBreathCycle();
         } else {
-          clearTimeout(breathTimer);
+          window.clearTimeout(breathTimer);
           clearBars();
           const btnText = breathBtn.querySelector<HTMLElement>(".btn-text");
           if (btnText) btnText.textContent = "Begin 4-7-8 Rhythm";
@@ -606,11 +606,11 @@ function initMobileSwipeCarousel() {
   });
 
   // Track horizontal scroll for dot active state
-  let scrollTimeout: number | null = null;
+  let scrollTimeout: number | undefined;
   carousel.addEventListener(
     "scroll",
     () => {
-      clearTimeout(scrollTimeout);
+      window.clearTimeout(scrollTimeout);
       scrollTimeout = window.setTimeout(() => {
         const scrollLeft = carousel.scrollLeft;
         const width = carousel.offsetWidth;

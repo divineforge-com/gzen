@@ -1,0 +1,5 @@
+## 2026-08-19 - Exposing Custom Keyboard Shortcuts for Discoverability and Accessibility
+
+**Learning:** When custom keyboard shortcuts (like Z, E, N) are implemented programmatically via global `keydown` event listeners in a portal application, they remain "invisible" to both screen readers (which rely on semantic HTML) and sighted users (who have no visual affordance unless they notice tiny decorative pills). The lack of ARIA keyshortcut declarations degrades the accessible experience.
+
+**Action:** Ensure that any interactive UI element mapped to a custom keyboard shortcut includes both `aria-keyshortcuts="[Key]"` for screen reader users and a simple `title` attribute string (e.g., `"Name (Shortcut: [Key])"`) to act as a native tooltip for sighted mouse/pointer users, bridging the gap between programmatic listeners and semantic HTML.
