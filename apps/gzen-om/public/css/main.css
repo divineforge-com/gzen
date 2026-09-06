@@ -1,0 +1,87 @@
+:root {
+  --bg: #f7f4ef;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --line: #e7e5e4;
+  --accent: #9a3412;
+  --card: #fffcf7;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Serif SC", "Songti SC", "Source Han Serif SC", serif;
+  line-height: 1.85;
+  min-height: 100vh;
+}
+.top {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.brand span {
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 0.35rem;
+  font-size: 0.92rem;
+}
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 0.95rem;
+}
+nav a:hover { color: var(--ink); }
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0.4rem 0 0.8rem;
+}
+.hero.compact h1 { font-size: 1.8rem; }
+.kicker {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin: 0;
+}
+.lede { color: var(--muted); margin: 0; max-width: 36rem; }
+.list { margin-top: 2.5rem; }
+.list h2 { font-size: 1.1rem; margin-bottom: 1rem; }
+.list ul { list-style: none; padding: 0; margin: 0; }
+.list li {
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+.list a { color: var(--ink); text-decoration: none; }
+.list a:hover { color: var(--accent); }
+.meta { color: var(--muted); font-size: 0.85rem; margin-left: 0.6rem; }
+.prose h1 { margin-top: 0; }
+.prose h2 { margin-top: 2rem; font-size: 1.15rem; }
+.foot {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+.foot a { color: var(--ink); }
