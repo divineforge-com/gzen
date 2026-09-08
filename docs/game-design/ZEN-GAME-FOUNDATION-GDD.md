@@ -13,6 +13,42 @@ The **gZen Zen Game** is a tranquil, browser-native sanctuary of gentle human wa
 
 In an attention economy dominated by dopamine loops, algorithmic outrage, and real-time urgency, the gZen Zen Game offers an intentional counter-space: **a world where messages travel slowly across real planetary distances, validation metrics do not exist, and interaction is grounded in the cultivation of the Four Immeasurables (Brahmaviharas).**
 
+---
+
+### 1.2 gZen Ecosystem Topology & Domain Architecture
+
+The gZen universe is structured into dedicated, decoupled domains that collaborate smoothly across the web:
+
+```
+                               ┌────────────────────────────────┐
+                               │            gzen.io             │
+                               │   Main Portal & Sanctuary      │
+                               │ (Philosophy, Gateway, Presence)│
+                               └───────────────┬────────────────┘
+                                               │
+         ┌─────────────────────────────────────┼─────────────────────────────────────┐
+         ▼                                     ▼                                     ▼
+┌──────────────────────────────┐ ┌──────────────────────────────┐ ┌──────────────────────────────┐
+│         zen.gzen.io          │ │        enlight.gzen.io       │ │         nexus.gzen.io        │
+│      The Zen Game Client     │ │    Zen Knowledge & Health    │ │   AI & Neural Companion Core │
+│ - 2.5D/3D Isometric Dioramas │ │ - Buddhist Wisdom & Dharma   │ │ - In-game AI Zen Companion   │
+│ - World Map & Country Nodes  │ │ - Mindful Health & Longevity │ │ - Thoughtful prompt guidance │
+│ - Origami Cranes & Letters   │ │ - Daily Seeds & Meditations  │ │ - Pre-flight sentiment guard │
+│ - River Lanterns & Seals     │ │ - Integrative Wellness Guides│ │ - Compassionate dialogue API │
+└──────────────────────────────┘ └──────────────────────────────┘ └──────────────────────────────┘
+```
+
+1. **`gzen.io` — Main Portal & Sanctuary**:
+   - The central gateway, guiding seekers into the brand's philosophy, overarching principles, and foundational offerings.
+2. **`zen.gzen.io` — The Zen Game Client**:
+   - Dedicated gaming experience. Hosts the lightweight Three.js / React Three Fiber / WebGL diorama world, progressive globe exploration, paper crane transit, river lanterns, and mindful writing desk.
+3. **`enlight.gzen.io` — Wisdom, Zen Message & Mindful Health Repository**:
+   - Deep knowledge hub covering timeless Buddhist wisdom, contemplative sutras, holistic health practices, longevity habits, and mind-body harmony. Serves as the source of truth for daily in-game Dharma seeds and collectible wisdom seals.
+4. **`nexus.gzen.io` — AI Gateway & Neural Companion Core**:
+   - Orchestrates the mindful AI companion within the game (the Zen Guide / Dharma Companion).
+   - Manages prompts, empathetic listening dialogues, emotional grounding, pre-flight content moderation, and multilingual wisdom translations without intrusive or dopamine-farming mechanics.
+
+
 ```
                      ┌──────────────────────────────────────┐
                      │          The Four Immeasurables      │
@@ -385,7 +421,48 @@ The backend operates solely as a stateless, asynchronous post office:
 | **Temporal Scheduling** | **Cloudflare Queues / Upstash Redis** | Asynchronous letter arrival scheduling without long-running background daemon processes. |
 | **Edge Moderation** | **Workers AI / Hermes Guard (Serverless)** | Low-latency, cost-effective pre-flight kindness and safety classification at the edge. |
 
-### 5.4 Pre-Flight AI Safety & Compassion Filter
+### 5.4 AI Gateway (`nexus.gzen.io`) & Mindful Companion Integration
+
+The AI architecture is centralized in **`nexus.gzen.io`**, acting as an ethical, non-addictive neural companion service:
+
+```
+┌────────────────────────────────────────────────────────┐
+│                   zen.gzen.io (Client)                 │
+│  - Player in contemplation or drafting letters         │
+│  - Summons "Zen Companion" (Dharma Guide)              │
+└───────────────────────────┬────────────────────────────┘
+                            │ HTTPS Streaming SSE (Encrypted)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│             nexus.gzen.io (Neural Core)                │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ Prompt Orchestration & Empathy Guard             │  │
+│  │ - Non-directive, active listening tone          │  │
+│  │ - Buddhist contemplation reframing (Metta/Karuna)│  │
+│  │ - Grounding exercises for emotional distress     │  │
+│  └──────────────────────────┬───────────────────────┘  │
+│                             │ Query Wisdom Knowledge
+│                             ▼
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ enlight.gzen.io (Wisdom Knowledge Base)          │  │
+│  │ - Sutra excerpts, longevity habits, mindful diet │  │
+│  └──────────────────────────┬───────────────────────┘  │
+│                             │ Safe Stream
+│                             ▼
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ Pre-Flight Safety & Sentiment Screener           │  │
+│  │ - Filters PII, toxic words, hate, despair        │  │
+│  │ - Global crisis resource injection if needed     │  │
+│  └──────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────┘
+```
+
+#### 5.4.1 In-Game Companion Persona & Guardrails
+- **The Companion Role**: Not an addictive conversational chatbot or waifu, but a quiet, respectful monk or temple cat presence. Speaks sparingly, warmly, and pointedly.
+- **Guidance on Writing**: When a player struggles to express pain or gratitude, the companion suggests poetic prompts based on the Four Immeasurables.
+- **Direct Linkage to `enlight.gzen.io`**: Whenever discussions touch on physical wellness, sleep, meditation postures, or breathwork, the companion draws certified principles directly from `enlight.gzen.io`.
+
+### 5.5 Pre-Flight AI Safety & Compassion Filter
 Every outgoing letter and comfort request passes through an automated edge moderation pipeline:
 ```
 [User Letter Submission]
@@ -455,7 +532,85 @@ CREATE TABLE wanderer_archives (
     last_meditation_ts INTEGER
 );
 ```
-## 6. Milestones & Implementation Roadmap
+---
+
+## 6. Sustainable Monetization Architecture (The Mindful Patron)
+
+To protect the contemplative sanctuary of gZen from commercial pollution, the monetization model strictly adheres to **Value Co-Creation & Cosmetic Dāna (Generosity)**.
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                   MONETIZATION ARCHITECTURE (ETHICAL DĀNA)             │
+├──────────────────────────────────┬─────────────────────────────────────┤
+│ ❌ REJECTED (SOUL-KILLING)       │ ✅ ADOPTED (VALUE & BEAUTY)         │
+├──────────────────────────────────┼─────────────────────────────────────┤
+│ • Interstitial & Pop-up Video Ads│ • Artisanal Washi & Chops ($0.99)   │
+│ • Banner Ads & Tracking Pixels   │ • "Gift of Dāna" Cross-Gifting      │
+│ • "Pay to Speed Up Transit"      │ • Sanctuary Circle Light Patron     │
+│ • Gacha Lootboxes & Pay-to-Win   │ • Physical Anthologies & Tea Chops  │
+└──────────────────────────────────┴─────────────────────────────────────┘
+```
+
+### 6.1 What is Strictly Forbidden
+- **Zero Interstitial/Pop-up Ads**: Interrupting a peaceful contemplation loop or crane arrival with noisy commercial video ads shatters player immersion immediately.
+- **Zero Banner Ads**: Preserves the clean editorial layout (`#FFFAF4` / `#2F2118`) and uncluttered typography.
+- **Zero Speed-Ups**: Players cannot pay or watch ads to rush letter transit. Patience (*Upekkhā*) is the foundational gameplay mechanic.
+- **Zero Gacha or FOMO Mechanics**: No gambling, countdown pressure, or punitive daily login loss.
+
+### 6.2 Sustainable Revenue Pillars
+1. **Artisanal Washi Stationery & Rare Seal Chops ($0.99 – $2.99)**:
+   - Core writing paper and standard cinnabar chops remain 100% free forever.
+   - Optional cosmetic sets: *Gold Leaf Foil washi*, *Pressed Maple Blossom paper*, *Dark Sumi ink finishes*, and hand-carved stone chop seals created in collaboration with independent artists.
+2. **"The Gift of Dāna" (Pay-It-Forward Gifting)**:
+   - Players who receive deeply moving comfort letters can gift stationery sets, tea house lanterns, or collectible stamps to the anonymous sender.
+3. **The "Sanctuary Circle" Light Patron ($3.99/mo or $29/year)**:
+   - Cloud backup for lifetime letter journals (Tea Chest).
+   - High-fidelity spatial ambient soundscapes (authentic temple bells, bamboo chimes, 432Hz bowls).
+   - Direct integration with `enlight.gzen.io` deep health & longevity practices.
+   - Expanded, thoughtful dialogue guidance via the `nexus.gzen.io` AI companion.
+4. **Physical World Bridges**:
+   - The *Annual gZen Kind Words Anthology* (curated anonymous wisdom coffee table book) and physical cinnabar seal sets.
+
+---
+
+## 7. Multi-Agent Industry Readiness Review & Engine Decision
+
+To validate readiness for production, three industry specialist personas conducted an architectural review focusing on **reducing installation friction (Mobile-First Web PWA $\rightarrow$ Desktop Web $\rightarrow$ App Store Wrapper)**:
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                   TRI-AGENT READINESS REVIEW BOARD                     │
+├────────────────────────────────────────────────────────────────────────┤
+│ 1. Principal Game Tech Director (Engine & Multiplatform Architecture)  │
+│ 2. Lead UX & Indie Game Producer (Player Ergonomics & Frictionless PWA)│
+│ 3. Contemplative Systems & Economy Designer (Game Loop & Monetization) │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+### 7.1 Reviewer 1: Principal Game Tech Director
+- **Verdict**: **APPROVED — Engine Selected: Three.js / React Three Fiber (Web-First PWA + Capacitor Wrapper)**.
+- **Technical Analysis**:
+  - *Why not Unity/Unreal?* Initial web download size (>40MB) creates massive drop-off on mobile browsers.
+  - *Why not Godot 4 initially?* Godot 4 Web/Wasm export is viable (~18MB), but mobile Safari/Chrome WebGL memory management for Godot Wasm can encounter stutter on older budget phones.
+  - *The Optimal Choice*: **React Three Fiber (R3F) / Three.js**. Total initial payload is under **3.5MB** gzipped. It boots instantaneously in mobile Safari, Chrome, and desktop browsers without any App Store installation gate.
+  - *Mobile Transition*: When ready for native distribution, wrap the exact same codebase with **Capacitor 6+** to publish to the Apple App Store and Google Play Store, unlocking native haptics, local background notification for crane arrivals, and offline IndexedDB persistence.
+
+### 7.2 Reviewer 2: Lead UX & Indie Game Producer
+- **Verdict**: **APPROVED with Onboarding Constraint**.
+- **Ergonomics & Frictionless Strategy**:
+  - **Zero-Barrier Access**: Forcing users to download a 200MB app before writing their first letter destroys conversion. Launching `zen.gzen.io` as a **Mobile-First Responsive Web Experience (PWA)** allows users to click a link on Discord, Reddit, or mobile browser and be inside the tranquil diorama within **2 seconds**.
+  - **Touch Ergonomics**: Design bottom-anchored touch controls for mobile screens: thumb-reachable letter writing desk, gentle swipe gesture to unfold cranes, and one-tap haptic Gasshō bowing.
+  - **Install Prompt as a Ritual**: Offer the PWA "Add to Home Screen" as an in-game blessing ("Place your Sanctuary on your pocket device") rather than a browser popup.
+
+### 7.3 Reviewer 3: Contemplative Systems & Economy Designer
+- **Verdict**: **APPROVED — High Longevity Potential**.
+- **System Evaluation**:
+  - Validates that separating the experience into `zen.gzen.io` (client), `enlight.gzen.io` (health/wisdom repository), and `nexus.gzen.io` (ethical AI gateway) prevents bloat.
+  - The "Mindful Patron" and "Gift of Dāna" monetization model mimics the proven, highly respected monetization of *Sky: Children of the Light* and *Slowly*, ensuring financial sustainability while honoring the sacred stillness of the player.
+
+---
+
+## 8. Milestones & Implementation Roadmap
 
 ```
 2026 Q3               2026 Q4               2027 Q1               2027 Q2
