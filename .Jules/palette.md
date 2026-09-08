@@ -1,0 +1,3 @@
+## 2023-10-27 - Keyboard Shortcut Accessibility in Astro Cards
+**Learning:** Interactive components with custom global keyboard shortcuts (like `ElementCard.astro`) rely on Javascript to function (e.g. `initKeyboardHint()`), but lack native keyboard discoverability for screen readers. Using `aria-keyshortcuts` explicitly declares the binding, and appending the shortcut to the `title` tooltip gives mouse users discoverability without cluttering the UI.
+**Action:** When creating or modifying components with custom Javascript keyboard shortcuts in this Astro application, ensure both `aria-keyshortcuts` and a non-intrusive visual indicator like a `title` tooltip are implemented for accessibility.
