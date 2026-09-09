@@ -2,7 +2,7 @@
 {{- $codebergURL := print "https://codeberg.org/api/v1/repos/" (.Get "repo") -}}
 {{- $repoColors := .Site.Data.repoColors -}}
 {{- $codebergData := dict -}}
-{{- with try (resources.GetRemote $codebergURL) -}}
+{{- with resources.GetRemote $codebergURL -}}
   {{- with .Err -}}
     {{- warnf "codeberg shortcode: failed to fetch remote resource from %q: %s" $codebergURL $.Position -}}
   {{- else with .Value -}}
