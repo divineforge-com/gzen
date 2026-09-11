@@ -1,0 +1,3 @@
+## 2024-05-24 - Keyboard Shortcut Accessibility for Interactive Elements
+**Learning:** Interactive elements with custom keyboard bindings (like the Path Cards mapped in `initKeyboardHint()`) lack semantic accessibility attributes to communicate these shortcuts to screen readers and visual tooltips for sighted users. The `element.letter` property is the convention for these shortcuts in the UI data-attributes.
+**Action:** Always add `aria-keyshortcuts="[Key]"` to elements with custom keyboard listeners, and append `(Shortcut: [Key])` to their `title` attribute to ensure the shortcut is discoverable by both assistive technologies and hover interactions. Use `element.letter` for this mapping where applicable.
