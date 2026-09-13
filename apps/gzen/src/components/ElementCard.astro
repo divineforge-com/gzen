@@ -577,7 +577,8 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
     transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
   }
 
-  .micro-practice:hover {
+  .micro-practice:hover,
+  .micro-practice:focus-visible {
     background: rgba(255, 255, 255, 0.04);
     border-color: color-mix(in srgb, var(--element-tone) 35%, rgba(255, 255, 255, 0.12));
   }
@@ -706,7 +707,8 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
     transition: all 0.2s var(--ease);
   }
 
-  .tier-btn:hover {
+  .tier-btn:hover,
+  .tier-btn:focus-visible {
     color: var(--ink);
     background: rgba(255, 255, 255, 0.08);
   }
@@ -804,7 +806,8 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
   }
 
   /* Interactions */
-  .element-card:hover {
+  .element-card:hover,
+  .element-card:focus-visible {
     border-color: color-mix(in srgb, var(--element-tone) 45%, rgba(255,255,255,0.12));
     box-shadow:
       0 16px 48px -8px rgba(0, 0, 0, 0.55),
@@ -812,16 +815,19 @@ const delayClass = `reveal-d${Math.min(index + 1, 5)}`;
       inset 0 0 42px 0 color-mix(in srgb, var(--element-tone) 12%, transparent);
   }
 
-  .element-card:hover .element-ambient-glow {
+  .element-card:hover .element-ambient-glow,
+  .element-card:focus-visible .element-ambient-glow {
     opacity: 0.95;
   }
 
-  .element-card:hover .explore-btn {
+  .element-card:hover .explore-btn,
+  .element-card:focus-visible .explore-btn {
     color: var(--element-tone);
     gap: 0.65rem;
   }
 
-  .element-card:hover .arrow-svg {
+  .element-card:hover .arrow-svg,
+  .element-card:focus-visible .arrow-svg {
     transform: translateX(3px);
   }
 
