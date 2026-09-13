@@ -1,4 +1,6 @@
 baseURL = "https://invest.gzen.dev/"
+defaultContentLanguage = "en"
+languageName = "English"
 languageCode = "en-US"
 title = "invest.gzen"
 enableRobotsTXT = true
