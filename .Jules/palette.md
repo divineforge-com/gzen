@@ -1,0 +1,3 @@
+## 2024-05-24 - [Keyboard Shortcuts Tooltips]
+ **Learning:** Interactive elements with custom keyboard shortcuts (such as the Theme Toggle or Path Cards in the Astro portal) must include the `aria-keyshortcuts` attribute for accessibility. Append `(Shortcut: [Key])` to the `title` attribute to provide a non-intrusive, discoverable visual tooltip for sighted users.
+ **Action:** Always add `aria-keyshortcuts` and a formatted `title` tooltip to elements with custom keyboard shortcuts.
