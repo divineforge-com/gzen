@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import UnifiedNav from "../components/UnifiedNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
 const gddMeta = {
@@ -9,20 +10,8 @@ const gddMeta = {
 ---
 
 <BaseLayout title={gddMeta.title} description={gddMeta.description}>
+  <UnifiedNav activeTab="gdd" />
   <div class="gdd-container">
-    <!-- Header / Navigation Bar -->
-    <header class="gdd-nav">
-      <div class="gdd-nav-inner">
-        <a href="/" class="brand-link">
-          <span class="brand-glyph">✦</span>
-          <span class="brand-name">gZen<strong>.io</strong></span>
-        </a>
-        <div class="nav-actions">
-          <span class="badge doc-badge">GDD-v1.0 • Living Spec</span>
-          <a href="#toc" class="nav-toc-link">Table of Contents</a>
-        </div>
-      </div>
-    </header>
 
     <!-- Hero Section -->
     <section class="hero-section">

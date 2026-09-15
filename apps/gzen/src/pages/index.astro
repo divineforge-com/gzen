@@ -1,75 +1,381 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import UnifiedNav from "../components/UnifiedNav.astro";
 import Starfield from "../components/Starfield.astro";
 import GeometricField from "../components/GeometricField.astro";
-import Hero from "../components/Hero.astro";
-import ElementGrid from "../components/ElementGrid.astro";
-import GiftSection from "../components/GiftSection.astro";
-import TributeSection from "../components/TributeSection.astro";
 import SiteFooter from "../components/SiteFooter.astro";
-import BuyMeACoffeeModal from "../components/BuyMeACoffeeModal.astro";
+
+const meta = {
+  title: "gZen — Gaming & Zen | Contemplative Game World",
+  description: "gZen fuses interactive game worlds with timeless Buddhist stillness. Explore the design foundation and enter the living 3D sanctuary.",
+};
 ---
 
-<BaseLayout>
+<BaseLayout title={meta.title} description={meta.description}>
+  <UnifiedNav activeTab="home" />
   <Starfield />
   <GeometricField />
 
-  <main class="wrap">
-    <Hero />
-    <ElementGrid />
-    <GiftSection />
-    <TributeSection />
+  <main class="page-wrap">
+    <!-- Hero Header -->
+    <header class="hero-section">
+      <div class="brand-seal">GAMING &amp; ZEN // 遊戲與禪</div>
+      <h1 class="brand-title">
+        <span class="g-letter">g</span>Zen
+      </h1>
+      <p class="brand-lead">
+        A slow, immersive 3D world game designed around tranquility, contemplative letter transit, and the timeless Four Immeasurables.
+      </p>
+      <div class="hero-actions">
+        <a href="/sanctuary" class="btn-primary">
+          <span>Enter 3D Sanctuary</span>
+          <span class="btn-glyph">↗</span>
+        </a>
+        <a href="#foundation" class="btn-secondary">
+          <span>Explore Game Design</span>
+          <span class="btn-glyph">↓</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Concept Showcase Hero Banner -->
+    <section class="showcase-section">
+      <div class="concept-card">
+        <picture>
+          <source srcset="/assets/game-design/zen-world-concept.webp" type="image/webp" />
+          <img
+            src="/assets/game-design/zen-world-concept.png"
+            alt="gZen Concept Art — Low-poly floating diorama sanctuary with pagoda, willow tree, koi pond, and origami carrier crane"
+            class="concept-img"
+            loading="eager"
+          />
+        </picture>
+        <div class="concept-bar">
+          <div class="bar-left">
+            <span class="tag">World Slice</span>
+            <span class="title">Floating Sanctuary Kyoto Node</span>
+          </div>
+          <a href="/sanctuary" class="play-link">Experience in 3D ✦</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fused GDD & Philosophical Foundation -->
+    <section id="foundation" class="foundation-section">
+      <div class="section-head">
+        <span class="sub-seal">Core Pillars</span>
+        <h2 class="section-title">The Foundation of gZen</h2>
+        <p class="section-desc">
+          Modern gaming feeds on urgency and variable reward loops. gZen is built on the inverse principle: non-attachment, slow organic arrival, and peaceful aesthetic stillness.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <article class="pillar-card">
+          <div class="pillar-icon">✉️</div>
+          <h3 class="pillar-title">Slow Transit</h3>
+          <p class="pillar-text">
+            Letters and contemplations carried across continents by origami cranes along calm river currents. No instant notifications, only organic arrival.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon">🪷</div>
+          <h3 class="pillar-title">The Four Seals</h3>
+          <p class="pillar-text">
+            Rooted in Buddhist Brahmaviharas: Loving-kindness (Metta), Compassion (Karuna), Sympathetic Joy (Mudita), and Equanimity (Upekkha).
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon">🔔</div>
+          <h3 class="pillar-title">Sensory Stillness</h3>
+          <p class="pillar-text">
+            Harmonic 432Hz singing bowls, water ripple caustics, and wind-drifted clouds crafted to gently slow breathing and soothe attention.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Interactive Experience Callout -->
+    <section class="cta-banner">
+      <div class="cta-card">
+        <h2 class="cta-heading">Step into the World of gZen</h2>
+        <p class="cta-text">
+          Built with Blender on Apple Silicon and rendered in real-time with Three.js on Cloudflare Pages.
+        </p>
+        <a href="/sanctuary" class="btn-primary large">
+          <span>Launch 3D Game World</span>
+          <span class="btn-glyph">✦</span>
+        </a>
+      </div>
+    </section>
+
     <SiteFooter />
   </main>
-
-  <BuyMeACoffeeModal />
-
-  <div class="cursor-glow" aria-hidden="true"></div>
 </BaseLayout>
 
 <style>
-  .wrap {
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     position: relative;
     z-index: 1;
-    max-width: var(--max);
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 clamp(1.35rem, 4.5vw, 2rem) clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .hero-section {
+    text-align: center;
+    padding: clamp(4rem, 10vw, 6.5rem) 0 3.5rem;
+  }
+
+  .brand-seal {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #b45309;
+    background: rgba(180, 83, 9, 0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    display: inline-block;
+    margin-bottom: 1.25rem;
+  }
+
+  .brand-title {
+    font-size: clamp(3.2rem, 8vw, 5.5rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin: 0 0 1rem 0;
+    color: #111;
+    line-height: 1;
+  }
+
+  .g-letter {
+    font-weight: 300;
+    color: #888;
+  }
+
+  .brand-lead {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: #6b6b6b;
+    max-width: 620px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    min-height: 100dvh;
-    overflow-x: hidden;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
-  .cursor-glow {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(
-      560px circle at var(--px, 50%) var(--py, 18%),
-      var(--cursor-glow),
-      transparent 55%
-    );
-    opacity: 0.95;
-    transition: opacity 0.45s var(--ease);
+  .btn-primary {
+    background: #111;
+    color: #fafafa;
+    padding: 0.85rem 1.6rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
   }
 
-  @media (prefers-reduced-motion: reduce), (pointer: coarse) {
-    .cursor-glow {
-      display: none;
-    }
+  .btn-primary:hover {
+    background: #2a2a2a;
+    transform: translateY(-2px);
   }
 
-  :global(.element-key-flash) {
-    border-color: color-mix(
-      in srgb,
-      var(--element-tone, var(--accent)) 55%,
-      var(--line-strong)
-    ) !important;
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.08),
-      0 0 42px color-mix(in srgb, var(--element-tone, var(--accent)) 30%, transparent) !important;
+  .btn-primary.large {
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+  }
+
+  .btn-secondary {
+    background: rgba(0, 0, 0, 0.04);
+    color: #333;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  /* Concept Showcase */
+  .showcase-section {
+    margin: 1rem 0 5rem;
+  }
+
+  .concept-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+  }
+
+  .concept-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .concept-bar {
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .bar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: #b45309;
+    background: rgba(180, 83, 9, 0.08);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .play-link {
+    color: #b45309;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.2s ease;
+  }
+
+  .play-link:hover {
+    transform: translateX(3px);
+  }
+
+  /* Foundation Section */
+  .foundation-section {
+    padding: 2rem 0 5rem;
+  }
+
+  .section-head {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+  }
+
+  .sub-seal {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    letter-spacing: -0.03em;
+    margin: 0 0 1rem 0;
+    color: #111;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .pillar-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 14px;
+    padding: 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pillar-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+  }
+
+  .pillar-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.6rem 0;
+    color: #111;
+  }
+
+  .pillar-text {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
+  }
+
+  /* CTA Banner */
+  .cta-banner {
+    margin: 2rem 0 6rem;
+  }
+
+  .cta-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f7f4ee 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: clamp(2.5rem, 6vw, 4rem) 2rem;
+    text-align: center;
+  }
+
+  .cta-heading {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    letter-spacing: -0.03em;
+    margin: 0 0 0.75rem 0;
+    color: #111;
+  }
+
+  .cta-text {
+    font-size: 1.05rem;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.5;
   }
 </style>

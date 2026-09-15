@@ -1,0 +1,40 @@
+{
+  "generation": 1,
+  "champion_id": "gen1_sunset_contemplation",
+  "active_genes": {
+    "camera": {
+      "fov": 45,
+      "distance": 11.5,
+      "elevation": 6.2,
+      "auto_rotate_speed": 0.35,
+      "damping_factor": 0.04
+    },
+    "lighting": {
+      "ambient_color": "0xfff1e6",
+      "ambient_intensity": 1.4,
+      "sun_color": "0xfffaed",
+      "sun_intensity": 2.2,
+      "sun_position": [12, 16, 8],
+      "fog_color": "0xfaf5ee",
+      "fog_density": 0.035
+    },
+    "kinetics": {
+      "island_float_amplitude": 0.12,
+      "island_float_speed": 1.2,
+      "water_ripple_frequency": 2.4,
+      "particle_mote_count": 35,
+      "crane_flight_interval_sec": 45
+    },
+    "diorama_density": {
+      "koi_count": 3,
+      "lantern_count": 4,
+      "has_sand_garden": true,
+      "has_singing_bell": true
+    },
+    "pacing": {
+      "breathing_cycle_seconds": 6.0,
+      "chime_sustain_seconds": 4.5
+    }
+  },
+  "player_feedback_history": []
+}

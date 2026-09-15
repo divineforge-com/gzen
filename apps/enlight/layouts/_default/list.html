@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <section class="hero compact">
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  </section>
+  <section class="list">
+    <ul>
+      {{ range .Pages.ByDate.Reverse }}
+      <li>
+        <a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong></a>
+        <span class="meta">{{ .Date.Format "2006-01-02" }}</span>
+        <p>{{ .Description }}</p>
+      </li>
+      {{ end }}
+    </ul>
+  </section>
+{{ end }}

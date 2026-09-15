@@ -1,0 +1,493 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UnifiedNav from "../components/UnifiedNav.astro";
+import gameGenes from "../data/game-genes.json";
+
+const meta = {
+  title: "Zen 3D Sanctuary — Living Contemplative Diorama | gZen",
+  description: "A contemplative 3D Zen sanctuary world slice built with Blender on Seidan M4 and rendered in real-time with Three.js.",
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="sanctuary-container">
+    <UnifiedNav activeTab="game" />
+
+    <main class="viewport-wrapper">
+      <div id="three-canvas-container" class="canvas-container">
+        <div id="loading-overlay" class="loading-overlay">
+          <div class="spinner"></div>
+          <p>Awakening Zen Sanctuary...</p>
+        </div>
+      </div>
+
+      <!-- Player Judge / Genetic Evaluation Pill -->
+      <div class="feedback-dial-container" aria-label="Player Contemplative Feedback">
+        <div class="feedback-card">
+          <span class="feedback-title">Rate Contemplation Experience:</span>
+          <div class="feedback-buttons">
+            <button class="fb-btn fb-empty" data-rating="empty" title="Too empty or plain">🪨 Empty</button>
+            <button class="fb-btn fb-grounded" data-rating="grounded" title="Harmonious and peaceful">🪷 Grounded</button>
+            <button class="fb-btn fb-noisy" data-rating="noisy" title="Too busy or distracting">🌪️ Noisy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-overlay">
+        <div class="hud-card">
+          <h1 class="hud-title">Living Sanctuary v0.2</h1>
+          <p class="hud-desc">
+            Multi-tiered floating island, shaded tea pavilion, and resonant singing bowl. Tap anywhere on the diorama or the bell to chime.
+          </p>
+          <div class="hud-controls">
+            <span class="control-tag">🖱️ Drag to Orbit</span>
+            <span class="control-tag">🔔 Click Bell to Chime</span>
+            <span class="control-tag">✨ Slow Contemplative Drift</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+  import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import { animate } from 'animejs';
+
+  const container = document.getElementById('three-canvas-container');
+  const loadingOverlay = document.getElementById('loading-overlay');
+
+  if (container) {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    // Audio Context (Synthesized Singing Bell Chime)
+    let audioCtx: AudioContext | null = null;
+    const playZenChime = () => {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+        
+        // Singing bowl fundamental 432Hz + harmonic overtone
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(432, now);
+        osc1.frequency.exponentialRampToValueAtTime(430, now + 4.5);
+
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(864, now); // Overtone
+        osc2.frequency.exponentialRampToValueAtTime(860, now + 3.0);
+
+        gain.gain.setValueAtTime(0.35, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 5.0);
+
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 5.2);
+        osc2.stop(now + 5.2);
+      } catch (e) {
+        console.log('Audio chime error:', e);
+      }
+    };
+
+    // Scene Setup
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xfbf8f3);
+    scene.fog = new THREE.FogExp2(0xfbf8f3, 0.035);
+
+    // Camera
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    camera.position.set(9, 6.5, 11);
+
+    // Renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    container.appendChild(renderer.domElement);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.04;
+    controls.maxPolarAngle = Math.PI / 2.08;
+    controls.minDistance = 4;
+    controls.maxDistance = 25;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.35;
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xfff1e6, 1.4);
+    scene.add(ambientLight);
+
+    const dirLight = new THREE.DirectionalLight(0xfffaed, 2.2);
+    dirLight.position.set(12, 16, 8);
+    dirLight.castShadow = true;
+    dirLight.shadow.mapSize.width = 1024;
+    dirLight.shadow.mapSize.height = 1024;
+    scene.add(dirLight);
+
+    // Subtle Ground Horizon Ring
+    const groundGrid = new THREE.GridHelper(50, 50, 0xebdcd0, 0xf5eee7);
+    groundGrid.position.y = -2.2;
+    scene.add(groundGrid);
+
+    // Floating Island Group for Organic Oscillation
+    const islandGroup = new THREE.Group();
+    scene.add(islandGroup);
+
+    // Load Model from Seidan V3 Blender Pipeline
+    const loader = new GLTFLoader();
+    loader.load(
+      '/models/zen_diorama_v3.glb',
+      (gltf) => {
+        const model = gltf.scene;
+        model.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            const mesh = child as THREE.Mesh;
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            
+            if (mesh.name.includes('Pond')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x60a5fa, // Reflective water
+                roughness: 0.08,
+                metalness: 0.3,
+              });
+            } else if (mesh.name.includes('Koi')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0xf97316, // Vibrant orange koi
+                roughness: 0.3,
+              });
+            } else if (mesh.name.includes('PineFoliage')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x15803d, // Deep pine evergreen
+                roughness: 0.8,
+              });
+            } else if (mesh.name.includes('PineTrunk')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x54382a, // Pine bark
+                roughness: 0.9,
+              });
+            } else if (mesh.name.includes('Cloud')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0xffffff,
+                roughness: 1.0,
+                transparent: true,
+                opacity: 0.85,
+              });
+            } else if (mesh.name.includes('Roof')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0xb45309, // Saffron eave tile
+                roughness: 0.45,
+              });
+            } else if (mesh.name.includes('Pillar') || mesh.name.includes('Platform')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x3e2b20, // Dark cedar timber
+                roughness: 0.7,
+              });
+            } else if (mesh.name.includes('Bell')) {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0xd97706, // Polished bronze
+                metalness: 0.85,
+                roughness: 0.2,
+              });
+            } else {
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0xd6ccc2, // Natural river stone & earth
+                roughness: 0.85,
+              });
+            }
+          }
+        });
+
+        islandGroup.add(model);
+        if (loadingOverlay) {
+          loadingOverlay.style.opacity = '0';
+          setTimeout(() => loadingOverlay.remove(), 400);
+        }
+      },
+      undefined,
+      (error) => {
+        console.error('Failed to load V2 model:', error);
+      }
+    );
+
+    // Interactive Click Handler
+    window.addEventListener('pointerdown', (e) => {
+      // Ignore clicks on HUD or navigation
+      if ((e.target as HTMLElement).closest('.sanctuary-nav, .unified-nav, .hud-overlay, .feedback-dial-container')) {
+        return;
+      }
+      playZenChime();
+
+      // Anime.js HUD Pulsing Ripple
+      const hud = document.querySelector('.hud-card');
+      if (hud) {
+        animate(hud, {
+          scale: [1, 1.03, 1],
+          duration: 800,
+          ease: 'outElastic(1, .6)'
+        });
+      }
+    });
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+      if (!container) return;
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    });
+
+    // Animation Loop with Gentle Island Breathing Oscillation
+    let clock = new THREE.Clock();
+    const animate = () => {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+      
+      // Floating breath motion
+      islandGroup.position.y = Math.sin(elapsedTime * 1.2) * 0.12;
+      islandGroup.rotation.z = Math.sin(elapsedTime * 0.6) * 0.015;
+
+      controls.update();
+      renderer.render(scene, camera);
+    };
+
+    animate();
+  }
+</script>
+
+<style>
+  .sanctuary-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #fafafa;
+    color: #111;
+    overflow: hidden;
+  }
+
+  .sanctuary-nav {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 20;
+  }
+
+  .nav-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .brand-glyph {
+    color: #b45309;
+  }
+
+  .brand-name {
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .badge {
+    background: rgba(180, 83, 9, 0.08);
+    color: #b45309;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .nav-gdd-link {
+    color: #6b6b6b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .viewport-wrapper {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  .canvas-container {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .loading-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fbf9f5;
+    z-index: 10;
+    transition: opacity 0.4s ease;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #6b6b6b;
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(180, 83, 9, 0.15);
+    border-top-color: #b45309;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Player Judge Feedback Pill */
+  .feedback-dial-container {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 15;
+  }
+
+  .feedback-card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(14px);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .feedback-title {
+    font-size: 0.75rem;
+    color: #6b6b6b;
+    font-weight: 500;
+  }
+
+  .feedback-buttons {
+    display: flex;
+    gap: 0.35rem;
+  }
+
+  .fb-btn {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fdfdfd;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .fb-btn:hover {
+    transform: translateY(-1px);
+    border-color: #b45309;
+    color: #b45309;
+  }
+
+  .hud-overlay {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    pointer-events: none;
+    z-index: 5;
+    max-width: 420px;
+  }
+
+  .hud-card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(16px);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    pointer-events: auto;
+  }
+
+  .hud-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    color: #111;
+  }
+
+  .hud-desc {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #6b6b6b;
+    margin: 0 0 1rem 0;
+  }
+
+  .hud-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .control-tag {
+    font-size: 0.72rem;
+    background: #f4f0eb;
+    color: #555;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .feedback-dial-container {
+      top: auto;
+      bottom: 12rem;
+      right: 1rem;
+      left: 1rem;
+    }
+    .hud-overlay {
+      bottom: 1rem;
+      left: 1rem;
+      right: 1rem;
+      max-width: none;
+    }
+  }
+</style>

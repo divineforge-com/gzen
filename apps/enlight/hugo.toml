@@ -1,0 +1,27 @@
+baseURL = "https://enlight.gzen.io/"
+title = "enlight · gZen Wisdom"
+languageCode = "en"
+defaultContentLanguage = "en"
+disableLanguages = []
+enableRobotsTXT = true
+summaryLength = 120
+hasCJKLanguage = true
+
+[params]
+  description = "enlight.gzen.io — Timeless contemplative wisdom, Buddhist philosophy, and principles for mindful living."
+  author = "gZen"
+  brand = "✦ enlight"
+  subtitle = "Clear thinking, stillness, and mindful living."
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]

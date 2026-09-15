@@ -1,0 +1,246 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UnifiedNav from "../components/UnifiedNav.astro";
+
+interface Article {
+  title: string;
+  category: string;
+  slug: string;
+  description: string;
+}
+
+const articles: Article[] = [
+  {
+    title: "Clarity Before Tools",
+    category: "Principles",
+    slug: "principles/clarity-before-tools",
+    description: "The instrument never replaces the intent. Master the thought before reaching for the chisel."
+  },
+  {
+    title: "Discipline Before Motivation",
+    category: "Principles",
+    slug: "principles/discipline-before-motivation",
+    description: "Feelings fluctuate like morning mist. Habit and commitment form the bedrock of enduring creation."
+  },
+  {
+    title: "Simplicity Before Scale",
+    category: "Principles",
+    slug: "principles/simplicity-before-scale",
+    description: "Premature expansion is a quiet form of self-destruction. Carve away the excess until only the truth remains."
+  },
+  {
+    title: "Virtue Before Power",
+    category: "Principles",
+    slug: "principles/virtue-before-power",
+    description: "Technological capability without moral clarity only accelerates ruin. Right view precedes right action."
+  },
+  {
+    title: "The Empty Cup",
+    category: "Koans",
+    slug: "koans/the-empty-cup",
+    description: "Nan-in pours until tea spills across the tatami. To absorb wisdom, one must first empty what is full."
+  },
+  {
+    title: "The Second Arrow",
+    category: "Koans",
+    slug: "koans/the-second-arrow",
+    description: "The first arrow strikes through circumstance. The second arrow is struck by our own mind's grief."
+  },
+  {
+    title: "The Drifting Log",
+    category: "Koans",
+    slug: "koans/the-drifting-log",
+    description: "If it does not ground on either bank nor sink into the mire, the river carries it effortlessly to the ocean."
+  },
+  {
+    title: "Observing Yin-Yang & Stillness",
+    category: "Stillness",
+    slug: "stillness/hexagram-stillness",
+    description: "The mountain rests above the earth. In stillness, movement discovers its true direction."
+  }
+];
+
+const meta = {
+  title: "enlight — Contemplative Wisdom Vault | gZen",
+  description: "A sanctuary of clear thinking, ancient Buddhist wisdom, and contemplative insights designed to calm the mind and guide right action.",
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="enlight-container">
+    <UnifiedNav activeTab="enlight" />
+
+    <main class="enlight-main">
+      <div class="hero-block">
+        <div class="enlight-seal">ENLIGHT // 悟</div>
+        <h1 class="page-title">The Wisdom Beneath</h1>
+        <p class="page-subtitle">
+          Timeless contemplative principles, Zen koans, and foundations for clear living. Everything integrated directly into gZen.
+        </p>
+      </div>
+
+      <div class="article-grid">
+        {articles.map((item) => (
+          <article class="article-card">
+            <span class="category-tag">{item.category}</span>
+            <h2 class="article-title">{item.title}</h2>
+            <p class="article-desc">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </main>
+
+    <footer class="enlight-footer">
+      <p>enlight · Integrated Wisdom Engine for gZen · Rooted in the Four Immeasurables.</p>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .enlight-container {
+    min-height: 100vh;
+    background: #fafafa;
+    color: #111;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .enlight-nav {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(250, 250, 250, 0.88);
+    backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.1rem;
+  }
+
+  .brand-glyph {
+    color: #b45309;
+  }
+
+  .nav-meta {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    color: #6b6b6b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #111;
+  }
+
+  .enlight-main {
+    max-width: 960px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    flex: 1;
+    width: 100%;
+  }
+
+  .hero-block {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .enlight-seal {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #b45309;
+    background: rgba(180, 83, 9, 0.08);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    letter-spacing: -0.03em;
+    margin: 0 0 0.85rem 0;
+    color: #111;
+  }
+
+  .page-subtitle {
+    font-size: 1.05rem;
+    color: #6b6b6b;
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.55;
+  }
+
+  .article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .article-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 14px;
+    padding: 1.65rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
+  }
+
+  .category-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #b45309;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .article-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.6rem 0;
+    color: #111;
+  }
+
+  .article-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #666;
+    margin: 0;
+  }
+
+  .enlight-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    color: #888;
+    font-size: 0.82rem;
+  }
+</style>
