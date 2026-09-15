@@ -5,7 +5,7 @@ import gameGenes from "../data/game-genes.json";
 
 const meta = {
   title: "Zen 3D Sanctuary — Living Contemplative Diorama | gZen",
-  description: "A contemplative 3D Zen sanctuary world slice built with Blender on Seidan M4 and rendered in real-time with Three.js.",
+  description: "A contemplative 3D Zen sanctuary diorama featuring slow transit mechanics, singing bell meditation, active koi swimming, and Kyoto garden aesthetics.",
 };
 ---
 
@@ -17,35 +17,93 @@ const meta = {
       <div id="three-canvas-container" class="canvas-container">
         <div id="loading-overlay" class="loading-overlay">
           <div class="spinner"></div>
-          <p>Awakening Zen Sanctuary...</p>
+          <p class="loading-text">Awakening Zen Sanctuary...</p>
         </div>
       </div>
 
-      <!-- Player Judge / Genetic Evaluation Pill -->
-      <div class="feedback-dial-container" aria-label="Player Contemplative Feedback">
-        <div class="feedback-card">
-          <span class="feedback-title">Rate Contemplation Experience:</span>
+      <!-- Interactive Hover Target Reticle / Tooltip -->
+      <div id="target-tooltip" class="target-tooltip" aria-hidden="true">
+        <span class="tooltip-glyph">✦</span>
+        <span id="tooltip-label" class="tooltip-label">Singing Bell</span>
+      </div>
+
+      <!-- Top Right: Contemplation Feedback & Camera Presets -->
+      <header class="top-controls-container">
+        <div class="preset-pill-group" role="group" aria-label="Camera Presets">
+          <button class="preset-btn active" data-view="orbit" title="Classic Isometric Orbit (1)">
+            <span class="btn-icon">🏯</span>
+            <span class="btn-text">Diorama</span>
+          </button>
+          <button class="preset-btn" data-view="bell" title="Bell Shrine Focus (2)">
+            <span class="btn-icon">🔔</span>
+            <span class="btn-text">Shrine</span>
+          </button>
+          <button class="preset-btn" data-view="pond" title="Reflecting Koi Garden (3)">
+            <span class="btn-icon">🪷</span>
+            <span class="btn-text">Pond</span>
+          </button>
+          <button id="breathe-toggle" class="preset-btn breathe-btn" title="Toggle 6s Pranayama Breath Rhythm (Space)">
+            <span class="btn-icon">🧘</span>
+            <span class="btn-text">Breathe</span>
+          </button>
+        </div>
+
+        <!-- Genetic Player Feedback Pill -->
+        <div class="feedback-card" aria-label="Contemplation Evaluation">
+          <span class="feedback-title">Contemplation:</span>
           <div class="feedback-buttons">
-            <button class="fb-btn fb-empty" data-rating="empty" title="Too empty or plain">🪨 Empty</button>
-            <button class="fb-btn fb-grounded" data-rating="grounded" title="Harmonious and peaceful">🪷 Grounded</button>
-            <button class="fb-btn fb-noisy" data-rating="noisy" title="Too busy or distracting">🌪️ Noisy</button>
+            <button class="fb-btn fb-empty" data-rating="empty" title="Deepen mist and floating motes">🪨 Empty</button>
+            <button class="fb-btn fb-grounded active" data-rating="grounded" title="Harmonious golden balance">🪷 Grounded</button>
+            <button class="fb-btn fb-noisy" data-rating="noisy" title="Calm turbulence & slow motion">🌪️ Noisy</button>
           </div>
+        </div>
+      </header>
+
+      <!-- Pranayama Breathing Guide Ring Overlay -->
+      <div id="breath-guide-overlay" class="breath-guide-overlay hidden" aria-hidden="true">
+        <div class="breath-ring">
+          <div class="breath-pulse"></div>
+          <span id="breath-status-text" class="breath-status-text">Inhale (3s)</span>
         </div>
       </div>
 
-      <div class="hud-overlay">
+      <!-- Bottom Left: Interactive Sanctuary HUD Card -->
+      <aside class="hud-overlay">
         <div class="hud-card">
-          <h1 class="hud-title">Living Sanctuary v0.2</h1>
-          <p class="hud-desc">
-            Multi-tiered floating island, shaded tea pavilion, and resonant singing bowl. Tap anywhere on the diorama or the bell to chime.
+          <div class="hud-header-strip">
+            <span class="brand-kicker">✦ gZen Living Diorama</span>
+            <span id="interaction-badge" class="interaction-badge">✨ Ready</span>
+          </div>
+          <h1 class="hud-title">Living Sanctuary v0.3</h1>
+          <p id="hud-quote" class="hud-desc">
+            "When the singing bowl is struck, sound dissolves into silence. In silence, the true mind awakens."
           </p>
-          <div class="hud-controls">
-            <span class="control-tag">🖱️ Drag to Orbit</span>
-            <span class="control-tag">🔔 Click Bell to Chime</span>
-            <span class="control-tag">✨ Slow Contemplative Drift</span>
+
+          <div class="hud-action-row">
+            <button id="chime-btn" class="hud-action-btn primary" title="Strike Bell (B)">
+              <span>🔔 Strike Bell</span>
+            </button>
+            <button id="lantern-btn" class="hud-action-btn" title="Toggle Sacred Flame (L)">
+              <span>🏮 Kindle Lantern</span>
+            </button>
+            <button id="crane-btn" class="hud-action-btn special" title="Release Slow Transit Origami Crane (C)">
+              <span>🕊️ Send Crane</span>
+            </button>
+          </div>
+
+          <div class="hud-controls-hint">
+            <span class="hint-tag"><kbd>Drag</kbd> Orbit</span>
+            <span class="hint-tag"><kbd>Click</kbd> Bell / Pond / Koi</span>
+            <span class="hint-tag"><kbd>B</kbd> Bell</span>
+            <span class="hint-tag"><kbd>L</kbd> Lantern</span>
+            <span class="hint-tag"><kbd>C</kbd> Crane</span>
+            <span class="hint-tag"><kbd>Space</kbd> Breathe</span>
           </div>
         </div>
-      </div>
+      </aside>
+
+      <!-- Toast Notification for Dynamic Feedback -->
+      <div id="zen-toast" class="zen-toast" role="status" aria-live="polite"></div>
     </main>
   </div>
 </BaseLayout>
@@ -54,63 +112,142 @@ const meta = {
   import * as THREE from 'three';
   import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-  import { animate } from 'animejs';
 
   const container = document.getElementById('three-canvas-container');
   const loadingOverlay = document.getElementById('loading-overlay');
+  const targetTooltip = document.getElementById('target-tooltip');
+  const tooltipLabel = document.getElementById('tooltip-label');
+  const interactionBadge = document.getElementById('interaction-badge');
+  const hudQuote = document.getElementById('hud-quote');
+  const zenToast = document.getElementById('zen-toast');
+  const breathOverlay = document.getElementById('breath-guide-overlay');
+  const breathText = document.getElementById('breath-status-text');
+
+  // Zen Koan & Wisdom Seals
+  const ZEN_INSIGHTS = [
+    "When the singing bowl is struck, sound dissolves into silence. In silence, the true mind awakens.",
+    "The river flows without hurrying to reach the ocean. Be the water, not the stone.",
+    "Loving-kindness (Mettā) is the open heart that holds all beings without condition.",
+    "Equanimity (Upekkhā) is the mountain that remains unshakeable in the fierce wind.",
+    "The crane carries a folded letter across distance, arriving exactly when ready.",
+    "A single spark in the stone lantern gently illuminates the darkest mountain path.",
+    "In the still surface of the pond, the moon reflects without effort."
+  ];
 
   if (container) {
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    // Audio Context (Synthesized Singing Bell Chime)
+    // --- 1. Sound Synthesis Engine (Web Audio API) ---
     let audioCtx: AudioContext | null = null;
-    const playZenChime = () => {
-      try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
-        if (audioCtx.state === 'suspended') audioCtx.resume();
-        const now = audioCtx.currentTime;
-        
-        // Singing bowl fundamental 432Hz + harmonic overtone
-        const osc1 = audioCtx.createOscillator();
-        const osc2 = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
+    const ensureAudio = () => {
+      if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    };
 
+    // Harmonic Tibetan Singing Bowl Chime (432Hz + Overtones)
+    const playZenBell = () => {
+      try {
+        const ctx = ensureAudio();
+        const now = ctx.currentTime;
+
+        // Fundamental 432Hz
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
         osc1.type = 'sine';
         osc1.frequency.setValueAtTime(432, now);
-        osc1.frequency.exponentialRampToValueAtTime(430, now + 4.5);
+        osc1.frequency.exponentialRampToValueAtTime(430.5, now + 5.5);
+        gain1.gain.setValueAtTime(0.38, now);
+        gain1.gain.exponentialRampToValueAtTime(0.0001, now + 5.5);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
 
+        // 1st Overtone (864Hz octave)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
         osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(864, now); // Overtone
-        osc2.frequency.exponentialRampToValueAtTime(860, now + 3.0);
+        osc2.frequency.setValueAtTime(864, now);
+        osc2.frequency.exponentialRampToValueAtTime(861, now + 4.2);
+        gain2.gain.setValueAtTime(0.18, now);
+        gain2.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
 
-        gain.gain.setValueAtTime(0.35, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 5.0);
-
-        osc1.connect(gain);
-        osc2.connect(gain);
-        gain.connect(audioCtx.destination);
+        // 2nd Harmonic (1296Hz upper shimmer)
+        const osc3 = ctx.createOscillator();
+        const gain3 = ctx.createGain();
+        osc3.type = 'sine';
+        osc3.frequency.setValueAtTime(1296, now);
+        osc3.frequency.exponentialRampToValueAtTime(1290, now + 2.8);
+        gain3.gain.setValueAtTime(0.09, now);
+        gain3.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+        osc3.connect(gain3);
+        gain3.connect(ctx.destination);
 
         osc1.start(now);
         osc2.start(now);
-        osc1.stop(now + 5.2);
-        osc2.stop(now + 5.2);
+        osc3.start(now);
+        osc1.stop(now + 5.6);
+        osc2.stop(now + 4.3);
+        osc3.stop(now + 2.9);
       } catch (e) {
-        console.log('Audio chime error:', e);
+        console.warn('Audio chime error:', e);
       }
     };
 
-    // Scene Setup
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xfbf8f3);
-    scene.fog = new THREE.FogExp2(0xfbf8f3, 0.035);
+    // Soothing Water Droplet Tone
+    const playWaterRippleAudio = () => {
+      try {
+        const ctx = ensureAudio();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(840, now);
+        osc.frequency.exponentialRampToValueAtTime(380, now + 0.35);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.38);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } catch (e) {
+        console.warn('Water audio error:', e);
+      }
+    };
 
-    // Camera
+    // Soft Lantern Ignition Tone
+    const playLanternIgniteAudio = () => {
+      try {
+        const ctx = ensureAudio();
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(260, now);
+        osc.frequency.exponentialRampToValueAtTime(520, now + 0.6);
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.72);
+      } catch (e) {
+        console.warn('Lantern audio error:', e);
+      }
+    };
+
+    // --- 2. Three.js Scene, Camera, Lighting & Renderer ---
+    const scene = new THREE.Scene();
+    const warmCreamBg = 0xfbf9f5;
+    scene.background = new THREE.Color(warmCreamBg);
+    scene.fog = new THREE.FogExp2(warmCreamBg, 0.028);
+
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.set(9, 6.5, 11);
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
@@ -119,37 +256,81 @@ const meta = {
     renderer.toneMappingExposure = 1.15;
     container.appendChild(renderer.domElement);
 
-    // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.04;
-    controls.maxPolarAngle = Math.PI / 2.08;
-    controls.minDistance = 4;
-    controls.maxDistance = 25;
+    controls.maxPolarAngle = Math.PI / 2.05;
+    controls.minDistance = 3.5;
+    controls.maxDistance = 24;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.35;
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xfff1e6, 1.4);
+    // Ambient Lighting — Warm monastic morning wash
+    const ambientLight = new THREE.AmbientLight(0xfff5ea, 1.35);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xfffaed, 2.2);
-    dirLight.position.set(12, 16, 8);
-    dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width = 1024;
-    dirLight.shadow.mapSize.height = 1024;
-    scene.add(dirLight);
+    // Directional Sunlight with Soft Shadows
+    const sunLight = new THREE.DirectionalLight(0xfffaec, 2.0);
+    sunLight.position.set(12, 16, 8);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.width = 1024;
+    sunLight.shadow.mapSize.height = 1024;
+    sunLight.shadow.bias = -0.0003;
+    scene.add(sunLight);
 
-    // Subtle Ground Horizon Ring
-    const groundGrid = new THREE.GridHelper(50, 50, 0xebdcd0, 0xf5eee7);
-    groundGrid.position.y = -2.2;
-    scene.add(groundGrid);
+    // Warm Golden Fill Light
+    const fillLight = new THREE.DirectionalLight(0xfef3c7, 0.85);
+    fillLight.position.set(-10, 8, -6);
+    scene.add(fillLight);
 
-    // Floating Island Group for Organic Oscillation
+    // Sky Edge Rim Light
+    const rimLight = new THREE.DirectionalLight(0xe0e7ff, 0.4);
+    rimLight.position.set(0, -6, 10);
+    scene.add(rimLight);
+
+    // --- 3. Karesansui Raked Zen Sand Rings (Floor Aesthetic) ---
+    const sandFloorGroup = new THREE.Group();
+    sandFloorGroup.position.y = -2.3;
+    scene.add(sandFloorGroup);
+
+    // Concentric rippling sand rings
+    const sandColors = [0xf5ece1, 0xeee3d5, 0xe7dac9, 0xe0d0be];
+    for (let r = 1.5; r <= 14; r += 1.2) {
+      const ringGeo = new THREE.RingGeometry(r - 0.08, r, 64);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: sandColors[Math.floor(r) % sandColors.length],
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: Math.max(0.12, 0.5 - (r / 18)),
+      });
+      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+      ringMesh.rotation.x = -Math.PI / 2;
+      sandFloorGroup.add(ringMesh);
+    }
+
+    // --- 4. Floating Island Group & Diorama Mesh Hooks ---
     const islandGroup = new THREE.Group();
     scene.add(islandGroup);
 
-    // Load Model from Seidan V3 Blender Pipeline
+    // Object References for Raycasting & Kinetic Animation
+    let bellMesh: THREE.Mesh | null = null;
+    let pondMesh: THREE.Mesh | null = null;
+    let lanternMesh: THREE.Mesh | null = null;
+    const koiMeshes: THREE.Mesh[] = [];
+    const cloudMeshes: THREE.Mesh[] = [];
+    const interactiveTargets: THREE.Object3D[] = [];
+
+    // Lantern Sacred PointLight
+    const lanternLight = new THREE.PointLight(0xd97845, 0, 8, 1.8);
+    lanternLight.castShadow = true;
+    islandGroup.add(lanternLight);
+    let lanternLit = false;
+
+    // Bell Dynamic Swing Physics
+    let bellSwingAngle = 0;
+    let bellSwingVelocity = 0;
+
+    // Load V3 Living Diorama Model
     const loader = new GLTFLoader();
     loader.load(
       '/models/zen_diorama_v3.glb',
@@ -160,54 +341,104 @@ const meta = {
             const mesh = child as THREE.Mesh;
             mesh.castShadow = true;
             mesh.receiveShadow = true;
-            
+
             if (mesh.name.includes('Pond')) {
+              // Deep Serene Jade-Teal Water (Brand Jade #2d6b4f harmony)
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0x60a5fa, // Reflective water
-                roughness: 0.08,
-                metalness: 0.3,
+                color: 0x204840,
+                roughness: 0.04,
+                metalness: 0.35,
+                transparent: true,
+                opacity: 0.88,
               });
+              pondMesh = mesh;
+              interactiveTargets.push(mesh);
             } else if (mesh.name.includes('Koi')) {
+              // Vermilion Orange Kohaku Koi
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0xf97316, // Vibrant orange koi
-                roughness: 0.3,
+                color: 0xe05a2b,
+                roughness: 0.25,
+                metalness: 0.15,
               });
+              koiMeshes.push(mesh);
+              interactiveTargets.push(mesh);
             } else if (mesh.name.includes('PineFoliage')) {
+              // Warm Jade Evergreen (#2d6b4f)
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0x15803d, // Deep pine evergreen
-                roughness: 0.8,
+                color: 0x2d6b4f,
+                roughness: 0.78,
+                metalness: 0.05,
               });
             } else if (mesh.name.includes('PineTrunk')) {
+              // Aged Pine Cedar Bark
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0x54382a, // Pine bark
-                roughness: 0.9,
-              });
-            } else if (mesh.name.includes('Cloud')) {
-              mesh.material = new THREE.MeshStandardMaterial({
-                color: 0xffffff,
-                roughness: 1.0,
-                transparent: true,
-                opacity: 0.85,
+                color: 0x453125,
+                roughness: 0.88,
               });
             } else if (mesh.name.includes('Roof')) {
+              // Saffron Amber Eave Tile (#b45309)
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0xb45309, // Saffron eave tile
-                roughness: 0.45,
+                color: 0xb45309,
+                roughness: 0.42,
               });
             } else if (mesh.name.includes('Pillar') || mesh.name.includes('Platform')) {
+              // Earthy Dark Cedar Timber (#2f2118)
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0x3e2b20, // Dark cedar timber
-                roughness: 0.7,
+                color: 0x271e18,
+                roughness: 0.68,
               });
             } else if (mesh.name.includes('Bell')) {
+              // Polished Monastic Bronze (#d97845)
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0xd97706, // Polished bronze
-                metalness: 0.85,
-                roughness: 0.2,
+                color: 0xd97845,
+                metalness: 0.9,
+                roughness: 0.22,
               });
+              bellMesh = mesh;
+              interactiveTargets.push(mesh);
+            } else if (mesh.name.includes('Lantern')) {
+              // Garden Granite Lantern with Inner Glow
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x9c948a,
+                roughness: 0.82,
+              });
+              lanternMesh = mesh;
+              interactiveTargets.push(mesh);
+              // Position lantern light at lantern
+              const lanternBox = new THREE.Box3().setFromObject(mesh);
+              const lanternCenter = lanternBox.getCenter(new THREE.Vector3());
+              lanternLight.position.copy(lanternCenter);
+              lanternLight.position.y += 0.2;
+            } else if (mesh.name.includes('Underbelly')) {
+              // Stratified Volcanic Bedrock / Dark Earth Loam
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x352820,
+                roughness: 0.95,
+              });
+            } else if (mesh.name.includes('FacetedRock')) {
+              // Weathered Mossy Terrace Stone
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x787268,
+                roughness: 0.85,
+              });
+            } else if (mesh.name.includes('RiverRock')) {
+              // Polished Graphite River Pebbles
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0x48433d,
+                roughness: 0.35,
+              });
+            } else if (mesh.name.includes('Cloud')) {
+              // Translucent Mist Puffs
+              mesh.material = new THREE.MeshStandardMaterial({
+                color: 0xfffaf2,
+                roughness: 0.9,
+                transparent: true,
+                opacity: 0.78,
+              });
+              cloudMeshes.push(mesh);
             } else {
               mesh.material = new THREE.MeshStandardMaterial({
-                color: 0xd6ccc2, // Natural river stone & earth
+                color: 0x8a8278,
                 roughness: 0.85,
               });
             }
@@ -215,6 +446,7 @@ const meta = {
         });
 
         islandGroup.add(model);
+
         if (loadingOverlay) {
           loadingOverlay.style.opacity = '0';
           setTimeout(() => loadingOverlay.remove(), 400);
@@ -222,30 +454,407 @@ const meta = {
       },
       undefined,
       (error) => {
-        console.error('Failed to load V2 model:', error);
+        console.error('Failed to load V3 diorama model:', error);
       }
     );
 
-    // Interactive Click Handler
+    // --- 5. Atmospheric Golden Motes (Pollen & Incense) ---
+    const moteCount = 45;
+    const moteGeo = new THREE.BufferGeometry();
+    const motePositions = new Float32Array(moteCount * 3);
+    const moteSpeeds: number[] = [];
+
+    for (let i = 0; i < moteCount; i++) {
+      motePositions[i * 3] = (Math.random() - 0.5) * 12;
+      motePositions[i * 3 + 1] = Math.random() * 8;
+      motePositions[i * 3 + 2] = (Math.random() - 0.5) * 12;
+      moteSpeeds.push(0.005 + Math.random() * 0.012);
+    }
+
+    moteGeo.setAttribute('position', new THREE.BufferAttribute(motePositions, 3));
+    const moteMat = new THREE.PointsMaterial({
+      color: 0xd97845,
+      size: 0.14,
+      transparent: true,
+      opacity: 0.65,
+      blending: THREE.AdditiveBlending,
+    });
+    const motePoints = new THREE.Points(moteGeo, moteMat);
+    scene.add(motePoints);
+
+    // --- 6. Visual Golden Soundwave Shockwave (Bell Chime) ---
+    const soundRingGeo = new THREE.TorusGeometry(0.3, 0.04, 16, 64);
+    const soundRingMat = new THREE.MeshBasicMaterial({
+      color: 0xd97845,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
+    });
+    const soundRing = new THREE.Mesh(soundRingGeo, soundRingMat);
+    soundRing.rotation.x = Math.PI / 2;
+    scene.add(soundRing);
+    let soundRingActive = false;
+    let soundRingScale = 1;
+    let soundRingOpacity = 0;
+
+    const triggerSoundRing = (pos: THREE.Vector3) => {
+      soundRing.position.copy(pos);
+      soundRingScale = 0.5;
+      soundRingOpacity = 0.9;
+      soundRingActive = true;
+    };
+
+    // --- 7. Water Ripple Rings System ---
+    interface WaterRipple {
+      mesh: THREE.Mesh;
+      scale: number;
+      opacity: number;
+    }
+    const ripples: WaterRipple[] = [];
+    const rippleGeo = new THREE.RingGeometry(0.05, 0.1, 32);
+
+    const spawnWaterRipple = (pos: THREE.Vector3) => {
+      const mat = new THREE.MeshBasicMaterial({
+        color: 0x6ee7b7,
+        transparent: true,
+        opacity: 0.8,
+        side: THREE.DoubleSide,
+      });
+      const mesh = new THREE.Mesh(rippleGeo, mat);
+      mesh.position.copy(pos);
+      mesh.position.y += 0.02;
+      mesh.rotation.x = -Math.PI / 2;
+      islandGroup.add(mesh);
+      ripples.push({ mesh, scale: 0.2, opacity: 0.85 });
+    };
+
+    // --- 8. Slow Transit: Origami Crane Flight ---
+    interface OrigamiCrane {
+      group: THREE.Group;
+      progress: number;
+      start: THREE.Vector3;
+      end: THREE.Vector3;
+      speed: number;
+    }
+    const cranes: OrigamiCrane[] = [];
+
+    const spawnOrigamiCrane = () => {
+      const craneGroup = new THREE.Group();
+
+      // Low-poly Origami Crane Geometry
+      const bodyMat = new THREE.MeshStandardMaterial({
+        color: 0xfffaf4,
+        roughness: 0.6,
+        side: THREE.DoubleSide,
+      });
+      const accentMat = new THREE.MeshStandardMaterial({
+        color: 0xb45309,
+        roughness: 0.5,
+      });
+
+      // Simple origami bird triangles
+      const wingGeo = new THREE.BufferGeometry();
+      const wingVertices = new Float32Array([
+        0, 0, 0,
+        1.0, 0.2, 0.4,
+        0.3, 0, -0.6,
+        0, 0, 0,
+        -1.0, 0.2, 0.4,
+        -0.3, 0, -0.6,
+      ]);
+      wingGeo.setAttribute('position', new THREE.BufferAttribute(wingVertices, 3));
+      wingGeo.computeVertexNormals();
+
+      const wings = new THREE.Mesh(wingGeo, bodyMat);
+      craneGroup.add(wings);
+
+      // Crane beak / letter seal
+      const beakGeo = new THREE.ConeGeometry(0.08, 0.35, 4);
+      const beak = new THREE.Mesh(beakGeo, accentMat);
+      beak.rotation.x = Math.PI / 2;
+      beak.position.z = 0.45;
+      craneGroup.add(beak);
+
+      craneGroup.scale.set(0.45, 0.45, 0.45);
+
+      const start = new THREE.Vector3(
+        (Math.random() - 0.5) * 2,
+        2.5,
+        (Math.random() - 0.5) * 2
+      );
+      const end = new THREE.Vector3(
+        (Math.random() - 0.5) * 14 + 10,
+        9 + Math.random() * 4,
+        (Math.random() - 0.5) * 14 - 10
+      );
+
+      craneGroup.position.copy(start);
+      craneGroup.lookAt(end);
+      scene.add(craneGroup);
+
+      cranes.push({
+        group: craneGroup,
+        progress: 0,
+        start,
+        end,
+        speed: 0.0035,
+      });
+
+      showToast("🕊️ Origami Crane released into the mountain mist with your contemplation.");
+    };
+
+    // --- 9. Toast Notification Helper ---
+    const showToast = (message: string) => {
+      if (!zenToast) return;
+      zenToast.textContent = message;
+      zenToast.classList.add('visible');
+      setTimeout(() => {
+        zenToast.classList.remove('visible');
+      }, 3400);
+    };
+
+    // --- 10. Raycasting & Hover Feedback ---
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2(-999, -999);
+    let hoveredObject: THREE.Object3D | null = null;
+
+    const onPointerMove = (e: MouseEvent) => {
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      // Position floating tooltip
+      if (targetTooltip && hoveredObject) {
+        targetTooltip.style.left = `${e.clientX + 14}px`;
+        targetTooltip.style.top = `${e.clientY - 28}px`;
+      }
+    };
+
+    window.addEventListener('pointermove', onPointerMove);
+
+    // --- 11. Interactive Click Dispatcher ---
+    const strikeBell = () => {
+      playZenBell();
+      bellSwingVelocity = 0.18;
+
+      if (bellMesh) {
+        const bellWorldPos = new THREE.Vector3();
+        bellMesh.getWorldPosition(bellWorldPos);
+        triggerSoundRing(bellWorldPos);
+      }
+
+      // Rotate wisdom quote
+      const quote = ZEN_INSIGHTS[Math.floor(Math.random() * ZEN_INSIGHTS.length)];
+      if (hudQuote) hudQuote.textContent = `"${quote}"`;
+      if (interactionBadge) interactionBadge.textContent = '🔔 Chime Resonating';
+
+      showToast("🔔 432Hz Singing Bowl resonated. Sound dissolves into stillness.");
+      setTimeout(() => {
+        if (interactionBadge) interactionBadge.textContent = '✨ Stillness';
+      }, 4000);
+    };
+
+    const toggleLantern = () => {
+      lanternLit = !lanternLit;
+      playLanternIgniteAudio();
+
+      if (lanternLit) {
+        lanternLight.intensity = 1.9;
+        showToast("🏮 Sacred lantern flame kindled. Warmth rests upon cedar.");
+        if (interactionBadge) interactionBadge.textContent = '🏮 Sacred Flame';
+      } else {
+        lanternLight.intensity = 0;
+        showToast("🏮 Sacred lantern softened to quiet ember.");
+        if (interactionBadge) interactionBadge.textContent = '✨ Quietude';
+      }
+    };
+
+    const triggerPondRipple = (hitPoint: THREE.Vector3) => {
+      playWaterRippleAudio();
+      // Convert world hit point to island group local
+      const localPoint = islandGroup.worldToLocal(hitPoint.clone());
+      spawnWaterRipple(localPoint);
+      showToast("🪷 Droplet touches the sacred pond. Thoughts ripple and settle.");
+    };
+
+    const triggerKoiInteraction = (koi: THREE.Mesh) => {
+      playWaterRippleAudio();
+      // Brief joyful leap
+      koi.position.y += 0.35;
+      setTimeout(() => {
+        koi.position.y -= 0.35;
+      }, 350);
+      showToast("🐟 The Kohaku Koi twirls gently, welcoming your attention.");
+    };
+
+    // Canvas Pointer Down Raycast Click
     window.addEventListener('pointerdown', (e) => {
-      // Ignore clicks on HUD or navigation
-      if ((e.target as HTMLElement).closest('.sanctuary-nav, .unified-nav, .hud-overlay, .feedback-dial-container')) {
+      // Ignore clicks on UI elements
+      if ((e.target as HTMLElement).closest('.unified-nav, .top-controls-container, .hud-overlay, .zen-toast')) {
         return;
       }
-      playZenChime();
 
-      // Anime.js HUD Pulsing Ripple
-      const hud = document.querySelector('.hud-card');
-      if (hud) {
-        animate(hud, {
-          scale: [1, 1.03, 1],
-          duration: 800,
-          ease: 'outElastic(1, .6)'
-        });
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(interactiveTargets, true);
+
+      if (intersects.length > 0) {
+        const hit = intersects[0];
+        let obj: THREE.Object3D | null = hit.object;
+
+        while (obj && !interactiveTargets.includes(obj)) {
+          obj = obj.parent;
+        }
+
+        if (!obj) obj = hit.object;
+
+        if (obj === bellMesh || obj.name.includes('Bell')) {
+          strikeBell();
+        } else if (obj === lanternMesh || obj.name.includes('Lantern')) {
+          toggleLantern();
+        } else if (obj === pondMesh || obj.name.includes('Pond')) {
+          triggerPondRipple(hit.point);
+        } else if (koiMeshes.includes(obj as THREE.Mesh) || obj.name.includes('Koi')) {
+          triggerKoiInteraction(obj as THREE.Mesh);
+        }
+      } else {
+        // Tap on open space chimes bell softly
+        playZenBell();
       }
     });
 
-    // Resize Handler
+    // --- 12. Camera Presets & Transitions ---
+    interface CameraPreset {
+      pos: THREE.Vector3;
+      target: THREE.Vector3;
+    }
+    const presets: Record<string, CameraPreset> = {
+      orbit: {
+        pos: new THREE.Vector3(9, 6.5, 11),
+        target: new THREE.Vector3(0, 0.5, 0),
+      },
+      bell: {
+        pos: new THREE.Vector3(3.2, 3.8, 4.2),
+        target: new THREE.Vector3(0.5, 2.0, 0),
+      },
+      pond: {
+        pos: new THREE.Vector3(1.2, 7.5, 2.8),
+        target: new THREE.Vector3(0, 0.2, 0),
+      },
+    };
+
+    let targetCameraPos = camera.position.clone();
+    let targetControlsTarget = controls.target.clone();
+    let isTransitioningCamera = false;
+
+    const transitionToPreset = (name: string) => {
+      const preset = presets[name];
+      if (!preset) return;
+
+      targetCameraPos.copy(preset.pos);
+      targetControlsTarget.copy(preset.target);
+      isTransitioningCamera = true;
+
+      document.querySelectorAll('.preset-btn[data-view]').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-view') === name);
+      });
+
+      controls.autoRotate = (name === 'orbit');
+    };
+
+    document.querySelectorAll('.preset-btn[data-view]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const view = btn.getAttribute('data-view');
+        if (view) transitionToPreset(view);
+      });
+    });
+
+    // --- 13. Pranayama 6-Second Breath Guide Mode ---
+    let breathGuideActive = false;
+    const breatheToggleBtn = document.getElementById('breathe-toggle');
+
+    const toggleBreatheMode = () => {
+      breathGuideActive = !breathGuideActive;
+      breatheToggleBtn?.classList.toggle('active', breathGuideActive);
+      breathOverlay?.classList.toggle('hidden', !breathGuideActive);
+
+      if (breathGuideActive) {
+        showToast("🧘 Breathing mode engaged. Harmonize your breath with the island's rhythm.");
+      } else {
+        showToast("🧘 Breathing guide resting.");
+      }
+    };
+
+    breatheToggleBtn?.addEventListener('click', toggleBreatheMode);
+
+    // --- 14. Genetic Contemplation Feedback (Empty, Grounded, Noisy) ---
+    let currentRating = localStorage.getItem('gzen_sanctuary_rating') || 'grounded';
+    let floatSpeedMultiplier = 1.0;
+
+    const applyContemplationRating = (rating: string) => {
+      currentRating = rating;
+      localStorage.setItem('gzen_sanctuary_rating', rating);
+
+      document.querySelectorAll('.fb-btn').forEach((btn) => {
+        btn.classList.toggle('active', btn.getAttribute('data-rating') === rating);
+      });
+
+      if (rating === 'empty') {
+        scene.fog = new THREE.FogExp2(warmCreamBg, 0.042);
+        ambientLight.intensity = 1.15;
+        sunLight.intensity = 1.6;
+        floatSpeedMultiplier = 0.85;
+        controls.autoRotateSpeed = 0.22;
+        showToast("🪨 Empty: Atmospheric mist softened, contemplation space expanded.");
+      } else if (rating === 'grounded') {
+        scene.fog = new THREE.FogExp2(warmCreamBg, 0.028);
+        ambientLight.intensity = 1.35;
+        sunLight.intensity = 2.0;
+        floatSpeedMultiplier = 1.0;
+        controls.autoRotateSpeed = 0.35;
+        showToast("🪷 Grounded: Harmonious golden equilibrium established.");
+      } else if (rating === 'noisy') {
+        scene.fog = new THREE.FogExp2(warmCreamBg, 0.022);
+        ambientLight.intensity = 1.45;
+        sunLight.intensity = 1.8;
+        floatSpeedMultiplier = 0.55;
+        controls.autoRotateSpeed = 0.12;
+        showToast("🌪️ Noisy: Turbulence quelled. Island kinetics calmed to restore stillness.");
+      }
+    };
+
+    document.querySelectorAll('.fb-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const rating = btn.getAttribute('data-rating');
+        if (rating) applyContemplationRating(rating);
+      });
+    });
+
+    // Apply saved rating on start
+    applyContemplationRating(currentRating);
+
+    // --- 15. Action Button Listeners ---
+    document.getElementById('chime-btn')?.addEventListener('click', strikeBell);
+    document.getElementById('lantern-btn')?.addEventListener('click', toggleLantern);
+    document.getElementById('crane-btn')?.addEventListener('click', spawnOrigamiCrane);
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+
+      const key = e.key.toLowerCase();
+      if (key === 'b') strikeBell();
+      else if (key === 'l') toggleLantern();
+      else if (key === 'c') spawnOrigamiCrane();
+      else if (key === '1') transitionToPreset('orbit');
+      else if (key === '2') transitionToPreset('bell');
+      else if (key === '3') transitionToPreset('pond');
+      else if (e.code === 'Space') {
+        e.preventDefault();
+        toggleBreatheMode();
+      }
+    });
+
+    // Window Resize Handler
     window.addEventListener('resize', () => {
       if (!container) return;
       const w = container.clientWidth;
@@ -255,21 +864,168 @@ const meta = {
       renderer.setSize(w, h);
     });
 
-    // Animation Loop with Gentle Island Breathing Oscillation
-    let clock = new THREE.Clock();
-    const animate = () => {
-      requestAnimationFrame(animate);
+    // --- 16. The Living Render Loop ---
+    const clock = new THREE.Clock();
+
+    const renderLoop = () => {
+      requestAnimationFrame(renderLoop);
       const elapsedTime = clock.getElapsedTime();
-      
-      // Floating breath motion
-      islandGroup.position.y = Math.sin(elapsedTime * 1.2) * 0.12;
-      islandGroup.rotation.z = Math.sin(elapsedTime * 0.6) * 0.015;
+      const delta = clock.getDelta();
+
+      // Island Breathing Kinematics (6-Second Harmonized Cycle)
+      const breathPhase = (elapsedTime * floatSpeedMultiplier) % 6.0;
+      const breathCycle = Math.sin((elapsedTime * floatSpeedMultiplier * Math.PI) / 3.0);
+      islandGroup.position.y = breathCycle * 0.14;
+      islandGroup.rotation.z = Math.sin(elapsedTime * 0.5) * 0.012;
+
+      // Update Breath Overlay Text
+      if (breathGuideActive && breathText) {
+        if (breathPhase < 3.0) {
+          breathText.textContent = `Inhale (${(3.0 - breathPhase).toFixed(1)}s)`;
+        } else {
+          breathText.textContent = `Exhale (${(6.0 - breathPhase).toFixed(1)}s)`;
+        }
+      }
+
+      // Bell Physical Swing Damping
+      if (bellMesh && Math.abs(bellSwingAngle) + Math.abs(bellSwingVelocity) > 0.001) {
+        const k = 14; // Hooke spring stiffness
+        const c = 2.2; // Damping
+        const acceleration = -k * bellSwingAngle - c * bellSwingVelocity;
+        bellSwingVelocity += acceleration * 0.016;
+        bellSwingAngle += bellSwingVelocity * 0.016;
+        bellMesh.rotation.z = bellSwingAngle;
+      }
+
+      // Soundwave Ring Expansion
+      if (soundRingActive) {
+        soundRingScale += 0.08;
+        soundRingOpacity -= 0.014;
+        soundRing.scale.set(soundRingScale, soundRingScale, soundRingScale);
+        soundRingMat.opacity = Math.max(0, soundRingOpacity);
+        if (soundRingOpacity <= 0) {
+          soundRingActive = false;
+        }
+      }
+
+      // Water Ripples Expansion
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rip = ripples[i];
+        rip.scale += 0.045;
+        rip.opacity -= 0.018;
+        rip.mesh.scale.set(rip.scale, rip.scale, rip.scale);
+        (rip.mesh.material as THREE.MeshBasicMaterial).opacity = Math.max(0, rip.opacity);
+
+        if (rip.opacity <= 0) {
+          islandGroup.remove(rip.mesh);
+          rip.mesh.geometry.dispose();
+          (rip.mesh.material as THREE.Material).dispose();
+          ripples.splice(i, 1);
+        }
+      }
+
+      // Swimming Koi Fish Kinematics
+      koiMeshes.forEach((koi, idx) => {
+        const koiTime = elapsedTime * 0.6 + (idx * (Math.PI * 2 / 3));
+        const pondRadius = 0.9 + (idx * 0.18);
+        const kX = Math.cos(koiTime) * pondRadius;
+        const kZ = Math.sin(koiTime) * pondRadius;
+        
+        koi.position.x = kX;
+        koi.position.z = kZ;
+        koi.position.y = 0.12 + Math.sin(elapsedTime * 2.5 + idx) * 0.02;
+
+        // Fish Heading angle + natural body wiggle
+        const heading = -koiTime + Math.PI / 2;
+        koi.rotation.y = heading + Math.sin(elapsedTime * 4.0 + idx) * 0.15;
+      });
+
+      // Drifting Mist Clouds
+      cloudMeshes.forEach((cloud, idx) => {
+        cloud.position.y = (cloud.position.y || 2.5) + Math.sin(elapsedTime * 0.8 + idx) * 0.0015;
+        cloud.rotation.y += 0.0012;
+      });
+
+      // Atmospheric Golden Motes Rising Float
+      const positions = moteGeo.attributes.position.array as Float32Array;
+      for (let i = 0; i < moteCount; i++) {
+        positions[i * 3 + 1] += moteSpeeds[i];
+        positions[i * 3] += Math.sin(elapsedTime + i) * 0.003;
+        if (positions[i * 3 + 1] > 9) {
+          positions[i * 3 + 1] = 0;
+        }
+      }
+      moteGeo.attributes.position.needsUpdate = true;
+
+      // Origami Cranes Flight Trajectory
+      for (let i = cranes.length - 1; i >= 0; i--) {
+        const crane = cranes[i];
+        crane.progress += crane.speed;
+        crane.group.position.lerpVectors(crane.start, crane.end, crane.progress);
+
+        // Sinusoidal Wing Flapping
+        const wingFlap = Math.sin(crane.progress * 45) * 0.2;
+        crane.group.rotation.z = wingFlap;
+
+        if (crane.progress >= 1.0) {
+          scene.remove(crane.group);
+          cranes.splice(i, 1);
+        }
+      }
+
+      // Smooth Camera Lerp for Presets
+      if (isTransitioningCamera) {
+        camera.position.lerp(targetCameraPos, 0.05);
+        controls.target.lerp(targetControlsTarget, 0.05);
+        if (camera.position.distanceTo(targetCameraPos) < 0.05) {
+          camera.position.copy(targetCameraPos);
+          controls.target.copy(targetControlsTarget);
+          isTransitioningCamera = false;
+        }
+      }
+
+      // Raycast Hover Test
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(interactiveTargets, true);
+
+      if (intersects.length > 0) {
+        const hit = intersects[0];
+        let obj: THREE.Object3D | null = hit.object;
+        while (obj && !interactiveTargets.includes(obj)) {
+          obj = obj.parent;
+        }
+        if (!obj) obj = hit.object;
+
+        if (obj !== hoveredObject) {
+          hoveredObject = obj;
+          renderer.domElement.style.cursor = 'pointer';
+
+          if (targetTooltip && tooltipLabel) {
+            if (obj === bellMesh || obj.name.includes('Bell')) {
+              tooltipLabel.textContent = 'Singing Bell (Click to strike)';
+            } else if (obj === lanternMesh || obj.name.includes('Lantern')) {
+              tooltipLabel.textContent = 'Stone Lantern (Click to kindle)';
+            } else if (obj === pondMesh || obj.name.includes('Pond')) {
+              tooltipLabel.textContent = 'Reflecting Pond (Click to ripple)';
+            } else if (obj.name.includes('Koi')) {
+              tooltipLabel.textContent = 'Kohaku Koi (Click to guide)';
+            }
+            targetTooltip.classList.add('visible');
+          }
+        }
+      } else {
+        if (hoveredObject) {
+          hoveredObject = null;
+          renderer.domElement.style.cursor = 'default';
+          targetTooltip?.classList.remove('visible');
+        }
+      }
 
       controls.update();
       renderer.render(scene, camera);
     };
 
-    animate();
+    renderLoop();
   }
 </script>
 
@@ -278,64 +1034,11 @@ const meta = {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background: #fafafa;
-    color: #111;
+    height: 100dvh;
+    background: #fbf9f5;
+    color: #111111;
     overflow: hidden;
-  }
-
-  .sanctuary-nav {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    background: rgba(250, 250, 250, 0.85);
-    backdrop-filter: blur(12px);
-    z-index: 20;
-  }
-
-  .nav-inner {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .brand-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .brand-glyph {
-    color: #b45309;
-  }
-
-  .brand-name {
-    font-size: 1.1rem;
-    letter-spacing: -0.02em;
-  }
-
-  .nav-meta {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .badge {
-    background: rgba(180, 83, 9, 0.08);
-    color: #b45309;
-    padding: 0.25rem 0.6rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-  }
-
-  .nav-gdd-link {
-    color: #6b6b6b;
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 0.2s;
+    position: relative;
   }
 
   .viewport-wrapper {
@@ -343,6 +1046,7 @@ const meta = {
     flex: 1;
     width: 100%;
     height: 100%;
+    overflow: hidden;
   }
 
   .canvas-container {
@@ -359,16 +1063,21 @@ const meta = {
     align-items: center;
     justify-content: center;
     background: #fbf9f5;
-    z-index: 10;
+    z-index: 50;
     transition: opacity 0.4s ease;
-    gap: 1rem;
+    gap: 1.25rem;
+  }
+
+  .loading-text {
     font-size: 0.9rem;
-    color: #6b6b6b;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: #8c7a6b;
   }
 
   .spinner {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     border: 3px solid rgba(180, 83, 9, 0.15);
     border-top-color: #b45309;
     border-radius: 50%;
@@ -376,50 +1085,126 @@ const meta = {
   }
 
   @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
   }
 
-  /* Player Judge Feedback Pill */
-  .feedback-dial-container {
+  /* Floating Target Tooltip */
+  .target-tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    background: rgba(255, 252, 248, 0.95);
+    border: 1px solid rgba(180, 83, 9, 0.25);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 18px rgba(180, 83, 9, 0.12);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #2f2118;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .target-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tooltip-glyph {
+    color: #b45309;
+    font-size: 0.8rem;
+  }
+
+  /* Top Right Controls & Feedback */
+  .top-controls-container {
     position: absolute;
-    top: 1.5rem;
-    right: 1.5rem;
-    z-index: 15;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 25;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  .preset-pill-group {
+    background: rgba(255, 252, 248, 0.9);
+    border: 1px solid rgba(180, 83, 9, 0.15);
+    backdrop-filter: blur(14px);
+    border-radius: 999px;
+    padding: 0.25rem;
+    display: flex;
+    gap: 0.25rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  }
+
+  .preset-btn {
+    border: none;
+    background: transparent;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #6b6b6b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+  }
+
+  .preset-btn:hover {
+    color: #b45309;
+    background: rgba(180, 83, 9, 0.06);
+  }
+
+  .preset-btn.active {
+    background: #b45309;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(180, 83, 9, 0.3);
   }
 
   .feedback-card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: rgba(255, 252, 248, 0.9);
+    border: 1px solid rgba(180, 83, 9, 0.15);
     backdrop-filter: blur(14px);
     border-radius: 999px;
     padding: 0.35rem 0.85rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   }
 
   .feedback-title {
-    font-size: 0.75rem;
-    color: #6b6b6b;
-    font-weight: 500;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #8c7a6b;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .feedback-buttons {
     display: flex;
-    gap: 0.35rem;
+    gap: 0.3rem;
   }
 
   .fb-btn {
     border: 1px solid rgba(0, 0, 0, 0.08);
-    background: #fdfdfd;
-    padding: 0.25rem 0.6rem;
+    background: #ffffff;
+    padding: 0.22rem 0.55rem;
     border-radius: 999px;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #555;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
   }
 
   .fb-btn:hover {
@@ -428,65 +1213,273 @@ const meta = {
     color: #b45309;
   }
 
+  .fb-btn.active {
+    background: #2d6b4f;
+    border-color: #2d6b4f;
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Pranayama Breath Ring Overlay */
+  .breath-guide-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 20;
+    transition: opacity 0.4s ease;
+  }
+
+  .breath-guide-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .breath-ring {
+    width: 220px;
+    height: 220px;
+    border: 2px dashed rgba(180, 83, 9, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .breath-pulse {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(180, 83, 9, 0.18) 0%, rgba(45, 107, 79, 0.05) 70%, transparent 100%);
+    animation: breathPulse 6s ease-in-out infinite;
+  }
+
+  @keyframes breathPulse {
+    0%, 100% {
+      transform: scale(0.7);
+      opacity: 0.35;
+    }
+    50% {
+      transform: scale(1.4);
+      opacity: 0.85;
+    }
+  }
+
+  .breath-status-text {
+    position: relative;
+    z-index: 2;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #2f2118;
+    background: rgba(255, 252, 248, 0.85);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+  }
+
+  /* Bottom Left HUD Overlay */
   .hud-overlay {
     position: absolute;
     bottom: 2rem;
     left: 2rem;
     pointer-events: none;
-    z-index: 5;
-    max-width: 420px;
+    z-index: 20;
+    max-width: 440px;
+    width: calc(100% - 4rem);
   }
 
   .hud-card {
-    background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    backdrop-filter: blur(16px);
-    border-radius: 12px;
-    padding: 1.25rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    background: rgba(255, 252, 248, 0.94);
+    border: 1px solid rgba(180, 83, 9, 0.18);
+    backdrop-filter: blur(18px);
+    border-radius: 16px;
+    padding: 1.35rem 1.5rem;
+    box-shadow: 0 12px 36px rgba(47, 33, 24, 0.07);
     pointer-events: auto;
   }
 
-  .hud-title {
-    font-size: 1.1rem;
+  .hud-header-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .brand-kicker {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b45309;
+  }
+
+  .interaction-badge {
+    font-size: 0.68rem;
     font-weight: 600;
-    margin: 0 0 0.5rem 0;
-    color: #111;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    background: rgba(45, 107, 79, 0.1);
+    color: #2d6b4f;
+    transition: all 0.3s ease;
+  }
+
+  .hud-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.45rem 0;
+    color: #111111;
   }
 
   .hud-desc {
-    font-size: 0.85rem;
-    line-height: 1.45;
-    color: #6b6b6b;
-    margin: 0 0 1rem 0;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: #554a40;
+    margin: 0 0 1.15rem 0;
+    font-style: italic;
   }
 
-  .hud-controls {
+  .hud-action-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hud-action-btn {
+    border: 1px solid rgba(180, 83, 9, 0.2);
+    background: #ffffff;
+    color: #2f2118;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s ease;
+  }
+
+  .hud-action-btn:hover {
+    transform: translateY(-2px);
+    border-color: #b45309;
+    box-shadow: 0 4px 12px rgba(180, 83, 9, 0.15);
+  }
+
+  .hud-action-btn.primary {
+    background: #b45309;
+    color: #ffffff;
+    border-color: #b45309;
+  }
+
+  .hud-action-btn.primary:hover {
+    background: #92400e;
+  }
+
+  .hud-action-btn.special {
+    background: rgba(45, 107, 79, 0.08);
+    border-color: rgba(45, 107, 79, 0.25);
+    color: #2d6b4f;
+  }
+
+  .hud-action-btn.special:hover {
+    background: #2d6b4f;
+    color: #ffffff;
+  }
+
+  .hud-controls-hint {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
   }
 
-  .control-tag {
-    font-size: 0.72rem;
-    background: #f4f0eb;
-    color: #555;
-    padding: 0.2rem 0.5rem;
+  .hint-tag {
+    font-size: 0.68rem;
+    background: rgba(0, 0, 0, 0.04);
+    color: #6b6b6b;
+    padding: 0.18rem 0.45rem;
     border-radius: 6px;
-    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
   }
 
-  @media (max-width: 640px) {
-    .feedback-dial-container {
-      top: auto;
-      bottom: 12rem;
-      right: 1rem;
-      left: 1rem;
+  .hint-tag kbd {
+    font-family: inherit;
+    font-size: 0.62rem;
+    font-weight: 700;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding: 0.05rem 0.25rem;
+    border-radius: 4px;
+    color: #2f2118;
+  }
+
+  /* Zen Toast Notification */
+  .zen-toast {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 40;
+    max-width: 360px;
+    background: rgba(255, 252, 248, 0.96);
+    border: 1px solid rgba(180, 83, 9, 0.25);
+    box-shadow: 0 10px 30px rgba(47, 33, 24, 0.08);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.45;
+    color: #2f2118;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .zen-toast.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .top-controls-container {
+      top: 0.75rem;
+      right: 0.75rem;
+      left: 0.75rem;
+      align-items: stretch;
     }
+
+    .preset-pill-group {
+      justify-content: center;
+    }
+
+    .feedback-card {
+      justify-content: center;
+    }
+
     .hud-overlay {
       bottom: 1rem;
       left: 1rem;
       right: 1rem;
+      width: auto;
+      max-width: none;
+    }
+
+    .hud-card {
+      padding: 1rem 1.15rem;
+    }
+
+    .zen-toast {
+      top: 6rem;
+      bottom: auto;
+      right: 1rem;
+      left: 1rem;
       max-width: none;
     }
   }
