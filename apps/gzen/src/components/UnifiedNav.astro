@@ -57,6 +57,12 @@ const { activeTab = 'home' } = Astro.props;
     gap: 0.6rem;
     text-decoration: none;
     color: #1a1512;
+    border-radius: 4px;
+  }
+
+  .brand-link:focus-visible {
+    outline: 2px solid #b45309;
+    outline-offset: 4px;
   }
 
   .brand-glyph {
@@ -109,12 +115,14 @@ const { activeTab = 'home' } = Astro.props;
     background: rgba(255, 255, 255, 0.75);
   }
 
-  .nav-item:hover {
+  .nav-item:hover,
+  .nav-item:focus-visible {
     color: #1a1512;
     background: #ffffff;
     border-color: rgba(180, 83, 9, 0.35);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(180, 83, 9, 0.08);
+    outline: none;
   }
 
   .nav-item.active {
