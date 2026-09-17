@@ -1,0 +1,300 @@
+---
+import type { ZenCardData } from '../data/zen-cards';
+
+interface Props {
+  card: ZenCardData;
+}
+
+const { card } = Astro.props;
+---
+
+<article 
+  class="zen-card-wrapper"
+  data-sphere={card.sphere}
+  data-card-id={card.id}
+  style={`--card-theme: ${card.themeColor}; --card-glow: ${card.accentGlow};`}
+>
+  <div class="zen-card">
+    <!-- Foil Sheen / Holographic Layer -->
+    <div class="zen-card-shine"></div>
+
+    <!-- Inner Border & Texture Glow -->
+    <div class="zen-card-frame"></div>
+
+    <!-- Top Header Bar -->
+    <header class="zen-card-header">
+      <div class="zen-card-badge">
+        <span class="zen-card-num">{card.number}</span>
+        <span class="zen-card-sphere-tag">{card.sphereLabel}</span>
+      </div>
+      <div class="zen-card-kanji-stamp" aria-hidden="true">
+        {card.kanji}
+      </div>
+    </header>
+
+    <!-- Art Canvas Container (4:3 Pokemon card style window) -->
+    <div class="zen-card-art-box" style={`background: ${card.bgGradient};`}>
+      <div class="zen-card-art-ambient"></div>
+      <div class="zen-card-art-glyph">
+        <span class="zen-card-big-kanji">{card.kanji}</span>
+      </div>
+      <div class="zen-card-art-label">
+        <span class="zen-card-subtitle">{card.subtitle}</span>
+      </div>
+    </div>
+
+    <!-- Card Body & Philosophical Text -->
+    <section class="zen-card-body">
+      <h3 class="zen-card-title">{card.title}</h3>
+      
+      <blockquote class="zen-card-quote">
+        “{card.quote}”
+      </blockquote>
+
+      <p class="zen-card-commentary">
+        {card.commentary}
+      </p>
+    </section>
+
+    <!-- Card Footer (Date in YYYY.MMM.DD format) -->
+    <footer class="zen-card-footer">
+      <span class="zen-card-date">{card.madeDate}</span>
+      <span class="zen-card-brand">gZen · 唵</span>
+    </footer>
+  </div>
+</article>
+
+<style>
+  .zen-card-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 310px;
+    height: 434px; /* Standard 5:7 Pokemon Card Ratio (310 * 7 / 5) */
+    aspect-ratio: 5 / 7;
+    margin: 0 auto;
+    perspective: 1000px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Optimize touch & mid-range devices: zero jank on mobile */
+  @media (pointer: coarse) {
+    .zen-card {
+      transform: none !important;
+      transition: none !important;
+    }
+    .zen-card-shine {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.02) 100%
+      );
+      opacity: 0.6 !important;
+    }
+  }
+
+  .zen-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 
+      0 10px 25px -5px rgba(0, 0, 0, 0.05),
+      0 0 0 1px rgba(180, 83, 9, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+    transition: transform 0.15s ease-out, box-shadow 0.2s ease-out;
+  }
+
+  .zen-card-wrapper:hover .zen-card {
+    box-shadow: 
+      0 20px 35px -10px rgba(0, 0, 0, 0.12),
+      0 0 20px 4px var(--card-glow);
+  }
+
+  /* Holographic Sheen */
+  .zen-card-shine {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: color-dodge;
+    transition: opacity 0.2s ease-out;
+    border-radius: 15px;
+  }
+
+  /* Inner Border Frame */
+  .zen-card-frame {
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(180, 83, 9, 0.12);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Header */
+  .zen-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 6px;
+    z-index: 3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  }
+
+  .zen-card-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .zen-card-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--card-theme);
+    background: rgba(0, 0, 0, 0.04);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .zen-card-sphere-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #6b6b6b;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .zen-card-kanji-stamp {
+    font-family: serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--card-theme);
+    line-height: 1;
+    opacity: 0.9;
+  }
+
+  /* Art Box (Graphic Area) */
+  .zen-card-art-box {
+    position: relative;
+    width: 100%;
+    height: 145px;
+    border-radius: 8px;
+    margin-top: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .zen-card-art-ambient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 70%);
+  }
+
+  .zen-card-art-glyph {
+    position: relative;
+    z-index: 2;
+  }
+
+  .zen-card-big-kanji {
+    font-family: "Cabinet Grotesk", serif;
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .zen-card-art-label {
+    position: absolute;
+    bottom: 6px;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    padding: 2px 10px;
+    border-radius: 12px;
+  }
+
+  .zen-card-subtitle {
+    font-size: 0.65rem;
+    color: #ffffff;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+
+  /* Body Text */
+  .zen-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 4px 6px;
+    z-index: 3;
+    text-align: left;
+  }
+
+  .zen-card-title {
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #111111;
+    line-height: 1.25;
+  }
+
+  .zen-card-quote {
+    margin: 0 0 6px 0;
+    padding-left: 8px;
+    border-left: 2px solid var(--card-theme);
+    font-size: 0.76rem;
+    line-height: 1.35;
+    color: #2b2b2b;
+    font-style: italic;
+  }
+
+  .zen-card-commentary {
+    margin: 0;
+    font-size: 0.7rem;
+    line-height: 1.35;
+    color: #6b6b6b;
+  }
+
+  /* Footer */
+  .zen-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 6px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 3;
+  }
+
+  .zen-card-date {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #8c7a6b;
+    letter-spacing: 0.05em;
+  }
+
+  .zen-card-brand {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #111111;
+    opacity: 0.65;
+  }
+</style>

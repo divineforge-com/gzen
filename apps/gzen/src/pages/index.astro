@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import UnifiedNav from "../components/UnifiedNav.astro";
 import Starfield from "../components/Starfield.astro";
 import GeometricField from "../components/GeometricField.astro";
+import ZenCardGallery from "../components/ZenCardGallery.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
 const meta = {
@@ -74,6 +75,7 @@ const meta = {
         <article class="pillar-card">
           <div class="pillar-icon">✉️</div>
           <h3 class="pillar-title">Slow Transit</h3>
+          <span class="pillar-subtitle">Presence over pace</span>
           <p class="pillar-text">
             Letters and contemplations carried across continents by origami cranes along calm river currents. No instant notifications, only organic arrival.
           </p>
@@ -82,6 +84,7 @@ const meta = {
         <article class="pillar-card">
           <div class="pillar-icon">🪷</div>
           <h3 class="pillar-title">The Four Seals</h3>
+          <span class="pillar-subtitle">What every moment shares</span>
           <p class="pillar-text">
             Rooted in Buddhist Brahmaviharas: Loving-kindness (Metta), Compassion (Karuna), Sympathetic Joy (Mudita), and Equanimity (Upekkha).
           </p>
@@ -90,6 +93,7 @@ const meta = {
         <article class="pillar-card">
           <div class="pillar-icon">🔔</div>
           <h3 class="pillar-title">Sensory Stillness</h3>
+          <span class="pillar-subtitle">Signal from the noise</span>
           <p class="pillar-text">
             Harmonic 432Hz singing bowls, water ripple caustics, and wind-drifted clouds crafted to gently slow breathing and soothe attention.
           </p>
@@ -97,15 +101,18 @@ const meta = {
       </div>
     </section>
 
+    <!-- Zen Cards Gallery Section -->
+    <ZenCardGallery />
+
     <!-- Interactive Experience Callout -->
     <section class="cta-banner">
       <div class="cta-card">
-        <h2 class="cta-heading">Step into the World of gZen</h2>
+        <h2 class="cta-heading">Put the controller down. Not the practice.</h2>
         <p class="cta-text">
-          Built with Blender on Apple Silicon and rendered in real-time with Three.js on Cloudflare Pages.
+          A living 3D diorama built on Apple Silicon and rendered in real-time with Three.js on Cloudflare Pages.
         </p>
         <a href="/sanctuary" class="btn-primary large">
-          <span>Launch 3D Game World</span>
+          <span>Open Sanctuary</span>
           <span class="btn-glyph">✦</span>
         </a>
       </div>
@@ -342,8 +349,18 @@ const meta = {
     font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: -0.01em;
-    margin: 0 0 0.6rem 0;
+    margin: 0 0 0.35rem 0;
     color: #111;
+  }
+
+  .pillar-subtitle {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #b45309;
+    margin-bottom: 0.75rem;
   }
 
   .pillar-text {

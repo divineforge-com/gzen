@@ -1,0 +1,271 @@
+---
+import ZenCard from './ZenCard.astro';
+import { ZEN_CARDS, SPHERES } from '../data/zen-cards';
+---
+
+<section id="zen-cards-section" class="zen-cards-section">
+  <div class="zen-cards-container">
+    
+    <!-- Section Header -->
+    <header class="section-header">
+      <div class="zen-pill-tag">
+        <span class="pulse-dot"></span>
+        <span>MIND SHAPING COLLECTION</span>
+      </div>
+      <h2 class="section-title">The 20 Zen Mind Cards</h2>
+      <p class="section-desc">
+        Standard Pokémon aspect-ratio collectible cards distilled from ancient Buddhist teachings. Designed for daily reflection, mindfulness grounding, and mental recalibration.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="sphere-filters" role="tablist">
+        {SPHERES.map((sphere, index) => (
+          <button 
+            type="button"
+            class={`sphere-btn ${index === 0 ? 'active' : ''}`}
+            data-target={sphere.id}
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            <span class="sphere-kanji">{sphere.kanji}</span>
+            <span>{sphere.label}</span>
+          </button>
+        ))}
+      </div>
+    </header>
+
+    <!-- Cards Stream / Grid (Mobile horizontal swipe + Desktop grid) -->
+    <div class="cards-viewport">
+      <div class="cards-track" id="cardsTrack">
+        {ZEN_CARDS.map(card => (
+          <div class="card-cell" data-sphere={card.sphere}>
+            <ZenCard card={card} />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Interactive Usage Footnote -->
+    <div class="section-footnote">
+      <p>💡 <em>Interactive: Hover or tilt on touch screen for dynamic holographic foil sheen. Swipe horizontally on mobile.</em></p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Filter switching
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.sphere-btn');
+  const cardCells = document.querySelectorAll<HTMLElement>('.card-cell');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const target = btn.dataset.target;
+      cardCells.forEach(cell => {
+        if (target === 'all' || cell.dataset.sphere === target) {
+          cell.style.display = 'block';
+        } else {
+          cell.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 3D Tilt & Holographic Shine (Reyneese TCG technique)
+  const wrappers = document.querySelectorAll<HTMLElement>('.zen-card-wrapper');
+  
+  wrappers.forEach(wrapper => {
+    const card = wrapper.querySelector<HTMLElement>('.zen-card');
+    const shine = wrapper.querySelector<HTMLElement>('.zen-card-shine');
+    if (!card) return;
+
+    const handleMove = (x: number, y: number, rect: DOMRect) => {
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+      const angleX = ((yc - y) / yc) * 12;
+      const angleY = ((x - xc) / xc) * 12;
+      const percentX = (x / rect.width) * 100;
+      const percentY = (y / rect.height) * 100;
+
+      card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.02, 1.02, 1.02)`;
+      if (shine) {
+        shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%), linear-gradient(${135 + (angleY * 2)}deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 100%)`;
+        shine.style.opacity = '1';
+      }
+    };
+
+    wrapper.addEventListener('mousemove', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+      handleMove(e.clientX - rect.left, e.clientY - rect.top, rect);
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      if (shine) shine.style.opacity = '0';
+    });
+  });
+</script>
+
+<style>
+  .zen-cards-section {
+    padding: var(--space-section, 4rem) 1.5rem;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+  }
+
+  .zen-cards-container {
+    max-width: var(--max, 68rem);
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 44rem;
+    margin: 0 auto 3rem;
+  }
+
+  .zen-pill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px;
+    background: rgba(180, 83, 9, 0.08);
+    border: 1px solid rgba(180, 83, 9, 0.2);
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent, #b45309);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent, #b45309);
+    box-shadow: 0 0 8px var(--accent, #b45309);
+  }
+
+  .section-title {
+    font-family: var(--font-display, sans-serif);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: var(--ink, #111111);
+    margin: 0 0 1rem;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--muted, #6b6b6b);
+    line-height: 1.6;
+    margin: 0 0 2rem;
+  }
+
+  /* Filter Tabs */
+  .sphere-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1.5rem;
+  }
+
+  .sphere-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+  }
+
+  .sphere-btn:hover {
+    border-color: rgba(180, 83, 9, 0.3);
+    color: #111111;
+  }
+
+  .sphere-btn.active {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .sphere-kanji {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  /* Viewport and Layout */
+  .cards-viewport {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  .cards-track {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+  }
+
+  .card-cell {
+    width: 100%;
+    max-width: 310px;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  /* Mobile horizontal swipe container with 1.2 card bleed for discovery */
+  @media (max-width: 640px) {
+    .cards-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 1.25rem;
+      padding: 1rem 1.25rem 1.75rem;
+      padding-right: calc(100vw * 0.22); /* 22% viewport bleed from next card */
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .cards-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card-cell {
+      flex: 0 0 80vw;
+      max-width: 300px;
+      scroll-snap-align: start;
+    }
+  }
+
+  .section-footnote {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    color: var(--muted, #6b6b6b);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
