@@ -33,7 +33,7 @@ const meta = {
           <span class="btn-glyph">↗</span>
         </a>
         <a href="#foundation" class="btn-secondary">
-          <span>Explore Game Design</span>
+          <span>The Four Immeasurables</span>
           <span class="btn-glyph">↓</span>
         </a>
       </div>
@@ -64,11 +64,42 @@ const meta = {
     <!-- Fused GDD & Philosophical Foundation -->
     <section id="foundation" class="foundation-section">
       <div class="section-head">
-        <span class="sub-seal">Core Pillars</span>
-        <h2 class="section-title">The Foundation of gZen</h2>
+        <span class="sub-seal">The Teaching of Goodness</span>
+        <h2 class="section-title">The Four Immeasurables (Brahmavihāras)</h2>
         <p class="section-desc">
-          Modern gaming feeds on urgency and variable reward loops. gZen is built on the inverse principle: non-attachment, slow organic arrival, and peaceful aesthetic stillness.
+          Modern technology often accelerates urgency and ego-comparison. gZen is designed as an intentional counter-space grounded in the cultivation of universal goodness, gentle kindness, and deep peace.
         </p>
+      </div>
+
+      <div class="immeasurables-grid">
+        <div class="immeasurable-card metta">
+          <div class="card-kanji">慈</div>
+          <div class="card-name">Mettā</div>
+          <div class="card-sub">Loving-Kindness</div>
+          <p class="card-wish">“May all beings be peaceful.”</p>
+          <div class="card-manifest">Cultivating universal goodwill and warmth without boundary or condition.</div>
+        </div>
+        <div class="immeasurable-card karuna">
+          <div class="card-kanji">悲</div>
+          <div class="card-name">Karuṇā</div>
+          <div class="card-sub">Compassion</div>
+          <p class="card-wish">“May all beings be free of pain.”</p>
+          <div class="card-manifest">Holding space for suffering and pain with tender, non-judgmental presence.</div>
+        </div>
+        <div class="immeasurable-card mudita">
+          <div class="card-kanji">喜</div>
+          <div class="card-name">Muditā</div>
+          <div class="card-sub">Sympathetic Joy</div>
+          <p class="card-wish">“May all beings rejoice in good.”</p>
+          <div class="card-manifest">Rejoicing genuinely in the joy, wisdom, and small victories of others.</div>
+        </div>
+        <div class="immeasurable-card upekkha">
+          <div class="card-kanji">捨</div>
+          <div class="card-name">Upekkhā</div>
+          <div class="card-sub">Equanimity</div>
+          <p class="card-wish">“All beings inherit their karma.”</p>
+          <div class="card-manifest">An unshakeable, peaceful stillness that remains tranquil through all life's shifts.</div>
+        </div>
       </div>
 
       <div class="pillars-grid">
@@ -77,16 +108,16 @@ const meta = {
           <h3 class="pillar-title">Slow Transit</h3>
           <span class="pillar-subtitle">Presence over pace</span>
           <p class="pillar-text">
-            Letters and contemplations carried across continents by origami cranes along calm river currents. No instant notifications, only organic arrival.
+            Meaningful thoughts and contemplations carried across distances at natural organic speeds. No instant notifications, only mindful arrival.
           </p>
         </article>
 
         <article class="pillar-card">
           <div class="pillar-icon">🪷</div>
-          <h3 class="pillar-title">The Four Seals</h3>
-          <span class="pillar-subtitle">What every moment shares</span>
+          <h3 class="pillar-title">Pure Goodness</h3>
+          <span class="pillar-subtitle">Kindness without vanity</span>
           <p class="pillar-text">
-            Rooted in Buddhist Brahmaviharas: Loving-kindness (Metta), Compassion (Karuna), Sympathetic Joy (Mudita), and Equanimity (Upekkha).
+            Zero vanity metrics, zero algorithmic competition, and zero public performance. Pure human warmth and authentic well-wishes.
           </p>
         </article>
 
@@ -293,8 +324,68 @@ const meta = {
 
   .section-head {
     text-align: center;
-    max-width: 600px;
+    max-width: 680px;
     margin: 0 auto 3rem;
+  }
+
+  .immeasurables-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .immeasurable-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 14px;
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .immeasurable-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -4px rgba(0, 0, 0, 0.06);
+  }
+
+  .card-kanji {
+    font-family: serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #b45309;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-name {
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111111;
+  }
+
+  .card-sub {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #888888;
+    margin-bottom: 0.85rem;
+  }
+
+  .card-wish {
+    font-style: italic;
+    font-size: 0.88rem;
+    color: #b45309;
+    margin: 0 0 0.85rem 0;
+    font-weight: 500;
+  }
+
+  .card-manifest {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: #666666;
   }
 
   .sub-seal {
