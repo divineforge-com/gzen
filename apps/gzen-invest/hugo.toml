@@ -9,7 +9,6 @@ enableRobotsTXT = true
 [params]
   description = "Visual investment knowledge — dividends, capital growth, technical analysis & market insights. All through infographics, less text."
   author = "divineforge"
-  buyMeCoffeeURL = "https://buymeacoffee.com/divineforge"
   divineforgeURL = "https://divineforge.dev"
 
 [taxonomies]

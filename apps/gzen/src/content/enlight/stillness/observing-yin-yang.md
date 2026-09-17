@@ -6,7 +6,6 @@ tags: ["清明", "修行", "中道"]
 categories: ["易经"]
 ---
 
-![阴阳墨宝](/images/yijing-yin-yang.png)
 
 ## 观察
 

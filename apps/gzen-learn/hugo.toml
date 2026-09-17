@@ -6,7 +6,6 @@ title = 'GZen — Japanese, Korean & Russian Language Learning'
   description = "Daily language learning for Japanese (N3→N1), Korean (beginner→intermediate), and Russian (beginner→advanced). Inspired by advent-calendar learning."
   author = "GZen"
   tagline = "One lesson a day keeps forgetting away."
-  buymeacoffee = "divineforge"
 
 [markup]
   [markup.goldmark]

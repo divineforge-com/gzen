@@ -24,8 +24,7 @@
 /resources/ https://divineforge.com/essays/  301
 /playground https://gzen.io/  301
 /playground/ https://gzen.io/  301
-/donate   https://buymeacoffee.com/divineforge  302
-/donate/  https://buymeacoffee.com/divineforge  302
+# /donate legacy route removed
 
 # Old language prefix
 /en /  301
