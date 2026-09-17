@@ -226,6 +226,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-012',
+    image: '/assets/cards/zen-012.webp',
     number: '#012',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -242,6 +243,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-013',
+    image: '/assets/cards/zen-013.webp',
     number: '#013',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -258,6 +260,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-014',
+    image: '/assets/cards/zen-014.webp',
     number: '#014',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -274,6 +277,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-015',
+    image: '/assets/cards/zen-015.webp',
     number: '#015',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -292,6 +296,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group IV: Loving Presence (慈 · Metta)
   {
     id: 'zen-016',
+    image: '/assets/cards/zen-016.webp',
     number: '#016',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -308,6 +313,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-017',
+    image: '/assets/cards/zen-017.webp',
     number: '#017',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -324,6 +330,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-018',
+    image: '/assets/cards/zen-018.webp',
     number: '#018',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -340,6 +347,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-019',
+    image: '/assets/cards/zen-019.webp',
     number: '#019',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -356,6 +364,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-020',
+    image: '/assets/cards/zen-020.webp',
     number: '#020',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
