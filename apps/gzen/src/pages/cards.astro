@@ -1,0 +1,295 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UnifiedNav from "../components/UnifiedNav.astro";
+import Starfield from "../components/Starfield.astro";
+import ZenCard from "../components/ZenCard.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { ZEN_CARDS, SPHERES } from "../data/zen-cards";
+
+const meta = {
+  title: "gZen Cards Gallery — 20 Mind Shaping Contemplative Cards",
+  description: "Explore the full collection of 20 collectible Zen mind cards across Stillness, Impermanence, Empty Mind, and Loving Presence. Distilled for daily mindfulness and mental recalibration.",
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <UnifiedNav activeTab="cards" />
+  <Starfield />
+
+  <main class="gallery-page">
+    <!-- Gallery Hero Header -->
+    <header class="gallery-hero">
+      <div class="zen-badge">
+        <span class="pulse-dot"></span>
+        <span>COLLECTIBLE WISDOM ARCHIVE</span>
+      </div>
+      <h1 class="hero-title">Zen Mind Cards Gallery</h1>
+      <p class="hero-desc">
+        A full collectible gallery of 20 physical-feel Zen mind cards. Each card pairs an ancient contemplative principle with high-clarity peaceful meditative art and practical grounding reflection.
+      </p>
+
+      <!-- Category Filter Pills -->
+      <div class="sphere-filters" role="tablist">
+        {SPHERES.map((sphere, index) => (
+          <button 
+            type="button"
+            class={`sphere-btn ${index === 0 ? 'active' : ''}`}
+            data-target={sphere.id}
+            role="tab"
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            <span class="sphere-kanji">{sphere.kanji}</span>
+            <span>{sphere.label}</span>
+          </button>
+        ))}
+      </div>
+    </header>
+
+    <!-- Cards Grid (Pure CSS Responsive Grid) -->
+    <section class="gallery-grid-section" aria-label="Zen Cards Grid">
+      <div class="cards-grid" id="cardsGrid">
+        {ZEN_CARDS.map(card => (
+          <div class="grid-card-item" data-sphere={card.sphere}>
+            <ZenCard card={card} />
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Footnote / Guidance -->
+    <footer class="gallery-footnote">
+      <p>✦ <em>Interactive 3D Cards: Hover or tilt to activate dynamic holographic foil sheen. Built on Astro &amp; hosted on Cloudflare Pages.</em></p>
+    </footer>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
+
+<script>
+  // Filter switching
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.sphere-btn');
+  const cardItems = document.querySelectorAll<HTMLElement>('.grid-card-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const target = btn.dataset.target;
+      cardItems.forEach(item => {
+        if (target === 'all' || item.dataset.sphere === target) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 3D Tilt & Holographic Foil Sheen (Mouse & Touch Pointer tracking)
+  const wrappers = document.querySelectorAll<HTMLElement>('.zen-card-wrapper');
+  
+  wrappers.forEach(wrapper => {
+    const card = wrapper.querySelector<HTMLElement>('.zen-card');
+    const shine = wrapper.querySelector<HTMLElement>('.zen-card-shine');
+    if (!card) return;
+
+    const handleMove = (x: number, y: number, rect: DOMRect) => {
+      const xc = rect.width / 2;
+      const yc = rect.height / 2;
+      const angleX = ((yc - y) / yc) * 12;
+      const angleY = ((x - xc) / xc) * 12;
+      const percentX = (x / rect.width) * 100;
+      const percentY = (y / rect.height) * 100;
+
+      card.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.02, 1.02, 1.02)`;
+      if (shine) {
+        shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 55%), linear-gradient(${135 + (angleY * 2)}deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 100%)`;
+        shine.style.opacity = '1';
+      }
+    };
+
+    wrapper.addEventListener('mousemove', (e) => {
+      const rect = wrapper.getBoundingClientRect();
+      handleMove(e.clientX - rect.left, e.clientY - rect.top, rect);
+    });
+
+    wrapper.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      if (shine) shine.style.opacity = '0';
+    });
+
+    wrapper.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = wrapper.getBoundingClientRect();
+        handleMove(touch.clientX - rect.left, touch.clientY - rect.top, rect);
+      }
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', () => {
+      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      if (shine) shine.style.opacity = '0';
+    });
+  });
+</script>
+
+<style>
+  .gallery-page {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+
+  .gallery-hero {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 24px 40px;
+  }
+
+  .zen-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(180, 83, 9, 0.08);
+    border: 1px solid rgba(180, 83, 9, 0.2);
+    color: var(--accent, #b45309);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent, #b45309);
+    box-shadow: 0 0 8px var(--accent, #b45309);
+    animation: pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .hero-title {
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    color: #111111;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555555;
+    margin: 0 auto 32px auto;
+    max-width: 680px;
+  }
+
+  .sphere-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .sphere-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: #444444;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+  }
+
+  .sphere-btn:hover {
+    background: #f4f4f5;
+    border-color: rgba(0, 0, 0, 0.16);
+    color: #111111;
+    transform: translateY(-1px);
+  }
+
+  .sphere-btn.active {
+    background: #111111;
+    border-color: #111111;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .sphere-kanji {
+    font-family: serif;
+    font-weight: 700;
+    opacity: 0.85;
+  }
+
+  /* Gallery Grid Section */
+  .gallery-grid-section {
+    max-width: 1380px;
+    margin: 0 auto;
+    padding: 20px 24px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 32px 24px;
+    justify-content: center;
+    align-items: start;
+  }
+
+  .grid-card-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    animation: fadeIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .gallery-footnote {
+    max-width: 900px;
+    margin: 40px auto 0;
+    text-align: center;
+    padding: 0 24px;
+  }
+
+  .gallery-footnote p {
+    font-size: 0.85rem;
+    color: #888888;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+</style>

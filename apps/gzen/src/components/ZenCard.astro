@@ -34,10 +34,20 @@ const { card } = Astro.props;
 
     <!-- Art Canvas Container (4:3 Pokemon card style window) -->
     <div class="zen-card-art-box" style={`background: ${card.bgGradient};`}>
+      {card.image ? (
+        <img 
+          src={card.image} 
+          alt={`${card.title} — ${card.subtitle}`} 
+          class="zen-card-art-img"
+          loading="lazy"
+        />
+      ) : null}
       <div class="zen-card-art-ambient"></div>
-      <div class="zen-card-art-glyph">
-        <span class="zen-card-big-kanji">{card.kanji}</span>
-      </div>
+      {!card.image && (
+        <div class="zen-card-art-glyph">
+          <span class="zen-card-big-kanji">{card.kanji}</span>
+        </div>
+      )}
       <div class="zen-card-art-label">
         <span class="zen-card-subtitle">{card.subtitle}</span>
       </div>
@@ -199,6 +209,20 @@ const { card } = Astro.props;
     justify-content: center;
     z-index: 3;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .zen-card-art-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.4s ease-out;
+  }
+
+  .zen-card-wrapper:hover .zen-card-art-img {
+    transform: scale(1.06);
   }
 
   .zen-card-art-ambient {

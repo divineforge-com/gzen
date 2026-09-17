@@ -13,6 +13,7 @@ export interface ZenCardData {
   bgGradient: string;
   accentGlow: string;
   icon: string;
+  image?: string;
 }
 
 export interface SphereCategory {
@@ -34,6 +35,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group I: Stillness (止 · Śamatha)
   {
     id: 'zen-001',
+    image: '/assets/cards/zen-001.webp',
     number: '#001',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -50,6 +52,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-002',
+    image: '/assets/cards/zen-002.webp',
     number: '#002',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -66,6 +69,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-003',
+    image: '/assets/cards/zen-003.webp',
     number: '#003',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -82,6 +86,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-004',
+    image: '/assets/cards/zen-004.webp',
     number: '#004',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -98,6 +103,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-005',
+    image: '/assets/cards/zen-005.webp',
     number: '#005',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -116,6 +122,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group II: Impermanence (无常 · Anicca)
   {
     id: 'zen-006',
+    image: '/assets/cards/zen-006.webp',
     number: '#006',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -132,6 +139,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-007',
+    image: '/assets/cards/zen-007.webp',
     number: '#007',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -148,6 +156,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-008',
+    image: '/assets/cards/zen-008.webp',
     number: '#008',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -164,6 +173,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-009',
+    image: '/assets/cards/zen-009.webp',
     number: '#009',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -180,6 +190,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-010',
+    image: '/assets/cards/zen-010.webp',
     number: '#010',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -198,6 +209,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group III: Empty Mind (空 / 初心 · Shoshin)
   {
     id: 'zen-011',
+    image: '/assets/cards/zen-011.webp',
     number: '#011',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
