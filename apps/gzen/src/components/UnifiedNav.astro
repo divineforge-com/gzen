@@ -191,6 +191,12 @@ const navItems = [
     text-decoration: none;
     color: #1a1512;
     z-index: 1002;
+    border-radius: 8px;
+  }
+
+  .brand-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b45309;
   }
 
   .brand-glyph {
@@ -258,12 +264,18 @@ const navItems = [
     background: rgba(255, 255, 255, 0.75);
   }
 
-  .nav-pill:hover {
+  .nav-pill:hover,
+  .nav-pill:focus-visible {
     color: #1a1512;
     background: #ffffff;
     border-color: rgba(180, 83, 9, 0.35);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(180, 83, 9, 0.08);
+  }
+
+  .nav-pill:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b45309;
   }
 
   .nav-pill.active {
@@ -305,13 +317,20 @@ const navItems = [
     color: #b45309;
   }
 
-  .live-game-pill:hover {
+  .live-game-pill:hover,
+  .live-game-pill:focus-visible {
     background: #b45309;
     color: #ffffff;
     border-color: #b45309;
   }
 
-  .live-game-pill:hover .nav-kanji {
+  .live-game-pill:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b45309;
+  }
+
+  .live-game-pill:hover .nav-kanji,
+  .live-game-pill:focus-visible .nav-kanji {
     color: #ffffff;
   }
 
@@ -352,6 +371,11 @@ const navItems = [
     text-decoration: none;
   }
 
+  .mobile-quick-enter:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b45309;
+  }
+
   /* Modern Hamburger Button */
   .mobile-menu-toggle {
     width: 40px;
@@ -367,6 +391,11 @@ const navItems = [
     cursor: pointer;
     padding: 0;
     transition: all 0.2s ease;
+  }
+
+  .mobile-menu-toggle:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b45309;
   }
 
   .hamburger-bar {
@@ -474,9 +503,14 @@ const navItems = [
     transition: all 0.2s ease;
   }
 
-  .drawer-item:hover, .drawer-item:active {
+  .drawer-item:hover, .drawer-item:active, .drawer-item:focus-visible {
     background: #f4eee5;
     border-color: rgba(180, 83, 9, 0.25);
+  }
+
+  .drawer-item:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #b45309;
   }
 
   .drawer-item.active {

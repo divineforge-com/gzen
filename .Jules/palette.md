@@ -1,0 +1,3 @@
+## 2024-05-18 - [Custom UI Component Focus Rings]
+**Learning:** Custom UI components without default browser outlines often fail keyboard accessibility checks because users cannot see which element has focus. Simply relying on `:hover` styles is insufficient for screen readers or keyboard navigation.
+**Action:** Always implement a `:focus-visible` pseudo-class for interactive elements lacking default outlines. Mirroring the `:hover` style while adding a double box-shadow (e.g., `box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--gzen-primary);`) creates a highly visible, accessible focus ring that works against varying background colors without shifting the layout.
