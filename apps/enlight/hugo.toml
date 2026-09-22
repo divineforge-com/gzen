@@ -1,5 +1,6 @@
 baseURL = "https://enlight.gzen.io/"
 title = "enlight · gZen Wisdom"
+languageCode = "en"
 defaultContentLanguage = "en"
 disableLanguages = []
 enableRobotsTXT = true
