@@ -42,6 +42,14 @@ const meta = {
             <span class="btn-icon">🪷</span>
             <span class="btn-text">Pond</span>
           </button>
+          <button class="preset-btn" data-view="cranePeak" title="Crane Mountain Peak (4)">
+            <span class="btn-icon">⛰️</span>
+            <span class="btn-text">Peak</span>
+          </button>
+          <button class="preset-btn" data-view="bambooHaven" title="Bamboo Shrine Grove (5)">
+            <span class="btn-icon">🎋</span>
+            <span class="btn-text">Grove</span>
+          </button>
           <button id="breathe-toggle" class="preset-btn breathe-btn" title="Toggle 6s Pranayama Breath Rhythm (Space)">
             <span class="btn-icon">🧘</span>
             <span class="btn-text">Breathe</span>
@@ -327,6 +335,92 @@ const meta = {
     // --- 4. Floating Island Group & Diorama Mesh Hooks ---
     const islandGroup = new THREE.Group();
     scene.add(islandGroup);
+
+    // --- 4b. Secondary Zone: Floating Crane Mountain Peak ---
+    const craneZoneGroup = new THREE.Group();
+    craneZoneGroup.position.set(12, 4.5, -14);
+    scene.add(craneZoneGroup);
+
+    // Rocky Peak base
+    const peakGeo = new THREE.ConeGeometry(4.5, 5.5, 6);
+    const peakMat = new THREE.MeshStandardMaterial({
+      color: 0x8a7f72,
+      roughness: 0.85,
+      flatShading: true,
+    });
+    const peakMesh = new THREE.Mesh(peakGeo, peakMat);
+    peakMesh.rotation.x = Math.PI; // upside-down floating mountain
+    craneZoneGroup.add(peakMesh);
+
+    // Moss top on peak
+    const peakTopGeo = new THREE.CylinderGeometry(3.2, 4.2, 0.8, 6);
+    const peakTopMat = new THREE.MeshStandardMaterial({
+      color: 0x4d6848,
+      roughness: 0.9,
+    });
+    const peakTop = new THREE.Mesh(peakTopGeo, peakTopMat);
+    peakTop.position.y = 0.4;
+    craneZoneGroup.add(peakTop);
+
+    // Torii Gate on Mountain Peak
+    const toriiMat = new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.4 });
+    const postGeo = new THREE.CylinderGeometry(0.12, 0.12, 2.2, 6);
+    const postL = new THREE.Mesh(postGeo, toriiMat);
+    postL.position.set(-0.9, 1.5, 0);
+    const postR = new THREE.Mesh(postGeo, toriiMat);
+    postR.position.set(0.9, 1.5, 0);
+    const beamGeo = new THREE.BoxGeometry(2.4, 0.18, 0.25);
+    const beam = new THREE.Mesh(beamGeo, toriiMat);
+    beam.position.set(0, 2.5, 0);
+    craneZoneGroup.add(postL);
+    craneZoneGroup.add(postR);
+    craneZoneGroup.add(beam);
+
+    // Floating Collectible Card 021 Monolith Shrine
+    const cardShrineGeo = new THREE.BoxGeometry(0.65, 0.9, 0.08);
+    const cardShrineMat = new THREE.MeshStandardMaterial({
+      color: 0xfbf9f5,
+      roughness: 0.3,
+      metalness: 0.2,
+      emissive: 0x2d6b4f,
+      emissiveIntensity: 0.25,
+    });
+    const card021Shrine = new THREE.Mesh(cardShrineGeo, cardShrineMat);
+    card021Shrine.position.set(0, 1.5, -0.6);
+    card021Shrine.name = "ZenCard_021_Shrine";
+    craneZoneGroup.add(card021Shrine);
+
+    // --- 4c. 3rd-Person Low-Poly Wanderer Character ---
+    const wandererGroup = new THREE.Group();
+    wandererGroup.position.set(0, 0.5, 3.5); // Start on main garden path
+    scene.add(wandererGroup);
+
+    // Low Poly Robe (Cone)
+    const robeGeo = new THREE.ConeGeometry(0.35, 1.1, 6);
+    const robeMat = new THREE.MeshStandardMaterial({
+      color: 0x3f3d3b,
+      roughness: 0.8,
+      flatShading: true,
+    });
+    const robeMesh = new THREE.Mesh(robeGeo, robeMat);
+    robeMesh.position.y = 0.55;
+    wandererGroup.add(robeMesh);
+
+    // Wanderer Head & Kasa Straw Hat
+    const headGeo = new THREE.SphereGeometry(0.18, 6, 6);
+    const headMat = new THREE.MeshStandardMaterial({ color: 0xd8caa8 });
+    const headMesh = new THREE.Mesh(headGeo, headMat);
+    headMesh.position.y = 1.15;
+    wandererGroup.add(headMesh);
+
+    const hatGeo = new THREE.ConeGeometry(0.55, 0.22, 6);
+    const hatMat = new THREE.MeshStandardMaterial({ color: 0x9c7a4b, roughness: 0.9 });
+    const hatMesh = new THREE.Mesh(hatGeo, hatMat);
+    hatMesh.position.y = 1.3;
+    wandererGroup.add(hatMesh);
+
+    let isWandererMode = false;
+    const moveState = { forward: false, backward: false, left: false, right: false };
 
     // Object References for Raycasting & Kinetic Animation
     let bellMesh: THREE.Mesh | null = null;
@@ -756,6 +850,14 @@ const meta = {
         pos: new THREE.Vector3(1.2, 7.5, 2.8),
         target: new THREE.Vector3(0, 0.2, 0),
       },
+      cranePeak: {
+        pos: new THREE.Vector3(16, 12, -18),
+        target: new THREE.Vector3(12, 5, -14),
+      },
+      bambooHaven: {
+        pos: new THREE.Vector3(-14, 8, 14),
+        target: new THREE.Vector3(-10, 2, 10),
+      },
     };
 
     let targetCameraPos = camera.position.clone();
@@ -853,21 +955,50 @@ const meta = {
     document.getElementById('lantern-btn')?.addEventListener('click', toggleLantern);
     document.getElementById('crane-btn')?.addEventListener('click', spawnOrigamiCrane);
 
+    const walkBtn = document.getElementById('walk-btn');
+    const toggleWandererMode = () => {
+      isWandererMode = !isWandererMode;
+      walkBtn?.classList.toggle('active', isWandererMode);
+      if (isWandererMode) {
+        controls.autoRotate = false;
+        showToast("🚶 Wanderer Mode: Use W/A/S/D to explore the sanctuary grounds.");
+      } else {
+        showToast("🏯 Overview Mode: Orbit diorama restored.");
+      }
+    };
+    walkBtn?.addEventListener('click', toggleWandererMode);
+
     // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
 
       const key = e.key.toLowerCase();
+      if (key === 'w') moveState.forward = true;
+      if (key === 's') moveState.backward = true;
+      if (key === 'a') moveState.left = true;
+      if (key === 'd') moveState.right = true;
+
       if (key === 'b') strikeBell();
       else if (key === 'l') toggleLantern();
       else if (key === 'c') spawnOrigamiCrane();
+      else if (key === 'v') toggleWandererMode();
       else if (key === '1') transitionToPreset('orbit');
       else if (key === '2') transitionToPreset('bell');
       else if (key === '3') transitionToPreset('pond');
+      else if (key === '4') transitionToPreset('cranePeak');
+      else if (key === '5') transitionToPreset('bambooHaven');
       else if (e.code === 'Space') {
         e.preventDefault();
         toggleBreatheMode();
       }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const key = e.key.toLowerCase();
+      if (key === 'w') moveState.forward = false;
+      if (key === 's') moveState.backward = false;
+      if (key === 'a') moveState.left = false;
+      if (key === 'd') moveState.right = false;
     });
 
     // Window Resize Handler
@@ -987,6 +1118,37 @@ const meta = {
           scene.remove(crane.group);
           cranes.splice(i, 1);
         }
+      }
+
+      // Card 021 Shrine Gentle Float & Glow
+      if (card021Shrine) {
+        card021Shrine.rotation.y = elapsedTime * 0.5;
+        card021Shrine.position.y = 1.5 + Math.sin(elapsedTime * 1.5) * 0.12;
+      }
+
+      // 3rd-Person Wanderer Motion & Follow Camera
+      if (isWandererMode) {
+        const moveSpeed = 0.08;
+        const forward = new THREE.Vector3();
+        camera.getWorldDirection(forward);
+        forward.y = 0;
+        forward.normalize();
+
+        const right = new THREE.Vector3();
+        right.crossVectors(camera.up, forward).normalize();
+
+        if (moveState.forward) wandererGroup.position.addScaledVector(forward, moveSpeed);
+        if (moveState.backward) wandererGroup.position.addScaledVector(forward, -moveSpeed);
+        if (moveState.left) wandererGroup.position.addScaledVector(right, moveSpeed);
+        if (moveState.right) wandererGroup.position.addScaledVector(right, -moveSpeed);
+
+        if (moveState.forward || moveState.backward || moveState.left || moveState.right) {
+          const targetHeading = Math.atan2(forward.x, forward.z);
+          wandererGroup.rotation.y = targetHeading;
+        }
+
+        // Camera smoothly tracks 3rd-person character
+        controls.target.lerp(new THREE.Vector3(wandererGroup.position.x, wandererGroup.position.y + 1.0, wandererGroup.position.z), 0.08);
       }
 
       // Smooth Camera Lerp for Presets

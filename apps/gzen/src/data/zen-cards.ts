@@ -381,7 +381,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-021',
-    image: '/assets/cards/zen-020.webp',
+    image: '/assets/cards/zen-021.webp',
     number: '#021',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
