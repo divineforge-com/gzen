@@ -4,11 +4,12 @@ import UnifiedNav from "../components/UnifiedNav.astro";
 import Starfield from "../components/Starfield.astro";
 import ZenCard from "../components/ZenCard.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import ZenAdSlot from "../components/ZenAdSlot.astro";
 import { ZEN_CARDS, SPHERES } from "../data/zen-cards";
 
 const meta = {
-  title: "gZen Cards Gallery — 20 Mind Shaping Contemplative Cards",
-  description: "Explore the full collection of 20 collectible Zen mind cards across Stillness, Impermanence, Empty Mind, and Loving Presence. Distilled for daily mindfulness and mental recalibration.",
+  title: "gZen Cards Gallery — 21 Mind Shaping Contemplative Cards",
+  description: "Explore the full collection of 21 collectible Zen mind cards across Stillness, Impermanence, Empty Mind, and Loving Presence. Distilled for daily mindfulness and mental recalibration.",
 };
 ---
 
@@ -25,25 +26,28 @@ const meta = {
       </div>
       <h1 class="hero-title">Zen Mind Cards Gallery</h1>
       <p class="hero-desc">
-        A full collectible gallery of 20 physical-feel Zen mind cards. Each card pairs an ancient contemplative principle with high-clarity peaceful meditative art and practical grounding reflection.
+        A full collectible gallery of 21 physical-feel Zen mind cards. Each card pairs an ancient contemplative principle with high-clarity peaceful meditative art and practical grounding reflection.
       </p>
 
       <!-- Category Filter Pills -->
       <div class="sphere-filters" role="tablist">
         {SPHERES.map((sphere, index) => (
-          <button 
-            type="button"
-            class={`sphere-btn ${index === 0 ? 'active' : ''}`}
+          <button
+            class={`filter-pill ${index === 0 ? 'active' : ''}`}
             data-target={sphere.id}
             role="tab"
-            aria-selected={index === 0 ? 'true' : 'false'}
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls="cardsGrid"
           >
-            <span class="sphere-kanji">{sphere.kanji}</span>
-            <span>{sphere.label}</span>
+            <span class="pill-kanji">{sphere.kanji}</span>
+            <span class="pill-label">{sphere.label}</span>
           </button>
         ))}
       </div>
     </header>
+
+    <!-- Zen AdSense Insertion -->
+    <ZenAdSlot slotId="8294017265" format="auto" />
 
     <!-- Cards Grid (Pure CSS Responsive Grid) -->
     <section class="gallery-grid-section" aria-label="Zen Cards Grid">

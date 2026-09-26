@@ -378,6 +378,23 @@ export const ZEN_CARDS: ZenCardData[] = [
     bgGradient: 'linear-gradient(135deg, #832e12 0%, #c54817 50%, #ee6327 100%)',
     accentGlow: 'rgba(197, 72, 23, 0.4)',
     icon: 'flower'
+  },
+  {
+    id: 'zen-021',
+    image: '/assets/cards/zen-020.webp',
+    number: '#021',
+    sphere: 'stillness',
+    sphereLabel: 'Stillness · Śamatha',
+    kanji: '鹤',
+    title: 'The Paper Crane',
+    subtitle: 'Flight Above the Fog',
+    quote: 'Folded from patience, carrying no weight of malice, the origami crane glides effortlessly through vast mountain mist.',
+    commentary: 'When the world is heavy with noise, surrender the burden. Lightness of spirit traverses any distance.',
+    madeDate: '2026.SEP.27',
+    themeColor: '#2d6b4f',
+    bgGradient: 'linear-gradient(135deg, #1b382b 0%, #285e46 50%, #3f8f6b 100%)',
+    accentGlow: 'rgba(45, 107, 79, 0.4)',
+    icon: 'feather'
   }
 ];
 
