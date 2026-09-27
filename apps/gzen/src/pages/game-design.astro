@@ -9,6 +9,68 @@ const gddMeta = {
 };
 ---
 
+<style>
+  .walk-revision {
+    width: min(1080px, calc(100% - 2rem));
+    margin: 0 auto 2.5rem;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .walk-kicker {
+    margin: 0 0 0.25rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #6b5b4d;
+  }
+  .walk-copy h2 {
+    margin: 0 0 0.4rem;
+  }
+  .walk-copy p {
+    margin: 0 0 0.8rem;
+    line-height: 1.7;
+    max-width: 42rem;
+  }
+  .walk-enter {
+    display: inline-block;
+    background: #d97845;
+    color: #fffaf4;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+  }
+  .walk-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 1.1fr;
+    gap: 0.75rem;
+  }
+  .walk-grid figure {
+    margin: 0;
+  }
+  .walk-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+    background: #fffaf4;
+  }
+  .walk-grid figcaption {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    color: #6b5b4d;
+  }
+  @media (max-width: 800px) {
+    .walk-grid {
+      grid-template-columns: 1fr;
+    }
+    .walk-grid img {
+      height: 200px;
+    }
+  }
+</style>
+
 <BaseLayout title={gddMeta.title} description={gddMeta.description}>
   <UnifiedNav activeTab="gdd" />
   <div class="gdd-container">
@@ -22,8 +84,8 @@ const gddMeta = {
           Game Design Document, Technical Architecture & Diorama Concept
         </p>
         <div class="meta-strip">
-          <span><strong>Document ID:</strong> <code>ZEN-GAME-FOUNDATION-GDD-v1.0</code></span>
-          <span><strong>Pillars:</strong> Slow Transit · Brahmaviharas · Edge Relay</span>
+          <span><strong>Document ID:</strong> <code>ZEN-GAME-FOUNDATION-GDD-v1.1</code></span>
+          <span><strong>Pillars:</strong> Third-person walk · Four shores · Slow Transit</span>
           <span><strong>Target:</strong> Web-First (R3F) &amp; Mobile (Capacitor / Godot)</span>
         </div>
       </div>
@@ -52,6 +114,31 @@ const gddMeta = {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="walk-revision">
+      <div class="walk-copy">
+        <p class="walk-kicker">Revision · 27 September 2026</p>
+        <h2>One walk, four shores</h2>
+        <p>
+          The diorama stays. The new slice is a third-person wanderer on a low-poly earth: Jiangnan, the bamboo grove, the Himalayan ridge, and the fjord, joined by stone paths. Sit with a teaching, answer a fellow wanderer, leave a note.
+        </p>
+        <a class="walk-enter" href="/world">Walk the world</a>
+      </div>
+      <div class="walk-grid">
+        <figure>
+          <img src="/assets/game-design/world-four-zones.jpg" alt="Low-poly concept of four sanctuary islands joined by stone paths" />
+          <figcaption>Four shores and the crossing</figcaption>
+        </figure>
+        <figure>
+          <img src="/assets/game-design/wanderer-lowpoly.jpg" alt="Low-poly wanderer in a cream robe with a saffron sash" />
+          <figcaption>Wanderer</figcaption>
+        </figure>
+        <figure>
+          <img src="/assets/game-design/world-third-person.jpg" alt="Third-person view of the wanderer on a stone path toward a canal pavilion" />
+          <figcaption>Third person, Jiangnan path</figcaption>
+        </figure>
       </div>
     </section>
 

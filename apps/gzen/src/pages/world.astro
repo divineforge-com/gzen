@@ -1,0 +1,372 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UnifiedNav from "../components/UnifiedNav.astro";
+
+const meta = {
+  title: "Walk the World — gZen",
+  description: "A third-person walk across four low-poly sanctuaries. Sit with a teaching, speak with a wanderer, and leave a note on the path.",
+};
+---
+
+<BaseLayout title={meta.title} description={meta.description}>
+  <div class="world-shell">
+    <UnifiedNav activeTab="world" />
+    <main class="viewport">
+      <div id="world-root" class="world-root"></div>
+
+      <div class="zone-card" id="zone-card">
+        <span class="zone-kanji" id="zone-kanji">江南</span>
+        <div>
+          <p class="zone-kicker">gZen world</p>
+          <h1 class="zone-name" id="zone-name">Jiangnan Canals</h1>
+        </div>
+        <p class="teach-count" id="teach-count">Teachings 0 / 4</p>
+      </div>
+
+      <button type="button" class="prompt" id="prompt" hidden>Listen</button>
+
+      <aside class="sheet" id="sheet" hidden>
+        <div class="sheet-card">
+          <p class="sheet-kicker" id="sheet-kicker">Teaching</p>
+          <h2 class="sheet-title" id="sheet-title">The Empty Cup</h2>
+          <p class="sheet-zh" id="sheet-zh"></p>
+          <p class="sheet-line" id="sheet-line"></p>
+          <label class="composer" id="composer-label">
+            <span id="composer-caption">Your reply</span>
+            <textarea id="composer" rows="3" maxlength="180"></textarea>
+          </label>
+          <div class="sheet-actions">
+            <button type="button" class="text-btn" id="close-sheet">Close</button>
+            <button type="button" class="solid-btn" id="send-sheet">Keep this</button>
+          </div>
+        </div>
+      </aside>
+
+      <p class="hint">
+        <kbd>W A S D</kbd> walk · <kbd>drag</kbd> turn · <kbd>E</kbd> listen · <kbd>N</kbd> leave a note
+      </p>
+      <pre id="selftest" class="selftest" hidden></pre>
+    </main>
+  </div>
+</BaseLayout>
+
+<script>
+  import { mountWorld, type Focus } from "../scripts/world/createWorld.ts";
+
+  const root = document.getElementById("world-root");
+  const zoneName = document.getElementById("zone-name");
+  const zoneKanji = document.getElementById("zone-kanji");
+  const teachCount = document.getElementById("teach-count");
+  const prompt = document.getElementById("prompt") as HTMLButtonElement | null;
+  const sheet = document.getElementById("sheet");
+  const sheetKicker = document.getElementById("sheet-kicker");
+  const sheetTitle = document.getElementById("sheet-title");
+  const sheetZh = document.getElementById("sheet-zh");
+  const sheetLine = document.getElementById("sheet-line");
+  const composerLabel = document.getElementById("composer-label");
+  const composerCaption = document.getElementById("composer-caption");
+  const composer = document.getElementById("composer") as HTMLTextAreaElement | null;
+  const send = document.getElementById("send-sheet");
+  const close = document.getElementById("close-sheet");
+  const selftest = document.getElementById("selftest");
+
+  if (root && prompt && sheet && composer && send && close && zoneName && zoneKanji && teachCount && sheetKicker && sheetTitle && sheetZh && sheetLine && composerLabel && composerCaption) {
+    let focus: Focus | null = null;
+    let mode: "focus" | "note" | null = null;
+
+    const world = mountWorld(root, {
+      onFrame(snapshot) {
+        zoneName.textContent = snapshot.zoneName;
+        zoneKanji.textContent = snapshot.kanji;
+        teachCount.textContent = `Teachings ${snapshot.teachings} / 4`;
+        if (snapshot.prompt && mode === null) {
+          prompt.hidden = false;
+          prompt.textContent = snapshot.prompt;
+        } else {
+          prompt.hidden = true;
+        }
+      },
+      onFocus(next) {
+        openFocus(next);
+      },
+    });
+
+    const openFocus = (next: Focus | null) => {
+      focus = next;
+      if (!next) return;
+      mode = "focus";
+      world.setPaused(true);
+      sheet.hidden = false;
+      composerLabel.hidden = next.kind === "teaching";
+      send.hidden = next.kind === "teaching";
+      if (next.kind === "teaching") {
+        sheetKicker.textContent = next.source;
+        sheetTitle.textContent = next.title;
+        sheetZh.textContent = next.zh;
+        sheetLine.textContent = next.line;
+        world.markTeaching(next.zone);
+      } else if (next.kind === "fellow") {
+        sheetKicker.textContent = next.zone;
+        sheetTitle.textContent = next.name;
+        sheetZh.textContent = "";
+        sheetLine.textContent = `${next.line} ${next.ask}`;
+        composerCaption.textContent = "Your reply";
+        composer.maxLength = 180;
+        composer.value = next.reply ?? "";
+        send.textContent = "Leave your reply";
+      } else {
+        sheetKicker.textContent = next.zone;
+        sheetTitle.textContent = "A note on the path";
+        sheetZh.textContent = "";
+        sheetLine.textContent = next.body;
+        composerLabel.hidden = true;
+        send.hidden = true;
+      }
+    };
+
+    const openNote = () => {
+      mode = "note";
+      focus = null;
+      world.setPaused(true);
+      sheet.hidden = false;
+      sheetKicker.textContent = zoneName.textContent ?? "The path";
+      sheetTitle.textContent = "Leave a note";
+      sheetZh.textContent = "";
+      sheetLine.textContent = "A short kindness for the next wanderer. It stays on this path, in this browser, and in any other tab open on this machine.";
+      composerLabel.hidden = false;
+      send.hidden = false;
+      composerCaption.textContent = "Note";
+      composer.maxLength = 140;
+      composer.value = "";
+      send.textContent = "Set it down";
+      composer.focus();
+    };
+
+    const closeSheet = () => {
+      mode = null;
+      focus = null;
+      sheet.hidden = true;
+      world.setPaused(false);
+    };
+
+    prompt.addEventListener("click", () => openFocus(world.interact()));
+    close.addEventListener("click", closeSheet);
+    send.addEventListener("click", () => {
+      if (mode === "note") world.leaveNote(composer.value);
+      else if (focus?.kind === "fellow") world.replyTo(focus.id, composer.value);
+      closeSheet();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.target === composer) {
+        if (event.code === "Escape") closeSheet();
+        return;
+      }
+      if (event.code === "KeyN") openNote();
+      if (event.code === "Escape") closeSheet();
+    });
+
+    const params = new URLSearchParams(location.search);
+    if (params.get("selftest") === "1" && selftest) {
+      const failures = world.selfTest();
+      selftest.hidden = false;
+      selftest.textContent = failures.length ? failures.join("\n") : "PASS";
+    }
+
+    (window as unknown as { __gzenWorld?: typeof world }).__gzenWorld = world;
+  }
+</script>
+
+<style>
+  .world-shell {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background: #d7e4ec;
+    color: #2f2118;
+  }
+
+  .viewport {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .world-root {
+    position: absolute;
+    inset: 0;
+  }
+
+  .world-root :global(canvas) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .zone-card {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.7rem 0.9rem;
+    background: rgba(255, 250, 244, 0.92);
+    border-radius: 16px;
+    max-width: min(28rem, calc(100% - 1.6rem));
+  }
+
+  .zone-kanji {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .zone-kicker,
+  .sheet-kicker {
+    margin: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b5b4d;
+  }
+
+  .zone-name,
+  .sheet-title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .teach-count {
+    margin: 0 0 0 auto;
+    font-size: 0.78rem;
+    color: #6b5b4d;
+  }
+
+  .prompt {
+    position: absolute;
+    left: 50%;
+    bottom: 4.5rem;
+    transform: translateX(-50%);
+    border: 0;
+    background: #2f2118;
+    color: #fffaf4;
+    border-radius: 999px;
+    padding: 0.75rem 1.1rem;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .hint {
+    position: absolute;
+    left: 0.8rem;
+    bottom: 0.7rem;
+    margin: 0;
+    font-size: 0.78rem;
+    color: #2f2118;
+    background: rgba(255, 250, 244, 0.88);
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+  }
+
+  kbd {
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .sheet[hidden],
+  .prompt[hidden],
+  .composer[hidden],
+  .solid-btn[hidden] {
+    display: none;
+  }
+
+  .sheet {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: end center;
+    padding: 1rem;
+    background: rgba(47, 33, 24, 0.18);
+  }
+
+  .sheet-card {
+    width: min(34rem, 100%);
+    background: #fffaf4;
+    border-radius: 18px;
+    padding: 1rem 1.1rem 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .sheet-zh,
+  .sheet-line {
+    line-height: 1.7;
+  }
+
+  .sheet-zh {
+    color: #6b5b4d;
+  }
+
+  .composer {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+  }
+
+  textarea {
+    width: 100%;
+    resize: vertical;
+    border: 1px solid #e4d5c4;
+    border-radius: 12px;
+    padding: 0.6rem 0.7rem;
+    font: inherit;
+    color: inherit;
+    background: #fff;
+  }
+
+  .sheet-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+
+  .text-btn,
+  .solid-btn {
+    border-radius: 999px;
+    padding: 0.55rem 0.9rem;
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .text-btn {
+    border: 0;
+    background: transparent;
+    color: #2f2118;
+  }
+
+  .solid-btn {
+    border: 0;
+    background: #d97845;
+    color: #fffaf4;
+  }
+
+  .selftest {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.8rem;
+    background: #fffaf4;
+    padding: 0.5rem;
+  }
+
+  @media (max-width: 720px) {
+    .hint {
+      right: 0.8rem;
+      font-size: 0.72rem;
+    }
+
+    .teach-count {
+      display: none;
+    }
+  }
+</style>

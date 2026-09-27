@@ -1,8 +1,50 @@
 # gZen Zen Game: Foundation Game Design Document & Architecture Spec
-**Document Identifier:** `ZEN-GAME-FOUNDATION-GDD-v1.0`  
+**Document Identifier:** `ZEN-GAME-FOUNDATION-GDD-v1.1`  
 **Target Path:** `docs/game-design/ZEN-GAME-FOUNDATION-GDD.md`  
 **Status:** Living Specification  
 **Design Philosophy:** Slow Gaming, Buddhist Contemplative Interaction, Intentional Asynchronous Connectivity  
+
+## 0. Revision — Walkable world (27 September 2026)
+
+The diorama sanctuaries in the sections below stay. What changes is how a wanderer meets them.
+
+The playable earth is one continuous low-poly world in a third-person view, in the spirit of the miniature-globe scenes people have been making with Blender: faceted shores, a handful of readable landmarks, a small figure large enough to read against the land. gZen’s figure walks. The lands teach. Other wanderers are someone to answer.
+
+### 0.1 Key metrics for this direction
+
+| Metric | First slice (`/world`) | Later |
+| :--- | :--- | :--- |
+| **World zones** | Four sanctuaries on one sea, joined by stone paths through a crossing: Jiangnan canals, bamboo grove, Himalayan ridge, fjord of stillness. | More shores, still one walk, not a menu of separate dioramas. |
+| **View** | Third person. The camera sits behind a low-poly wanderer. Drag turns the body. W A S D walks in that frame. The body faces the direction it travels. | Same camera when a Blender hero mesh replaces the code-built figure. |
+| **Learning** | Each shore has one teaching taken from gZen’s own koans and principles. Sitting with it records the visit locally. Four teachings, no score, no streak. | Daily seed still arrives at dawn, as in §3.3, and is read in the world rather than on a separate desk. |
+| **Fellow players** | Each shore has a wanderer with a question. A reply is kept in this browser and shared with other tabs on the same machine. A note can be set down on the path for the next person who walks past. | The same note and reply cross the network through the edge mailbox in §5.2. No live combat server. No follower count. |
+
+Letters, cranes, lanterns, and the bow stay the social grammar from §2. In the walk they are something you do while standing with someone, not a separate screen you open first.
+
+### 0.2 What you can play now
+
+Open `/world` on the portal.
+
+- Walk off Jiangnan, across the crossing, into the other three shores.
+- Stand at a stone flame and press **E** to sit with that shore’s teaching.
+- Stand with Willow, Tea, Ridge, or Cedar and answer the question they ask.
+- Press **N** to leave a short note. Another tab open to `/world` on the same computer receives it over a browser broadcast channel.
+
+`/sanctuary` remains the orbit diorama. `/world` is the walk.
+
+### 0.3 Art direction and the mesh pipeline
+
+Concept frames for this revision live in `docs/game-design/assets/`:
+
+- `world-four-zones.jpg` — the four shores and the crossing, from above.
+- `wanderer-lowpoly.jpg` — the third-person figure, cream robe, saffron sash, full body.
+- `world-third-person.jpg` — the figure on a Jiangnan path, camera behind.
+
+Blender is the intended tool for the hero meshes and modular kits (see `docs/GAME_AGENT_SQUAD.md`: procedural islands, shrines, paths, export `.glb`, under 500KB a slice). This workstation does not have Blender installed, and image-to-mesh is unavailable here because the team runs with zero data retention, which refuses stored 3D jobs. Until a Blender export arrives, shores and the wanderer are faceted geometry built in Three.js so the walk exists and can be played. Dropping `wanderer.glb` into `apps/gzen/public/models/` is the seam for the authored mesh. Measure that mesh’s front after load. Do not assume it faces −z.
+
+### 0.4 Controls and frame
+
+One yaw on the wanderer. The follow camera is placed from that yaw. Movement reads the camera’s planar forward and right (`forward × up = right`). Local forward of the figure is −z. At yaw 0 the camera’s right is world +x and forward is world −z. A control self-test covers W A S D, the nose of the figure against heading, and the four paths staying walkable. It lives in `apps/gzen/src/scripts/world/frame.test.ts`.
 
 ---
 
@@ -631,6 +673,8 @@ To validate readiness for production, three industry specialist personas conduct
 - [ ] Implement AI Moderation Prompt contract & safety test harness.
 
 ### Phase 2: WebGL Diorama & Audio Prototype
+- [x] Walkable four-zone third-person slice on the portal at `/world` (procedural low-poly shores, teachings, fellow questions, local notes).
+- [ ] Replace the code-built wanderer and landmark kits with Blender `.glb` exports.
 - [ ] Scaffold Astro + Three.js workspace under `apps/gzen-game` or `apps/gzen/zen-game`.
 - [ ] Implement interactive Kyoto Zen Garden diorama with procedural water shader and raked sand normal maps.
 - [ ] Build Day/Night and weather synchronization controller using SunCalc.

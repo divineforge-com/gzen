@@ -1,6 +1,6 @@
 ---
 interface Props {
-  activeTab?: 'home' | 'cards' | 'sanctuary' | 'game-design' | 'enlight';
+  activeTab?: 'home' | 'cards' | 'sanctuary' | 'game-design' | 'enlight' | 'world';
 }
 
 const { activeTab = 'home' } = Astro.props;
@@ -9,7 +9,8 @@ const navItems = [
   { href: '/', label: 'Overview', kanji: '主', id: 'home' },
   { href: '/cards', label: 'Zen Cards', kanji: '卡', id: 'cards', badge: '20' },
   { href: '/enlight', label: 'Contemplation', kanji: '悟', id: 'enlight' },
-  { href: '/sanctuary', label: '3D Sanctuary', kanji: '遊', id: 'sanctuary', isPrimary: true, isLive: true }
+  { href: '/world', label: 'Walk the World', kanji: '界', id: 'world', isPrimary: true, isLive: true },
+  { href: '/sanctuary', label: '3D Sanctuary', kanji: '遊', id: 'sanctuary', isLive: true }
 ];
 ---
 
@@ -47,9 +48,9 @@ const navItems = [
 
     <!-- Mobile Hamburger Toggle Button -->
     <div class="mobile-actions">
-      <a href="/sanctuary" class="mobile-quick-enter" aria-label="Launch 3D Sanctuary">
-        <span class="mobile-quick-glyph">遊</span>
-        <span>3D</span>
+      <a href="/world" class="mobile-quick-enter" aria-label="Walk the world">
+        <span class="mobile-quick-glyph">界</span>
+        <span>World</span>
         <span class="pulse-dot" aria-hidden="true"></span>
       </a>
       
