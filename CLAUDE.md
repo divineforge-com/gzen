@@ -1,9 +1,11 @@
 # CLAUDE.md — gZen monorepo
 
-gZen is the **playground / knowledge nexus**, not the engineering blog.
+gZen is a **Zen gaming and mindfulness portal**, not the engineering blog.
 
-- Portal `apps/gzen` → gzen.io (single minimal page, K.I.L.O.)
-- Sub-apps: ki, invest, learn, **om** (Buddhism ZH)
+- Portal `apps/gzen` → gzen.io
+- `/world` — 3D walkable low-poly world (four shores, teachings on the path)
+- `/sanctuary` — interactive contemplative sanctuary diorama
+- `/cards` — 21 collectible Zen Mind cards
 - Engineering / speaking / consulting → DivineForge (`../divineforge/web`)
 
 See `AGENTS.md` and `BRAND.md`.

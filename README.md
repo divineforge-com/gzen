@@ -1,13 +1,12 @@
-# gZen.io — K.I.L.O. portal
+# gZen.io — Zen gaming & mindfulness
 
-Tesla-minimal single-page nexus. **Astro** static site → [gzen.io](https://gzen.io).
+A quiet portal for a walkable low-poly world, a contemplative 3D sanctuary, and collectible Zen Mind cards. **Astro** static site → [gzen.io](https://gzen.io).
 
-| | Domain |
+| | Route |
 |---|--------|
-| **K**i | https://ki.gzen.io |
-| **I**nvest | https://invest.gzen.io |
-| **L**earn | https://learn.gzen.io |
-| **O**m | https://om.gzen.io |
+| Walk the World | [/world](https://gzen.io/world) — third-person walk across four low-poly shores |
+| 3D Sanctuary | [/sanctuary](https://gzen.io/sanctuary) — interactive garden diorama |
+| Zen Mind Cards | [/cards](https://gzen.io/cards) — 21 collectible cards |
 
 Engineering / speaking / consulting → [divineforge.com](https://divineforge.com)
 

@@ -1,20 +1,21 @@
-# Brand split — gZen portal & DivineForge publication
+# Brand — gZen portal & DivineForge publication
 
-## gZen = playground nexus
-- Portal: Tesla-minimal K.I.L.O. landing
-- K=ki I=invest L=learn O=om (唵, ZH Buddhism)
-- Hawaiian kilo quote on portal
-- Tech blog content does NOT live here
+## gZen = Zen gaming & mindfulness
+
+- Portal: [gzen.io](https://gzen.io), app `apps/gzen`
+- **Walk the World** (`/world`) — third-person walk across a low-poly world: Jiangnan Canals, Bamboo Grove, Himalaya, Nordic Fjord
+- **Sanctuary** (`/sanctuary`) — interactive contemplative 3D garden (bell, koi, crane, bamboo)
+- **Zen Mind Cards** (`/cards`) — 21 collectibles in four spheres: Stillness (止), Impermanence (变), Empty Mind (空), Loving Presence (慈)
+- Voice: quiet, contemplative, unhurried. Write **gZen** (lowercase g, capital Z)
+- Palette: bg `#fafafa` · ink `#111` · muted `#6b6b6b` · saffron `#b45309` · jade `#2d6b4f`
+- Tech blog content does not live here
 
 ## DivineForge = engineering publication
-- Essays/speaking/consulting/advocacy
-- Ported Go posts into content/worklog essays
-- Nav has Essays
 
-## Om naming
-Chose **Om / 唵** over O/On for sacred weight + K.I.L.O. letter O + ZH-friendly short URI om.gzen.io
+- Essays / speaking / consulting / advocacy
+- Separate repo: `../divineforge/web` → divineforge.com
 
 ## Deploy
-- gzen portal workflow exists
-- gzen-om workflow added (needs CF project + DNS om.gzen.io)
-- Analytics dashboard later on DF
+
+- Cloudflare Pages project `gzen`: root `apps/gzen`, build `npm run build`, output `dist`, domain gzen.io
+- Push to `main` auto-builds
