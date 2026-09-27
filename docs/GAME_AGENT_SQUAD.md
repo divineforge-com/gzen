@@ -18,7 +18,7 @@ This document defines the agent personas, operational boundaries, and delegation
 
 #### **Agent 3: Three.js Frontend & Experience Engineer (`ZenWeb3D`)**
 - **Domain**: Three.js, Astro 5, Shaders, WebGL/WebGPU optimization, audio integration.
-- **Responsibility**: Render dioramas inside `apps/gzen` with soft shadows, atmospheric fog, orbit navigation, and responsive touch controls for mobile/tablet.
+- **Responsibility**: Render the world inside `apps/gzen`. `/world` is a third-person walk across the shores (follow camera derived from the wanderer’s yaw). `/sanctuary` stays the orbit diorama. Touch: left side of the screen moves, right side turns.
 - **Privacy Standard**: Zero telemetry or server-side identity leaks; pure client-side contemplative runtime.
 
 #### **Agent 4: Gemini Vision Visual Critic (`GeminiVisionArt`)**

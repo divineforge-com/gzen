@@ -13,6 +13,7 @@ export interface ZenCardData {
   bgGradient: string;
   accentGlow: string;
   icon: string;
+  image?: string;
 }
 
 export interface SphereCategory {
@@ -34,6 +35,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group I: Stillness (止 · Śamatha)
   {
     id: 'zen-001',
+    image: '/assets/cards/zen-001.webp',
     number: '#001',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -50,6 +52,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-002',
+    image: '/assets/cards/zen-002.webp',
     number: '#002',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -66,6 +69,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-003',
+    image: '/assets/cards/zen-003.webp',
     number: '#003',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -82,6 +86,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-004',
+    image: '/assets/cards/zen-004.webp',
     number: '#004',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -98,6 +103,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-005',
+    image: '/assets/cards/zen-005.webp',
     number: '#005',
     sphere: 'stillness',
     sphereLabel: 'Stillness · Śamatha',
@@ -116,6 +122,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group II: Impermanence (无常 · Anicca)
   {
     id: 'zen-006',
+    image: '/assets/cards/zen-006.webp',
     number: '#006',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -132,6 +139,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-007',
+    image: '/assets/cards/zen-007.webp',
     number: '#007',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -148,6 +156,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-008',
+    image: '/assets/cards/zen-008.webp',
     number: '#008',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -164,6 +173,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-009',
+    image: '/assets/cards/zen-009.webp',
     number: '#009',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -180,6 +190,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-010',
+    image: '/assets/cards/zen-010.webp',
     number: '#010',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -198,6 +209,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group III: Empty Mind (空 / 初心 · Shoshin)
   {
     id: 'zen-011',
+    image: '/assets/cards/zen-011.webp',
     number: '#011',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -214,6 +226,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-012',
+    image: '/assets/cards/zen-012.webp',
     number: '#012',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -230,6 +243,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-013',
+    image: '/assets/cards/zen-013.webp',
     number: '#013',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -246,6 +260,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-014',
+    image: '/assets/cards/zen-014.webp',
     number: '#014',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -262,6 +277,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-015',
+    image: '/assets/cards/zen-015.webp',
     number: '#015',
     sphere: 'empty-mind',
     sphereLabel: 'Empty Mind · Shoshin',
@@ -280,6 +296,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   // Group IV: Loving Presence (慈 · Metta)
   {
     id: 'zen-016',
+    image: '/assets/cards/zen-016.webp',
     number: '#016',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -296,6 +313,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-017',
+    image: '/assets/cards/zen-017.webp',
     number: '#017',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -312,6 +330,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-018',
+    image: '/assets/cards/zen-018.webp',
     number: '#018',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -328,6 +347,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-019',
+    image: '/assets/cards/zen-019.webp',
     number: '#019',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -344,6 +364,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-020',
+    image: '/assets/cards/zen-020.webp',
     number: '#020',
     sphere: 'presence',
     sphereLabel: 'Loving Presence · Mettā',
@@ -357,6 +378,23 @@ export const ZEN_CARDS: ZenCardData[] = [
     bgGradient: 'linear-gradient(135deg, #832e12 0%, #c54817 50%, #ee6327 100%)',
     accentGlow: 'rgba(197, 72, 23, 0.4)',
     icon: 'flower'
+  },
+  {
+    id: 'zen-021',
+    image: '/assets/cards/zen-021.webp',
+    number: '#021',
+    sphere: 'stillness',
+    sphereLabel: 'Stillness · Śamatha',
+    kanji: '鹤',
+    title: 'The Paper Crane',
+    subtitle: 'Flight Above the Fog',
+    quote: 'Folded from patience, carrying no weight of malice, the origami crane glides effortlessly through vast mountain mist.',
+    commentary: 'When the world is heavy with noise, surrender the burden. Lightness of spirit traverses any distance.',
+    madeDate: '2026.SEP.27',
+    themeColor: '#2d6b4f',
+    bgGradient: 'linear-gradient(135deg, #1b382b 0%, #285e46 50%, #3f8f6b 100%)',
+    accentGlow: 'rgba(45, 107, 79, 0.4)',
+    icon: 'feather'
   }
 ];
 
