@@ -1,6 +1,6 @@
 disabled    = false
-languageCode = "zh-CN"
-languageName = "中文"
+locale = "zh-CN"
+label = "中文"
 weight       = 1
 title        = "元気・健康笔记"
 

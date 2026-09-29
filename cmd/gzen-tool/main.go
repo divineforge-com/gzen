@@ -127,7 +127,7 @@ func handleBuild() {
 			}
 
 			// Run hugo --minify
-			cmd := exec.Command("hugo", "--minify")
+			cmd := exec.Command("../../node_modules/.bin/hugo", "--minify")
 			cmd.Dir = a.Path
 			output, err := cmd.CombinedOutput()
 

@@ -1,5 +1,5 @@
 baseURL = "https://genki.gzen.io/"
-languageCode = "zh-CN"
+locale = "zh-CN"
 defaultContentLanguage = "zh-cn"
 title = "元気・健康笔记"
 theme = "blowfish"
