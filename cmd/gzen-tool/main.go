@@ -126,8 +126,14 @@ func handleBuild() {
 				return
 			}
 
-			// Run hugo --minify
-			cmd := exec.Command("hugo", "--minify")
+			var cmd *exec.Cmd
+			// Astro portal uses pnpm run build
+			if a.Name == "gzen" {
+				cmd = exec.Command("pnpm", "run", "build")
+			} else {
+				// Run hugo --minify
+				cmd = exec.Command("hugo", "--minify")
+			}
 			cmd.Dir = a.Path
 			output, err := cmd.CombinedOutput()
 
