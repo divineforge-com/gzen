@@ -395,6 +395,23 @@ export const ZEN_CARDS: ZenCardData[] = [
     bgGradient: 'linear-gradient(135deg, #1b382b 0%, #285e46 50%, #3f8f6b 100%)',
     accentGlow: 'rgba(45, 107, 79, 0.4)',
     icon: 'feather'
+  },
+  {
+    id: 'zen-022',
+    image: '/assets/cards/zen-022.webp',
+    number: '#022',
+    sphere: 'impermanence',
+    sphereLabel: 'Impermanence · Anicca',
+    kanji: '潮',
+    title: 'The Ocean Tide',
+    subtitle: 'Rhythm of Arrival and Retreat',
+    quote: 'The wave does not fight receding from the shore, nor does it hesitate to return. In yielding to the tide, the ocean finds its eternal pulse.',
+    commentary: 'Honor both the expansive seasons of doing and the quiet withdrawals of resting. To ebb is not to disappear; it is gathering depth for the next swell.',
+    madeDate: '2026.OCT.03',
+    themeColor: '#b45309',
+    bgGradient: 'linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%)',
+    accentGlow: 'rgba(180, 83, 9, 0.4)',
+    icon: 'waves'
   }
 ];
 
