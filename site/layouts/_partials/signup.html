@@ -1,5 +1,7 @@
 {{- /* Newsletter signup. Context: dict "title", "blurb", optional "id". */ -}}
-{{- $action := site.Params.newsletter.action }}
+{{- $nl := site.Params.newsletter }}
+{{- $action := $nl.action }}
+{{- if and (not $action) $nl.buttondown }}{{ $action = printf "https://buttondown.com/api/emails/embed-subscribe/%s" $nl.buttondown }}{{ end }}
 <div class="signup"{{ with .id }} id="{{ . }}"{{ end }}><h3 style="margin-top:0">{{ .title }}</h3><p class="muted" style="margin:0">{{ .blurb }}</p>
 <form{{ with $action }} action="{{ . }}" method="post"{{ end }}><input type="email" name="email" placeholder="you@example.com" aria-label="Email" required{{ if not $action }} disabled{{ end }}><button class="btn btn-primary"{{ if not $action }} disabled{{ end }}>Subscribe</button></form>
 {{- if not $action }}<p class="small muted" style="margin:.75rem 0 0">Signup opens soon.</p>{{ end }}

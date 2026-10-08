@@ -25,7 +25,7 @@ to this and other websites. You can turn off personalised ads in
 
 ## Newsletter
 
-If you subscribe, we keep your email address only to send the newsletter. Every email has an unsubscribe link.
+If you subscribe, your email address is stored by [Buttondown](https://buttondown.com/legal/privacy), our newsletter service, and used only to send the newsletter. Every email has an unsubscribe link.
 
 ## Hosting
 

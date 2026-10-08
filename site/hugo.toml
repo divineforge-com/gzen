@@ -29,7 +29,9 @@ disableKinds = ["taxonomy", "term"]
   homeKoan = "zen-003"
 
   [params.newsletter]
-    # TODO(Tether/Atlas): hosted free-tier form endpoint (PLAN: Newsletter v1). Empty = form shows "opening soon".
+    # Buttondown (picked by Tether). Set buttondown to William's Buttondown username to open signups.
+    # Empty = form shows "Signup opens soon". `action` overrides the endpoint if ever needed.
+    buttondown = ""
     action = ""
 
   [params.adsense]
