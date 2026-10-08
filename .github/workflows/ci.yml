@@ -30,13 +30,37 @@ jobs:
       - name: make check
         run: make check
 
-  # TODO(Tether): security gates (PLAN.md "CI gates from day one").
-  # Replace this stub on feat/hugo-scaffold with:
-  #   - gitleaks over the full history (checkout with fetch-depth: 0)
-  #   - govulncheck on every Go module (wasm/*, the tool repos' go.mod files)
-  # Until then this job only warns; it does not gate anything.
+  # Security gates (PLAN.md "CI gates from day one"), owned by Tether.
   security:
-    name: security (stub, Tether)
+    name: security (gitleaks, govulncheck)
     runs-on: ubuntu-latest
+    env:
+      GITLEAKS_VERSION: 8.30.1
+      GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+      GOVULNCHECK_VERSION: v1.8.0
     steps:
-      - run: echo "::warning title=security gates pending::gitleaks + govulncheck are not wired yet (Tether)"
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks (full history, values redacted)
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tgz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          echo "${GITLEAKS_SHA256}  /tmp/gitleaks.tgz" | sha256sum -c -
+          tar -xzf /tmp/gitleaks.tgz -C /tmp gitleaks
+          /tmp/gitleaks git . --config .gitleaks.toml --redact --no-banner --exit-code 1
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+          cache: false
+      - name: govulncheck (every Go module)
+        run: |
+          go install "golang.org/x/vuln/cmd/govulncheck@${GOVULNCHECK_VERSION}"
+          mods=$(git ls-files '*go.mod' | grep -v '/themes/' || true)
+          [ -n "$mods" ] || { echo "no Go modules"; exit 0; }
+          fail=0
+          for m in $mods; do
+            d=$(dirname "$m"); echo "::group::govulncheck $d"
+            (cd "$d" && "$(go env GOPATH)/bin/govulncheck" ./...) || fail=1
+            echo "::endgroup::"
+          done
+          exit $fail
