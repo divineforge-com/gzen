@@ -1,7 +1,7 @@
 # gZen.io: simple Go tools for a calm mind. See PLAN.md.
 # Pinned Hugo extended version: see HUGO_VERSION in ../Makefile.
 baseURL = "https://gzen.io/"
-languageCode = "en-us"
+locale = "en-US"
 title = "gZen"
 publishDir = "../public"
 enableRobotsTXT = false   # static/robots.txt is served as-is
@@ -10,7 +10,8 @@ disableKinds = ["taxonomy", "term"]
 [pagination]
   pagerSize = 20
 
-[outputFormats.json]
+[outputFormats.koans]
+  mediaType = "application/json"
   baseName = "koans"
   isPlainText = true
 

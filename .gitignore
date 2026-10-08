@@ -48,3 +48,4 @@ site/resources/_gen/
 site/.hugo_build.lock
 site/static/play/*/game.wasm
 site/static/play/*/wasm_exec.js
+site/static/play/*/index.html
