@@ -14,12 +14,14 @@ gZen.io is a static website. It has no accounts and does not ask for your name.
 
 We use Cloudflare Web Analytics to count page views. It does not use cookies and does not track you across sites.
 
+{{< if-ads >}}
 ## Advertising
 
 Some pages show ads from Google AdSense. Google and its partners may use cookies to serve ads based on your visits
 to this and other websites. You can turn off personalised ads in
 [Google's Ads Settings](https://adssettings.google.com/), and read
 [how Google uses information from sites that use its services](https://policies.google.com/technologies/partner-sites).
+{{< /if-ads >}}
 
 ## Newsletter
 
@@ -31,4 +33,5 @@ The site is served by Cloudflare Pages, which keeps standard server logs.
 
 ## Contact
 
+<!-- TODO(William): real privacy contact address before cutover. -->
 Questions about privacy: write to us through [DivineForge](https://divineforge.com/).
