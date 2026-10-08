@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 export interface ZenCardData {
   id: string;
   number: string;
@@ -31,7 +34,8 @@ export const SPHERES: SphereCategory[] = [
   { id: 'presence', label: 'Loving Presence · 慈', kanji: '慈', color: '#c2410c' }
 ];
 
-export const ZEN_CARDS: ZenCardData[] = [
+// Full catalogue. Pages must use ZEN_CARDS (below), which hides cards whose art isn't committed yet.
+const ALL_ZEN_CARDS: ZenCardData[] = [
   // Group I: Stillness (止 · Śamatha)
   {
     id: 'zen-001',
@@ -414,6 +418,20 @@ export const ZEN_CARDS: ZenCardData[] = [
     icon: 'waves'
   }
 ];
+
+// Art guard: never ship a card that points at an image missing from public/ (it would 404).
+// Runs at build time only (this module is imported from Astro frontmatter, not client scripts).
+const PUBLIC_DIR = join(process.cwd(), 'public');
+
+function hasCommittedArt(card: ZenCardData): boolean {
+  if (!card.image) return true; // ZenCard renders its gradient + icon fallback
+  if (!existsSync(PUBLIC_DIR)) return true; // unexpected cwd: don't hide anything
+  const present = existsSync(join(PUBLIC_DIR, card.image));
+  if (!present) console.warn(`[zen-cards] hiding ${card.id}: missing public${card.image}`);
+  return present;
+}
+
+export const ZEN_CARDS: ZenCardData[] = ALL_ZEN_CARDS.filter(hasCommittedArt);
 
 export function getCardsBySphere(sphere: string): ZenCardData[] {
   if (sphere === 'all') return ZEN_CARDS;

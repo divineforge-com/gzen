@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gzen.io/sitemap.xml
+Sitemap: https://gzen.io/sitemap-index.xml

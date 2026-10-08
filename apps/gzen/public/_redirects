@@ -1,13 +1,4 @@
-# K.I.L.O. subdomains
-/ki       https://ki.gzen.io/        302
-/ki/      https://ki.gzen.io/        302
-/ki/*     https://ki.gzen.io/:splat  302
-/invest       https://invest.gzen.io/        302
-/invest/      https://invest.gzen.io/        302
-/invest/*     https://invest.gzen.io/:splat  302
-/learn       https://learn.gzen.io/        302
-/learn/      https://learn.gzen.io/        302
-/learn/*     https://learn.gzen.io/:splat  302
+# Subdomains (ki/learn/invest removed 2026-10-07: those hosts are NXDOMAIN)
 /om       https://om.gzen.io/        302
 /om/      https://om.gzen.io/        302
 /om/*     https://om.gzen.io/:splat  302
@@ -30,6 +21,9 @@
 /en /  301
 /en/ /  301
 /en/* /:splat  301
+
+# Sitemap: crawlers that guess /sitemap.xml land on the @astrojs/sitemap index
+/sitemap.xml /sitemap-index.xml 301
 
 # 404
 /*  /404.html  404
