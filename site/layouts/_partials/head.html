@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{{ $title := cond .IsHome (printf "%s · %s" (strings.TrimSuffix "." site.Params.tagline) site.Title) (printf "%s · %s" .Title site.Title) -}}
+{{ $desc := .Description | default (cond .IsHome site.Params.description (.Summary | plainify | strings.Truncate 160)) | default site.Params.description -}}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#faf7f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15120f" media="(prefers-color-scheme: dark)">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
+{{- with .Params.card }}{{ with index (where hugo.Data.cards "id" .) 0 }}{{ with .image }}
+<meta property="og:image" content="{{ . | absURL }}">{{ end }}{{ end }}{{ end }}
+<meta name="twitter:card" content="summary">
+{{ with site.Home.OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">{{ end }}
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+{{ with resources.Get "css/main.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
+{{ with site.Params.adsense }}<meta name="google-adsense-account" content="{{ .client }}">
+{{ if .enabled }}<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ .client }}" crossorigin="anonymous"></script>{{ end }}{{ end }}
+{{ with site.Params.analytics.cfBeaconToken }}<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ . }}"}'></script>{{ end }}

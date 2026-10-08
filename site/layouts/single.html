@@ -1,0 +1,11 @@
+{{- /* Plain pages (about, privacy, newsletter, posts). No mockup: the essay text column without the hero. */ -}}
+{{ define "main" }}
+<article><section><div class="read">
+ {{ with .Params.eyebrow }}<div class="eyebrow">{{ . }}</div>{{ end }}
+ <h1>{{ .Title }}</h1>
+ {{ if eq .Section "posts" }}<div class="meta"><span>{{ .Date | time.Format "2 Jan 2006" }}</span><span>·</span><span>{{ .ReadingTime }} min read</span></div>{{ end }}
+</div>
+<div class="read prose" style="margin-top:2rem">{{ .Content }}</div>
+{{ partial "ad.html" . }}
+</section></article>
+{{ end }}

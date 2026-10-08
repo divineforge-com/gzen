@@ -1,0 +1,22 @@
+{{- /* Mockup: design/mockups/kit.html. /kit/ is a section page in Hugo, so this is kit/list.html (guide says kit/single.html).
+     Front matter: heading, lede, ticks, price, priceNote, card, gumroad, launched. No ads on /kit/. */ -}}
+{{ define "main" }}
+<section><div class="wrap split">
+ <div><div class="eyebrow">Starter Kit</div><h1>{{ .Params.heading | default .Title | safeHTML }}</h1>
+  {{ with .Params.lede }}<p class="lede">{{ . }}</p>{{ end }}
+  {{ with .Params.ticks }}<ul class="ticks">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+ </div>
+ <div class="card">
+  {{- with .Params.card }}{{ with index (where hugo.Data.cards "id" .) 0 }}{{ with .image }}<img class="art" src="{{ . | relURL }}" alt="{{ $.Params.heroAlt | default "gZen card art" }}">{{ end }}{{ end }}{{ end }}
+  <div class="card-body">
+  <div class="price">{{ .Params.price }} <small>one-time</small></div>
+  {{ with .Params.priceNote }}<p style="margin:1rem 0 0">{{ . }}</p>{{ end }}
+  {{- if and .Params.launched .Params.gumroad }}
+  <div class="actions"><a class="btn btn-primary" href="{{ .Params.gumroad }}">Buy on Gumroad</a></div>
+  {{- else }}
+  <div style="margin-top:1.5rem">{{ partial "signup.html" (dict "title" "Join the waitlist" "blurb" "One email when the kit is ready. Nothing else." "id" "waitlist") }}</div>
+  {{- end }}
+ </div></div>
+</div></section>
+{{ with .Content }}<section><div class="read">{{ . }}</div></section>{{ end }}
+{{ end }}

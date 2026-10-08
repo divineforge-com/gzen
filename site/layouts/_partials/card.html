@@ -1,0 +1,6 @@
+{{- /* Teaser card for a page. Context: page. Optional param: tag. Essays (way) show their card art on top, as in home.html. */ -}}
+{{- $tag := .Params.tag }}
+{{- if not $tag }}{{ if eq .Section "way" }}{{ $tag = "The Way of Go" }}{{ with .Params.number }}{{ $tag = printf "The Way of Go · No. %v" . }}{{ end }}{{ else }}{{ $tag = .Section | title }}{{ end }}{{ end }}
+<a class="card" href="{{ .RelPermalink }}">
+{{- if eq .Section "way" }}{{ with .Params.card }}{{ with index (where hugo.Data.cards "id" .) 0 }}{{ with .image }}<img class="art" src="{{ . | relURL }}" alt="{{ $.Params.heroAlt | default $.Title }}" loading="lazy">{{ end }}{{ end }}{{ end }}{{ end }}
+<div class="card-body"><span class="tag{{ if eq .Section "way" }} saffron{{ end }}">{{ $tag }}</span><h3>{{ .Title }}</h3><p>{{ .Description | default (.Summary | plainify) }}</p></div></a>

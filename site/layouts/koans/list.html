@@ -1,0 +1,14 @@
+{{- /* /koans/: every card with committed art. No mockup: card grid from home.html + koan figure. Also outputs koans.json. */ -}}
+{{ define "main" }}
+<section><div class="wrap">
+ <div class="eyebrow">Koans</div><h1>{{ .Title }}</h1>
+ {{ with .Params.lede }}<p class="lede">{{ . }}</p>{{ end }}
+ <div class="grid" style="margin-top:2rem">
+ {{- range where hugo.Data.cards "image" "ne" "" }}
+  <div class="card" id="{{ .id }}"><img class="art" src="{{ .image | relURL }}" alt="{{ .title }}: {{ .subtitle }}" loading="lazy">
+  <div class="card-body"><span class="tag">{{ .sphere }}</span><h3><span aria-hidden="true">{{ .kanji }}</span> {{ .title }}</h3><p>{{ .quote }}</p></div></div>
+ {{- end }}
+ </div>
+ {{ partial "ad.html" . }}
+</div></section>
+{{ end }}
