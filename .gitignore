@@ -40,3 +40,11 @@ _archive/
 
 # Graphify output
 graphify-out/
+
+# Hugo site (site/) build output: `make build` writes to ./public at the repo root
+/public/
+/.bin/
+site/resources/_gen/
+site/.hugo_build.lock
+site/static/play/*/game.wasm
+site/static/play/*/wasm_exec.js
