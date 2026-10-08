@@ -400,9 +400,6 @@ const ALL_ZEN_CARDS: ZenCardData[] = [
     accentGlow: 'rgba(45, 107, 79, 0.4)',
     icon: 'feather'
   },
-  // TODO(zen-022): artwork owed. public/assets/cards/zen-022.webp was never committed
-  // (card added in 1957b3b without its image). Commit the .webp and the card reappears
-  // automatically via the art guard below; until then it is hidden from /cards and the home gallery.
   {
     id: 'zen-022',
     image: '/assets/cards/zen-022.webp',
