@@ -4,6 +4,8 @@ draft: true
 date: 2026-10-09
 description: "Build a small Pomodoro-style timer for the terminal with nothing but Go's standard library."
 tags: ["go", "cli", "focus"]
+card: "zen-013"
+heroAlt: "A dark bronze singing bowl and its wooden striker rest on a gold silk cushion, with a quiet raked-gravel temple garden behind."
 ---
 
 A focus timer is one of the smallest useful programs you can write. It waits, it counts, and it tells you when to stop.
