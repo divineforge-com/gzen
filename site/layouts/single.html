@@ -1,5 +1,6 @@
 {{- /* Plain pages (about, privacy, newsletter, posts). No mockup: the essay text column.
-   Posts may set card (a data/cards id, see STYLE_GUIDE "Card art") and heroAlt for a 21:9 hero, as in way/single.html. */ -}}
+   Posts may set card (a data/cards id, see STYLE_GUIDE "Card art") and heroAlt for a 21:9 hero, as in way/single.html.
+   Optional heroPosition (CSS object-position, e.g. "center 75%") moves the 21:9 crop. */ -}}
 {{ define "main" }}
 <article><section><div class="read">
  {{ with .Params.eyebrow }}<div class="eyebrow">{{ . }}</div>{{ end }}
@@ -7,7 +8,7 @@
  {{ if eq .Section "posts" }}<div class="meta"><span>{{ .Date | time.Format "2 Jan 2006" }}</span><span>·</span><span>{{ .ReadingTime }} min read</span></div>{{ end }}
 </div>
 {{- if eq .Section "posts" }}{{ with .Params.card }}{{ with index (where hugo.Data.cards "id" .) 0 }}{{ with .image }}
-<div class="read" style="max-width:52rem"><img class="hero-art" src="{{ . | relURL }}" alt="{{ $.Params.heroAlt | default $.Title }}"></div>
+<div class="read" style="max-width:52rem"><img class="hero-art" src="{{ . | relURL }}" alt="{{ $.Params.heroAlt | default $.Title }}"{{ with $.Params.heroPosition }} style="object-position:{{ . | safeCSS }}"{{ end }}></div>
 {{- end }}{{ end }}{{ end }}{{ end }}
 <div class="read prose" style="margin-top:2rem">{{ .Content }}</div>
 {{ partial "ad.html" . }}
