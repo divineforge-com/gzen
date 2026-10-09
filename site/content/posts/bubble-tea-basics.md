@@ -4,6 +4,8 @@ draft: true
 date: 2026-10-09
 description: "Learn the Model, Update and View loop of Bubble Tea by building a small breathing pacer for the terminal."
 tags: ["go", "cli", "tui"]
+card: "zen-022"
+heroAlt: "Three smooth grey stones rest in shallow water on a sunset beach, ringed by soft ripples as a low wave rolls in under an orange sky."
 ---
 
 In the last post we built a focus timer with nothing but the standard library. It drew one line and rewrote it with a
