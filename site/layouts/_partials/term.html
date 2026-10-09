@@ -1,0 +1,12 @@
+{{- /* Terminal frame for a VHS demo. Context: dict "demo" (path to .gif/.webp/.mp4, optional), "alt", "placeholder" (HTML). */ -}}
+<div class="term"><div class="term-bar"><i></i><i></i><i></i></div>
+{{- with .demo }}
+{{- if strings.HasSuffix . ".mp4" }}
+<video class="term-body" src="{{ . | relURL }}" autoplay muted loop playsinline aria-label="{{ $.alt }}"></video>
+{{- else }}
+<img class="term-body" src="{{ . | relURL }}" alt="{{ $.alt }}" loading="lazy">
+{{- end }}
+{{- else }}
+<div class="term-body">{{ .placeholder | default "demo coming soon" | safeHTML }}</div>
+{{- end }}
+</div>

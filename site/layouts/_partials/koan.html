@@ -1,0 +1,6 @@
+{{- /* Koan figure from data/cards.yaml. Context: card id string, e.g. "zen-001". */ -}}
+{{- with index (where hugo.Data.cards "id" .) 0 }}
+<figure class="koan"><span class="kanji" aria-hidden="true">{{ .kanji }}</span><blockquote>{{ .quote }}</blockquote><figcaption>{{ .title }} · gZen card {{ .number }}</figcaption></figure>
+{{- else }}
+{{- errorf "koan: unknown card %q" . }}
+{{- end }}

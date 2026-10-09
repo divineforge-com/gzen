@@ -1,0 +1,112 @@
+# gZen.io: simple Go tools for a calm mind. See PLAN.md.
+# Pinned Hugo extended version: see HUGO_VERSION in ../Makefile.
+baseURL = "https://gzen.io/"
+locale = "en-US"
+title = "gZen"
+publishDir = "../public"
+enableRobotsTXT = false   # static/robots.txt is served as-is
+disableKinds = ["taxonomy", "term"]
+
+[pagination]
+  pagerSize = 20
+
+[outputFormats.koans]
+  mediaType = "application/json"
+  baseName = "koans"
+  isPlainText = true
+
+[markup.highlight]
+  noClasses = false   # code blocks are styled by .prose pre in main.css
+
+[markup.goldmark.renderer]
+  unsafe = false
+
+[params]
+  description = "Simple Go tools for a calm mind: quiet terminal apps, small games that end with a saying, and essays on writing less."
+  tagline = "Simple Go tools for a calm mind."
+  github = "https://github.com/divineforge"
+  # Card shown next to the latest essay on the home page.
+  homeKoan = "zen-003"
+
+  [params.newsletter]
+    # Buttondown (picked by Tether). Set buttondown to William's Buttondown username to open signups.
+    # Empty = form shows "Signup opens soon". `action` overrides the endpoint if ever needed.
+    buttondown = ""
+    action = ""
+
+  [params.adsense]
+    # Kept from the Astro site. Public ids, not secrets.
+    client = "ca-pub-0491250494506886"
+    slot = "8294017265"
+    # TODO(Atlas): ads touch money; switch on at cutover after sign-off. Off = no AdSense script, no slot
+    # (hugo server still shows the labelled placeholder so layouts can be judged).
+    enabled = false
+
+  [params.analytics]
+    # TODO(Tether): Cloudflare Web Analytics beacon token. The Astro site has no snippet in the repo
+    # (CF auto-injects it for the Pages project), so this stays empty unless we switch to the manual beacon.
+    cfBeaconToken = ""
+
+[menus]
+  [[menus.main]]
+    name = "Tools"
+    pageRef = "/tools"
+    weight = 10
+  [[menus.main]]
+    name = "Games"
+    pageRef = "/games"
+    weight = 20
+  [[menus.main]]
+    name = "Way"
+    pageRef = "/way"
+    weight = 30
+  [[menus.main]]
+    name = "Kit"
+    pageRef = "/kit"
+    weight = 40
+    [menus.main.params]
+      opt = true
+  [[menus.main]]
+    name = "Koans"
+    pageRef = "/koans"
+    weight = 50
+    [menus.main.params]
+      opt = true
+
+  [[menus.footer]]
+    name = "Tools"
+    pageRef = "/tools"
+    weight = 10
+  [[menus.footer]]
+    name = "Games"
+    pageRef = "/games"
+    weight = 20
+  [[menus.footer]]
+    name = "The Way of Go"
+    pageRef = "/way"
+    weight = 30
+  [[menus.footer]]
+    name = "Starter Kit"
+    pageRef = "/kit"
+    weight = 40
+
+  [[menus.footer2]]
+    name = "Koans"
+    pageRef = "/koans"
+    weight = 10
+  [[menus.footer2]]
+    name = "Newsletter"
+    pageRef = "/newsletter"
+    weight = 20
+  [[menus.footer2]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+  [[menus.footer2]]
+    name = "Privacy"
+    pageRef = "/privacy"
+    weight = 40
+  [[menus.footer2]]
+    name = "RSS"
+    url = "/index.xml"
+    weight = 50

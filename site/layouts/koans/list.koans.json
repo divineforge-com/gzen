@@ -1,0 +1,5 @@
+{{- $cards := slice }}
+{{- range where hugo.Data.cards "image" "ne" "" }}
+{{- $cards = $cards | append (dict "id" .id "number" .number "kanji" .kanji "title" .title "sphere" .sphere "quote" .quote "commentary" .commentary "url" (printf "%s#%s" $.Permalink .id)) }}
+{{- end }}
+{{- dict "source" site.BaseURL "count" (len $cards) "koans" $cards | jsonify (dict "indent" "  ") }}

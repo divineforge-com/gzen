@@ -1,0 +1,4 @@
+{{- /* Renders its inner Markdown only when ads are enabled (params.adsense.enabled). */ -}}
+{{- if site.Params.adsense.enabled -}}
+{{ .Inner | .Page.RenderString (dict "display" "block") }}
+{{- end -}}

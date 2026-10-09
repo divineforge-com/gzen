@@ -1,0 +1,2 @@
+{{- /* Install line. Context: dict "cmd" string, optional "style" (mockups set margins inline). */ -}}
+<div class="install"{{ with .style }} style="{{ . | safeCSS }}"{{ end }}><code>{{ .cmd }}</code><button type="button">Copy</button></div>
