@@ -412,6 +412,22 @@ export const ZEN_CARDS: ZenCardData[] = [
     bgGradient: 'linear-gradient(135deg, #78350f 0%, #b45309 50%, #d97706 100%)',
     accentGlow: 'rgba(180, 83, 9, 0.4)',
     icon: 'waves'
+  },
+  {
+    id: 'zen-023',
+    number: '#023',
+    sphere: 'empty-mind',
+    sphereLabel: 'Empty Mind · Shoshin',
+    kanji: '谷',
+    title: 'The Open Valley',
+    subtitle: 'Receptive Emptiness',
+    quote: 'The valley attains fullness by remaining low and hollow. Because it claims nothing, all mountain streams naturally converge within it.',
+    commentary: 'Yield your rigid defenses and pride. By cultivating the receptive posture of the low ground, wisdom, nourishment, and grace flow to you unforced.',
+    madeDate: '2026.OCT.10',
+    themeColor: '#334155',
+    bgGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #475569 100%)',
+    accentGlow: 'rgba(51, 65, 85, 0.4)',
+    icon: 'mountain'
   }
 ];
 
