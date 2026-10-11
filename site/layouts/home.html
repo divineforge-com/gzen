@@ -1,0 +1,36 @@
+{{- /* Mockup: design/mockups/home.html */ -}}
+{{ define "main" }}
+{{- $tools := (where site.RegularPages "Section" "tools").ByWeight }}
+{{- $featured := index $tools 0 }}
+<section><div class="wrap split">
+ <div><div class="eyebrow">{{ .Params.eyebrow | default "Go · Zen · Terminal" }}</div>
+  <h1>{{ .Params.heading | default site.Params.tagline | safeHTML }}</h1>
+  <p class="lede">{{ .Params.lede }}</p>
+  {{- with $featured }}{{ with .Params.install }}
+  {{ partial "install.html" (dict "cmd" . "style" "margin-top:2rem") }}
+  {{- end }}{{ end }}
+  <div class="actions"><a class="btn btn-primary" href="{{ "tools/" | relURL }}">Browse the tools</a><a class="btn btn-ghost" href="{{ "way/" | relURL }}">Read The Way of Go</a></div>
+ </div>
+ {{ partial "term.html" (dict "demo" (cond (ne $featured nil) ($featured.Params.demo | default "") "") "alt" (cond (ne $featured nil) (printf "%s demo" ($featured.Title | default "")) "") "placeholder" "focus · 25:00 · breathe in<br>▁▂▃▅▆▇█▇▆▅▃▂▁") }}
+</div></section>
+
+<section><div class="wrap">
+ <div class="eyebrow">Tools</div><h2 style="margin-top:0">Free, tiny, and yours</h2>
+ {{- with first 3 $tools }}
+ <div class="grid">{{ range . }}{{ partial "card.html" . }}{{ end }}</div>
+ {{- else }}
+ <p class="muted">The first tool, a focus timer, is on its way.</p>
+ {{- end }}
+</div></section>
+
+<section><div class="wrap split">
+ {{- with index (where site.RegularPages "Section" "way").ByDate.Reverse 0 }}
+ {{ partial "card.html" . }}
+ {{- else }}
+ <div><div class="eyebrow">The Way of Go</div><p class="muted">Essays on simplicity, patience and clean code. The first one is being written.</p></div>
+ {{- end }}
+ {{ partial "koan.html" site.Params.homeKoan }}
+</div></section>
+
+<section><div class="read">{{ partial "signup.html" (dict "title" "One calm letter a month" "blurb" "New tools, one essay, one koan. No noise.") }}</div></section>
+{{ end }}

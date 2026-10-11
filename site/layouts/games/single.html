@@ -1,0 +1,34 @@
+{{- /* Mockup: design/mockups/game.html. Front matter: install, source, keys, card, play (true once wasm/<game>/ exists). */ -}}
+{{ define "main" }}
+<section><div class="wrap">
+ <div class="eyebrow">{{ .Params.eyebrow | default "Games · Ebitengine + WASM" }}</div><h1>{{ .Title }}</h1>
+ {{ with .Params.lede | default .Description }}<p class="lede">{{ . }}</p>{{ end }}
+ <div class="split" style="align-items:start;margin-top:2rem;grid-template-columns:1.3fr .7fr">
+  <div class="play">
+   {{- $play := printf "/play/%s/" .File.ContentBaseName }}
+   {{- if .Params.play }}
+   <iframe class="play-stage" src="{{ $play | relURL }}" title="{{ .Title }}, playable in the browser" loading="lazy" style="width:100%;border:0"></iframe>
+   {{- else }}
+   <div class="play-stage">The browser version is on its way.</div>
+   {{- end }}
+   <div class="play-bar"><span class="keys">
+    {{- range $i, $k := .Params.keys }}{{ if $i }} · {{ end }}<kbd>{{ $k.key }}</kbd> {{ $k.does }}{{ end -}}
+   </span>{{ if .Params.play }}<a href="{{ $play | relURL }}">Full screen</a>{{ end }}</div>
+  </div>
+  <div>
+   {{ with .Params.install }}<h3 style="margin-top:0">Install</h3>
+   {{ partial "install.html" (dict "cmd" .) }}{{ end }}
+   <div class="muted small">{{ .Content }}</div>
+   {{ with .Params.source }}<a class="btn btn-ghost" href="{{ . }}">Source on GitHub</a>{{ end }}
+  </div>
+ </div>
+</div></section>
+{{- with where .CurrentSection.RegularPages "Permalink" "ne" .Permalink }}
+<section><div class="wrap"><div class="eyebrow">More games</div>
+ <div class="grid">{{ range . }}{{ partial "card.html" . }}{{ end }}</div>
+ {{ partial "ad.html" $ }}
+</div></section>
+{{- else }}
+<section><div class="wrap">{{ partial "ad.html" . }}</div></section>
+{{- end }}
+{{ end }}

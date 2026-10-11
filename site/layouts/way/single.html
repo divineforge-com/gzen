@@ -1,0 +1,21 @@
+{{- /* Mockup: design/mockups/essay.html. Front matter: number, card (hero art), heroAlt. */ -}}
+{{ define "main" }}
+<article><section><div class="read">
+ <div class="eyebrow">The Way of Go{{ with .Params.number }} · No. {{ . }}{{ end }}</div>
+ <h1>{{ .Title }}</h1>
+ <div class="meta"><span>{{ .Date | time.Format "2 Jan 2006" }}</span><span>·</span><span>{{ .ReadingTime }} min read</span></div>
+</div>
+{{- with .Params.card }}{{ with index (where hugo.Data.cards "id" .) 0 }}{{ with .image }}
+<div class="read" style="max-width:52rem"><img class="hero-art" src="{{ . | relURL }}" alt="{{ $.Params.heroAlt | default $.Title }}"></div>
+{{- end }}{{ end }}{{ end }}
+<div class="read prose">
+ {{ .Content }}
+</div>
+<div class="read" style="margin-top:3rem">{{ partial "signup.html" (dict "title" "Get the next essay" "blurb" "One calm letter a month.") }}
+ <div class="meta" style="justify-content:space-between;margin-top:2rem">
+  {{- with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<span></span>{{ end }}
+  {{- with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end -}}
+ </div></div>
+{{ partial "ad.html" . }}
+</section></article>
+{{ end }}

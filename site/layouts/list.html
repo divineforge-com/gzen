@@ -1,0 +1,16 @@
+{{- /* Section index (tools, games, way, posts). No mockup: built from the card grid in home.html. */ -}}
+{{ define "main" }}
+<section><div class="wrap">
+ {{ with .Params.eyebrow }}<div class="eyebrow">{{ . }}</div>{{ end }}
+ <h1>{{ .Title }}</h1>
+ {{ with .Params.lede }}<p class="lede">{{ . }}</p>{{ end }}
+ {{ with .Content }}<div class="read" style="margin:0;padding:0">{{ . }}</div>{{ end }}
+ {{- $pages := cond (eq .Section "way") .Pages.ByDate.Reverse .Pages.ByWeight }}
+ {{- with $pages }}
+ <div class="grid" style="margin-top:2rem">{{ range . }}{{ partial "card.html" . }}{{ end }}</div>
+ {{- else }}
+ <p class="muted">{{ .Params.empty | default "Nothing here yet. Soon." }}</p>
+ {{- end }}
+ {{ partial "ad.html" . }}
+</div></section>
+{{ end }}

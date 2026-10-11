@@ -1,0 +1,9 @@
+# gitleaks config for gzen (Tether). Default rules plus a narrow allowlist.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Upstream Blowfish theme demo content (public example Firebase key, not ours)"
+paths = [
+  '''themes/blowfish/exampleSite/''',
+]

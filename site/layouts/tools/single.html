@@ -1,0 +1,29 @@
+{{- /* Mockup: design/mockups/tool.html. Front matter: install, minGo, platforms, source, license, demo, keys, builtWith, card. */ -}}
+{{ define "main" }}
+<section><div class="read">
+ <div class="eyebrow">{{ .Params.eyebrow | default "Tools · TUI" }}</div><h1>{{ .Title }}</h1>
+ {{ with .Params.lede | default .Description }}<p class="lede">{{ . }}</p>{{ end }}
+ {{ with .Params.install }}{{ partial "install.html" (dict "cmd" . "style" "margin:2rem 0 1rem") }}{{ end }}
+ <p class="small muted">
+  {{- $bits := slice }}
+  {{- with .Params.minGo }}{{ $bits = $bits | append (printf "Go %s or later" .) }}{{ end }}
+  {{- with .Params.platforms }}{{ $bits = $bits | append (delimit . ", ") }}{{ end }}
+  {{- with .Params.source }}{{ $bits = $bits | append (printf "<a href=\"%s\">Source on GitHub</a>" .) }}{{ end }}
+  {{- with .Params.license }}{{ $bits = $bits | append . }}{{ end }}
+  {{- delimit $bits " · " | safeHTML -}}
+ </p>
+</div>
+<div class="read" style="max-width:48rem;margin-top:2.5rem">{{ partial "term.html" (dict "demo" (.Params.demo | default "") "alt" (printf "%s running in a terminal" .Title) "placeholder" "VHS demo GIF<br>coming soon · 16:10") }}</div>
+<div class="read">
+ {{ .Content }}
+ {{ with .Params.keys }}
+ <h2>Keys</h2>
+ <ul class="ticks keys">{{ range . }}<li><kbd>{{ .key }}</kbd> {{ .does }}</li>{{ end }}</ul>
+ {{ end }}
+ {{ with .Params.builtWith }}<h2>Built with</h2>
+ <p>{{ . }}</p>{{ end }}
+ {{ with .Params.card }}{{ partial "koan.html" . }}{{ end }}
+</div>
+{{ partial "ad.html" . }}
+</section>
+{{ end }}

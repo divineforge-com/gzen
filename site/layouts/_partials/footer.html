@@ -1,0 +1,5 @@
+<footer class="site-foot"><div class="wrap">
+<div><a class="brand" href="{{ "/" | relURL }}"><b>g</b>Zen</a><p style="margin-top:.75rem">{{ site.Params.tagline }}</p></div>
+<div>{{ range site.Menus.footer }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}</div>
+<div>{{ range site.Menus.footer2 }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}</div>
+</div></footer>

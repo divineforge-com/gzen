@@ -1,0 +1,11 @@
+{{- /* One labelled AdSense slot after the main content (STYLE_GUIDE: Ads). Context: page.
+     Off unless params.adsense.enabled; hugo server shows the empty labelled placeholder. Pages set noAds: true to opt out. */ -}}
+{{- if not .Params.noAds }}
+{{- with site.Params.adsense }}
+{{- if .enabled }}
+<div class="ad"><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="{{ .client }}" data-ad-slot="{{ .slot }}" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div>
+{{- else if hugo.IsServer }}
+<div class="ad"></div>
+{{- end }}
+{{- end }}
+{{- end }}

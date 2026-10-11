@@ -1,0 +1,7 @@
+<header class="site-head"><div class="wrap"><a class="brand" href="{{ "/" | relURL }}"><b>g</b>Zen</a>
+<nav class="nav" aria-label="Main">
+{{- range site.Menus.main }}
+{{- $cur := cond ($.IsMenuCurrent "main" .) "page" (cond ($.HasMenuCurrent "main" .) "true" "") }}
+<a{{ if .Params.opt }} class="opt"{{ end }} href="{{ .URL }}"{{ with $cur }} aria-current="{{ . }}"{{ end }}>{{ .Name }}</a>
+{{- end }}
+</nav></div></header>

@@ -1,0 +1,4 @@
+# om.gzen.io stays live as it is (PLAN.md). The other subdomain redirects were dropped with the Astro site.
+/om       https://om.gzen.io/        302
+/om/      https://om.gzen.io/        302
+/om/*     https://om.gzen.io/:splat  302
