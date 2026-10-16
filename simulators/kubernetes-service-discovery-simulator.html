@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Service Discovery Simulator</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#131c2f; --line:#26344f; --text:#e6edf7; --muted:#8fa0bd;
+    --blue:#3b82f6; --purple:#8b5cf6; --green:#22c55e; --red:#ef4444; --amber:#facc15;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,Arial,sans-serif;}
+  header{padding:14px 20px 6px}
+  header h1{margin:0;font-size:20px}
+  header p{margin:4px 0 0;color:var(--muted);font-size:13px}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 20px}
+  button{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;font-size:13px}
+  button:hover{border-color:var(--blue)}
+  button.danger:hover{border-color:var(--red)}
+  button.ok:hover{border-color:var(--green)}
+  label{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+  .stats{margin-left:auto;display:flex;gap:14px;font-size:13px;color:var(--muted)}
+  .stats b{color:var(--text)}
+  #scene{position:relative;margin:6px 20px;height:430px;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .col-title{position:absolute;top:8px;font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+  #client{position:absolute;left:30px;top:50%;transform:translateY(-50%);width:150px;background:var(--blue);border-radius:12px;padding:14px;text-align:center;font-weight:600}
+  #client small{display:block;margin-top:8px;font-weight:400;opacity:.9}
+  #client code{background:rgba(0,0,0,.25);padding:2px 6px;border-radius:6px}
+  #service{position:absolute;left:38%;top:50%;transform:translateY(-50%);width:240px;background:var(--purple);border-radius:12px;padding:12px;text-align:center}
+  #service h3{margin:0 0 2px;font-size:15px}
+  #service .sub{font-size:11px;opacity:.85;margin-bottom:8px}
+  #registry{background:rgba(0,0,0,.28);border-radius:8px;padding:6px;text-align:left;font-family:Consolas,monospace;font-size:12px;min-height:64px}
+  #registry .row{display:flex;justify-content:space-between;padding:2px 4px;animation:pop .5s}
+  #registry .empty{opacity:.7;text-align:center;padding:8px}
+  @keyframes pop{from{background:rgba(250,204,21,.55)}to{background:transparent}}
+  #pods{position:absolute;right:30px;top:30px;bottom:12px;width:190px;display:flex;flex-direction:column;justify-content:space-around;gap:6px}
+  .pod{background:var(--green);border-radius:10px;padding:8px 10px;text-align:center;font-size:12px;font-weight:600;transition:background .4s,opacity .8s,transform .8s}
+  .pod small{display:block;font-weight:400;opacity:.9;font-family:Consolas,monospace}
+  .pod.starting{background:var(--blue);animation:pulse 1s infinite}
+  .pod.dead{background:var(--red);opacity:.25;transform:scale(.9)}
+  .pod.hit{box-shadow:0 0 0 3px var(--amber)}
+  @keyframes pulse{50%{opacity:.5}}
+  .packet{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);left:0;top:0;pointer-events:none}
+  .lower{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 20px 20px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px}
+  .card h4{margin:0 0 8px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  #log{height:150px;overflow:auto;font-family:Consolas,monospace;font-size:12px;line-height:1.5}
+  #log .k{color:var(--red)} #log .a{color:var(--green)} #log .r{color:var(--amber)}
+  .card ol{margin:0;padding-left:18px;line-height:1.7;color:var(--muted)}
+  .card ol b{color:var(--text)}
+  @media (max-width:800px){ .lower{grid-template-columns:1fr} #service{left:32%;width:200px} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Kubernetes Service Discovery Simulator</h1>
+  <p>The client only knows a <b>name</b>. The platform keeps the name &rarr; endpoints table correct while pods die, start and scale.</p>
+</header>
+
+<div class="controls">
+  <button class="danger" id="btnKill">&#128165; Kill a pod</button>
+  <button class="ok" id="btnAdd">&#10133; Add a pod</button>
+  <button id="btnRedeploy">&#128260; Redeploy (replace one, new IP)</button>
+  <label><input type="checkbox" id="chkChaos"> Auto chaos</label>
+  <label>Traffic <input type="range" id="rngRate" min="1" max="8" value="3"></label>
+  <button id="btnPause">&#10074;&#10074; Pause</button>
+  <div class="stats">
+    <span>Sent: <b id="sSent">0</b></span>
+    <span>Delivered: <b id="sOk">0</b></span>
+    <span>Failed: <b id="sFail">0</b></span>
+  </div>
+</div>
+
+<div id="scene">
+  <div class="col-title" style="left:30px">Client</div>
+  <div class="col-title" style="left:38%">Service (stable name + registry)</div>
+  <div class="col-title" style="right:30px">Pods (come and go)</div>
+
+  <div id="client">
+    CLIENT APP
+    <small>calls only<br><code>payment-service</code></small>
+  </div>
+
+  <div id="service">
+    <h3>payment-service</h3>
+    <div class="sub">ClusterIP 10.96.21.4 &middot; CoreDNS name</div>
+    <div id="registry"></div>
+  </div>
+
+  <div id="pods"></div>
+</div>
+
+<div class="lower">
+  <div class="card">
+    <h4>Event log</h4>
+    <div id="log"></div>
+  </div>
+  <div class="card">
+    <h4>What to notice</h4>
+    <ol>
+      <li>Client config never changes: <b>payment-service</b>.</li>
+      <li>Kill a pod: it vanishes from the registry; <b>no human edits anything</b>.</li>
+      <li>Add a pod: starts (blue), passes readiness, then <b>joins the table</b>.</li>
+      <li>Redeploy: the IP changes, the name does not.</li>
+      <li>Service Discovery = stable name + auto-maintained registry + health check + load balancing.</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+(function(){
+  const scene   = document.getElementById('scene');
+  const podsEl  = document.getElementById('pods');
+  const regEl   = document.getElementById('registry');
+  const logEl   = document.getElementById('log');
+  const clientEl= document.getElementById('client');
+  const svcEl   = document.getElementById('service');
+
+  let pods = [];          // {id, ip, el, state: 'starting'|'ready'|'dead'}
+  let counter = 0;
+  let rr = 0;             // round-robin pointer
+  let paused = false;
+  let sent = 0, ok = 0, fail = 0;
+  const MAX_PODS = 6;
+
+  function log(msg, cls){
+    const t = new Date().toLocaleTimeString();
+    const d = document.createElement('div');
+    if(cls) d.className = cls;
+    d.textContent = '[' + t + '] ' + msg;
+    logEl.prepend(d);
+    while(logEl.children.length > 60) logEl.lastChild.remove();
+  }
+
+  function newIp(){
+    return '10.244.' + (1 + Math.floor(Math.random()*8)) + '.' + (10 + Math.floor(Math.random()*200));
+  }
+
+  function createPod(startImmediately){
+    counter++;
+    const pod = { id: counter, ip: newIp(), state: startImmediately ? 'ready' : 'starting' };
+    const el = document.createElement('div');
+    el.className = 'pod' + (startImmediately ? '' : ' starting');
+    el.innerHTML = 'payment-' + pod.id + '<small>' + pod.ip + '</small>';
+    podsEl.appendChild(el);
+    pod.el = el;
+    pods.push(pod);
+    if(!startImmediately){
+      log('POD-' + pod.id + ' (' + pod.ip + ') starting... not in registry yet.', 'r');
+      setTimeout(() => {
+        if(pod.state !== 'starting') return;
+        pod.state = 'ready';
+        el.classList.remove('starting');
+        log('POD-' + pod.id + ' passed readiness -> registered automatically.', 'a');
+        renderRegistry(pod.id);
+      }, 1500);
+    }
+    return pod;
+  }
+
+  function readyPods(){ return pods.filter(p => p.state === 'ready'); }
+
+  function renderRegistry(highlightId){
+    const r = readyPods();
+    regEl.innerHTML = '';
+    if(!r.length){
+      regEl.innerHTML = '<div class="empty">(no healthy endpoints)</div>';
+      return;
+    }
+    r.forEach(p => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      if(highlightId !== p.id) row.style.animation = 'none';
+      row.innerHTML = '<span>payment-service</span><span>&rarr; ' + p.ip + '</span>';
+      regEl.appendChild(row);
+    });
+  }
+
+  function killPod(){
+    const r = readyPods();
+    if(r.length <= 1){ log('Refusing to kill the last healthy pod. Add one first.', 'r'); return; }
+    const v = r[Math.floor(Math.random()*r.length)];
+    removePod(v, 'died');
+  }
+
+  function removePod(v, why){
+    v.state = 'dead';
+    v.el.classList.add('dead');
+    log('POD-' + v.id + ' (' + v.ip + ') ' + why + ' -> removed from registry. Nobody edited anything.', 'k');
+    renderRegistry();
+    setTimeout(() => {
+      v.el.remove();
+      pods = pods.filter(p => p !== v);
+    }, 900);
+  }
+
+  function addPod(){
+    if(pods.filter(p => p.state !== 'dead').length >= MAX_PODS){ log('Max pods reached for this demo.', 'r'); return; }
+    createPod(false);
+  }
+
+  function redeploy(){
+    const r = readyPods();
+    if(!r.length) return;
+    const v = r[Math.floor(Math.random()*r.length)];
+    const fresh = createPod(false);
+    log('Redeploy: POD-' + v.id + ' replaced by POD-' + fresh.id + ' (new IP). Client config unchanged.', 'r');
+    setTimeout(() => removePod(v, 'terminated by rollout'), 1700);
+  }
+
+  // ----- packets -----
+  function centerOf(el){
+    const s = scene.getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return { x: r.left - s.left + r.width/2 - 7, y: r.top - s.top + r.height/2 - 7 };
+  }
+
+  function fly(packet, from, to, ms){
+    return packet.animate(
+      [{ transform: 'translate(' + from.x + 'px,' + from.y + 'px)' },
+       { transform: 'translate(' + to.x + 'px,' + to.y + 'px)' }],
+      { duration: ms, easing: 'ease-in-out', fill: 'forwards' }
+    ).finished;
+  }
+
+  async function sendRequest(){
+    if(paused) return;
+    sent++;
+    const r = readyPods();
+    document.getElementById('sSent').textContent = sent;
+    const packet = document.createElement('div');
+    packet.className = 'packet';
+    scene.appendChild(packet);
+
+    const a = centerOf(clientEl);
+    a.x += 75;
+    const b = centerOf(svcEl);
+    b.x -= 120;
+
+    try{
+      await fly(packet, a, b, 450);
+      // service picks target from CURRENT registry (round-robin)
+      const live = readyPods();
+      if(!live.length){
+        packet.style.background = '#ef4444';
+        fail++; document.getElementById('sFail').textContent = fail;
+        log('Request failed: registry has no healthy endpoints.', 'k');
+        packet.remove();
+        return;
+      }
+      rr = (rr + 1) % live.length;
+      const target = live[rr];
+      const c = centerOf(svcEl); c.x += 120;
+      const d = centerOf(target.el);
+      await fly(packet, b, c, 150);
+      await fly(packet, c, d, 450);
+      if(target.state === 'dead'){
+        fail++; document.getElementById('sFail').textContent = fail;
+      } else {
+        ok++; document.getElementById('sOk').textContent = ok;
+        target.el.classList.add('hit');
+        setTimeout(() => target.el.classList.remove('hit'), 200);
+      }
+    } finally {
+      packet.remove();
+    }
+  }
+
+  // ----- wiring -----
+  document.getElementById('btnKill').onclick = killPod;
+  document.getElementById('btnAdd').onclick = addPod;
+  document.getElementById('btnRedeploy').onclick = redeploy;
+  document.getElementById('btnPause').onclick = function(){
+    paused = !paused;
+    this.innerHTML = paused ? '&#9654; Resume' : '&#10074;&#10074; Pause';
+  };
+
+  let trafficTimer = null;
+  function restartTraffic(){
+    clearInterval(trafficTimer);
+    const rate = +document.getElementById('rngRate').value;      // 1..8 per second
+    trafficTimer = setInterval(sendRequest, Math.round(1000 / rate));
+  }
+  document.getElementById('rngRate').oninput = restartTraffic;
+
+  setInterval(() => {
+    if(!document.getElementById('chkChaos').checked || paused) return;
+    const roll = Math.random();
+    if(roll < 0.4) killPod();
+    else if(roll < 0.8) addPod();
+    else redeploy();
+  }, 4000);
+
+  // ----- init -----
+  createPod(true); createPod(true); createPod(true);
+  renderRegistry();
+  restartTraffic();
+  log('Simulation started. Client only knows: payment-service');
+  log('Client never knows the pod IPs.');
+})();
+</script>
+</body>
+</html>
