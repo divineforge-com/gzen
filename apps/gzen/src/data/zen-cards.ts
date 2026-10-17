@@ -428,6 +428,22 @@ export const ZEN_CARDS: ZenCardData[] = [
     bgGradient: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #475569 100%)',
     accentGlow: 'rgba(51, 65, 85, 0.4)',
     icon: 'mountain'
+  },
+  {
+    id: 'zen-024',
+    number: '#024',
+    sphere: 'presence',
+    sphereLabel: 'Loving Presence · Mettā',
+    kanji: '泉',
+    title: 'The Unfailing Spring',
+    subtitle: 'Boundless Wellspring of Grace',
+    quote: 'The spring does not question who draws from its water, nor does it ask for gratitude. It simply overflows from subterranean depth.',
+    commentary: 'True benevolence does not measure return or hoard its warmth. Abide in your own deep source, and loving kindness pours forth without exhaustion.',
+    madeDate: '2026.OCT.17',
+    themeColor: '#c2410c',
+    bgGradient: 'linear-gradient(135deg, #7c2d12 0%, #9a3412 50%, #ea580c 100%)',
+    accentGlow: 'rgba(194, 65, 12, 0.4)',
+    icon: 'droplet'
   }
 ];
 
