@@ -1,3 +1,5 @@
+Stale command. This is gZen, not GrowZen. Read `DIRECTION.md`.
+
 Run a full quality review of recently modified GrowZen content.
 
 1. Find all content files modified in the last git commit or currently staged:

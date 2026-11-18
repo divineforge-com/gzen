@@ -1,3 +1,5 @@
+Stale command. This is gZen, not GrowZen. Read `DIRECTION.md` before adding content.
+
 Run all code quality and formatting checks on the GrowZen repository.
 
 1. **Markdown lint** — check all content files:

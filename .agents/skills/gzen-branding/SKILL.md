@@ -9,10 +9,11 @@ This skill defines the rules for gZen.io branding, naming, typography, color pal
 
 ## Naming & Voice
 - Use **gZen.io** or **gZen** (lowercase g, capital Z). Never "GrowZen" or "GZen".
+- Read `DIRECTION.md` before copy or new surfaces. gZen is a slow low-poly walking game. Go, Kubernetes, and architecture advocacy belong on DivineForge.
 - Keep descriptions focused on:
-  - **Advocating energy flow** (身心能量与系统架构的顺畅流动)
-  - **Right tool use** (克制用器, Clarity before tools)
-  - **Real impact** (长期主义, 真实影响与善意)
+  - **The walk** — a shore, a stop, a teaching you actually noticed
+  - **STACKY** — a presence met inside the world, never a chat widget, and never claimed on the home page before the scene has him
+  - **A light close** — about ten minutes, no account, no streak
 
 ## Visual Design System
 - **Background**: Warm cream (`#fffaf4`), never cold gray or pure white.

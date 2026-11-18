@@ -1,4 +1,10 @@
-# gZen.io: simple Go tools for a calm mind
+# RETIRED — do not execute
+
+> Retired 2026-11-18. This plan pointed gZen at Go TUIs and away from the 3D world. That split is reversed. Read `DIRECTION.md`. Go, Kubernetes, and architecture advocacy belong in the DivineForge repo (`../dforge`). gZen keeps the low-poly world and takes the Atrium there, with STACKY as a presence on the path.
+>
+> The sections below are historical (2026-10-08).
+
+# Historical: gZen.io as simple Go tools for a calm mind
 
 > Rewritten 2026-10-08 (Atlas). Replaces the July 2026 "Cloud · AI · Platform hub" plan.
 > The current Astro site is tagged `legacy-astro-2026-10` before the rebuild starts.

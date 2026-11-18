@@ -1,6 +1,8 @@
 # gZen monorepo
 
-gZen is a Zen gaming and mindfulness portal. Engineering, speaking, and consulting live on DivineForge (`../divineforge/web`), not here.
+gZen is a slow walking game on a low-poly 3D world. Read `DIRECTION.md` before adding a page, a simulator, or a character.
+
+Technology advocacy, architecture principles, Go, and Kubernetes live in DivineForge (`../dforge`), not here. The Atrium moves here as encounters on the path. STACKY is the in-world presence. Do not feature him on the public home page until `/world` actually contains him.
 
 ## Portal
 

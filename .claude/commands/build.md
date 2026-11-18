@@ -1,3 +1,5 @@
+Stale command. The portal is `apps/gzen` (Astro), not GrowZen and not Hugo. Read `DIRECTION.md`. Do not run this file's steps.
+
 Build the GrowZen site and report any errors.
 
 Steps:

@@ -1,3 +1,5 @@
+Stale command. This is gZen, not GrowZen. New public work is the low-poly world, not a principles blog. Read `DIRECTION.md`.
+
 Create new GrowZen content. Ask the user for:
 1. Section: principles / koans / practice / engineering / library
 2. Slug (URL-friendly, e.g. "the-still-pond")

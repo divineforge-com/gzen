@@ -1,6 +1,6 @@
-# gZen.io — Zen gaming & mindfulness
+# gZen.io — a slow walking game
 
-A quiet portal for a walkable low-poly world, a contemplative 3D sanctuary, and collectible Zen Mind cards. **Astro** static site → [gzen.io](https://gzen.io).
+A low-poly 3D world you walk: four shores, a contemplative sanctuary, and Zen Mind cards. The Atrium's encounters are moving here from DivineForge. STACKY is the presence to meet on the path (see `DIRECTION.md`). **Astro** static site → [gzen.io](https://gzen.io).
 
 | | Route |
 |---|--------|
@@ -8,7 +8,7 @@ A quiet portal for a walkable low-poly world, a contemplative 3D sanctuary, and 
 | 3D Sanctuary | [/sanctuary](https://gzen.io/sanctuary) — interactive garden diorama |
 | Zen Mind Cards | [/cards](https://gzen.io/cards) — 21 collectible cards |
 
-Engineering / speaking / consulting → [divineforge.com](https://divineforge.com)
+Technology advocacy, architecture principles, Go, and Kubernetes → [divineforge.com](https://divineforge.com)
 
 ## Portal app
 

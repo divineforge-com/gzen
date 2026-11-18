@@ -1,3 +1,5 @@
+Stale command. This is gZen, not GrowZen. Read `DIRECTION.md`.
+
 Translate GrowZen content from Chinese (zh) to English (en) and Japanese (ja).
 
 The user will provide either:

@@ -1,3 +1,5 @@
+Stale command. The portal is `apps/gzen` (Astro): `npm run dev` on port 1318. Read `DIRECTION.md`.
+
 Start the GrowZen local development server.
 
 Run the following in order:

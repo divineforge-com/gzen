@@ -1,12 +1,13 @@
 # CLAUDE.md — gZen monorepo
 
-gZen is a **Zen gaming and mindfulness portal**, not the engineering blog.
+gZen is a **slow walking game** on a low-poly 3D world, not the engineering publication.
 
 - Portal `apps/gzen` → gzen.io
-- `/world` — 3D walkable low-poly world (four shores, teachings on the path)
+- `/world` — 3D walkable low-poly world (four shores, teachings on the path). The Atrium's encounters move here. STACKY is the presence on the path, not a chat widget.
 - `/sanctuary` — interactive contemplative sanctuary diorama
-- `/cards` — 21 collectible Zen Mind cards
-- Engineering / speaking / consulting → DivineForge (`../divineforge/web`)
+- `/cards` — Zen Mind cards
+- Technology advocacy, Go, and Kubernetes → DivineForge (`../dforge`, divineforge.com)
+- Direction: `DIRECTION.md`. `PLAN.md` is retired. Do not add simulators or Go tools here.
 
 See `AGENTS.md` and `BRAND.md`.
 
