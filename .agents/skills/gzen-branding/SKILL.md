@@ -19,7 +19,7 @@ This skill defines the rules for gZen.io branding, naming, typography, color pal
 - **Background**: Warm cream (`#fffaf4`), never cold gray or pure white.
 - **Ink**: Earthy dark brown (`#2f2118`), never pure black.
 - **Saffron**: Warm saffron/monk's robe amber (`#d97845`).
-- **Jade**: Warm jade green (`#2d6b4f`) for gZen Ki.
+- **Jade**: Warm jade green (`#2d6b4f`) for living green in the world. Not a separate product.
 - **Typography**: CJK Cursive/Serif first (Noto Serif SC for titles, Noto Sans SC for body). Line height `≥ 1.8` for readability.
 
 ## Multilingual Menu Order

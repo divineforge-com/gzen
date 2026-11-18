@@ -1,6 +1,6 @@
 # gZen.io — a slow walking game
 
-A low-poly 3D world you walk: four shores, a contemplative sanctuary, and Zen Mind cards. The Atrium's encounters are moving here from DivineForge. STACKY is the presence to meet on the path (see `DIRECTION.md`). **Astro** static site → [gzen.io](https://gzen.io).
+A low-poly 3D world you walk: four shores, a contemplative sanctuary, and Zen Mind cards. STACKY is the presence to meet on the path (see `DIRECTION.md`). DivineForge introduces this place. **Astro** static site → [gzen.io](https://gzen.io).
 
 | | Route |
 |---|--------|

@@ -10,6 +10,8 @@ The diorama sanctuaries in the sections below stay. What changes is how a wander
 
 The playable earth is one continuous low-poly world in a third-person view, in the spirit of the miniature-globe scenes people have been making with Blender: faceted shores, a handful of readable landmarks, a small figure large enough to read against the land. gZen’s figure walks. The lands teach. Other wanderers are someone to answer.
 
+DivineForge introduces this world and links here. It does not host the walk. Do not attach a notebook, a streak, a membership, or a second product (ki, learn, invest, an AI companion). STACKY is the presence on the path, not a chat window.
+
 ### 0.1 Key metrics for this direction
 
 | Metric | First slice (`/world`) | Later |

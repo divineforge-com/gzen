@@ -8,21 +8,21 @@ gZen is a **slow walking game** on a **low-poly 3D** world. A person crosses a s
 
 The world already has four shores (Jiangnan Canals, Bamboo Grove, Himalaya, Nordic Fjord), a sanctuary diorama, and the Zen Mind cards (Stillness 止, Impermanence 变, Empty Mind 空, Loving Presence 慈). Keep building on that. Do not replace it with a blog, a wellness tracker, or a Go tutorial.
 
-## What is moving here
+## What the two sites share
 
-The **Atrium** leaves DivineForge and becomes part of this world. On DivineForge it was a 2D floor where you walked up to someone and talked. Here that idea is an encounter inside the low-poly world, not a second game and not a lobby for a consultancy.
+One person. Attention is the craft.
 
-**STACKY** is the presence you meet. On DivineForge, StackySentinel (`@divineforgeBot`) is an operator notify bot. On gZen, STACKY is in the world: a figure on the path, a way the place responds when you stop. Not a chat widget pasted on the page. Not a streak, an account, or a lesson plan.
-
-Build STACKY into `/world` when the next scene work happens. Until that scene exists, do not claim on the public home page that he is already walking there.
+- DivineForge is a system you can click, and a sentence he wants to remember. It introduces this place and links here.
+- gZen is a shore you walk. STACKY is the presence on the path, inside the low-poly world. Not a chat widget, not a shopkeeper, and not a claim on the home page until `/world` contains him.
+- On DivineForge, StackySentinel (`@divineforgeBot`) is only the operator notify bot.
 
 ## What does not belong
 
-Go, Kubernetes, architecture principles, and technology advocacy are **DivineForge** (`../dforge`, divineforge.com).
+Go, Kubernetes, architecture principles, simulators, and technology advocacy are **DivineForge** (`../dforge`, divineforge.com). The service-discovery simulator has left this repo.
 
-A Kubernetes service-discovery simulator is parked at `apps/gzen/public/simulators/` (and a copy under `simulators/`). It was parked here before this direction. Leave it in place until it moves. Do not add another simulator, TUI, or engineering essay to this repo.
+Do not bring back a product line: no wisdom vault, no AI companion, no habit-to-power-up loop, no membership. `apps/gzen-ki`, `apps/gzen-learn`, and `apps/gzen-invest` stay off the portal. A notebook is not a second product.
 
-`apps/gzen-ki`, `apps/gzen-learn`, and `apps/gzen-invest` stay off the portal front door. A notebook can become a shore or a card later. It is not a product line now.
+`PLAN.md`, `docs/PRODUCT_LINE_STRATEGY.md`, and `docs/zen-rebrand/HANDOFF-PLAN.md` are retired stubs. Do not expand them.
 
 ## How DivineForge introduces this place
 
