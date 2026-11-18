@@ -24,6 +24,10 @@ A Kubernetes service-discovery simulator is parked at `apps/gzen/public/simulato
 
 `apps/gzen-ki`, `apps/gzen-learn`, and `apps/gzen-invest` stay off the portal front door. A notebook can become a shore or a card later. It is not a product line now.
 
+## How DivineForge introduces this place
+
+divineforge.com introduces gZen in William's voice and links here. This repo does not explain itself as a teaching track. The forge stays over there.
+
 ## Voice and name
 
 Write **gZen** (lowercase g, capital Z). Never GrowZen.
