@@ -1,0 +1,164 @@
+{
+  "updated": "2026-11-20",
+  "zones": {
+    "card-stall": {
+      "label": "Card Stall",
+      "link": "/cards",
+      "cta": "See all the cards",
+      "teasers": [
+        {
+          "title": "Stillness · 止",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "Anchor Breath, Silent Mountain, Clear Water and more."
+        },
+        {
+          "title": "Impermanence · 变",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "River Log, Autumn Leaf, Morning Dew."
+        },
+        {
+          "title": "Empty Mind · 空",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "The Empty Cup, Beginner's Mind."
+        },
+        {
+          "title": "Loving Presence · 慈",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "Gentle Lamp, Indra's Net, Compassionate Ear."
+        }
+      ]
+    },
+    "teaching-hall": {
+      "label": "Teaching Hall",
+      "link": "/enlight",
+      "cta": "Read in Contemplation",
+      "teasers": [
+        {
+          "title": "The Empty Cup",
+          "type": "Koan",
+          "href": "/enlight",
+          "hook": "To absorb wisdom, first empty what is full."
+        },
+        {
+          "title": "The Second Arrow",
+          "type": "Koan",
+          "href": "/enlight",
+          "hook": "The first arrow is circumstance; the second is our reaction."
+        },
+        {
+          "title": "The Drifting Log",
+          "type": "Koan",
+          "href": "/enlight",
+          "hook": "Neither grounded on a bank nor sunk, it reaches the ocean."
+        },
+        {
+          "title": "Clarity Before Tools",
+          "type": "Principle",
+          "href": "/enlight",
+          "hook": "Master the thought before reaching for the chisel."
+        }
+      ]
+    },
+    "walk-gate": {
+      "label": "The Walk Gate",
+      "link": "/world",
+      "cta": "Walk the World",
+      "teasers": [
+        {
+          "title": "Walk the World",
+          "type": "The walk",
+          "href": "/world",
+          "hook": "Four low-poly shores, one path, a teaching on each."
+        },
+        {
+          "title": "3D Sanctuary",
+          "type": "Diorama",
+          "href": "/sanctuary",
+          "hook": "Strike the bell, kindle a lantern, send a crane."
+        },
+        {
+          "title": "How it is built",
+          "type": "Design",
+          "href": "/game-design",
+          "hook": "The design document behind the walk."
+        }
+      ]
+    },
+    "ki-pavilion": {
+      "label": "Ki Pavilion",
+      "link": "/enlight",
+      "cta": "Contemplation and practice",
+      "teasers": [
+        {
+          "title": "Ba Duan Jin: Eight Pieces of Brocade",
+          "type": "Qigong",
+          "hook": "A 10 to 15 minute standing routine, no equipment, about 2 by 2 metres of space."
+        },
+        {
+          "title": "Introduction to Tai Ji Quan",
+          "type": "Taiji",
+          "hook": "History, core ideas and a beginner's home practice."
+        },
+        {
+          "title": "Morning reflection",
+          "type": "Practice",
+          "hook": "A five-minute start to the day: settle attention before it scatters."
+        },
+        {
+          "title": "Note",
+          "type": "Please read",
+          "hook": "These are practices and reflections, not medical advice. If something hurts, see a professional."
+        }
+      ]
+    },
+    "market-plaza": {
+      "label": "Market Plaza",
+      "link": "#",
+      "tab": "market",
+      "cta": "Open the Market tab",
+      "teasers": [
+        {
+          "title": "Cosmetics",
+          "type": "Coming soon",
+          "hook": "Art styles, wanderer robes, card backs, washi and seals."
+        },
+        {
+          "title": "Card packs",
+          "type": "Coming soon",
+          "hook": "Fixed, visible lists. No random draws."
+        },
+        {
+          "title": "Small digital goods",
+          "type": "Coming soon",
+          "hook": "Wallpapers, printable cards, sound packs, practice sheets."
+        }
+      ]
+    },
+    "maker-studio": {
+      "label": "Maker's Studio",
+      "link": "/game-design",
+      "cta": "Read the design document",
+      "teasers": [
+        {
+          "title": "Place a stone",
+          "type": "Try it",
+          "hook": "Press B (or the B button) on a tile to place or clear a stone."
+        },
+        {
+          "title": "Art styles",
+          "type": "Coming soon",
+          "hook": "Ink Wash and Golden Hour sets are being prepared."
+        },
+        {
+          "title": "Game creation",
+          "type": "Direction",
+          "hook": "Later: tune the world and share your own paths."
+        }
+      ]
+    }
+  }
+}
