@@ -20,6 +20,8 @@ Safety properties (Atlas review B1-B5):
   * Renamed files are classified by both the old and the new path.
   * Only same-repo PRs (head repo == base repo) opened by our own account
     (divineforge or dependabot[bot]) can auto-merge. Fork PRs never do.
+  * A T0 file whose added lines contain raw HTML/JS (<script, <iframe,
+    <object, <embed, on*=, javascript:) bumps the PR to T1.
   * A Dependabot PR drops to T0 only when every commit on the branch is
     authored by dependabot[bot] (and GitHub-verified) and every non-T0 file
     is a dependency manifest or lockfile.
@@ -60,6 +62,14 @@ MANIFEST_PATTERNS = [
 ]
 
 UPDATE_RANK = {"patch": 1, "minor": 2, "major": 3}
+
+# Raw HTML/JS that must never ride in on a T0 (docs/content) PR: Hugo runs with
+# `unsafe` on some sites, so content can carry live markup.
+RAW_HTML_RE = re.compile(
+    r"<\s*(?:script|iframe|object|embed)\b|\bon[a-z]+\s*=|javascript:", re.IGNORECASE)
+# Text-ish extensions whose diff we must be able to read; binaries are skipped.
+TEXT_EXTS = (".md", ".markdown", ".mdx", ".html", ".htm", ".svg", ".xml", ".txt",
+             ".js", ".mjs", ".css", ".json", ".yaml", ".yml", ".toml")
 
 
 # --------------------------------------------------------------------------
@@ -157,6 +167,26 @@ def changed_paths(files):
         if prev and prev != f["filename"]:
             out.append((prev, f"renamed to {f['filename']}"))
     return out
+
+
+def raw_html_reason(f):
+    """Why a changed T0 file counts as carrying raw HTML/JS, or None.
+
+    `f` is a GitHub PR-file dict. Only added lines are inspected. A text file
+    whose diff GitHub did not return (too large) cannot be checked, so it is
+    treated as risky; pure renames and deletions add nothing.
+    """
+    if not isinstance(f, dict) or f.get("status") == "removed":
+        return None
+    patch = f.get("patch")
+    if patch is None:
+        if f.get("changes", 1) == 0 or not f["filename"].lower().endswith(TEXT_EXTS):
+            return None
+        return "diff unavailable; cannot check for raw HTML"
+    for line in patch.splitlines():
+        if line.startswith("+") and not line.startswith("+++") and RAW_HTML_RE.search(line):
+            return "added line contains raw HTML/JS"
+    return None
 
 
 def is_manifest(path):
@@ -259,6 +289,13 @@ def compute_tier(pr, files, rules, commits=None):
         tier = max(tier, t)
         if t == 1:
             t1_paths.append(path)
+    # Raw-HTML bump: a T0 file that adds live markup is no longer plain content.
+    for f in files:
+        if isinstance(f, dict) and file_tier(f["filename"], rules)[0] == 0:
+            why = raw_html_reason(f)
+            if why:
+                tier = max(tier, 1)
+                reasons.append((f["filename"], 1, why))
     if not files:
         tier = int(rules.get("default_tier", 1))
     author = pr["user"]["login"]

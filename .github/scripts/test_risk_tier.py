@@ -64,17 +64,17 @@ class FileTier(unittest.TestCase):
 
 class Renames(unittest.TestCase):
     def test_rename_into_docs_keeps_t2(self):
-        files = [{"filename": "docs/ci.md", "previous_filename": ".github/workflows/ci.yml", "status": "renamed"}]
+        files = [{"filename": "docs/ci.md", "previous_filename": ".github/workflows/ci.yml", "status": "renamed", "changes": 0}]
         tier, reasons = rt.compute_tier(pr(), files, INLINE_RULES)
         self.assertEqual(tier, 2)
-        self.assertEqual(len(reasons), 2)  # old and new path both reported
+        self.assertEqual(len(reasons), 2)  # old and new path both reported (pure rename adds no HTML)
 
     def test_rename_out_of_ad_file_is_t3(self):
-        files = [{"filename": "docs/x.md", "previous_filename": "apps/a/ZenAdSlot.astro"}]
+        files = [{"filename": "docs/x.md", "previous_filename": "apps/a/ZenAdSlot.astro", "status": "renamed", "changes": 0}]
         self.assertEqual(rt.compute_tier(pr(), files, INLINE_RULES)[0], 3)
 
     def test_rename_between_t0_paths_stays_t0(self):
-        files = [{"filename": "docs/b.md", "previous_filename": "docs/a.md"}]
+        files = [{"filename": "docs/b.md", "previous_filename": "docs/a.md", "status": "renamed", "changes": 0}]
         self.assertEqual(rt.compute_tier(pr(), files, INLINE_RULES)[0], 0)
 
     def test_plain_paths_still_work(self):
@@ -169,6 +169,59 @@ class Dependabot(unittest.TestCase):
         self.assertEqual(rt.dependabot_update_type([]), "")
 
 
+def doc(patch, name="content/post.md", **kw):
+    f = {"filename": name, "status": "modified", "changes": 3, "patch": patch}
+    f.update(kw)
+    return f
+
+
+class RawHtmlBump(unittest.TestCase):
+    """A T0 PR that adds live markup is bumped to T1."""
+
+    def tier(self, files):
+        return rt.compute_tier(pr(), files, INLINE_RULES)[0]
+
+    def test_plain_content_stays_t0(self):
+        self.assertEqual(self.tier([doc("@@ -1 +1,2 @@\n old\n+Some **markdown** text with a [link](https://x.y)")]), 0)
+
+    def test_each_marker_bumps_to_t1(self):
+        for bad in ("<script>alert(1)</script>", "<SCRIPT src=x>", "< script>", "<iframe src=x></iframe>",
+                    "<object data=x>", "<embed src=x>", '<img src=x onerror="a()">', "<a onclick = 'x'>",
+                    '[x](javascript:alert(1))', "JavaScript:void(0)"):
+            self.assertEqual(self.tier([doc("@@ -1 +1,2 @@\n old\n+" + bad)]), 1, bad)
+
+    def test_removed_lines_and_context_do_not_bump(self):
+        self.assertEqual(self.tier([doc("@@ -1,2 +1 @@\n-<script>old()</script>\n context <iframe>")]), 0)
+
+    def test_file_header_lines_are_not_added_lines(self):
+        self.assertEqual(self.tier([doc("+++ b/x\n@@ -1 +1 @@\n-a\n+b")]), 0)
+
+    def test_words_that_merely_contain_on_do_not_bump(self):
+        self.assertEqual(self.tier([doc("@@ -1 +1 @@\n+based on x=1, iron=2, section=3 and a conclusion")]), 0)
+
+    def test_unreadable_text_diff_bumps_but_binary_and_rename_do_not(self):
+        self.assertEqual(self.tier([doc(None, name="content/big.md")]), 1)
+        self.assertEqual(self.tier([doc(None, name="content/pic.jpg")]), 0)
+        self.assertEqual(self.tier([doc(None, name="docs/b.md", status="renamed", changes=0,
+                                        previous_filename="docs/a.md")]), 0)
+        self.assertEqual(self.tier([doc(None, name="content/gone.md", status="removed")]), 0)
+
+    def test_only_t0_files_are_inspected_and_higher_tiers_win(self):
+        t2 = {"filename": ".github/x.yml", "status": "modified", "changes": 1, "patch": "+<script>"}
+        self.assertEqual(self.tier([t2]), 2)
+        t1 = {"filename": "src/a.js", "status": "modified", "changes": 1, "patch": "+<script>"}
+        self.assertEqual(self.tier([t1]), 1)
+
+    def test_bump_blocks_the_merge(self):
+        merged, calls = TryMerge().run_try([doc("@@ -1 +1 @@\n+<script>x()</script>")])
+        self.assertFalse(merged)
+        self.assertEqual(calls, [])
+
+    def test_clean_content_still_merges(self):
+        merged, _ = TryMerge().run_try([doc("@@ -1 +1 @@\n+hello")])
+        self.assertTrue(merged)
+
+
 class KillSwitch(unittest.TestCase):
     def test_fails_closed(self):
         for v in (None, "", "false", "FALSE", "1", "yes", "True ", "tru", " false"):
@@ -226,6 +279,9 @@ class MergeBlocker(unittest.TestCase):
 class TryMerge(unittest.TestCase):
     """try_merge with GitHub mocked out: classification is fresh, merge pinned."""
 
+    def runTest(self):  # lets other test classes instantiate this helper directly
+        pass
+
     def run_try(self, files, enabled="true", live_pr=None, commits=None, ci=(True, "CI success")):
         live_pr = live_pr or pr()
         commits = commits if commits is not None else [dep_commit(login="divineforge", sha="a" * 40)]
@@ -251,7 +307,7 @@ class TryMerge(unittest.TestCase):
         return merged, merge_calls
 
     def test_t0_merges_pinned_to_head_sha(self):
-        merged, calls = self.run_try([{"filename": "docs/a.md"}])
+        merged, calls = self.run_try([{"filename": "docs/a.md", "patch": "+ok"}])
         self.assertTrue(merged)
         self.assertEqual(len(calls), 1)
         args = list(calls[0])
@@ -259,33 +315,33 @@ class TryMerge(unittest.TestCase):
 
     def test_disabled_or_unset_does_nothing(self):
         for v in (None, "", "false", "TRUE-ish"):
-            merged, calls = self.run_try([{"filename": "docs/a.md"}], enabled=v)
+            merged, calls = self.run_try([{"filename": "docs/a.md", "patch": "+ok"}], enabled=v)
             self.assertFalse(merged, repr(v))
             self.assertEqual(calls, [])
 
     def test_stale_tier0_label_is_ignored(self):
         # Label says tier:0 (from pr()), but the head now touches a workflow.
-        merged, calls = self.run_try([{"filename": "docs/a.md"}, {"filename": ".github/workflows/x.yml"}])
+        merged, calls = self.run_try([{"filename": "docs/a.md", "patch": "+ok"}, {"filename": ".github/workflows/x.yml"}])
         self.assertFalse(merged)
         self.assertEqual(calls, [])
 
     def test_rename_of_workflow_into_docs_not_merged(self):
-        merged, _ = self.run_try([{"filename": "docs/x.md", "previous_filename": ".github/workflows/ci.yml"}])
+        merged, _ = self.run_try([{"filename": "docs/x.md", "previous_filename": ".github/workflows/ci.yml", "status": "renamed", "changes": 0}])
         self.assertFalse(merged)
 
     def test_fork_pr_not_merged(self):
         fork = pr(head={"sha": "a" * 40, "repo": {"full_name": "stranger/r"}})
-        merged, calls = self.run_try([{"filename": "docs/a.md"}], live_pr=fork)
+        merged, calls = self.run_try([{"filename": "docs/a.md", "patch": "+ok"}], live_pr=fork)
         self.assertFalse(merged)
         self.assertEqual(calls, [])
 
     def test_head_moved_not_merged(self):
         stale = [dep_commit(login="divineforge", sha="c" * 40)]
-        merged, _ = self.run_try([{"filename": "docs/a.md"}], commits=stale)
+        merged, _ = self.run_try([{"filename": "docs/a.md", "patch": "+ok"}], commits=stale)
         self.assertFalse(merged)
 
     def test_ci_not_green_not_merged(self):
-        merged, calls = self.run_try([{"filename": "docs/a.md"}], ci=(False, "CI failure"))
+        merged, calls = self.run_try([{"filename": "docs/a.md", "patch": "+ok"}], ci=(False, "CI failure"))
         self.assertFalse(merged)
         self.assertEqual(calls, [])
 
@@ -343,7 +399,7 @@ class RepoPolicy(unittest.TestCase):
         self.assertEqual(self.tier("static/ads.txt"), 3)
 
     def test_rename_of_protected_file_stays_protected(self):
-        files = [{"filename": "docs/x.md", "previous_filename": ".github/workflows/ci.yml"}]
+        files = [{"filename": "docs/x.md", "previous_filename": ".github/workflows/ci.yml", "status": "renamed", "changes": 0}]
         self.assertGreaterEqual(rt.compute_tier(pr(), files, self.rules)[0], 2)
 
 
@@ -356,7 +412,9 @@ REPO_EXPECTATIONS = {
         "apps/gzen/public/robots.txt": 2,
         "apps/gzen/public/_redirects": 2,
         "apps/enlight/static/_redirects": 2,
+        "apps/gzen/src/pages/cards.astro": 3,
         "apps/gzen/src/pages/index.astro": 1,
+        "apps/x/server.pem": 2, "apps/x/tls.key": 2, "deploy/id_ed25519": 2, "apps/x/auth.json": 2,
     },
     "divineforge/reywar": {
         "layouts/partials/article-content-with-ads.html": 3,
@@ -369,6 +427,12 @@ REPO_EXPECTATIONS = {
         "layouts/shortcodes/banner.html": 3,
         "static/js/cookie-consent.js": 3,
         "static/ads.txt": 3,
+        "layouts/_default/single.html": 3,
+        "layouts/collections/list.html": 3,
+        "layouts/stories/list.html": 3,
+        "static/sw.js": 2,
+        "scripts/test_ui_invariants.py": 2,
+        "x/server.pem": 2, "x/tls.key": 2, "x/id_rsa": 2, "x/auth.json": 2,
         "layouts/partials/extend-footer.html": 2,
         "layouts/robots.txt": 2,
         "static/_redirects": 2,

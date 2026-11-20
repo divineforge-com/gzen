@@ -55,6 +55,10 @@ opencode.json @divineforge
 **/.opencode/** @divineforge
 **/robots.txt @divineforge
 **/_redirects @divineforge
+**/*.pem @divineforge
+**/*.key @divineforge
+**/id_* @divineforge
+**/auth.json @divineforge
 
 # T3
 ads.txt @divineforge
@@ -69,3 +73,4 @@ ads.txt @divineforge
 /apps/gzen/src/components/ZenAdSlot.astro @divineforge
 **/ZenAdSlot* @divineforge
 /apps/gzen/src/layouts/BaseLayout.astro @divineforge
+/apps/gzen/src/pages/cards.astro @divineforge

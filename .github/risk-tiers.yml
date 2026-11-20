@@ -26,6 +26,8 @@ tiers:
     - "apps/gzen/src/components/ZenAdSlot.astro"
     - "**/ZenAdSlot*"
     - "apps/gzen/src/layouts/BaseLayout.astro"
+    # pages/templates that render ads
+    - "apps/gzen/src/pages/cards.astro"
   2:   # secrets, auth/exposure, CI, Hermes allowlists, major bumps: Atlas, one pass within 24h
     - ".github/workflows/**"
     - ".github/actions/**"
@@ -78,6 +80,11 @@ tiers:
     - "**/.opencode/**"
     - "**/robots.txt"
     - "**/_redirects"
+    # key material and auth files
+    - "**/*.pem"
+    - "**/*.key"
+    - "**/id_*"
+    - "**/auth.json"
   0:   # docs and content only (markdown elsewhere is T1): auto-merge once CI is green
     - "docs/**"
     - "content/**"
