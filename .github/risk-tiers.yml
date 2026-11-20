@@ -4,7 +4,8 @@
 #
 # A PR's tier is the highest tier of any file it changes. Per file: T3 and T2
 # rules win over T0 rules; unmatched files get default_tier (T1).
-# Dependabot: patch/minor -> T0 (unless a file is T2/T3), major -> T2.
+# Dependabot: patch/minor -> T0 only if every commit is a verified dependabot[bot]
+# commit and every T1 file is a dependency manifest/lockfile; major -> T2.
 # Humans/agents may escalate by adding a higher tier:N label (never lowered).
 # The labeller reads this file from the BASE branch, so edits only take
 # effect after merge (and editing it is itself T2).
@@ -21,6 +22,10 @@ tiers:
     - "**/*live_trad*"
     - "**/zentrade/**/live/**"
     - "apps/gzen/public/ads.txt"
+    # ad and consent code (Atlas review, William's explicit OK)
+    - "apps/gzen/src/components/ZenAdSlot.astro"
+    - "**/ZenAdSlot*"
+    - "apps/gzen/src/layouts/BaseLayout.astro"
   2:   # secrets, auth/exposure, CI, Hermes allowlists, major bumps: Atlas, one pass within 24h
     - ".github/workflows/**"
     - ".github/actions/**"
@@ -55,9 +60,25 @@ tiers:
     - "**/hermes/config.yaml"
     - "**/hermes/**/config.yaml"
     - "**/*allowlist*"
-  0:   # docs and content: auto-merge once CI is green
-    - "*.md"
-    - "**/*.md"
+    # agent-steering files, all of .github/**, host-executed and exposure files
+    - ".github/**"
+    - "AGENTS.md"
+    - "CLAUDE.md"
+    - "GEMINI.md"
+    - "copilot-instructions.md"
+    - "SOUL.md"
+    - "MEMORY.md"
+    - "SKILL.md"
+    - "opencode.json"
+    - "**/.claude/**"
+    - "**/.codex/**"
+    - "**/.agents/**"
+    - "**/.grok/**"
+    - "**/.gemini/**"
+    - "**/.opencode/**"
+    - "**/robots.txt"
+    - "**/_redirects"
+  0:   # docs and content only (markdown elsewhere is T1): auto-merge once CI is green
     - "docs/**"
     - "content/**"
     - "**/content/**"

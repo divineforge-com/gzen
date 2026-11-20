@@ -4,8 +4,16 @@ name: Auto-merge T0
 # CI workflow is green on the PR head. T1 auto-merge is OFF (phase 2, see
 # dforge stacky/VELOCITY.md). T2/T3 never auto-merge.
 #
-# Kill switch (one step):  gh variable set AUTOMERGE_ENABLED --body false -R <owner/repo>
-# Re-enable:               gh variable delete AUTOMERGE_ENABLED -R <owner/repo>
+# FAILS CLOSED: this workflow does nothing unless the repo variable
+# AUTOMERGE_ENABLED is exactly 'true'. The variable is NOT set by this change;
+# William turns auto-merge on per repo, in his own words:
+#   Enable:   gh variable set AUTOMERGE_ENABLED --body true -R <owner/repo>
+#   Disable:  gh variable delete AUTOMERGE_ENABLED -R <owner/repo>
+#             (or set it to anything other than 'true', e.g. false)
+#
+# Every merge re-classifies the PR from its files and commits at the exact head
+# SHA being merged (labels are only a hint), merges only same-repo PRs opened
+# by divineforge or dependabot[bot], and pins the merge to that SHA.
 on:
   workflow_run:
     workflows: [CI]
@@ -25,17 +33,17 @@ concurrency:
 
 jobs:
   sweep:
-    if: vars.AUTOMERGE_ENABLED != 'false'
+    if: vars.AUTOMERGE_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4   # default branch only: script and rules are the reviewed ones
         with:
           sparse-checkout: .github
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install --quiet pyyaml
+      - run: pip install --quiet pyyaml==6.0.2
       - name: Merge green tier:0 PRs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -38,6 +38,23 @@ CODEOWNERS @divineforge
 **/hermes/config.yaml @divineforge
 **/hermes/**/config.yaml @divineforge
 **/*allowlist* @divineforge
+/.github/** @divineforge
+AGENTS.md @divineforge
+CLAUDE.md @divineforge
+GEMINI.md @divineforge
+copilot-instructions.md @divineforge
+SOUL.md @divineforge
+MEMORY.md @divineforge
+SKILL.md @divineforge
+opencode.json @divineforge
+**/.claude/** @divineforge
+**/.codex/** @divineforge
+**/.agents/** @divineforge
+**/.grok/** @divineforge
+**/.gemini/** @divineforge
+**/.opencode/** @divineforge
+**/robots.txt @divineforge
+**/_redirects @divineforge
 
 # T3
 ads.txt @divineforge
@@ -49,4 +66,6 @@ ads.txt @divineforge
 **/*live_trad* @divineforge
 **/zentrade/**/live/** @divineforge
 /apps/gzen/public/ads.txt @divineforge
-
+/apps/gzen/src/components/ZenAdSlot.astro @divineforge
+**/ZenAdSlot* @divineforge
+/apps/gzen/src/layouts/BaseLayout.astro @divineforge
