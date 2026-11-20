@@ -12,12 +12,12 @@
     "@types/three": "^0.185.4",
     "animejs": "^4.5.0",
     "astro": "^7.2.8",
-    "gsap": "^3.15.0",
+    "gsap": "^3.15.1",
     "phaser": "^4.2.1",
     "three": "^0.186.0"
   },
   "devDependencies": {
-    "@types/animejs": "^3.1.13",
-    "@types/gsap": "^1.20.2"
+    "@types/animejs": "^4.0.0",
+    "@types/gsap": "^3.0.0"
   }
 }
