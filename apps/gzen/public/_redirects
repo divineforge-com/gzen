@@ -1,13 +1,5 @@
-# K.I.L.O. subdomains
-/ki       https://ki.gzen.io/        302
-/ki/      https://ki.gzen.io/        302
-/ki/*     https://ki.gzen.io/:splat  302
-/invest       https://invest.gzen.io/        302
-/invest/      https://invest.gzen.io/        302
-/invest/*     https://invest.gzen.io/:splat  302
-/learn       https://learn.gzen.io/        302
-/learn/      https://learn.gzen.io/        302
-/learn/*     https://learn.gzen.io/:splat  302
+# Subdomain redirects: ki./invest./learn. no longer resolve (NXDOMAIN), so their
+# /ki, /invest and /learn redirects were removed. om.gzen.io is still live.
 /om       https://om.gzen.io/        302
 /om/      https://om.gzen.io/        302
 /om/*     https://om.gzen.io/:splat  302

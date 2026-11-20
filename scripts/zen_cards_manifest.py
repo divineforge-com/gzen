@@ -1,4 +1,4 @@
-# Script to generate Zen card images via Agy
+# Card art prompt manifest (generator-neutral; see generate_zen_cards.py)
 # We generate them sequentially or in batches and convert to webp
 
 CARDS = [

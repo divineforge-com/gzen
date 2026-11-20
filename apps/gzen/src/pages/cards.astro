@@ -5,11 +5,11 @@ import Starfield from "../components/Starfield.astro";
 import ZenCard from "../components/ZenCard.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import ZenAdSlot from "../components/ZenAdSlot.astro";
-import { ZEN_CARDS, SPHERES } from "../data/zen-cards";
+import { ZEN_CARDS, SPHERES, CARD_COUNT } from "../data/zen-cards";
 
 const meta = {
-  title: "gZen Cards Gallery — 24 Mind Shaping Contemplative Cards",
-  description: "Explore the full collection of 24 collectible Zen mind cards across Stillness, Impermanence, Empty Mind, and Loving Presence. Distilled for daily mindfulness and mental recalibration.",
+  title: `gZen Cards Gallery — ${CARD_COUNT} Mind Shaping Contemplative Cards`,
+  description: `Explore the full collection of ${CARD_COUNT} collectible Zen mind cards across Stillness, Impermanence, Empty Mind, and Loving Presence. Distilled for daily mindfulness and mental recalibration.`,
 };
 ---
 
@@ -26,7 +26,7 @@ const meta = {
       </div>
       <h1 class="hero-title">Zen Mind Cards Gallery</h1>
       <p class="hero-desc">
-        A full collectible gallery of 24 physical-feel Zen mind cards. Each card pairs an ancient contemplative principle with high-clarity peaceful meditative art and practical grounding reflection.
+        A full collectible gallery of {CARD_COUNT} physical-feel Zen mind cards. Each card pairs an ancient contemplative principle with high-clarity peaceful meditative art and practical grounding reflection.
       </p>
 
       <!-- Category Filter Pills -->
@@ -54,7 +54,7 @@ const meta = {
       <div class="cards-grid" id="cardsGrid">
         {ZEN_CARDS.map(card => (
           <div class="grid-card-item" data-sphere={card.sphere}>
-            <ZenCard card={card} />
+            <ZenCard card={card} headingLevel="h2" />
           </div>
         ))}
       </div>
@@ -166,7 +166,7 @@ const meta = {
     border-radius: 999px;
     background: rgba(180, 83, 9, 0.08);
     border: 1px solid rgba(180, 83, 9, 0.2);
-    color: var(--accent, #b45309);
+    color: #92400e;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.06em;
@@ -286,7 +286,7 @@ const meta = {
 
   .gallery-footnote p {
     font-size: 0.85rem;
-    color: #888888;
+    color: #6b6b6b;
     margin: 0;
   }
 

@@ -31,7 +31,12 @@ export const SPHERES: SphereCategory[] = [
   { id: 'presence', label: 'Loving Presence · 慈', kanji: '慈', color: '#c2410c' }
 ];
 
-export const ZEN_CARDS: ZenCardData[] = [
+/**
+ * Every card in the collection, including ones whose art is not ready yet.
+ * Do not render this directly; use ZEN_CARDS (cards with art) so the site never
+ * links to a missing image.
+ */
+export const ALL_ZEN_CARDS: ZenCardData[] = [
   // Group I: Stillness (止 · Śamatha)
   {
     id: 'zen-001',
@@ -398,7 +403,7 @@ export const ZEN_CARDS: ZenCardData[] = [
   },
   {
     id: 'zen-022',
-    image: '/assets/cards/zen-022.webp',
+    // art pending: /assets/cards/zen-022.webp does not exist yet (was a 404 on gzen.io)
     number: '#022',
     sphere: 'impermanence',
     sphereLabel: 'Impermanence · Anicca',
@@ -446,6 +451,12 @@ export const ZEN_CARDS: ZenCardData[] = [
     icon: 'droplet'
   }
 ];
+
+/** Cards that are ready to show: only those with art. #022-#024 stay hidden until their art lands. */
+export const ZEN_CARDS: ZenCardData[] = ALL_ZEN_CARDS.filter((card) => Boolean(card.image));
+
+/** Single source of truth for every "N cards" label on the site. */
+export const CARD_COUNT: number = ZEN_CARDS.length;
 
 export function getCardsBySphere(sphere: string): ZenCardData[] {
   if (sphere === 'all') return ZEN_CARDS;
