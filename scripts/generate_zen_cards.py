@@ -1,6 +1,17 @@
+"""Zen card art batch helper (generator-neutral).
+
+This script used to call the retired Google Antigravity CLI (`agy`). It no longer
+calls any image generator. Plug one in by implementing `generate_image()` below
+(any provider or a local tool that writes a PNG to `png_path`); the prompt text,
+the skip-if-exists logic and the PNG -> WebP conversion are kept.
+
+Usage:  python3 scripts/generate_zen_cards.py
+Needs:  `cwebp` on PATH for the WebP step.
+"""
 import os
 import subprocess
 import time
+from pathlib import Path
 
 CARDS = [
     ("zen-005", "The Sacred Pause", "The calm quiet space between rolling ocean waves at twilight, silky water surface, golden horizon light, deep rhythmic breathing, absolute stillness"),
@@ -21,8 +32,20 @@ CARDS = [
     ("zen-020", "The Lotus Root", "A pure radiant white and pink sacred lotus blossom blooming above still pond water with green lily pads, purity born from muddy depths, enlightenment")
 ]
 
-OUT_DIR = "/home/divineforge/development/gzen/apps/gzen/public/assets/cards"
+OUT_DIR = str(Path(__file__).resolve().parent.parent / "apps" / "gzen" / "public" / "assets" / "cards")
 os.makedirs(OUT_DIR, exist_ok=True)
+
+
+def generate_image(prompt: str, png_path: str) -> bool:
+    """Write an image for `prompt` to `png_path`. Return True on success.
+
+    Intentionally not implemented: no image generator is wired in yet.
+    """
+    raise NotImplementedError(
+        "No image generator configured. Implement generate_image() in "
+        "scripts/generate_zen_cards.py before running this script."
+    )
+
 
 for card_id, title, desc in CARDS:
     webp_path = os.path.join(OUT_DIR, f"{card_id}.webp")
@@ -32,28 +55,23 @@ for card_id, title, desc in CARDS:
 
     png_path = os.path.join(OUT_DIR, f"{card_id}.png")
     prompt = (
-        f"Generate an image using generate_image tool.\n\n"
-        f"Prompt: A serene, peaceful Zen minimalist 4:3 digital painting of {title}. {desc}. "
-        f"Peaceful Buddhist aesthetic, tranquil, harmonious, contemplative, beautiful soft lighting, no text, no letters, no UI frame, pure meditative art.\n"
-        f"Save destination: Save the generated image file to {png_path}\n"
+        f"A serene, peaceful Zen minimalist 4:3 digital painting of {title}. {desc}. "
+        f"Peaceful Buddhist aesthetic, tranquil, harmonious, contemplative, beautiful soft lighting, no text, no letters, no UI frame, pure meditative art."
     )
 
     print(f"[{card_id}] Generating {title}...", flush=True)
-    cmd = ["/home/divineforge/.local/bin/agy", "--print", prompt, "--dangerously-skip-permissions"]
     try:
-        res = subprocess.run(cmd, capture_output=True, text=True, timeout=90)
-    except subprocess.TimeoutExpired:
-        print(f"[{card_id}] Timed out after 90s, continuing...", flush=True)
-        continue
+        ok = generate_image(prompt, png_path)
+    except NotImplementedError as err:
+        raise SystemExit(str(err))
 
-    if os.path.exists(png_path):
-        cwebp_cmd = ["cwebp", "-q", "85", png_path, "-o", webp_path]
-        subprocess.run(cwebp_cmd, capture_output=True)
+    if ok and os.path.exists(png_path):
+        subprocess.run(["cwebp", "-q", "85", png_path, "-o", webp_path], capture_output=True)
         if os.path.exists(webp_path):
             os.remove(png_path)
             print(f"[{card_id}] SUCCESS -> {webp_path}", flush=True)
     else:
-        print(f"[{card_id}] Failed. agy stdout: {res.stdout[:150]} stderr: {res.stderr[:150]}", flush=True)
+        print(f"[{card_id}] Failed to generate.", flush=True)
 
     time.sleep(2)
 

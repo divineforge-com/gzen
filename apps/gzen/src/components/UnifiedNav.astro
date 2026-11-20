@@ -1,4 +1,6 @@
 ---
+import { CARD_COUNT } from '../data/zen-cards';
+
 interface Props {
   activeTab?: 'home' | 'cards' | 'sanctuary' | 'game-design' | 'enlight' | 'world';
 }
@@ -7,7 +9,7 @@ const { activeTab = 'home' } = Astro.props;
 
 const navItems = [
   { href: '/', label: 'Overview', kanji: '主', id: 'home' },
-  { href: '/cards', label: 'Zen Cards', kanji: '卡', id: 'cards', badge: '20' },
+  { href: '/cards', label: 'Zen Cards', kanji: '卡', id: 'cards', badge: String(CARD_COUNT) },
   { href: '/enlight', label: 'Contemplation', kanji: '悟', id: 'enlight' },
   { href: '/world', label: 'Walk the World', kanji: '界', id: 'world', isPrimary: true, isLive: true },
   { href: '/sanctuary', label: '3D Sanctuary', kanji: '遊', id: 'sanctuary', isLive: true }
@@ -17,7 +19,7 @@ const navItems = [
 <header class="unified-nav" id="topNav">
   <div class="nav-inner">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link" aria-label="gZen Home">
+    <a href="/" class="brand-link">
       <span class="brand-glyph" aria-hidden="true">✦</span>
       <div class="brand-text-group">
         <span class="brand-name"><span class="g-brand">g</span>Zen</span>
@@ -48,8 +50,8 @@ const navItems = [
 
     <!-- Mobile Hamburger Toggle Button -->
     <div class="mobile-actions">
-      <a href="/world" class="mobile-quick-enter" aria-label="Walk the world">
-        <span class="mobile-quick-glyph">界</span>
+      <a href="/world" class="mobile-quick-enter">
+        <span class="mobile-quick-glyph" aria-hidden="true">界</span>
         <span>World</span>
         <span class="pulse-dot" aria-hidden="true"></span>
       </a>
@@ -71,7 +73,7 @@ const navItems = [
 
   <!-- Mobile Backdrop & Slide-down Drawer -->
   <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
-  <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+  <div class="mobile-nav-drawer" id="mobileNavDrawer" inert>
     <div class="drawer-header">
       <span class="drawer-title">Navigation · 導覽</span>
       <span class="drawer-badge">gzen.io</span>
@@ -122,7 +124,7 @@ const navItems = [
   const setOpen = (open: boolean) => {
     isOpen = open;
     toggleBtn?.setAttribute('aria-expanded', String(isOpen));
-    drawer?.setAttribute('aria-hidden', String(!isOpen));
+    if (drawer) drawer.inert = !isOpen;
     
     if (isOpen) {
       toggleBtn?.classList.add('is-active');
@@ -195,7 +197,7 @@ const navItems = [
   }
 
   .brand-glyph {
-    color: #b45309;
+    color: #92400e;
     font-size: 1.15rem;
     filter: drop-shadow(0 0 6px rgba(180, 83, 9, 0.3));
     animation: gentle-rotate 12s linear infinite;
@@ -222,7 +224,7 @@ const navItems = [
 
   .g-brand {
     font-weight: 400;
-    color: #b45309;
+    color: #92400e;
   }
 
   .brand-sub {
@@ -230,7 +232,7 @@ const navItems = [
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #8c7a6b;
+    color: #6f5f52;
     padding: 1px 6px;
     border-radius: 4px;
     background: rgba(180, 83, 9, 0.08);
@@ -280,7 +282,7 @@ const navItems = [
 
   .nav-kanji {
     font-size: 0.82rem;
-    color: #b45309;
+    color: #92400e;
     font-weight: 700;
   }
 
@@ -290,7 +292,7 @@ const navItems = [
     padding: 1px 5px;
     border-radius: 8px;
     background: rgba(180, 83, 9, 0.12);
-    color: #b45309;
+    color: #92400e;
     font-weight: 700;
   }
 
@@ -303,13 +305,13 @@ const navItems = [
   .live-game-pill {
     background: rgba(180, 83, 9, 0.08);
     border-color: rgba(180, 83, 9, 0.3);
-    color: #b45309;
+    color: #92400e;
   }
 
   .live-game-pill:hover {
     background: #b45309;
     color: #ffffff;
-    border-color: #b45309;
+    border-color: #92400e;
   }
 
   .live-game-pill:hover .nav-kanji {
@@ -349,7 +351,7 @@ const navItems = [
     border: 1px solid rgba(180, 83, 9, 0.3);
     font-size: 0.78rem;
     font-weight: 700;
-    color: #b45309;
+    color: #92400e;
     text-decoration: none;
   }
 
@@ -447,13 +449,13 @@ const navItems = [
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #8c7a6b;
+    color: #6f5f52;
   }
 
   .drawer-badge {
     font-size: 0.72rem;
     font-weight: 600;
-    color: #b45309;
+    color: #92400e;
   }
 
   .drawer-links {
@@ -499,7 +501,7 @@ const navItems = [
   .drawer-kanji {
     font-size: 1rem;
     font-weight: 700;
-    color: #b45309;
+    color: #92400e;
     width: 20px;
     text-align: center;
   }
@@ -522,7 +524,7 @@ const navItems = [
     padding: 2px 7px;
     border-radius: 8px;
     background: rgba(180, 83, 9, 0.12);
-    color: #b45309;
+    color: #92400e;
   }
 
   .drawer-item.active .drawer-count-badge {
@@ -551,7 +553,7 @@ const navItems = [
     margin: 0;
     font-size: 0.72rem;
     font-style: italic;
-    color: #8c7a6b;
+    color: #6f5f52;
     line-height: 1.4;
   }
 

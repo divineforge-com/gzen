@@ -686,7 +686,7 @@ To validate readiness for production, three industry specialist personas conduct
 - [ ] Deploy Cloudflare Worker API with Hono.js for distance calculations.
 - [ ] Implement Cloudflare Queues for temporal letter dispatching and crane progress tracking.
 - [ ] Build the handmade letter writing canvas with interactive stamp haptics and seal customizer.
-- [ ] Deploy Hermes/Antigravity pre-flight moderation guard at the edge.
+- [ ] Deploy a Hermes pre-flight moderation guard at the edge.
 
 ### Phase 4: Full Production Rollout & gzen.io Ecosystem Integration
 - [ ] Embed the Zen Game into the primary `gzen.io` navigation under `/game` or `zen.gzen.io`.
