@@ -10,7 +10,7 @@ The diorama sanctuaries in the sections below stay. What changes is how a wander
 
 The playable earth is one continuous low-poly world in a third-person view, in the spirit of the miniature-globe scenes people have been making with Blender: faceted shores, a handful of readable landmarks, a small figure large enough to read against the land. gZen’s figure walks. The lands teach. Other wanderers are someone to answer.
 
-DivineForge introduces this world and links here. It does not host the walk. Do not attach a notebook, a streak, a membership, or a second product (ki, learn, invest, an AI companion). STACKY is the presence on the path, not a chat window.
+DivineForge introduces this world and links here. It does not host the walk. As of 2026-11-20 (`DIRECTION.md`) gZen blends gaming, game creation, low-poly 3D, zen, ki (health) and enlightenment into one walk, funded first by product sales and microtransactions (cosmetics, card packs, small digital goods), then a supporter tier, with light AdSense reviewed later. Ki practice is folded into the world (for example a ki shore) rather than run as a separate product; `learn` and `invest` stay out; there is no AI companion yet and no streak with punishment. STACKY is the presence on the path, not a chat window.
 
 ### 0.1 Key metrics for this direction
 
@@ -60,6 +60,8 @@ In an attention economy dominated by dopamine loops, algorithmic outrage, and re
 ---
 
 ### 1.2 gZen Ecosystem Topology & Domain Architecture
+
+> **Superseded (2026-11-20).** The `zen.`, `enlight.`, and `nexus.` subdomains below were never built and do not resolve. Everything lives on gzen.io (see `DIRECTION.md`). Read this subsection as historical design intent.
 
 The gZen universe is structured into dedicated, decoupled domains that collaborate smoothly across the web:
 
@@ -578,42 +580,38 @@ CREATE TABLE wanderer_archives (
 ```
 ---
 
-## 6. Sustainable Monetization Architecture (The Mindful Patron)
+## 6. Sustainable Monetization Architecture (Product Sales First)
 
-To protect the contemplative sanctuary of gZen from commercial pollution, the monetization model strictly adheres to **Value Co-Creation & Cosmetic Dāna (Generosity)**.
+Updated 2026-11-20 to match `DIRECTION.md`. The earlier version of this section rejected all ads and proposed a patron tier tied to subdomains and an AI companion; both are superseded. William's order: product sales and microtransactions first, then a supporter tier, with light AdSense reviewed later. The principle is unchanged: money must never interrupt the walk.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                   MONETIZATION ARCHITECTURE (ETHICAL DĀNA)             │
+│                         MONETIZATION ARCHITECTURE                      │
 ├──────────────────────────────────┬─────────────────────────────────────┤
-│ ❌ REJECTED (SOUL-KILLING)       │ ✅ ADOPTED (VALUE & BEAUTY)         │
+│ ❌ NEVER                         │ ✅ ADOPTED (in this order)          │
 ├──────────────────────────────────┼─────────────────────────────────────┤
-│ • Interstitial & Pop-up Video Ads│ • Artisanal Washi & Chops ($0.99)   │
-│ • Banner Ads & Tracking Pixels   │ • "Gift of Dāna" Cross-Gifting      │
-│ • "Pay to Speed Up Transit"      │ • Sanctuary Circle Light Patron     │
-│ • Gacha Lootboxes & Pay-to-Win   │ • Physical Anthologies & Tea Chops  │
+│ • Ads on the game canvas         │ 1. Product sales & microtransactions│
+│ • Ads inside a contemplative     │    (cosmetics, card packs, small    │
+│   moment (teaching, breath, bell)│    digital goods) in a Market       │
+│ • Pop-up / interstitial / video  │ 2. Supporter tier                   │
+│ • Gacha / loot boxes / pay-to-win│ 3. Light AdSense, reviewed later    │
+│ • Pay-to-skip, countdown/FOMO    │ 4. Optional physical bridges        │
 └──────────────────────────────────┴─────────────────────────────────────┘
 ```
 
-### 6.1 What is Strictly Forbidden
-- **Zero Interstitial/Pop-up Ads**: Interrupting a peaceful contemplation loop or crane arrival with noisy commercial video ads shatters player immersion immediately.
-- **Zero Banner Ads**: Preserves the clean editorial layout (`#FFFAF4` / `#2F2118`) and uncluttered typography.
-- **Zero Speed-Ups**: Players cannot pay or watch ads to rush letter transit. Patience (*Upekkhā*) is the foundational gameplay mechanic.
-- **Zero Gacha or FOMO Mechanics**: No gambling, countdown pressure, or punitive daily login loss.
+### 6.1 Rules
+- **Packs are visible.** A card pack or art set is a fixed, shown list. No random draws.
+- **No speed-ups.** Nobody can pay or watch an ad to rush letter transit or a practice. Patience (*Upekkhā*) is a mechanic.
+- **No gacha, no pay-to-win, no FOMO.** No countdown timers, no punishing daily-login loss.
+- **Free core stays free.** The walk, the base cards and the teachings are playable without paying or signing in.
+- **AdSense is light.** One labelled unit at most per reading page. Never on `/world`, `/sanctuary`, `/emporium`, a Phaser or three.js canvas, or inside a teaching, breath practice or bell moment. No pop-ups, interstitials or video ads.
+- **No checkout until agreed.** The Market ships as UI and catalog with "coming soon" prices; a payment provider is chosen with William first.
 
-### 6.2 Sustainable Revenue Pillars
-1. **Artisanal Washi Stationery & Rare Seal Chops ($0.99 – $2.99)**:
-   - Core writing paper and standard cinnabar chops remain 100% free forever.
-   - Optional cosmetic sets: *Gold Leaf Foil washi*, *Pressed Maple Blossom paper*, *Dark Sumi ink finishes*, and hand-carved stone chop seals created in collaboration with independent artists.
-2. **"The Gift of Dāna" (Pay-It-Forward Gifting)**:
-   - Players who receive deeply moving comfort letters can gift stationery sets, tea house lanterns, or collectible stamps to the anonymous sender.
-3. **The "Sanctuary Circle" Light Patron ($3.99/mo or $29/year)**:
-   - Cloud backup for lifetime letter journals (Tea Chest).
-   - High-fidelity spatial ambient soundscapes (authentic temple bells, bamboo chimes, 432Hz bowls).
-   - Direct integration with `enlight.gzen.io` deep health & longevity practices.
-   - Expanded, thoughtful dialogue guidance via the `nexus.gzen.io` AI companion.
-4. **Physical World Bridges**:
-   - The *Annual gZen Kind Words Anthology* (curated anonymous wisdom coffee table book) and physical cinnabar seal sets.
+### 6.2 Revenue pillars
+1. **Product sales and microtransactions ($0.99 to $2.99 each).** Cosmetics (art-style sets, wanderer outfits, card back and foil variants, *Gold Leaf Foil washi*, *Pressed Maple Blossom paper*, *Dark Sumi ink finishes*, hand-carved seal chops, some made with independent artists); fixed card packs and art sets; small digital goods (wallpapers, printable cards, ambient sound packs, practice sheets). Purely visual or informational.
+2. **Supporter tier (suggested $3.99/month or $29/year, or a one-off).** Cross-device save, supporter cosmetics, higher-fidelity ambient soundscapes, ad-free. Framed as dāna (generosity), never as a gate.
+3. **Light AdSense (later).** Kept to reading pages; William reviews the ad unit.
+4. **Gifting and physical bridges (later).** Gift a cosmetic to someone who helped you; a kind-words anthology or a cinnabar seal set.
 
 ---
 
