@@ -1,0 +1,76 @@
+# CODEOWNERS for gzen: T2/T3 paths only (generated from .github/risk-tiers.yml).
+# Policy: divineforge/sentinel docs/team/OWNERSHIP.md. One reviewer per PR.
+# Owner is @divineforge for now. Atlas has no GitHub account: she reviews T2/T3
+# PRs via the tier:2 / tier:3 label and the PR link in chat, then William (or
+# the owning agent, for T2) merges. T0/T1 paths have no code owner on purpose.
+
+# T2
+/.github/workflows/** @divineforge
+/.github/actions/** @divineforge
+/.github/scripts/** @divineforge
+/.github/CODEOWNERS @divineforge
+CODEOWNERS @divineforge
+/.github/risk-tiers.yml @divineforge
+/.github/dependabot.yml @divineforge
+.gitleaks.toml @divineforge
+.gitleaksignore @divineforge
+**/*gitleaks* @divineforge
+.sops.yaml @divineforge
+**/.sops.yaml @divineforge
+**/secrets/** @divineforge
+**/*.enc.* @divineforge
+**/*secret* @divineforge
+**/.env* @divineforge
+**/auth/** @divineforge
+**/*oauth* @divineforge
+**/auth-* @divineforge
+**/*-auth.* @divineforge
+**/*-auth-* @divineforge
+**/Caddyfile* @divineforge
+**/caddy/** @divineforge
+**/*tailscale* @divineforge
+**/*tailnet* @divineforge
+**/*firewall* @divineforge
+**/ufw/** @divineforge
+**/nftables* @divineforge
+**/wrangler.toml @divineforge
+**/_headers @divineforge
+**/hermes/config.yaml @divineforge
+**/hermes/**/config.yaml @divineforge
+**/*allowlist* @divineforge
+/.github/** @divineforge
+AGENTS.md @divineforge
+CLAUDE.md @divineforge
+GEMINI.md @divineforge
+copilot-instructions.md @divineforge
+SOUL.md @divineforge
+MEMORY.md @divineforge
+SKILL.md @divineforge
+opencode.json @divineforge
+**/.claude/** @divineforge
+**/.codex/** @divineforge
+**/.agents/** @divineforge
+**/.grok/** @divineforge
+**/.gemini/** @divineforge
+**/.opencode/** @divineforge
+**/robots.txt @divineforge
+**/_redirects @divineforge
+**/*.pem @divineforge
+**/*.key @divineforge
+**/id_* @divineforge
+**/auth.json @divineforge
+
+# T3
+ads.txt @divineforge
+**/*adsense* @divineforge
+**/ads/** @divineforge
+**/billing/** @divineforge
+**/*billing* @divineforge
+**/*live-trad* @divineforge
+**/*live_trad* @divineforge
+**/zentrade/**/live/** @divineforge
+/apps/gzen/public/ads.txt @divineforge
+/apps/gzen/src/components/ZenAdSlot.astro @divineforge
+**/ZenAdSlot* @divineforge
+/apps/gzen/src/layouts/BaseLayout.astro @divineforge
+/apps/gzen/src/pages/cards.astro @divineforge

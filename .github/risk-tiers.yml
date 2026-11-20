@@ -1,0 +1,92 @@
+# Risk tiers for gzen: maps changed paths to T0-T3.
+# Decision rights live in divineforge/sentinel docs/team/OWNERSHIP.md; this
+# file only maps paths onto those tiers. Policy owner: Atlas.
+#
+# A PR's tier is the highest tier of any file it changes. Per file: T3 and T2
+# rules win over T0 rules; unmatched files get default_tier (T1).
+# Dependabot: patch/minor -> T0 only if every commit is a verified dependabot[bot]
+# commit and every T1 file is a dependency manifest/lockfile; major -> T2.
+# Humans/agents may escalate by adding a higher tier:N label (never lowered).
+# The labeller reads this file from the BASE branch, so edits only take
+# effect after merge (and editing it is itself T2).
+version: 1
+default_tier: 1
+tiers:
+  3:   # money, ads, live trading, irreversible: Atlas + William's explicit OK; never auto-merges
+    - "ads.txt"
+    - "**/*adsense*"
+    - "**/ads/**"
+    - "**/billing/**"
+    - "**/*billing*"
+    - "**/*live-trad*"
+    - "**/*live_trad*"
+    - "**/zentrade/**/live/**"
+    - "apps/gzen/public/ads.txt"
+    # ad and consent code (Atlas review, William's explicit OK)
+    - "apps/gzen/src/components/ZenAdSlot.astro"
+    - "**/ZenAdSlot*"
+    - "apps/gzen/src/layouts/BaseLayout.astro"
+    # pages/templates that render ads
+    - "apps/gzen/src/pages/cards.astro"
+  2:   # secrets, auth/exposure, CI, Hermes allowlists, major bumps: Atlas, one pass within 24h
+    - ".github/workflows/**"
+    - ".github/actions/**"
+    - ".github/scripts/**"
+    - ".github/CODEOWNERS"
+    - "CODEOWNERS"
+    - ".github/risk-tiers.yml"
+    - ".github/dependabot.yml"
+    - ".gitleaks.toml"
+    - ".gitleaksignore"
+    - "**/*gitleaks*"
+    - ".sops.yaml"
+    - "**/.sops.yaml"
+    - "**/secrets/**"
+    - "**/*.enc.*"
+    - "**/*secret*"
+    - "**/.env*"
+    - "**/auth/**"
+    - "**/*oauth*"
+    - "**/auth-*"
+    - "**/*-auth.*"
+    - "**/*-auth-*"
+    - "**/Caddyfile*"
+    - "**/caddy/**"
+    - "**/*tailscale*"
+    - "**/*tailnet*"
+    - "**/*firewall*"
+    - "**/ufw/**"
+    - "**/nftables*"
+    - "**/wrangler.toml"
+    - "**/_headers"
+    - "**/hermes/config.yaml"
+    - "**/hermes/**/config.yaml"
+    - "**/*allowlist*"
+    # agent-steering files, all of .github/**, host-executed and exposure files
+    - ".github/**"
+    - "AGENTS.md"
+    - "CLAUDE.md"
+    - "GEMINI.md"
+    - "copilot-instructions.md"
+    - "SOUL.md"
+    - "MEMORY.md"
+    - "SKILL.md"
+    - "opencode.json"
+    - "**/.claude/**"
+    - "**/.codex/**"
+    - "**/.agents/**"
+    - "**/.grok/**"
+    - "**/.gemini/**"
+    - "**/.opencode/**"
+    - "**/robots.txt"
+    - "**/_redirects"
+    # key material and auth files
+    - "**/*.pem"
+    - "**/*.key"
+    - "**/id_*"
+    - "**/auth.json"
+  0:   # docs and content only (markdown elsewhere is T1): auto-merge once CI is green
+    - "docs/**"
+    - "content/**"
+    - "**/content/**"
+

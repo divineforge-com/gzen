@@ -1,0 +1,42 @@
+name: Risk tier
+
+# Labels every PR tier:0/1/2/3 from .github/risk-tiers.yml and, only when the
+# repo variable AUTOMERGE_ENABLED is exactly 'true', merges T0 PRs whose CI is
+# green. Policy: divineforge/sentinel docs/team/OWNERSHIP.md.
+#
+# Security: pull_request_target runs the BASE branch copy of this workflow,
+# the script and risk-tiers.yml. PR code is never checked out or executed.
+# Merging re-classifies the PR at its head SHA and never trusts a label; fork
+# PRs are labelled but never merged (see risk_tier.py merge_blocker).
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
+
+permissions:
+  contents: write        # squash-merge T0 PRs
+  pull-requests: write   # labels
+  issues: write          # label create
+  actions: read          # read CI run status
+
+concurrency:
+  group: risk-tier-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  tier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4   # base branch only (pull_request_target default)
+        with:
+          sparse-checkout: .github
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install --quiet pyyaml==6.0.2
+      - name: Label tier (and merge if T0 + CI green + enabled)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          AUTOMERGE_ENABLED: ${{ vars.AUTOMERGE_ENABLED }}
+        run: python3 .github/scripts/risk_tier.py label
