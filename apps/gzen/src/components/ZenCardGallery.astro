@@ -1,6 +1,6 @@
 ---
 import ZenCard from './ZenCard.astro';
-import { ZEN_CARDS, SPHERES } from '../data/zen-cards';
+import { ZEN_CARDS, SPHERES, CARD_COUNT } from '../data/zen-cards';
 ---
 
 <section id="zen-cards-section" class="zen-cards-section">
@@ -12,7 +12,7 @@ import { ZEN_CARDS, SPHERES } from '../data/zen-cards';
         <span class="pulse-dot"></span>
         <span>MIND SHAPING COLLECTION</span>
       </div>
-      <h2 class="section-title">The 20 Zen Mind Cards</h2>
+      <h2 class="section-title">The {CARD_COUNT} Zen Mind Cards</h2>
       <p class="section-desc">
         Standard Pokémon aspect-ratio collectible cards distilled from ancient Buddhist teachings. Designed for daily reflection, mindfulness grounding, and mental recalibration.
       </p>
@@ -142,7 +142,7 @@ import { ZEN_CARDS, SPHERES } from '../data/zen-cards';
     border-radius: 999px;
     font-size: 0.72rem;
     font-weight: 700;
-    color: var(--accent, #b45309);
+    color: #92400e;
     letter-spacing: 0.08em;
     margin-bottom: 1rem;
   }

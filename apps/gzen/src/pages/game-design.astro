@@ -21,7 +21,7 @@ const gddMeta = {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-size: 0.75rem;
-    color: #6b5b4d;
+    color: #cdbfb2;
   }
   .walk-copy h2 {
     margin: 0 0 0.4rem;
@@ -33,7 +33,7 @@ const gddMeta = {
   }
   .walk-enter {
     display: inline-block;
-    background: #d97845;
+    background: #b45309;
     color: #fffaf4;
     text-decoration: none;
     border-radius: 999px;
@@ -59,7 +59,7 @@ const gddMeta = {
   .walk-grid figcaption {
     margin-top: 0.35rem;
     font-size: 0.8rem;
-    color: #6b5b4d;
+    color: #cdbfb2;
   }
   @media (max-width: 800px) {
     .walk-grid {
@@ -93,18 +93,10 @@ const gddMeta = {
       <!-- Hero Visual Art Frame -->
       <div class="concept-showcase">
         <div class="concept-frame">
-          <picture>
-            <source srcset="/assets/game-design/zen-world-concept.webp" type="image/webp" />
-            <img
-              src="/assets/game-design/zen-world-concept.png"
-              alt="gZen Zen World Concept - Low-poly floating diorama sanctuary with pagoda, willow tree, koi pond, and origami carrier crane"
-              class="concept-image"
-              loading="eager"
-            />
-          </picture>
+          <img src="/assets/game-design/zen-world-concept.webp" width="1376" height="768" alt="gZen Zen World Concept - Low-poly floating diorama sanctuary with pagoda, willow tree, koi pond, and origami carrier crane" class="concept-image" loading="eager" fetchpriority="high" />
           <div class="concept-caption">
             <div class="caption-left">
-              <span class="caption-tag">Concept Diorama by Agy</span>
+              <span class="caption-tag">Concept Diorama</span>
               <span class="caption-desc">Low-Poly Floating Sanctuary · Kyoto/Jiangnan Water Node · Procedural Mist &amp; Carrier Crane</span>
             </div>
             <div class="caption-right">
@@ -128,15 +120,15 @@ const gddMeta = {
       </div>
       <div class="walk-grid">
         <figure>
-          <img src="/assets/game-design/world-four-zones.jpg" alt="Low-poly concept of four sanctuary islands joined by stone paths" />
+          <img src="/assets/game-design/world-four-zones.jpg" width="1280" height="720" loading="lazy" alt="Low-poly concept of four sanctuary islands joined by stone paths" />
           <figcaption>Four shores and the crossing</figcaption>
         </figure>
         <figure>
-          <img src="/assets/game-design/wanderer-lowpoly.jpg" alt="Low-poly wanderer in a cream robe with a saffron sash" />
+          <img src="/assets/game-design/wanderer-lowpoly.jpg" width="1024" height="1024" loading="lazy" alt="Low-poly wanderer in a cream robe with a saffron sash" />
           <figcaption>Wanderer</figcaption>
         </figure>
         <figure>
-          <img src="/assets/game-design/world-third-person.jpg" alt="Third-person view of the wanderer on a stone path toward a canal pavilion" />
+          <img src="/assets/game-design/world-third-person.jpg" width="1024" height="1024" loading="lazy" alt="Third-person view of the wanderer on a stone path toward a canal pavilion" />
           <figcaption>Third person, Jiangnan path</figcaption>
         </figure>
       </div>
@@ -215,41 +207,31 @@ const gddMeta = {
 
         <div class="pillars-sub-list">
           <div class="sub-pillar-item domain-topology-full">
-            <h4>🌐 Ecosystem Topology &amp; Domain Architecture</h4>
-            <p>The gZen digital universe is partitioned into dedicated, specialized subdomains to guarantee decoupled architecture and modular clarity:</p>
+            <h3>🌐 Where Things Live</h3>
+            <p>gZen is one site and one walk. The old plan of separate game, wisdom and AI subdomains was retired; those hostnames no longer exist.</p>
             <div class="domains-topology-grid">
-              <div class="domain-card">
-                <span class="domain-badge">Main Sanctuary</span>
-                <strong class="domain-url">gzen.io</strong>
-                <p>The primary portal introducing the brand philosophy, life optimization pillars, gateway presence, and cross-application ecosystem.</p>
-              </div>
               <div class="domain-card highlight">
-                <span class="domain-badge">The Game Client</span>
-                <strong class="domain-url">zen.gzen.io</strong>
-                <p>The 2.5D/3D isometric interactive diorama game. Houses the world globe, carrier crane transit, letter-writing desk, and river lanterns.</p>
+                <span class="domain-badge">The Walk</span>
+                <strong class="domain-url">gzen.io</strong>
+                <p>The portal and the game in one place: the four-shore world at /world, the sanctuary diorama at /sanctuary, the Zen Mind cards at /cards, and teachings at /enlight.</p>
               </div>
               <div class="domain-card">
-                <span class="domain-badge">Wisdom &amp; Health</span>
-                <strong class="domain-url">enlight.gzen.io</strong>
-                <p>Curated Buddhist teachings, contemplative sutras, holistic health practices, sleep &amp; longevity guides, and daily Dharma seeds.</p>
-              </div>
-              <div class="domain-card">
-                <span class="domain-badge">AI Neural Core</span>
-                <strong class="domain-url">nexus.gzen.io</strong>
-                <p>Ethical AI gateway driving the mindful in-game companion, gentle writing prompts, sentiment moderation, and multilingual synthesis.</p>
+                <span class="domain-badge">The Forge</span>
+                <strong class="domain-url">divineforge.com</strong>
+                <p>Technology, Go, Kubernetes and architecture writing. It introduces gZen and links here; it is a separate site.</p>
               </div>
             </div>
           </div>
           <div class="sub-pillar-item">
-            <h4>🌿 Unrushed Connection</h4>
+            <h3>🌿 Unrushed Connection</h3>
             <p>True connection requires temporal distance and deliberate reflection rather than instant reply anxiety.</p>
           </div>
           <div class="sub-pillar-item">
-            <h4>🕊️ Radical Kindness Without Vanity</h4>
+            <h3>🕊️ Radical Kindness Without Vanity</h3>
             <p>Zero follower counts, zero public view tallies, zero thumbs-up/down, and zero competitive leaderboards.</p>
           </div>
           <div class="sub-pillar-item">
-            <h4>⛩️ Sanctuary of Sound &amp; Form</h4>
+            <h3>⛩️ Sanctuary of Sound &amp; Form</h3>
             <p>Living dioramas reflecting real-world solar cycles, lunar phases, and gentle weather transitions.</p>
           </div>
         </div>
@@ -319,19 +301,19 @@ const gddMeta = {
         <div class="dharma-flow-card">
           <div class="flow-step">
             <span class="step-badge">Dawn</span>
-            <h4>Daily Dharma Seed</h4>
+            <h3>Daily Dharma Seed</h3>
             <p>Trilingual verse (EN / ZH / JA) blooming at local sunrise with 30-second silent breathing chime.</p>
           </div>
           <div class="flow-arrow">→</div>
           <div class="flow-step">
             <span class="step-badge">Practice</span>
-            <h4>Seal of Right Action</h4>
+            <h3>Seal of Right Action</h3>
             <p>Unlock traditional stone chop seals by practicing consistent kindness and thoughtful reflection.</p>
           </div>
           <div class="flow-arrow">→</div>
           <div class="flow-step">
             <span class="step-badge">Archive</span>
-            <h4>Handmade Paper Scroll</h4>
+            <h3>Handmade Paper Scroll</h3>
             <p>Preserve heartfelt correspondences in a private, encrypted offline tea chest.</p>
           </div>
         </div>
@@ -401,10 +383,7 @@ const gddMeta = {
           <!-- Scene 1 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/world-map-continents.webp" type="image/webp" />
-                <img src="/assets/game-design/world-map-continents.png" alt="Global World Globe & Continent Progression - 3D stylized globe with glowing transit arcs and mist-shrouded continents" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/world-map-continents.webp" width="1376" height="768" alt="Global World Globe & Continent Progression - 3D stylized globe with glowing transit arcs and mist-shrouded continents" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge macro">World Map</span>
                 <span class="media-badge progression">Progression</span>
@@ -426,10 +405,7 @@ const gddMeta = {
           <!-- Scene 2 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/biome-east-asia-jiangnan.webp" type="image/webp" />
-                <img src="/assets/game-design/biome-east-asia-jiangnan.png" alt="East Asia Jiangnan Water Canal Sanctuary - Whitewashed pavilion, weeping willows, and floating lotuses" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/biome-east-asia-jiangnan.webp" width="1376" height="768" alt="East Asia Jiangnan Water Canal Sanctuary - Whitewashed pavilion, weeping willows, and floating lotuses" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge biome">East Asia</span>
                 <span class="media-badge gameplay">Aquatic Sanctuary</span>
@@ -451,10 +427,7 @@ const gddMeta = {
           <!-- Scene 3 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/biome-south-asia-himalayas.webp" type="image/webp" />
-                <img src="/assets/game-design/biome-south-asia-himalayas.png" alt="South Asia Himalayan Mountain Stupa of Equanimity - High-altitude stone stupa with colorful prayer flags" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/biome-south-asia-himalayas.webp" width="1376" height="768" alt="South Asia Himalayan Mountain Stupa of Equanimity - High-altitude stone stupa with colorful prayer flags" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge biome">South Asia</span>
                 <span class="media-badge gameplay">Equanimity Node</span>
@@ -476,10 +449,7 @@ const gddMeta = {
           <!-- Scene 4 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/biome-southeast-asia-bamboo.webp" type="image/webp" />
-                <img src="/assets/game-design/biome-southeast-asia-bamboo.png" alt="Southeast Asia Emerald Bamboo Sanctuary - Sun-dappled bamboo forest with tea pavilion and mossy stream" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/biome-southeast-asia-bamboo.webp" width="1376" height="768" alt="Southeast Asia Emerald Bamboo Sanctuary - Sun-dappled bamboo forest with tea pavilion and mossy stream" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge biome">Southeast Asia</span>
                 <span class="media-badge gameplay">Tea &amp; Scroll Craft</span>
@@ -501,10 +471,7 @@ const gddMeta = {
           <!-- Scene 5 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/biome-nordic-fjord.webp" type="image/webp" />
-                <img src="/assets/game-design/biome-nordic-fjord.png" alt="Northern Europe Nordic Fjord of Stillness - Minimalist cedar shelter beside mirror-calm fjord water and twilight aurora" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/biome-nordic-fjord.webp" width="1376" height="768" alt="Northern Europe Nordic Fjord of Stillness - Minimalist cedar shelter beside mirror-calm fjord water and twilight aurora" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge biome">Northern Europe</span>
                 <span class="media-badge gameplay">Fjord Sanctuary</span>
@@ -526,10 +493,7 @@ const gddMeta = {
           <!-- Scene 6 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/gameplay-writing-desk.webp" type="image/webp" />
-                <img src="/assets/game-design/gameplay-writing-desk.png" alt="The Mindful Writing Desk - Washi paper, ceramic sumi inkstone, steaming tea, and wax seals" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/gameplay-writing-desk.webp" width="1376" height="768" alt="The Mindful Writing Desk - Washi paper, ceramic sumi inkstone, steaming tea, and wax seals" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge gameplay">Writing UI</span>
                 <span class="media-badge craft">Tactile Craft</span>
@@ -551,10 +515,7 @@ const gddMeta = {
           <!-- Scene 7 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/gameplay-crane-arrival.webp" type="image/webp" />
-                <img src="/assets/game-design/gameplay-crane-arrival.png" alt="Carrier Crane Arrival - Origami crane landing on wooden veranda and unfolding into a letter" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/gameplay-crane-arrival.webp" width="1376" height="768" alt="Carrier Crane Arrival - Origami crane landing on wooden veranda and unfolding into a letter" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge gameplay">Delivery Loop</span>
                 <span class="media-badge animation">Origami Unfold</span>
@@ -576,10 +537,7 @@ const gddMeta = {
           <!-- Scene 8 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/gameplay-river-lanterns.webp" type="image/webp" />
-                <img src="/assets/game-design/gameplay-river-lanterns.png" alt="The River of Shared Hopes - Floating lotus lanterns with flickering candlelight drifting on calm river" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/gameplay-river-lanterns.webp" width="1376" height="768" alt="The River of Shared Hopes - Floating lotus lanterns with flickering candlelight drifting on calm river" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge gameplay">Sympathetic Joy</span>
                 <span class="media-badge ritual">Muditā</span>
@@ -601,10 +559,7 @@ const gddMeta = {
           <!-- Scene 9 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/gameplay-stamp-collection.webp" type="image/webp" />
-                <img src="/assets/game-design/gameplay-stamp-collection.png" alt="Zen Travel & Wisdom Stamp Book - Accordion album filled with cinnabar seal chops and botanical stamps" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/gameplay-stamp-collection.webp" width="1376" height="768" alt="Zen Travel & Wisdom Stamp Book - Accordion album filled with cinnabar seal chops and botanical stamps" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge craft">Stamp Book</span>
                 <span class="media-badge progression">Non-Vanity</span>
@@ -626,10 +581,7 @@ const gddMeta = {
           <!-- Scene 10 -->
           <div class="gallery-card">
             <div class="gallery-media">
-              <picture>
-                <source srcset="/assets/game-design/gameplay-bell-meditation.webp" type="image/webp" />
-                <img src="/assets/game-design/gameplay-bell-meditation.png" alt="The Great Bell of Mindfulness - Bronze temple bell emitting visible golden soundwave rings clearing mountain mist" loading="lazy" />
-              </picture>
+              <img src="/assets/game-design/gameplay-bell-meditation.webp" width="1376" height="768" alt="The Great Bell of Mindfulness - Bronze temple bell emitting visible golden soundwave rings clearing mountain mist" loading="lazy" />
               <div class="media-badges">
                 <span class="media-badge ritual">Meditation</span>
                 <span class="media-badge audio">Harmonic Waves</span>
@@ -661,7 +613,7 @@ const gddMeta = {
               <span class="swatch-name">Ink Brown</span>
               <code>#2F2118</code>
             </div>
-            <div class="swatch" style="--c: #D97845; --t: #FFFFFF;">
+            <div class="swatch" style="--c: #D97845; --t: #2F2118;">
               <span class="swatch-name">Saffron Amber</span>
               <code>#D97845</code>
             </div>
@@ -686,6 +638,27 @@ const gddMeta = {
     <SiteFooter />
   </div>
 </BaseLayout>
+
+<style is:global>
+  /* This page is written for a dark canvas (light text everywhere). The site-wide
+     body is cream, which left headings and body copy nearly invisible. */
+  body {
+    background-color: #0c0e13;
+    color: #f8f4ee;
+  }
+  body::before {
+    display: none;
+  }
+  body .foot {
+    --dim: #b8aaa0;
+  }
+  body .foot .mark {
+    color: #f8f4ee;
+  }
+  body .foot a {
+    color: #d8ccc2;
+  }
+</style>
 
 <style>
   /* gZen Theme Variables & Palette */
@@ -1074,7 +1047,7 @@ const gddMeta = {
     border: 1px solid rgba(255, 255, 255, 0.04);
   }
 
-  .sub-pillar-item h4 {
+  .sub-pillar-item h3 {
     margin: 0 0 0.5rem;
     font-size: 1.05rem;
     color: #FFFFFF;
@@ -1168,8 +1141,9 @@ const gddMeta = {
     margin-bottom: 0.4rem;
   }
 
-  .flow-step h4 {
+  .flow-step h3 {
     margin: 0 0 0.4rem;
+    font-size: 1rem;
     color: #FFFFFF;
   }
 

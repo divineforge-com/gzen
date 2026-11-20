@@ -12,7 +12,7 @@ Technology advocacy, architecture principles, Go, and Kubernetes live in DivineF
 |-------|------------|
 | `/world` | Third-person walk across a low-poly world: Jiangnan Canals, Bamboo Grove, Himalaya, and Nordic Fjord. Sit with a teaching, speak with a wanderer, leave a note. |
 | `/sanctuary` | Interactive contemplative 3D diorama: orbit the garden, focus the singing bell, koi pond, crane peak, and bamboo grove. |
-| `/cards` | 21 collectible Zen Mind cards across Stillness (止), Impermanence (变), Empty Mind (空), and Loving Presence (慈). |
+| `/cards` | 21 collectible Zen Mind cards (24 defined; #022–#024 hidden until art exists, see `CARD_COUNT`) across Stillness (止), Impermanence (变), Empty Mind (空), and Loving Presence (慈). |
 
 ## Design
 

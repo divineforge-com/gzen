@@ -3,9 +3,12 @@ import type { ZenCardData } from '../data/zen-cards';
 
 interface Props {
   card: ZenCardData;
+  /** Heading level for the card title; pick the level that follows the page's own headings. */
+  headingLevel?: 'h2' | 'h3';
 }
 
-const { card } = Astro.props;
+const { card, headingLevel = 'h3' } = Astro.props;
+const TitleTag = headingLevel;
 ---
 
 <article 
@@ -55,7 +58,7 @@ const { card } = Astro.props;
 
     <!-- Card Body & Philosophical Text -->
     <section class="zen-card-body">
-      <h3 class="zen-card-title">{card.title}</h3>
+      <TitleTag class="zen-card-title">{card.title}</TitleTag>
       
       <blockquote class="zen-card-quote">
         “{card.quote}”

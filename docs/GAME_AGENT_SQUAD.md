@@ -23,7 +23,7 @@ This document defines the agent personas, operational boundaries, and delegation
 
 #### **Agent 4: Gemini Vision Visual Critic (`GeminiVisionArt`)**
 - **Domain**: Image review, composition evaluation, color grading (cream, charcoal cedar, warm saffron `#b45309`).
-- **Responsibility**: Ingest concept art from Gemini/Agy, analyze real-time render screenshots from the 3D canvas, critique lighting balance, and provide corrective parameter deltas back to `SeidanBlender`.
+- **Responsibility**: Ingest concept art from the image generator in use, analyze real-time render screenshots from the 3D canvas, critique lighting balance, and provide corrective parameter deltas back to `SeidanBlender`.
 
 #### **Agent 5: Playability Critic & Stage Gatekeeper (`ZenGatekeeper`)**
 - **Domain**: Automated headless play-testing, framerate profiling, input responsiveness, and release cutoff evaluation (inspired by Meng To / Vesperfall Three.js skills).

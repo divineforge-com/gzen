@@ -1,5 +1,5 @@
-# Dependabot version updates. Patch/minor PRs are tier:0 and auto-merge when
-# CI is green; majors are tier:2 (Atlas). See .github/risk-tiers.yml.
+# Dependabot version updates for the gZen portal.
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -7,11 +7,26 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 5
-  - package-ecosystem: "gomod"
+    groups:
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+      three:
+        patterns:
+          - "three"
+          - "@types/three"
+      animation:
+        patterns:
+          - "gsap"
+          - "animejs"
+          - "@types/gsap"
+          - "@types/animejs"
+  - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "github-actions"
+  - package-ecosystem: "gomod"
     directory: "/"
     schedule:
       interval: "weekly"
