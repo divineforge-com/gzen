@@ -1,57 +1,163 @@
 {
-  "updated": "2026-10-25",
+  "updated": "2026-11-20",
   "zones": {
-    "atlas-vault": {
-      "label": "Architecture & Engineering Blueprints",
-      "link": "https://divineforge.com/writing",
+    "card-stall": {
+      "label": "Card Stall",
+      "link": "/cards",
+      "cta": "See all the cards",
       "teasers": [
-        {"title": "Kubernetes Architecture & Self-Healing Lab", "type": "Kubernetes", "slug": "2026.1025-kubernetes-architecture-self-healing-visual-guide", "hook": "Control Plane, etcd, and interactive Pod OOMKill self-healing simulator."},
-        {"title": "Game Engine Architecture: Unity, Three.js & Phaser", "type": "Game Dev", "slug": "2026.1025-game-engine-architecture-unity-threejs-phaser", "hook": "Inside the 16.67ms 60FPS frame loop, ECS vs Scene Graphs, and GLSL shaders."},
-        {"title": "Concurrency Patterns in Go", "type": "Golang", "slug": "2026.0716-concurrency-patterns-in-go", "hook": "Goroutines, channels, Fan-Out/Fan-In worker pools, and interactive CSP lab."},
-        {"title": "Guide to REST APIs with net/http", "type": "Golang", "slug": "2026.0716-guide-to-rest-apis-with-net-http", "hook": "Building clean, idiomatic REST APIs in Go 1.22+ with zero framework bloat."},
-        {"title": "Agentic Self-Building Loop", "type": "Architecture", "slug": "2026.0524-agentic-self-building-loop", "hook": "The architecture behind an AI agent that improves itself."}
+        {
+          "title": "Stillness · 止",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "Anchor Breath, Silent Mountain, Clear Water and more."
+        },
+        {
+          "title": "Impermanence · 变",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "River Log, Autumn Leaf, Morning Dew."
+        },
+        {
+          "title": "Empty Mind · 空",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "The Empty Cup, Beginner's Mind."
+        },
+        {
+          "title": "Loving Presence · 慈",
+          "type": "Cards",
+          "href": "/cards",
+          "hook": "Gentle Lamp, Indra's Net, Compassionate Ear."
+        }
       ]
     },
-    "canvas-studio": {
-      "label": "Satire & Culture",
-      "link": "https://divineforge.com/satire",
+    "teaching-hall": {
+      "label": "Teaching Hall",
+      "link": "/enlight",
+      "cta": "Read in Contemplation",
       "teasers": [
-        {"title": "The Architecture Review Board That Reviews Architecture", "type": "Satire", "slug": "2025.1124-the-architecture-review-board", "hook": "Governance theatre, observed and named."},
-        {"title": "The Quick Sync That Wasn't", "type": "Satire", "slug": "2025.0108-the-quick-sync-that-wasnt", "hook": "37 minutes later, nobody remembered the agenda."},
-        {"title": "The Demo That Became the Product", "type": "Satire", "slug": "2026.0131-the-demo-that-became-the-product", "hook": "Six months of polishing a presentation nobody asked for."}
+        {
+          "title": "The Empty Cup",
+          "type": "Koan",
+          "href": "/enlight",
+          "hook": "To absorb wisdom, first empty what is full."
+        },
+        {
+          "title": "The Second Arrow",
+          "type": "Koan",
+          "href": "/enlight",
+          "hook": "The first arrow is circumstance; the second is our reaction."
+        },
+        {
+          "title": "The Drifting Log",
+          "type": "Koan",
+          "href": "/enlight",
+          "hook": "Neither grounded on a bank nor sunk, it reaches the ocean."
+        },
+        {
+          "title": "Clarity Before Tools",
+          "type": "Principle",
+          "href": "/enlight",
+          "hook": "Master the thought before reaching for the chisel."
+        }
       ]
     },
-    "spark-bay": {
-      "label": "Digital Goods & Starter Kits",
-      "link": "https://gumroad.com",
+    "walk-gate": {
+      "label": "The Walk Gate",
+      "link": "/world",
+      "cta": "Walk the World",
       "teasers": [
-        {"title": "Autonomous Agent Starter Kit", "type": "Product", "slug": "agent-starter-kit", "hook": "Multi-agent harness, memory pipelines, and tool bundles for production."},
-        {"title": "Go Microservice & Daemon Boilerplate", "type": "Software", "slug": "go-daemon-kit", "hook": "Low-footprint Go 1.24 systemd service templates with zero bloat."},
-        {"title": "Obsidian Knowledge OS Bundle", "type": "Digital Good", "slug": "obsidian-knowledge-os", "hook": "Structured graph PKM with automated AI research and sync pipelines."}
+        {
+          "title": "Walk the World",
+          "type": "The walk",
+          "href": "/world",
+          "hook": "Four low-poly shores, one path, a teaching on each."
+        },
+        {
+          "title": "3D Sanctuary",
+          "type": "Diorama",
+          "href": "/sanctuary",
+          "hook": "Strike the bell, kindle a lantern, send a crane."
+        },
+        {
+          "title": "How it is built",
+          "type": "Design",
+          "href": "/game-design",
+          "hook": "The design document behind the walk."
+        }
       ]
     },
-    "tether-hub": {
-      "label": "gZen Zen Gaming Portal",
-      "link": "https://gzen.io",
+    "ki-pavilion": {
+      "label": "Ki Pavilion",
+      "link": "/enlight",
+      "cta": "Contemplation and practice",
       "teasers": [
-        {"title": "Walkable World (/world)", "type": "Game", "slug": "gzen-world", "hook": "3rd-person low-poly wanderer across Jiangnan, Bamboo, Himalaya, and Fjord."},
-        {"title": "Zen Cards & Diorama", "type": "Product", "slug": "gzen-sanctuary", "hook": "Calm mindfulness interactive dioramas and collection."}
+        {
+          "title": "Ba Duan Jin: Eight Pieces of Brocade",
+          "type": "Qigong",
+          "hook": "A 10 to 15 minute standing routine, no equipment, about 2 by 2 metres of space."
+        },
+        {
+          "title": "Introduction to Tai Ji Quan",
+          "type": "Taiji",
+          "hook": "History, core ideas and a beginner's home practice."
+        },
+        {
+          "title": "Morning reflection",
+          "type": "Practice",
+          "hook": "A five-minute start to the day: settle attention before it scatters."
+        },
+        {
+          "title": "Note",
+          "type": "Please read",
+          "hook": "These are practices and reflections, not medical advice. If something hurts, see a professional."
+        }
       ]
     },
-    "kinetic-forge": {
-      "label": "Developer Tools & Code",
-      "link": "https://github.com/divineforge",
+    "market-plaza": {
+      "label": "Market Plaza",
+      "link": "#",
+      "tab": "market",
+      "cta": "Open the Market tab",
       "teasers": [
-        {"title": "Sentinel & Ombridge Daemons", "type": "Tool", "slug": "sentinel-daemon", "hook": "High-efficiency local reverse proxy and autonomous agent bridge."},
-        {"title": "Pagefind Instant Search", "type": "Tool", "slug": "pagefind-search", "hook": "Zero-server, 0ms static search engine implementation."}
+        {
+          "title": "Cosmetics",
+          "type": "Coming soon",
+          "hook": "Art styles, wanderer robes, card backs, washi and seals."
+        },
+        {
+          "title": "Card packs",
+          "type": "Coming soon",
+          "hook": "Fixed, visible lists. No random draws."
+        },
+        {
+          "title": "Small digital goods",
+          "type": "Coming soon",
+          "hook": "Wallpapers, printable cards, sound packs, practice sheets."
+        }
       ]
     },
-    "ying-tidepool": {
-      "label": "Advocacy, X (@divineforge) & STACKY",
-      "link": "https://x.com/divineforge",
+    "maker-studio": {
+      "label": "Maker's Studio",
+      "link": "/game-design",
+      "cta": "Read the design document",
       "teasers": [
-        {"title": "DivineForge on X (@divineforge)", "type": "Advocacy", "slug": "", "hook": "Build-in-public threads, visual architecture simulators, and open engineering exchange."},
-        {"title": "STACKY Sentinel Swarm", "type": "System", "slug": "", "hook": "Spark, Tether, Atlas, Canvas, Kinetic, and Ying coordinating 24/7 autonomous ops."}
+        {
+          "title": "Place a stone",
+          "type": "Try it",
+          "hook": "Press B (or the B button) on a tile to place or clear a stone."
+        },
+        {
+          "title": "Art styles",
+          "type": "Coming soon",
+          "hook": "Ink Wash and Golden Hour sets are being prepared."
+        },
+        {
+          "title": "Game creation",
+          "type": "Direction",
+          "hook": "Later: tune the world and share your own paths."
+        }
       ]
     }
   }

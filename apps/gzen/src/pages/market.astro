@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import UnifiedNav from '../components/UnifiedNav.astro';
+import MarketCatalog from '../components/MarketCatalog.astro';
+import '../styles/aether.css';
+
+const description = "The gZen Market: a small top-down hall of six pavilions. Browse cards, teachings, ki practices and the cosmetics and card packs that are coming.";
+---
+
+<BaseLayout title="Market — gZen" description={description} ads={false}>
+  <UnifiedNav activeTab="market" />
+  <main class="main-fullbleed">
+  <div id="app" class="emporium-stage">
+    <!-- ── Welcome Overlay ── -->
+    <div id="welcome-overlay" class="welcome-overlay">
+      <div class="welcome-card">
+        <h1 class="welcome-title">The Market</h1>
+        <p class="welcome-sub">
+          A small hall of six pavilions: cards, teachings, the walk, ki, a market and a maker's studio. Nothing is for sale yet; prices are coming soon.
+        </p>
+        <div class="welcome-actions">
+          <button id="welcome-enter" class="welcome-btn welcome-btn-primary">Enter the Market</button>
+          <button id="welcome-wander" class="welcome-btn welcome-btn-ghost">Let me wander</button>
+        </div>
+        <div class="welcome-crew">
+          <span class="welcome-crew-label">six wanderers and merchants</span>
+          <div class="welcome-crew-list">
+            <span style="color:#2d8a5a">Willow</span><span class="welcome-dot">·</span>
+            <span style="color:#7a8a1c">Ridge</span><span class="welcome-dot">·</span>
+            <span style="color:#2f7aa6">Cedar</span><span class="welcome-dot">·</span>
+            <span style="color:#6b4fb0">Tea</span><span class="welcome-dot">·</span>
+            <span style="color:#c4577a">Lantern</span><span class="welcome-dot">·</span>
+            <span style="color:#a67c00">Brush</span>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-hint">
+        WASD / Arrows or the on-screen pad to walk · Tap a floor tile to pathfind · <strong>Fit World</strong> shows the whole hall
+      </div>
+    </div>
+
+    <!-- ── Greeter Choices ── -->
+    <div id="greeter-choices" class="greeter-choices hidden">
+      <button id="choice-tour" class="greeter-choice-btn">⊡ Show all 6 pavilions</button>
+      <button id="choice-explore" class="greeter-choice-btn greeter-choice-secondary">I'll explore on my own</button>
+    </div>
+
+    <div id="game-container-wrapper">
+      <!-- Wide-Viewport Top HUD Bar -->
+      <div id="top-bar">
+        <div class="topbar-status-group">
+          <span id="player-status-dot" class="player-status-dot" style="background:#3DBF7A"></span>
+          <span id="player-status-name" class="player-status-name" style="color:#3DBF7A">Willow</span>
+          <span id="player-status-zone" class="player-status-zone">Market Hall</span>
+          <span id="topbar-nearby" class="topbar-nearby hidden"></span>
+        </div>
+
+        <!-- Quick character switcher Pills (Desktop/Tablet) -->
+        <div class="topbar-crew-pills" role="group" aria-label="Switch active character">
+          <button type="button" class="crew-pill active" data-quick-bot="spark" style="--c:#3DBF7A">Willow</button>
+          <button type="button" class="crew-pill" data-quick-bot="atlas" style="--c:#A8B83A">Ridge</button>
+          <button type="button" class="crew-pill" data-quick-bot="tether" style="--c:#4A9BC7">Cedar</button>
+          <button type="button" class="crew-pill" data-quick-bot="kinetic" style="--c:#8B6BC9">Tea</button>
+          <button type="button" class="crew-pill" data-quick-bot="ying" style="--c:#E07A9B">Lantern</button>
+          <button type="button" class="crew-pill" data-quick-bot="canvas" style="--c:#D4A017">Brush</button>
+        </div>
+
+        <!-- Camera Viewport Controls -->
+        <div id="canvas-chrome" aria-label="Camera controls">
+          <button type="button" id="pan-tool-btn" class="chrome-btn chrome-icon" title="Pan camera tool (H or Space+Drag)" aria-pressed="false">✋</button>
+          <button type="button" id="zoom-out-btn" class="chrome-btn" title="Zoom out (−)">−</button>
+          <span id="zoom-level" class="zoom-level">150%</span>
+          <button type="button" id="zoom-in-btn" class="chrome-btn" title="Zoom in (+)">+</button>
+          <button type="button" id="zoom-fit-btn" class="chrome-btn chrome-wide" title="Fit the entire 28×18 Market Hall in the viewport">⊡ Fit World</button>
+          <button type="button" id="zoom-focus-btn" class="chrome-btn chrome-wide" title="Centre & follow the active character">🎯 Focus</button>
+        </div>
+      </div>
+
+      <!-- Full-Width Camera Viewport -->
+      <div id="phaser-canvas-parent">
+        <!-- Touch controls overlay (shown on coarse pointers only) -->
+        <div id="touch-controls" aria-label="Touch controls">
+          <div class="dpad">
+            <button type="button" id="dpad-up" class="dpad-btn dpad-up" aria-label="Up">▲</button>
+            <button type="button" id="dpad-left" class="dpad-btn dpad-left" aria-label="Left">◀</button>
+            <button type="button" id="dpad-down" class="dpad-btn dpad-down" aria-label="Down">▼</button>
+            <button type="button" id="dpad-right" class="dpad-btn dpad-right" aria-label="Right">▶</button>
+          </div>
+          <div class="ab-buttons">
+            <button type="button" id="btn-b" class="ab-btn ab-b" aria-label="B (place or clear a stone)">B</button>
+            <button type="button" id="btn-a" class="ab-btn ab-a" aria-label="A (talk)">A</button>
+          </div>
+        </div>
+
+        <!-- Centered RPG Dialog Box -->
+        <div id="dialog-box" class="dialog-speaker-row-wrap dialog-box">
+          <div class="dialog-speaker-row"><span id="dialog-speaker" style="color:#3DBF7A">Willow</span></div>
+          <p id="dialog-text">Ready when you are.</p>
+          <span class="dialog-arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- Bottom Drawer (Crew, Nearby, Zone Content & Brief) -->
+      <div id="bottom-drawer" class="bottom-drawer">
+        <div class="drawer-header-row">
+          <button type="button" id="drawer-tab" class="drawer-tab" aria-expanded="false">
+            <span class="drawer-tab-label">Roster, Pavilions &amp; Market</span>
+            <span class="drawer-tab-caret">▲</span>
+          </button>
+          <div class="drawer-tabs" id="drawer-tabs">
+            <button type="button" class="drawer-tab-btn active" data-tab="roster">Roster (6)</button>
+            <button type="button" class="drawer-tab-btn" data-tab="content">Pavilion</button>
+            <button type="button" class="drawer-tab-btn" data-tab="nearby">Nearby</button>
+            <button type="button" class="drawer-tab-btn" data-tab="market">Market</button>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div id="drawer-panel-roster" class="drawer-panel active">
+            <div class="drawer-panel-title">The Six</div>
+            <p class="drawer-panel-desc">Pick a wanderer to walk as, and the camera jumps to their pavilion.</p>
+            <div id="bot-selector-grid">
+              <button class="bot-btn active" data-bot="spark" style="--bot-color: #3DBF7A;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Willow</span>
+                <span class="bot-role">Card Keeper · Card Stall</span>
+              </button>
+              <button class="bot-btn" data-bot="atlas" style="--bot-color: #A8B83A;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Ridge</span>
+                <span class="bot-role">Teacher · Teaching Hall</span>
+              </button>
+              <button class="bot-btn" data-bot="tether" style="--bot-color: #4A9BC7;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Cedar</span>
+                <span class="bot-role">Wayfinder · The Walk Gate</span>
+              </button>
+              <button class="bot-btn" data-bot="kinetic" style="--bot-color: #8B6BC9;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Tea</span>
+                <span class="bot-role">Breath Keeper · Ki Pavilion</span>
+              </button>
+              <button class="bot-btn" data-bot="ying" style="--bot-color: #E07A9B;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Lantern</span>
+                <span class="bot-role">Merchant · Market Plaza</span>
+              </button>
+              <button class="bot-btn" data-bot="canvas" style="--bot-color: #D4A017;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Brush</span>
+                <span class="bot-role">Maker · Studio</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="drawer-panel-nearby" class="drawer-panel">
+            <div class="drawer-panel-title">Nearby</div>
+            <div id="nearby-bot" class="nearby-panel">
+              <span class="nearby-empty">Walk near someone · press A / E to talk</span>
+            </div>
+          </div>
+
+          <div id="drawer-panel-content" class="drawer-panel">
+            <div class="drawer-panel-title">This pavilion</div>
+            <div id="zone-content" class="content-panel">
+              <span class="nearby-empty">Step onto a coloured pavilion rug to see what lives there.</span>
+            </div>
+            <div class="story-feed">
+              <div class="drawer-panel-title">Feed</div>
+              <div id="bot-console">
+                <div class="console-line system">[Market]: Welcome to the hall. All 6 pavilions are open.</div>
+                <div class="console-line bot-msg" id="bot-live-msg">
+                  <span class="console-name" style="color: #3DBF7A;">Willow:</span> Ready when you are.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="drawer-panel-market" class="drawer-panel">
+            <MarketCatalog />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </main>
+
+  <script>
+    import { startAetherGame } from '../game/main';
+
+    let gameInstance: any = null;
+    function init() {
+      if (!gameInstance && document.getElementById('phaser-canvas-parent')) {
+        gameInstance = startAetherGame();
+      }
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      init();
+    } else {
+      window.addEventListener('DOMContentLoaded', init);
+    }
+  </script>
+</BaseLayout>

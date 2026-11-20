@@ -1,0 +1,54 @@
+---
+import { MARKET_SECTIONS } from '../data/market';
+---
+
+<div class="market-catalog">
+  <p class="market-intro">
+    Nothing is on sale yet. These are the things being prepared; prices are <strong>coming soon</strong>.
+    No random draws, no pay-to-win.
+  </p>
+
+  {MARKET_SECTIONS.map((section) => (
+    <section class="market-section" aria-labelledby={`market-${section.id}`}>
+      <h3 class="market-section-title" id={`market-${section.id}`}>{section.title}</h3>
+      <p class="market-section-note">{section.note}</p>
+      <ul class="market-grid">
+        {section.items.map((item) => (
+          <li class="market-card">
+            <div class="market-card-name">{item.name}</div>
+            <p class="market-card-blurb">{item.blurb}</p>
+            {item.contents && (
+              <details class="market-card-contents">
+                <summary>What is inside ({item.contents.length})</summary>
+                <ul>
+                  {item.contents.map((c) => <li>{c}</li>)}
+                </ul>
+              </details>
+            )}
+            <div class="market-card-foot">
+              <span class="market-price">{item.price}</span>
+              <button type="button" class="market-buy" disabled aria-disabled="true">Not yet available</button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</div>
+
+<style is:global>
+  .market-catalog { display: flex; flex-direction: column; gap: 14px; }
+  .market-intro { margin: 0; font-size: 0.84rem; color: var(--gb-ink); }
+  .market-section-title { margin: 6px 0 0; font-family: var(--font-pixel); font-size: 10px; color: var(--gb-ink); }
+  .market-section-note { margin: 2px 0 8px; font-size: 0.78rem; color: #5b4a33; }
+  .market-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .market-card { background: var(--gb-ui); border: 2px solid var(--gb-border); border-radius: 4px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 3px 0 var(--gb-border); }
+  .market-card-name { font-weight: 800; font-size: 0.9rem; color: var(--gb-ink); }
+  .market-card-blurb { margin: 0; font-size: 0.78rem; color: #5b4a33; }
+  .market-card-contents { font-size: 0.76rem; color: var(--gb-ink); }
+  .market-card-contents summary { cursor: pointer; font-weight: 700; }
+  .market-card-contents ul { margin: 4px 0 0 16px; padding: 0; }
+  .market-card-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: auto; }
+  .market-price { font-family: var(--font-pixel); font-size: 8px; color: #7a4a1a; }
+  .market-buy { font-family: var(--font-ui); font-size: 0.74rem; font-weight: 700; padding: 6px 10px; border: 2px solid var(--gb-border); border-radius: 4px; background: var(--gb-ui-dark); color: #5b4a33; cursor: not-allowed; }
+</style>

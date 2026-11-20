@@ -243,21 +243,27 @@ export class TextureGenerator {
       this.px(ctx, 25, 10, 2, 2, '#f0d878');
     }, 'tile-table');
 
-    // ── Server / K8s Cluster Rack (code 8) ──
+    // ── Scroll and tea rack (code 8) ──
     make((ctx) => {
       this.px(ctx, 0, 0, T, T, P.grass);
       // shadow
       this.px(ctx, 4, 26, 24, 4, P.shadow);
-      // rack chassis
-      this.px(ctx, 5, 2, 22, 26, '#1e293b');
-      this.px(ctx, 5, 2, 22, 3, '#334155');
-      this.px(ctx, 7, 6, 18, 20, '#0f172a');
-      // blade servers + blinking LEDs
-      for (const by of [8, 13, 18, 23]) {
-        this.px(ctx, 8, by, 16, 3, '#1e293b');
-        this.px(ctx, 9, by + 1, 2, 1, '#22d3ee');
-        this.px(ctx, 12, by + 1, 2, 1, '#34d399');
-        this.px(ctx, 16, by + 1, 6, 1, '#475569');
+      // wooden frame
+      this.px(ctx, 5, 2, 22, 26, P.woodDark);
+      this.px(ctx, 5, 2, 22, 3, P.woodLight);
+      this.px(ctx, 7, 6, 18, 20, '#3a2818');
+      // hanging scrolls
+      for (const [sx, col] of [[8, '#f8f0d8'], [13, '#e8dcc0'], [18, '#f8f0d8']] as [number, string][]) {
+        this.px(ctx, sx, 7, 4, 10, col);
+        this.px(ctx, sx, 7, 4, 1, '#c4783a');
+        this.px(ctx, sx, 16, 4, 1, '#c4783a');
+        this.px(ctx, sx + 1, 9, 2, 1, '#8a7355');
+        this.px(ctx, sx + 1, 12, 2, 1, '#8a7355');
+      }
+      // tea cups on the lower shelf
+      for (const cx of [9, 14, 19]) {
+        this.px(ctx, cx, 20, 4, 3, '#d4a017');
+        this.px(ctx, cx + 1, 19, 2, 1, '#f0d878');
       }
     }, 'tile-server');
 
@@ -350,7 +356,7 @@ export class TextureGenerator {
       spark: { skin: '#F5D0B0', hair: '#E8A838', pants: this.mixHex(p.color, '#1d2418', 0.5), prop: 'spark' },
       tether: { skin: '#E8C4A8', hair: '#4A6FA5', pants: this.mixHex(p.color, '#1d2418', 0.5), prop: 'cable' },
       atlas: { skin: '#D4A574', hair: '#3D3429', pants: this.mixHex(p.color, '#1d2418', 0.5), prop: 'book' },
-      // Canvas, the Lens: near-black short crop (same ink as the shoes, so it costs no
+      // Brush (canvas key), the Maker: near-black short crop (same ink as the shoes, so it costs no
       // palette slot), broad build, small camera with a glass-blue lens pixel.
       canvas: {
         skin: '#B98058',
@@ -362,7 +368,7 @@ export class TextureGenerator {
         broad: true,
       },
       kinetic: { skin: '#C9956C', hair: '#2A1F3D', pants: this.mixHex(p.color, '#1d2418', 0.5), prop: 'wrench' },
-      // Ying, the Hermes chair: long dark hair (shoe ink again), sea-teal wave prop.
+      // Lantern (ying key), the Merchant: long dark hair (shoe ink again), sea-teal wave prop.
       ying: {
         skin: '#F3D9C4',
         hair: '#2a2418',

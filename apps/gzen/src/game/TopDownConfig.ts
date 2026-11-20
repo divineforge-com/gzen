@@ -1,6 +1,6 @@
 /**
  * Top-Down Projection Configuration and Coordinate Conversion Helpers
- * Wide-viewport 2D Emporium Hall: flat 32x32 grid tiles, crisp pixel art,
+ * Wide-viewport 2D Market Hall: flat 32x32 grid tiles, crisp pixel art,
  * dynamic camera viewport that scales with browser width.
  */
 
@@ -13,7 +13,7 @@ export const TOPDOWN_CONFIG = {
   /** Size of one grid tile in world pixels (flat square) */
   tileSize: 32,
 
-  /** Wide Emporium Hall footprint (28 columns × 18 rows = 896×576 world px) */
+  /** Wide Market Hall footprint (28 columns × 18 rows = 896×576 world px) */
   gridSizeX: 28,
   gridSizeY: 18,
 

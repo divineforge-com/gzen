@@ -8,6 +8,8 @@ interface Props {
   /** Social preview image, path under /public or absolute URL. */
   image?: string;
   imageAlt?: string;
+  /** Load the AdSense script. Off on game canvases (/world, /sanctuary, /market). */
+  ads?: boolean;
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   description = site.description,
   image = "/assets/game-design/world-four-zones.jpg",
   imageAlt = "Low-poly concept of four sanctuary islands joined by stone paths",
+  ads = true,
 } = Astro.props;
 // Per-page canonical: the page's own path on the production origin (not the site root).
 const canonical = new URL(Astro.url.pathname, site.url).href;
@@ -49,12 +52,16 @@ const ogImage = new URL(image, site.url).href;
     <meta name="theme-color" content="#fafafa" id="meta-theme-color" />
     <meta name="color-scheme" content="light" />
     <meta name="google-adsense-account" content="ca-pub-0491250494506886" />
-    <!-- Google AdSense Official Script Tag -->
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0491250494506886"
-      crossorigin="anonymous"
-    ></script>
+    {ads && (
+      <>
+        <!-- Google AdSense Official Script Tag -->
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0491250494506886"
+          crossorigin="anonymous"
+        ></script>
+      </>
+    )}
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />

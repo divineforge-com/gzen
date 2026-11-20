@@ -2,7 +2,7 @@
 import { CARD_COUNT } from '../data/zen-cards';
 
 interface Props {
-  activeTab?: 'home' | 'cards' | 'sanctuary' | 'game-design' | 'enlight' | 'world';
+  activeTab?: 'home' | 'cards' | 'sanctuary' | 'game-design' | 'enlight' | 'world' | 'market';
 }
 
 const { activeTab = 'home' } = Astro.props;
@@ -12,7 +12,8 @@ const navItems = [
   { href: '/cards', label: 'Zen Cards', kanji: '卡', id: 'cards', badge: String(CARD_COUNT) },
   { href: '/enlight', label: 'Contemplation', kanji: '悟', id: 'enlight' },
   { href: '/world', label: 'Walk the World', kanji: '界', id: 'world', isPrimary: true, isLive: true },
-  { href: '/sanctuary', label: '3D Sanctuary', kanji: '遊', id: 'sanctuary', isLive: true }
+  { href: '/sanctuary', label: '3D Sanctuary', kanji: '遊', id: 'sanctuary', isLive: true },
+  { href: '/market', label: 'Market', kanji: '市', id: 'market' }
 ];
 ---
 

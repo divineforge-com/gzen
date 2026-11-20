@@ -567,6 +567,7 @@ main.main-fullbleed {
 
 .content-teaser {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
   padding: 7px 10px;
@@ -589,7 +590,7 @@ main.main-fullbleed {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--gb-accent);
+  color: #8a4a14;
   min-width: 48px;
   flex-shrink: 0;
 }
@@ -662,84 +663,6 @@ main.main-fullbleed {
   color: var(--gb-ink);
   border-left: 2px solid var(--gb-border);
   padding-left: 8px;
-}
-
-/* Consultation form */
-.consult-form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  max-width: 680px;
-}
-
-.consult-textarea,
-.consult-submit,
-.consult-status {
-  grid-column: 1 / -1;
-}
-
-.consult-input {
-  font-family: var(--font-ui);
-  font-size: 0.84rem;
-  padding: 9px 12px;
-  border: 2px solid var(--gb-border);
-  border-radius: 4px;
-  background: var(--gb-ui);
-  color: var(--gb-ink);
-  outline: none;
-  transition: border-color 0.15s;
-}
-
-.consult-input:focus {
-  border-color: var(--gb-accent);
-}
-
-.consult-textarea {
-  resize: vertical;
-  min-height: 52px;
-}
-
-.consult-submit {
-  font-family: var(--font-pixel);
-  font-size: 9px;
-  padding: 11px 16px;
-  border-radius: 4px;
-  border: 2px solid var(--gb-border);
-  background: var(--gb-accent);
-  color: var(--gb-ui);
-  cursor: pointer;
-  box-shadow: 0 3px 0 var(--gb-border);
-  transition: transform 0.1s, background 0.15s;
-  justify-self: start;
-}
-
-.consult-submit:hover {
-  background: #b06830;
-}
-
-.consult-submit:active {
-  transform: translateY(3px);
-  box-shadow: none;
-}
-
-.consult-status {
-  font-size: 0.78rem;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin: 0;
-  font-weight: 600;
-}
-
-.consult-status.success {
-  background: rgba(61, 191, 122, 0.14);
-  color: #2d8a5a;
-  border: 1px solid rgba(61, 191, 122, 0.4);
-}
-
-.consult-status.error {
-  background: rgba(255, 107, 107, 0.14);
-  color: #c0392b;
-  border: 1px solid rgba(255, 107, 107, 0.4);
 }
 
 /* ── Touch controls (coarse pointers only) ── */
@@ -1069,4 +992,23 @@ main.main-fullbleed {
 #bot-console::-webkit-scrollbar-thumb {
   background: var(--gb-border);
   border-radius: 4px;
+}
+
+/* Zone content (Market) */
+.content-teaser-hook {
+  display: block;
+  flex-basis: 100%;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #5b4a33;
+  padding-left: 56px;
+}
+
+button.content-zone-link {
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  text-align: left;
 }

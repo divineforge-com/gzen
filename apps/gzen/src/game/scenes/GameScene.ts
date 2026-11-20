@@ -38,7 +38,7 @@ export class GameScene extends Phaser.Scene {
   private nearbyKey: string | null = null;
   private lastProximityGreet = 0;
   private keyMoveCooldown = 0;
-  /** When true, camera frames the full 28×18 Emporium Hall until player moves or clicks Focus */
+  /** When true, camera frames the full 28×18 Market Hall until player moves or clicks Focus */
   private overviewMode = false;
 
   /** Touch overlay virtual keys (movement held, A/B one-shot) */
@@ -59,6 +59,7 @@ export class GameScene extends Phaser.Scene {
 
   // ── Phase 2: Content manifest ──
   private contentManifest: any = null;
+  private renderedZoneId: string | null | undefined = undefined;
 
   private lastStatusPos = { x: -1, y: -1 };
 
@@ -141,14 +142,14 @@ export class GameScene extends Phaser.Scene {
     this.input.on('pointermove', (p: Phaser.Input.Pointer) => this.handlePointerMove(p));
     this.input.on('pointerdown', (p: Phaser.Input.Pointer) => this.handlePointerDown(p));
 
-    // On wide viewports, start with the wide camera framing the entire Emporium Hall
+    // On wide viewports, start with the wide camera framing the entire Market Hall
     if (cam.width >= 900) {
       this.fitWholeWorld();
     } else {
       this.focusOnPlayer(initialZoom);
     }
 
-    this.logConsole('SYSTEM', 'The Emporium floor is open — WASD/Arrows to walk, click any tile to pathfind, or use Fit World to view all 6 pavilions.', 'system');
+    this.logConsole('SYSTEM', 'The Market is open — WASD/Arrows (or the on-screen pad) to walk, tap a tile to pathfind, or use Fit World to see all 6 pavilions.', 'system');
     this.logConsole(
       this.botManager.getActiveBot().name,
       this.botManager.getRandomQuote('select'),
@@ -159,7 +160,6 @@ export class GameScene extends Phaser.Scene {
     this.updateNearbyPanel(null);
     this.setupWelcomeOverlay();
     this.loadContentManifest();
-    this.setupConsultForm();
   }
 
   shutdown() {
@@ -526,7 +526,7 @@ export class GameScene extends Phaser.Scene {
     );
   }
 
-  /** Zoom and center camera so the entire 28×18 Emporium Hall fills the viewport */
+  /** Zoom and center camera so the entire 28×18 Market Hall fills the viewport */
   private fitWholeWorld() {
     this.overviewMode = true;
     const cam = this.cameras.main;
@@ -601,7 +601,7 @@ export class GameScene extends Phaser.Scene {
 
   private interactNearby() {
     if (!this.nearbyKey) {
-      this.logConsole('SYSTEM', 'No bot nearby. Step closer to a zone mate.', 'system');
+      this.logConsole('SYSTEM', 'Nobody nearby. Step closer to a merchant or wanderer.', 'system');
       return;
     }
     const greet = this.botManager.getQuoteFor(this.nearbyKey, 'greet');
@@ -713,7 +713,7 @@ export class GameScene extends Phaser.Scene {
     this.mazeGrid[y][x] = next;
     this.logConsole(
       'SYSTEM',
-      `Voxel [${x},${y}] ${next === 1 ? 'DEPLOYED' : 'CLEARED'}.`,
+      `Stone [${x},${y}] ${next === 1 ? 'placed' : 'cleared'}.`,
       'action'
     );
     this.renderMap();
@@ -853,7 +853,7 @@ export class GameScene extends Phaser.Scene {
     });
     document.getElementById('zoom-fit-btn')?.addEventListener('click', () => {
       this.fitWholeWorld();
-      this.logConsole('SYSTEM', 'Camera widened to show the full 28×18 Emporium Hall.', 'action');
+      this.logConsole('SYSTEM', 'Camera widened to show the full 28×18 Market Hall.', 'action');
     });
     document.getElementById('zoom-reset-btn')?.addEventListener('click', () => {
       this.focusOnPlayer();
@@ -929,7 +929,7 @@ export class GameScene extends Phaser.Scene {
     }
     const zoneEl = document.getElementById('player-status-zone');
     const z = zoneAt(player.gridX, player.gridY);
-    if (zoneEl) zoneEl.textContent = z ? z.label : 'Emporium Grand Hall';
+    if (zoneEl) zoneEl.textContent = z ? z.label : 'Market Hall';
   }
 
   // ═══════════════════════════════════════════════════════════════════
@@ -945,7 +945,7 @@ export class GameScene extends Phaser.Scene {
     if (botParam && this.bots.has(botParam)) {
       this.selectBot(botParam);
     }
-    const skipOverlay = params.get('enter') === '1' || localStorage.getItem('emporium-visited');
+    const skipOverlay = params.get('enter') === '1' || localStorage.getItem('market-visited');
     if (skipOverlay) {
       overlay.classList.add('hidden');
       this.welcomeAccepted = true;
@@ -960,7 +960,7 @@ export class GameScene extends Phaser.Scene {
       overlay.classList.add('fade-out');
       setTimeout(() => overlay.classList.add('hidden'), 400);
       this.welcomeAccepted = true;
-      localStorage.setItem('emporium-visited', '1');
+      localStorage.setItem('market-visited', '1');
       this.triggerGreeter();
     });
 
@@ -968,21 +968,21 @@ export class GameScene extends Phaser.Scene {
       overlay.classList.add('fade-out');
       setTimeout(() => overlay.classList.add('hidden'), 400);
       this.welcomeAccepted = true;
-      localStorage.setItem('emporium-visited', '1');
+      localStorage.setItem('market-visited', '1');
       this.greeterPhase = 'done';
-      this.logConsole('SYSTEM', 'Feel free to explore. Tap any tile to walk or click a Sentinel to switch characters.', 'system');
+      this.logConsole('SYSTEM', 'Feel free to explore. Tap any tile to walk, or pick a wanderer in the roster to switch characters.', 'system');
     });
 
     document.getElementById('choice-tour')?.addEventListener('click', () => {
       document.getElementById('greeter-choices')?.classList.add('hidden');
-      this.logConsole('Tether', 'Great! First stop: the Digital Goods Counter in the North-West wing — that\'s Spark\'s corner.', 'tether');
+      this.logConsole('Cedar', 'Great! First stop: the Card Stall in the north-west wing, that is Willow\'s corner.', 'tether');
       this.greeterPhase = 'done';
       this.fitWholeWorld();
     });
 
     document.getElementById('choice-explore')?.addEventListener('click', () => {
       document.getElementById('greeter-choices')?.classList.add('hidden');
-      this.logConsole('Tether', 'Find me if you get lost. Use Fit World in the top-right camera bar to see all 6 pavilions.', 'tether');
+      this.logConsole('Cedar', 'Find me if you get lost. Fit World in the top-right camera bar shows all 6 pavilions.', 'tether');
       this.greeterPhase = 'done';
     });
   }
@@ -1028,11 +1028,11 @@ export class GameScene extends Phaser.Scene {
       this.time.delayedCall(foundPath.length * 140 + 400, () => {
         this.greeterPhase = 'greeting';
         ying.showSpeech(
-          `Welcome to The Emporium! Six pavilions span this hall — from K8s & Go Blueprints to Digital Goods, gZen, and Developer Tools.`
+          `Welcome to the Market. Six pavilions: cards, teachings, the walk, ki, the market, and the maker's studio.`
         );
         this.logConsole(
           BOT_PROFILES[ying.key].name,
-          'Welcome to The Emporium! Six pavilions span this hall — explore freely or take a quick overview.',
+          'Welcome to the Market. Six pavilions, no rush. Explore freely or take a quick overview.',
           ying.key
         );
 
@@ -1067,7 +1067,7 @@ export class GameScene extends Phaser.Scene {
       const rescueLines = [
         'Still there? Need a hand?',
         'Everything okay? I\'m right here.',
-        'Tip: Click "Fit World" in the top-right to see the whole Emporium!',
+        'Tip: Fit World in the top-right shows the whole Market.',
       ];
       const line = rescueLines[Math.floor(Math.random() * rescueLines.length)] as string;
       (closest as BotEntity).showSpeech(line);
@@ -1098,9 +1098,13 @@ export class GameScene extends Phaser.Scene {
     const z = zoneAt(player.gridX, player.gridY);
     const panel = document.getElementById('zone-content');
     if (!panel) return;
+    // Only re-render when the zone changes, so links and buttons stay clickable.
+    const zoneId = z ? z.id : null;
+    if (zoneId === this.renderedZoneId) return;
+    this.renderedZoneId = zoneId;
 
     if (!z) {
-      panel.innerHTML = '<span class="nearby-empty">Step onto any colored pavilion rug to inspect its blueprints, tools, or starter kits.</span>';
+      panel.innerHTML = '<span class="nearby-empty">Step onto a coloured pavilion rug to see what lives there.</span>';
       return;
     }
 
@@ -1112,61 +1116,21 @@ export class GameScene extends Phaser.Scene {
 
     let html = '';
     for (const t of zoneData.teasers) {
-      const url = zoneData.link.startsWith('http')
-        ? `${zoneData.link}/${t.slug}`.replace(/\/$/, '')
-        : `https://divineforge.com${zoneData.link}/${t.slug}`;
-      html += `<a href="${url}" target="_blank" class="content-teaser">
-        <span class="content-teaser-type">${t.type}</span>
+      const inner = `<span class="content-teaser-type">${t.type}</span>
         <span class="content-teaser-title">${t.title}</span>
-      </a>`;
+        <span class="content-teaser-hook">${t.hook || ''}</span>`;
+      html += t.href
+        ? `<a href="${t.href}" class="content-teaser">${inner}</a>`
+        : `<div class="content-teaser">${inner}</div>`;
     }
-    html += `<a href="${zoneData.link}" target="_blank" class="content-zone-link">All ${zoneData.label} →</a>`;
+    html += zoneData.tab
+      ? `<button type="button" class="content-zone-link" data-open-tab="${zoneData.tab}">${zoneData.cta || zoneData.label} →</button>`
+      : `<a href="${zoneData.link}" class="content-zone-link">${zoneData.cta || zoneData.label} →</a>`;
     panel.innerHTML = html;
-  }
-
-  // ═══════════════════════════════════════════════════════════════════
-  //  Phase 3 — Consultation Intake
-  // ═══════════════════════════════════════════════════════════════════
-
-  private setupConsultForm() {
-    const form = document.getElementById('consult-form') as HTMLFormElement | null;
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = (document.getElementById('consult-name') as HTMLInputElement).value.trim();
-      const email = (document.getElementById('consult-email') as HTMLInputElement).value.trim();
-      const brief = (document.getElementById('consult-brief') as HTMLTextAreaElement).value.trim();
-      const status = document.getElementById('consult-status');
-      const submitBtn = form.querySelector('button') as HTMLButtonElement;
-
-      if (!name || !email) {
-        if (status) { status.textContent = 'Name and email are required.'; status.className = 'consult-status error'; status.classList.remove('hidden'); }
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      try {
-        const res = await fetch('https://www.divineforge.com/api/consult', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, email, brief, source: 'emporium' }),
-        });
-        if (res.ok) {
-          if (status) { status.textContent = 'Brief sent! We\'ll reply within two working days.'; status.className = 'consult-status success'; status.classList.remove('hidden'); }
-          form.reset();
-          this.logConsole('SYSTEM', 'Consultation brief sent. Kinetic will review it.', 'action');
-        } else {
-          throw new Error('Server error');
-        }
-      } catch {
-        if (status) { status.textContent = 'Something went wrong. Email hi@divineforge.com directly.'; status.className = 'consult-status error'; status.className.replace('hidden', ''); status.classList.remove('hidden'); }
-      }
-
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send brief →';
+    panel.querySelectorAll<HTMLElement>('[data-open-tab]').forEach((el) => {
+      el.addEventListener('click', () => {
+        document.querySelector<HTMLElement>(`.drawer-tab-btn[data-tab="${el.dataset.openTab}"]`)?.click();
+      });
     });
   }
 }
