@@ -31,6 +31,7 @@ tiers:
     - ".github/dependabot.yml"
     - ".gitleaks.toml"
     - ".gitleaksignore"
+    - "**/*gitleaks*"
     - ".sops.yaml"
     - "**/.sops.yaml"
     - "**/secrets/**"

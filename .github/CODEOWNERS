@@ -14,6 +14,7 @@ CODEOWNERS @divineforge
 /.github/dependabot.yml @divineforge
 .gitleaks.toml @divineforge
 .gitleaksignore @divineforge
+**/*gitleaks* @divineforge
 .sops.yaml @divineforge
 **/.sops.yaml @divineforge
 **/secrets/** @divineforge
