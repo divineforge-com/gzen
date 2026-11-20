@@ -1,0 +1,92 @@
+name: CI
+
+# Required checks: build, test, gitleaks (see divineforge/sentinel docs/team/OWNERSHIP.md).
+# Scope notes:
+#  - apps/gzen (Astro) has no lint/typecheck/test scripts yet, so CI runs
+#    `npm ci && npm run build` only. Add `astro check` once @astrojs/check is a dev dep.
+#  - Hugo apps (enlight, gzen-invest, gzen-ki, gzen-learn, gzen-om) are build-checked.
+#  - Go (cmd/gzen-tool): build, vet, test (no tests yet).
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HUGO_VERSION: 0.164.0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/gzen/package-lock.json
+      - name: Astro build (apps/gzen)
+        working-directory: apps/gzen
+        run: npm ci --no-audit --no-fund && npm run build
+      - name: Install Hugo extended
+        run: |
+          curl -sSfL -o /tmp/hugo.tgz "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tgz -C /tmp hugo && sudo install /tmp/hugo /usr/local/bin/hugo
+      - name: Hugo builds
+        run: |
+          set -e
+          for a in enlight gzen-invest gzen-ki gzen-learn gzen-om; do
+            echo "::group::$a"; (cd "apps/$a" && hugo --gc --minify -d "/tmp/hugo-$a"); echo "::endgroup::"
+          done
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Go build
+        run: go build ./...
+
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: go vet
+        run: go vet ./...
+      - name: go test
+        run: go test ./...
+
+  gitleaks:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GITLEAKS_VERSION: 8.30.1
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks
+        run: |
+          curl -sSfL -o /tmp/gitleaks.tgz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf /tmp/gitleaks.tgz -C /tmp gitleaks
+          sudo install /tmp/gitleaks /usr/local/bin/gitleaks
+      - name: Scan working tree
+        run: gitleaks dir . --redact --no-banner --exit-code 1 $( [ -f .gitleaks.toml ] && echo --config .gitleaks.toml )
+      - name: Scan PR commits
+        if: github.event_name == 'pull_request'
+        run: |
+          gitleaks git . --redact --no-banner --exit-code 1 $( [ -f .gitleaks.toml ] && echo --config .gitleaks.toml ) \
+            --log-opts="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
