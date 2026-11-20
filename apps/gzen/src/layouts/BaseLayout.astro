@@ -49,6 +49,23 @@ const ogImage = new URL(image, site.url).href;
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content={imageAlt} />
 
+    <!-- Google Analytics 4 (property gzen.io, stream https://gzen.io). Not secret. -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G59M34WW9Y"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // Consent Mode v2: everything denied until a consent banner grants it.
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        wait_for_update: 500
+      });
+      gtag('js', new Date());
+      gtag('config', 'G-G59M34WW9Y');
+    </script>
+
     <meta name="theme-color" content="#fafafa" id="meta-theme-color" />
     <meta name="color-scheme" content="light" />
     <meta name="google-adsense-account" content="ca-pub-0491250494506886" />
