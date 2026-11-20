@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/aether.css';
+
+const description = "An old 2D floor kept for reference. The walk is gzen.io. DivineForge keeps the labs and the writing.";
+---
+
+<BaseLayout title="Emporium — gZen (port preview)" description={description}>
+  <div id="app" class="emporium-stage">
+    <!-- ── Welcome Overlay ── -->
+    <div id="welcome-overlay" class="welcome-overlay">
+      <div class="welcome-card">
+        <h1 class="welcome-title">The Emporium</h1>
+        <p class="welcome-sub">
+          This floor is the old idea. The walk is gzen.io. The labs and the writing stay on DivineForge.
+        </p>
+        <div class="welcome-actions">
+          <button id="welcome-enter" class="welcome-btn welcome-btn-primary">Enter the hall</button>
+          <button id="welcome-wander" class="welcome-btn welcome-btn-ghost">Let me wander</button>
+        </div>
+        <div class="welcome-crew">
+          <span class="welcome-crew-label">the 6 sentinels</span>
+          <div class="welcome-crew-list">
+            <span style="color:#3DBF7A">Spark</span><span class="welcome-dot">·</span>
+            <span style="color:#A8B83A">Atlas</span><span class="welcome-dot">·</span>
+            <span style="color:#4A9BC7">Tether</span><span class="welcome-dot">·</span>
+            <span style="color:#8B6BC9">Kinetic</span><span class="welcome-dot">·</span>
+            <span style="color:#E07A9B">Ying</span><span class="welcome-dot">·</span>
+            <span style="color:#D4A017">Canvas</span>
+          </div>
+        </div>
+      </div>
+      <div class="welcome-hint">
+        WASD / Arrows to walk · Click any floor tile to pathfind · Scroll or click <strong>Fit World</strong> to zoom the camera
+      </div>
+    </div>
+
+    <!-- ── Greeter Choices ── -->
+    <div id="greeter-choices" class="greeter-choices hidden">
+      <button id="choice-tour" class="greeter-choice-btn">⊡ Zoom out &amp; show all 6 pavilions</button>
+      <button id="choice-explore" class="greeter-choice-btn greeter-choice-secondary">I'll explore on my own</button>
+    </div>
+
+    <div id="game-container-wrapper">
+      <!-- Wide-Viewport Top HUD Bar -->
+      <div id="top-bar">
+        <div class="topbar-status-group">
+          <span id="player-status-dot" class="player-status-dot" style="background:#3DBF7A"></span>
+          <span id="player-status-name" class="player-status-name" style="color:#3DBF7A">Spark</span>
+          <span id="player-status-zone" class="player-status-zone">Emporium Grand Hall</span>
+          <span id="topbar-nearby" class="topbar-nearby hidden"></span>
+        </div>
+
+        <!-- Quick Sentinel Switcher Pills (Desktop/Tablet) -->
+        <div class="topbar-crew-pills" role="group" aria-label="Switch active Sentinel">
+          <button type="button" class="crew-pill active" data-quick-bot="spark" style="--c:#3DBF7A">Spark</button>
+          <button type="button" class="crew-pill" data-quick-bot="atlas" style="--c:#A8B83A">Atlas</button>
+          <button type="button" class="crew-pill" data-quick-bot="tether" style="--c:#4A9BC7">Tether</button>
+          <button type="button" class="crew-pill" data-quick-bot="kinetic" style="--c:#8B6BC9">Kinetic</button>
+          <button type="button" class="crew-pill" data-quick-bot="ying" style="--c:#E07A9B">Ying</button>
+          <button type="button" class="crew-pill" data-quick-bot="canvas" style="--c:#D4A017">Canvas</button>
+        </div>
+
+        <!-- Camera Viewport Controls -->
+        <div id="canvas-chrome" aria-label="Camera controls">
+          <button type="button" id="pan-tool-btn" class="chrome-btn chrome-icon" title="Pan camera tool (H or Space+Drag)" aria-pressed="false">✋</button>
+          <button type="button" id="zoom-out-btn" class="chrome-btn" title="Zoom out (−)">−</button>
+          <span id="zoom-level" class="zoom-level">150%</span>
+          <button type="button" id="zoom-in-btn" class="chrome-btn" title="Zoom in (+)">+</button>
+          <button type="button" id="zoom-fit-btn" class="chrome-btn chrome-wide" title="Fit entire 28×18 Emporium Hall in viewport">⊡ Fit World</button>
+          <button type="button" id="zoom-focus-btn" class="chrome-btn chrome-wide" title="Center & follow active Sentinel">🎯 Focus</button>
+        </div>
+      </div>
+
+      <!-- Full-Width Camera Viewport -->
+      <div id="phaser-canvas-parent">
+        <!-- Touch controls overlay (shown on coarse pointers only) -->
+        <div id="touch-controls" aria-label="Touch controls">
+          <div class="dpad">
+            <button type="button" id="dpad-up" class="dpad-btn dpad-up" aria-label="Up">▲</button>
+            <button type="button" id="dpad-left" class="dpad-btn dpad-left" aria-label="Left">◀</button>
+            <button type="button" id="dpad-down" class="dpad-btn dpad-down" aria-label="Down">▼</button>
+            <button type="button" id="dpad-right" class="dpad-btn dpad-right" aria-label="Right">▶</button>
+          </div>
+          <div class="ab-buttons">
+            <button type="button" id="btn-b" class="ab-btn ab-b" aria-label="B (build)">B</button>
+            <button type="button" id="btn-a" class="ab-btn ab-a" aria-label="A (chat)">A</button>
+          </div>
+        </div>
+
+        <!-- Centered RPG Dialog Box -->
+        <div id="dialog-box" class="dialog-box">
+          <div class="dialog-speaker-row"><span id="dialog-speaker" style="color:#3DBF7A">Spark</span></div>
+          <p id="dialog-text">Ready when you are.</p>
+          <span class="dialog-arrow">▼</span>
+        </div>
+      </div>
+
+      <!-- Bottom Drawer (Crew, Nearby, Zone Content & Brief) -->
+      <div id="bottom-drawer" class="bottom-drawer">
+        <div class="drawer-header-row">
+          <button type="button" id="drawer-tab" class="drawer-tab" aria-expanded="false">
+            <span class="drawer-tab-label">Crew, Zone Blueprints &amp; Digital Goods</span>
+            <span class="drawer-tab-caret">▲</span>
+          </button>
+          <div class="drawer-tabs" id="drawer-tabs">
+            <button type="button" class="drawer-tab-btn active" data-tab="roster">Roster (6)</button>
+            <button type="button" class="drawer-tab-btn" data-tab="content">Zone Goods &amp; Guides</button>
+            <button type="button" class="drawer-tab-btn" data-tab="nearby">Nearby</button>
+            <button type="button" class="drawer-tab-btn" data-tab="consult">Send Brief</button>
+          </div>
+        </div>
+        <div class="drawer-body">
+          <div id="drawer-panel-roster" class="drawer-panel active">
+            <div class="drawer-panel-title">Emporium Sentinel Roster</div>
+            <p class="drawer-panel-desc">Click any Sentinel card to possess them and jump the camera to their pavilion.</p>
+            <div id="bot-selector-grid">
+              <button class="bot-btn active" data-bot="spark" style="--bot-color: #3DBF7A;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Spark</span>
+                <span class="bot-role">Catalyst · Digital Goods</span>
+              </button>
+              <button class="bot-btn" data-bot="atlas" style="--bot-color: #A8B83A;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Atlas</span>
+                <span class="bot-role">Anchor · K8s &amp; Go Vault</span>
+              </button>
+              <button class="bot-btn" data-bot="tether" style="--bot-color: #4A9BC7;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Tether</span>
+                <span class="bot-role">Weaver · gZen &amp; Portals</span>
+              </button>
+              <button class="bot-btn" data-bot="kinetic" style="--bot-color: #8B6BC9;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Kinetic</span>
+                <span class="bot-role">Builder · Tools Forge</span>
+              </button>
+              <button class="bot-btn" data-bot="ying" style="--bot-color: #E07A9B;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Ying</span>
+                <span class="bot-role">Hermes · STACKY Plaza</span>
+              </button>
+              <button class="bot-btn" data-bot="canvas" style="--bot-color: #D4A017;">
+                <span class="bot-indicator"></span>
+                <span class="bot-name">Canvas</span>
+                <span class="bot-role">Lens · Satire Studio</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="drawer-panel-nearby" class="drawer-panel">
+            <div class="drawer-panel-title">Nearby Teammate</div>
+            <div id="nearby-bot" class="nearby-panel">
+              <span class="nearby-empty">Walk near a teammate · press A / E to chat</span>
+            </div>
+          </div>
+
+          <div id="drawer-panel-content" class="drawer-panel">
+            <div class="drawer-panel-title">Pavilion Goods &amp; Architecture Blueprints</div>
+            <div id="zone-content" class="content-panel">
+              <span class="nearby-empty">Step onto any colored pavilion rug to inspect its blueprints, tools, or starter kits.</span>
+            </div>
+            <div class="story-feed">
+              <div class="drawer-panel-title">Live World Feed</div>
+              <div id="bot-console">
+                <div class="console-line system">[Emporium]: Welcome to the wide 28×18 floor. All 6 pavilions are open.</div>
+                <div class="console-line bot-msg" id="bot-live-msg">
+                  <span class="console-name" style="color: #3DBF7A;">Spark:</span> Ready when you are.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="drawer-panel-consult" class="drawer-panel">
+            <div class="drawer-panel-title">Request Custom Kit or Architecture Brief</div>
+            <p class="drawer-panel-desc">Tell us what you are building. One email, one reply.</p>
+            <form id="consult-form" class="consult-form" action="mailto:hi@divineforge.com" method="get">
+              <input type="text" id="consult-name" placeholder="Your name" required class="consult-input" />
+              <input type="email" id="consult-email" placeholder="Your email" required class="consult-input" />
+              <textarea id="consult-brief" placeholder="What are you building? (optional)" rows="2" class="consult-input consult-textarea"></textarea>
+              <button type="submit" class="consult-submit">Send brief →</button>
+              <p id="consult-status" class="consult-status hidden"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { startAetherGame } from '../game/main';
+
+    let gameInstance: any = null;
+    function init() {
+      if (!gameInstance && document.getElementById('phaser-canvas-parent')) {
+        gameInstance = startAetherGame();
+      }
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      init();
+    } else {
+      window.addEventListener('DOMContentLoaded', init);
+    }
+  </script>
+</BaseLayout>

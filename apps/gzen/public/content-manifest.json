@@ -1,0 +1,58 @@
+{
+  "updated": "2026-10-25",
+  "zones": {
+    "atlas-vault": {
+      "label": "Architecture & Engineering Blueprints",
+      "link": "https://divineforge.com/writing",
+      "teasers": [
+        {"title": "Kubernetes Architecture & Self-Healing Lab", "type": "Kubernetes", "slug": "2026.1025-kubernetes-architecture-self-healing-visual-guide", "hook": "Control Plane, etcd, and interactive Pod OOMKill self-healing simulator."},
+        {"title": "Game Engine Architecture: Unity, Three.js & Phaser", "type": "Game Dev", "slug": "2026.1025-game-engine-architecture-unity-threejs-phaser", "hook": "Inside the 16.67ms 60FPS frame loop, ECS vs Scene Graphs, and GLSL shaders."},
+        {"title": "Concurrency Patterns in Go", "type": "Golang", "slug": "2026.0716-concurrency-patterns-in-go", "hook": "Goroutines, channels, Fan-Out/Fan-In worker pools, and interactive CSP lab."},
+        {"title": "Guide to REST APIs with net/http", "type": "Golang", "slug": "2026.0716-guide-to-rest-apis-with-net-http", "hook": "Building clean, idiomatic REST APIs in Go 1.22+ with zero framework bloat."},
+        {"title": "Agentic Self-Building Loop", "type": "Architecture", "slug": "2026.0524-agentic-self-building-loop", "hook": "The architecture behind an AI agent that improves itself."}
+      ]
+    },
+    "canvas-studio": {
+      "label": "Satire & Culture",
+      "link": "https://divineforge.com/satire",
+      "teasers": [
+        {"title": "The Architecture Review Board That Reviews Architecture", "type": "Satire", "slug": "2025.1124-the-architecture-review-board", "hook": "Governance theatre, observed and named."},
+        {"title": "The Quick Sync That Wasn't", "type": "Satire", "slug": "2025.0108-the-quick-sync-that-wasnt", "hook": "37 minutes later, nobody remembered the agenda."},
+        {"title": "The Demo That Became the Product", "type": "Satire", "slug": "2026.0131-the-demo-that-became-the-product", "hook": "Six months of polishing a presentation nobody asked for."}
+      ]
+    },
+    "spark-bay": {
+      "label": "Digital Goods & Starter Kits",
+      "link": "https://gumroad.com",
+      "teasers": [
+        {"title": "Autonomous Agent Starter Kit", "type": "Product", "slug": "agent-starter-kit", "hook": "Multi-agent harness, memory pipelines, and tool bundles for production."},
+        {"title": "Go Microservice & Daemon Boilerplate", "type": "Software", "slug": "go-daemon-kit", "hook": "Low-footprint Go 1.24 systemd service templates with zero bloat."},
+        {"title": "Obsidian Knowledge OS Bundle", "type": "Digital Good", "slug": "obsidian-knowledge-os", "hook": "Structured graph PKM with automated AI research and sync pipelines."}
+      ]
+    },
+    "tether-hub": {
+      "label": "gZen Zen Gaming Portal",
+      "link": "https://gzen.io",
+      "teasers": [
+        {"title": "Walkable World (/world)", "type": "Game", "slug": "gzen-world", "hook": "3rd-person low-poly wanderer across Jiangnan, Bamboo, Himalaya, and Fjord."},
+        {"title": "Zen Cards & Diorama", "type": "Product", "slug": "gzen-sanctuary", "hook": "Calm mindfulness interactive dioramas and collection."}
+      ]
+    },
+    "kinetic-forge": {
+      "label": "Developer Tools & Code",
+      "link": "https://github.com/divineforge",
+      "teasers": [
+        {"title": "Sentinel & Ombridge Daemons", "type": "Tool", "slug": "sentinel-daemon", "hook": "High-efficiency local reverse proxy and autonomous agent bridge."},
+        {"title": "Pagefind Instant Search", "type": "Tool", "slug": "pagefind-search", "hook": "Zero-server, 0ms static search engine implementation."}
+      ]
+    },
+    "ying-tidepool": {
+      "label": "Advocacy, X (@divineforge) & STACKY",
+      "link": "https://x.com/divineforge",
+      "teasers": [
+        {"title": "DivineForge on X (@divineforge)", "type": "Advocacy", "slug": "", "hook": "Build-in-public threads, visual architecture simulators, and open engineering exchange."},
+        {"title": "STACKY Sentinel Swarm", "type": "System", "slug": "", "hook": "Spark, Tether, Atlas, Canvas, Kinetic, and Ying coordinating 24/7 autonomous ops."}
+      ]
+    }
+  }
+}
