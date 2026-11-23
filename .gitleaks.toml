@@ -1,0 +1,14 @@
+# gitleaks config (CI gitleaks job). Default rules plus allowlists for
+# vendored third-party files we don't maintain.
+title = "gzen secret detection"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Vendored third-party example/demo content"
+paths = [
+  # Blowfish theme demo site: public sample Firebase keys in docs/examples
+  '''(^|/)themes/[^/]+/exampleSite/''',
+  '''(^|/)(package-lock\.json|pnpm-lock\.yaml|yarn\.lock|go\.sum)$''',
+]
