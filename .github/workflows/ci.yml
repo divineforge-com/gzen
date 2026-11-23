@@ -51,7 +51,7 @@ jobs:
           for a in enlight gzen-invest gzen-ki gzen-learn gzen-om; do
             echo "::group::$a"; (cd "apps/$a" && hugo --gc --minify -d "/tmp/hugo-$a"); echo "::endgroup::"
           done
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
       - name: Go build
@@ -63,7 +63,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
       - name: go vet
