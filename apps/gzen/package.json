@@ -9,12 +9,12 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@types/three": "^0.185.4",
+    "@types/three": "^0.187.0",
     "animejs": "^4.5.0",
     "astro": "^7.2.8",
     "gsap": "^3.15.0",
     "phaser": "^4.2.1",
-    "three": "^0.186.0"
+    "three": "^0.187.0"
   },
   "devDependencies": {
     "@types/animejs": "^3.1.13",
